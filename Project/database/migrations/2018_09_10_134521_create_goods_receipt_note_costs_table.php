@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGoodReceiptNoteCostsTable extends Migration
+class CreateGoodsReceiptNoteCostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateGoodReceiptNoteCostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('good_receipt_note_costs', function (Blueprint $table) {
+        Schema::create('goods_receipt_note_costs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('goods_receipt_note_id')->unsigned();
+            $table->double('cost');
             $table->timestamps();
+
+            $table->foreign('goods_receipt_note_id')->references('id')->on('goods_receipt_notes')->onDelete('cascade');
         });
     }
 
@@ -26,6 +30,6 @@ class CreateGoodReceiptNoteCostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('good_receipt_note_costs');
+        Schema::dropIfExists('goods_receipt_note_costs');
     }
 }

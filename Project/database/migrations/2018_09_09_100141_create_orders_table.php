@@ -26,7 +26,7 @@ class CreateOrdersTable extends Migration
             $table->double('total_of_cost');
             $table->tinyInteger('payment_status');
             $table->double('transport_fee');
-            $table->integer('transport_fee_id')->unsinged()->nullable();
+            $table->integer('transport_fee_id')->unsigned()->nullable();
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
