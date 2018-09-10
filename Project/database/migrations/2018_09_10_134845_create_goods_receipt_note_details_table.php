@@ -23,7 +23,7 @@ class CreateGoodsReceiptNoteDetailsTable extends Migration
             $table->integer('goods_receipt_note_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('goods_receipt_note_id')->references('id')->on('goods_receipt_note')->onDelete('cascade');
+            $table->foreign('goods_receipt_note_id')->references('id')->on('goods_receipt_notes')->onDelete('cascade');
         });
     }
 
