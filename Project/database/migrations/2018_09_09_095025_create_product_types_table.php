@@ -18,8 +18,11 @@ class CreateProductTypesTable extends Migration
             $table->string('name', 100);
 //            $table->string('icon', 20)->nullable();
             $table->string('slug', 20);
+            $table->integer('product_type_id')->unsigned()->nullable();
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
+
+            $table->foreign('product_type_id')->references('id')->on('product_types')->onDelete('cascade');
         });
     }
 
