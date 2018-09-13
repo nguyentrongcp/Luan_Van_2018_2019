@@ -16,9 +16,22 @@ Route::get('/', function () {
 });
 
 
+
 /**      Admin       **/
+//Route::get('/admin/login','Admin\AdminController@index')->name('admin.login');
+
+Route::group(['prefix' => 'admin'], function (){
+
+//    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
+//    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
 
+    /** Product type */
+    Route::resource('product_type','Admin\ProductTypeController',["except" => ["create", "show", "edit"]]);
+    Route::get('product_type/{id}','Admin\ProductTypeController@changeStatus')->name('admin.changeStatus');
+
+
+});
 
 /**      Customer       **/
 
