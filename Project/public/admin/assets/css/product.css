@@ -1,3 +1,15 @@
+
+.wrapper-pro{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.th-pro{
+    font-size: 1rem!important;
+}
+.td-pro{
+    font-size: 0.8rem!important;
+}
 .gallery {
     display: inline-block;
     overflow: hidden;

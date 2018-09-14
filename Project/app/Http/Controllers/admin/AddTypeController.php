@@ -5,9 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\ProductType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use function Sodium\compare;
 
-class ProductTypeController extends Controller
+class AddTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,31 +15,7 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        $productTypes = ProductType::where('product_type_id',null)->paginate(10);
 
-        return view('admin.productTypes.index',compact('productTypes'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function addType(Request $request, $id)
-    {
-        $product_type_id = $id;
-        $name_type = $request->get('name-type');
-        $lug = str_slug($name_type);
-
-        $productType = new ProductType();
-        $productType->name = $name_type;
-        $productType->slug = $lug;
-        $productType->product_type_id = $product_type_id;
-
-        $productType->save();
-
-        return view('admin.productTypes.create_type.index',compact('tile_name_type','productType'))
-            ->with('success',"Thêm $name_type thành công!");
     }
 
     /**
@@ -53,18 +28,16 @@ class ProductTypeController extends Controller
     {
         $name_type = $request->get('name-type');
         $slug = str_slug($name_type);
+        $type_id = $request->get('id-type');
 
         $productType = new ProductType();
         $productType->name = $name_type;
         $productType->slug = $slug;
+        $productType->product_type_id = $type_id;
         $productType->save();
-
-
-
 
         return back()->with('success',"Thêm $name_type thành công!");
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -92,7 +65,7 @@ class ProductTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $ids)
     {
         $ids = $request->get('product-type-id');
 
@@ -153,17 +126,6 @@ class ProductTypeController extends Controller
 
         return $errors;
     }
-
-    public function movePageCreateType($id){
-        $type_id = ProductType::find($id);
-        $title_name = $type_id->name;
-
-        $productTypes = ProductType::where('product_type_id',$id)->paginate(10);
-
-        return view('admin.productTypes.create_type.index',
-            compact('productTypes','title_name','id'));
-    }
-
     private function createLinkToProduct($productType) {
         return "<a href='"
             . route('product.index') . "?pt="

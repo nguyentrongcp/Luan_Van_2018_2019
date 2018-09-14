@@ -6,25 +6,25 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form action="{{route('product_type.destroy',[0])}}" method="post">
+                    <form action="{{route('loai_thuc_don.destroy',[0])}}" method="post">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <div class="card-header">
-                            <h5 class="title">DANH SÁCH CÁC LOẠI MÓN ĂN CỦA CỬA HÀNG</h5>
+                            <h5 class="title"><a href="{{route('loai_thuc_don.index')}} " rel="tooltip" title="Quay lại" data-placement="bottom">Loại thực đơn</a> >> {{$title_name}}</h5>
                             <div class="add-productType">
                                 <button type="button" class="btn btn-info btn-round" onclick="$('#modal-add-prot').modal('show')">
                                     <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
                                 </button>
-                                    <button type="submit" class="btn btn-danger btn-round"
-                                    onclick="return confirm('Bạn chắc chắn muốn xóa chứ?')">
-                                        <i class="now-ui-icons ui-1_simple-remove"></i> Xóa nhiều
-                                    </button>
+                                <button type="submit" class="btn btn-danger btn-round"
+                                        onclick="return confirm('Bạn chắc chắn muốn xóa chứ?')">
+                                    <i class="now-ui-icons ui-1_simple-remove"></i> Xóa nhiều
+                                </button>
                             </div>
                         </div>
                         <div class="card-body all-icons">
                             <div class="row">
                                 <div class="wrapper-prot">
-                                    @include('admin.productType.table')
+                                    @include('admin.productTypes.create_type.table')
                                 </div>
                             </div>
                         </div>
@@ -35,5 +35,5 @@
             </div>
         </div>
     </div>
-    @include('admin.productType.modals')
+    @include('admin.productTypes.create_type.modals')
 @endsection

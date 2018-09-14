@@ -1,20 +1,22 @@
 @extends('admin.layouts.master')
-@section('title','ADMIN | Sản phẩm')
+@section('title','ADMIN | Loại thực đơn')
 
 @section('content')
-
     <div class="content">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form action="">
+                    <form action="{{route('loai_thuc_don.destroy',[0])}}" method="post">
+                        {{ method_field('DELETE') }}
+                        {{ csrf_field() }}
                         <div class="card-header">
-                            <h5 class="title">Danh sách các món ăn của cửa hàng</h5>
-                            <div class="add-product">
-                                <a href="{{route('create_type')}}" class="btn btn-info btn-round" >
+                            <h5 class="title">DANH SÁCH CÁC LOẠI THỰC ĐƠN CỦA CỬA HÀNG</h5>
+                            <div class="add-productType">
+                                <button type="button" class="btn btn-info btn-round" onclick="$('#modal-add-prot').modal('show')">
                                     <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
-                                </a>
-                                <button class="btn btn-danger btn-round">
+                                </button>
+                                <button type="submit" class="btn btn-danger btn-round"
+                                        onclick="return confirm('Bạn chắc chắn muốn xóa chứ?')">
                                     <i class="now-ui-icons ui-1_simple-remove"></i> Xóa nhiều
                                 </button>
                             </div>
@@ -22,14 +24,16 @@
                         <div class="card-body all-icons">
                             <div class="row">
                                 <div class="wrapper-prot">
-                                    @include('admin.product.table')
-
+                                    @include('admin.productTypes.table')
                                 </div>
                             </div>
                         </div>
                     </form>
+
                 </div>
+
             </div>
         </div>
     </div>
+    @include('admin.productTypes.modals')
 @endsection

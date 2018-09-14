@@ -40,16 +40,6 @@
     });
 </script>
 
-<script>
-    function eventCheckBox(id) {
-        let checkboxs = document.getElementsByName(id);
-        let checkAll = document.getElementById('checkall');
-        for (let i = 0; i < checkboxs.length; i++) {
-            checkboxs[i].checked = checkAll.checked;
-        }
-
-    }
-</script>
 <!-- JS Datatables-->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
 
@@ -57,8 +47,8 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{asset('admin/assets/js/datatables.js')}}"></script>
 <script>
-    var tableId = $('table').attr('id');
-          bindDatatable(tableId);
+    // var tableId = $('table').attr('id');
+    //       bindDatatable(tableId);
 
 </script>
 

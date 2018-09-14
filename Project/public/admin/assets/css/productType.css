@@ -1,7 +1,21 @@
 .wrapper-prot{
     padding-left: 50px;
+    padding-right: 50px;
+    width: 100%;
 }
-
+.th-prot{
+    font-size: 1rem!important;
+    font-weight: 600!important;
+}
+.td-prot{
+    font-size: 0.8rem!important;
+}
+#th-name-type{
+    width: 40%!important;
+}
+.div-pagination{
+    padding-left: 40%!important;
+}
 .force-inline {
     display: inline-block ;
 }
