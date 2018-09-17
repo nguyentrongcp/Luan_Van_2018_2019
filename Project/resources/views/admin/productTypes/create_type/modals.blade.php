@@ -1,4 +1,4 @@
-<!-- Modal add product type-->
+<!-- Modal add products type-->
 <div class="modal fade" id="modal-add-prot" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('them_moi.store')}}" method="post">
+                <form action="{{route('add_new.store')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label class="bmd-label-floating">Tên loại sản phẩm</label>
@@ -31,7 +31,7 @@
 </div>
 <!--End modal-->
 
-<!-- Modal edit product type-->
+<!-- Modal edit products type-->
 @foreach($productTypes as $prot)
     <div class="modal fade" id="modal-update-prot-{{$prot->id}}" tabindex="-1" role="dialog"
          aria-labelledby="list-edit-prot" aria-hidden="true">
@@ -45,7 +45,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('them_moi.update',[$prot->id])}}" method="post">
+                    <form action="{{route('add_new.update',[$prot->id])}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="form-group">
@@ -82,7 +82,7 @@
                     <p class="text-black-50">Các dữ liệu liên quan đến <strong> {{$prot->name}} </strong>sẽ bị xóa hoàn toàn. Bạn cần suy nghĩ trước khi xóa?</p>
                 </div>
                 <div class="modal-footer">
-                    <form action="{{route('them_moi.destroy',[0])}}" method="post">
+                    <form action="{{route('add_new.destroy',[0])}}" method="post">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <input type="hidden" name="product-type-id" value="{{ $prot->id }}">

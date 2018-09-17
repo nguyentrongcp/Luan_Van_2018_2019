@@ -19,3 +19,10 @@
 .force-inline {
     display: inline-block ;
 }
+.a-prot{
+    color: #1da2ff!important;
+    text-underline: none;
+}
+a:hover{
+    text-decoration: none!important;
+}

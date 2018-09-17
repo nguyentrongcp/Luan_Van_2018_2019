@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form action="{{route('loai_thuc_don.destroy',[0])}}" method="post">
+                    <form action="{{route('product_type.destroy',[0])}}" method="post">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <div class="card-header">

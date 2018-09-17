@@ -19,7 +19,7 @@ class CreateImageNewsTable extends Migration
             $table->integer('news_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('img_product')->onDelete('cascade');
             $table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
         });
     }

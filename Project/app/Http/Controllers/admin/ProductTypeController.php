@@ -94,7 +94,7 @@ class ProductTypeController extends Controller
      */
     public function destroy(Request $request)
     {
-        $ids = $request->get('product-type-id');
+        $ids = $request->get('products-type-id');
 
         if (empty($ids))
             return back();
@@ -166,7 +166,7 @@ class ProductTypeController extends Controller
 
     private function createLinkToProduct($productType) {
         return "<a href='"
-            . route('product.index') . "?pt="
+            . route('products.index') . "?pt="
             . $productType->id
             . "'>{$productType->name}</a>";
     }

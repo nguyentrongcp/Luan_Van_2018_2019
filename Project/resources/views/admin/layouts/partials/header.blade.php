@@ -16,10 +16,13 @@
     <link href="{{asset('admin/assets/css/now-ui-dashboard.css?v=1.1.0')}}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('admin/assets/demo/demo.css')}}" rel="stylesheet" />
-
-    <!-- CSS product -->
+    <!-- CSS dropzone-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" />
+    <!-- CSS products -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/product.css')}}">
 
-    <!-- CSS product type -->
+    <!-- CSS products type -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/productType.css')}}">
+
+
 </head>

@@ -35,14 +35,7 @@
 
                 ?>
                 <td class="td-prot text-center">{{$name_type->name}}</td>
-                <td class="text-center td-prot">
-                    @if($pro->is_deleted == 1)
-                        <a class="title text-warning" href="{{route('thuc_don.changeStatus',[$pro->id])}}" onclick="return confirm('Bạn chắc chắn muốn thay đổi?')" >Phục hồi</a>
-                    @else
-                        <p class="title text-success" href="">Tồn tại</p>
-                    @endif
 
-                </td>
                 <td class="td-actions text-right td-prot">
                     <button type="button" rel="tooltip" class="btn btn-info btn-sm btn-round btn-icon"
                             onclick="$('#modal-info-prot-{{$pro->id}}').modal('show')">
@@ -65,7 +58,7 @@
 
 <script>
     function eventCheckBox() {
-        let checkboxs = document.getElementsByName('product-type-id[]');
+        let checkboxs = document.getElementsByName('products-type-id[]');
         let checkAll = document.getElementById('check-all');
         for (let i = 0; i < checkboxs.length; i++) {
             checkboxs[i].checked = checkAll.checked;

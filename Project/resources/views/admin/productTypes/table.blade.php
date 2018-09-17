@@ -14,7 +14,7 @@
             </th>
             <th class="text-center th-prot">STT</th>
             <th class="th-prot text-center" id="th-name-type">Tên loại</th>
-            <th class="th-prot text-center">Trạng thái</th>
+            <th class="th-prot text-center">Thực đơn</th>
             <th class="text-right th-prot">Thao tác</th>
         </tr>
         </thead>
@@ -31,21 +31,16 @@
                 </td>
                 <td class="text-center td-prot">{{$stt + 1}}</td>
                 <td class="td-prot" id="th-name-type">
-                    <a href="{{route('admin.addType',[$prot->id])}}">{{$prot->name}}</a>
+                    <a class="a-prot" href="{{route('admin.addType',[$prot->id])}}">{{$prot->name}}</a>
                 </td>
                 <td class="text-center td-prot">
-                    @if($prot->is_deleted == 1)
-                        <a class="title text-warning" href="{{route('loai_thuc_don.changeStatus',[$prot->id])}}" onclick="return confirm('Bạn chắc chắn muốn thay đổi?')" >Phục hồi</a>
-                    @else
-                        <p class="title text-success" href="">Tồn tại</p>
-                    @endif
-
-                </td>
-                <td class="td-actions text-right td-prot">
                     <button type="button" rel="tooltip" class="btn btn-info btn-sm btn-round btn-icon"
                             onclick="$('#modal-info-prot-{{$prot->id}}').modal('show')">
                         <i class="now-ui-icons travel_info"></i>
                     </button>
+                </td>
+                <td class="td-actions text-right td-prot">
+
                     <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-round btn-icon"
                             onclick="$('#modal-update-prot-{{$prot->id}}').modal('show')">
                         <i class="now-ui-icons ui-2_settings-90"></i>
@@ -67,7 +62,7 @@
 
 <script>
     function eventCheckBox() {
-        let checkboxs = document.getElementsByName('product-type-id[]');
+        let checkboxs = document.getElementsByName('products-type-id[]');
         let checkAll = document.getElementById('check-all');
         for (let i = 0; i < checkboxs.length; i++) {
             checkboxs[i].checked = checkAll.checked;

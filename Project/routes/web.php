@@ -28,16 +28,17 @@ Route::group(['prefix' => 'admin'], function (){
 
     /** Product type */
 
-    Route::resource('loai_thuc_don','Admin\ProductTypeController',["except" => ["create","show", "edit"]]);
-    Route::get('them_loai_thuc_don/{id}','Admin\ProductTypeController@movePageCreateType')
+    Route::resource('product_type','Admin\ProductTypeController',["except" => ["create","show", "edit"]]);
+    Route::get('add_product_type/{id}','Admin\ProductTypeController@movePageCreateType')
             ->name('admin.addType');
-    Route::resource('them_moi','Admin\AddTypeController',["except" => ["create","show", "edit"]]);
-    Route::get('loai_thuc_don/{id}','Admin\ProductTypeController@changeStatus')
-        ->name('loai_thuc_don.changeStatus');
+    Route::resource('add_new','Admin\AddTypeController',["except" => ["create","show", "edit"]]);
+    Route::get('product_type/{id}','Admin\ProductTypeController@changeStatus')
+        ->name('product_type.changeStatus');
 
     /** Product */
 
-    Route::resource('thuc_don','Admin\ProductController');
+    Route::resource('products','Admin\ProductController');
+
 
 });
 

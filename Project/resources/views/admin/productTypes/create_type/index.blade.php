@@ -6,11 +6,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form action="{{route('loai_thuc_don.destroy',[0])}}" method="post">
+                    <form action="{{route('product_type.destroy',[0])}}" method="post">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <div class="card-header">
-                            <h5 class="title"><a href="{{route('loai_thuc_don.index')}} " rel="tooltip" title="Quay lại" data-placement="bottom">Loại thực đơn</a> >> {{$title_name}}</h5>
+                            <h5 class="title"><a href="{{route('product_type.index')}} " rel="tooltip" title="Quay lại" data-placement="bottom">Loại thực đơn</a> >> {{$title_name}}</h5>
                             <div class="add-productType">
                                 <button type="button" class="btn btn-info btn-round" onclick="$('#modal-add-prot').modal('show')">
                                     <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới

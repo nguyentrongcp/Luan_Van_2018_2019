@@ -18,14 +18,14 @@
                     <p>Tổng quan</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/loai_thuc_don') || Request::is('*/them_loai_thuc_don/*')  ? 'active' : ''}}">
-                <a href="/admin/loai_thuc_don">
+            <li class="{{Request::is('*/product_type') || Request::is('*/add_product_type/*')  ? 'active' : ''}}">
+                <a href="/admin/product_type">
                     <i class="now-ui-icons location_map-big"></i>
                     <p>Loại thực đơn</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/thuc_don') || Request::is('*/thuc_don/create') ? 'active' : ''}}">
-                <a href="/admin/thuc_don">
+            <li class="{{Request::is('*/products') || Request::is('*/products/create') ? 'active' : ''}}">
+                <a href="/admin/products">
                     <i class="now-ui-icons location_map-big"></i>
                     <p>Thực đơn</p>
                 </a>

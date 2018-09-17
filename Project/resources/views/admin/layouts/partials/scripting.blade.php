@@ -17,7 +17,7 @@
 <script src="{{asset('admin/assets/demo/demo.js')}}"></script>
 
 <script>
-    CKEDITOR.replace('full_des');
+    CKEDITOR.replace('des');
 </script>
 
 <script>
@@ -52,6 +52,8 @@
 
 </script>
 
+<!-- JS dropzone -->
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 {{--<script>--}}
     {{--$(document).ready(function() {--}}
         {{--// Javascript method's body can be found in assets/js/demos.js--}}

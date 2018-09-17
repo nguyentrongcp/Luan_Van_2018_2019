@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Image;
+use App\ImageProduct;
 use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
@@ -19,7 +21,7 @@ class ProductController extends Controller
         $products = Product::all();
 
         $productTypes = ProductType::all();
-        return view('admin.product.index',compact('products','productTypes'));
+        return view('admin.products.index',compact('products','productTypes'));
     }
 
     /**
@@ -32,7 +34,7 @@ class ProductController extends Controller
         $productTypes = ProductType::all();
 
 
-        return view('admin.product.add.index',compact('productTypes'));
+        return view('admin.products.add.index',compact('productTypes'));
     }
 
     /**
@@ -43,18 +45,36 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $products = new Product();
+
+        if ($request->hasFile('images'))
+        {
+            $product = new Product();
+            $product->name = $request->get('name-pro');
+            $product->product_created_at = date('Y-m-d H:i:s');
+            $product->product_updated_at = date('Y-m-d H:i:s');
+            $product->describe = $request->get('des');
+            $product->product_type_id = $request->get('name-type');
+
+            $image = $request->file('images');
+            $image = array();
+            $filename = time().'-'.$image->getClientOriginalName();
+            $path = public_path('images/img_product');
+            $image = move($path, $filename);
+            dd($product);
+
+            $product->avatar = $filename;
 
 
+            $product->save();
 
+        }
         return back()->with('success',"Thêm thành công!");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $id     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {

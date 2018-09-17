@@ -13,6 +13,6 @@ class ProductTypeSeeder extends Seeder
      */
     public function run()
     {
-        
+
     }
 }
