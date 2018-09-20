@@ -24,7 +24,7 @@
                         <div class="card-body all-icons">
                             <div class="row">
                                 <div class="wrapper-prot">
-                                    @include('admin.productTypes.create_type.table')
+                                    @include('admin.productTypes.create.table')
                                 </div>
                             </div>
                         </div>
@@ -35,5 +35,5 @@
             </div>
         </div>
     </div>
-    @include('admin.productTypes.create_type.modals')
+    @include('admin.productTypes.create.modals')
 @endsection

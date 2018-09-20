@@ -42,19 +42,29 @@
                                         </div>
                                     </div>
                                         <div class="form-group">
-                                            <label for="images">Hình ảnh: </label>
+                                            <label for="images">Hình ảnh đại diện: </label>
                                             <div class="">
                                                 <button class="btn btn-info btn-fab btn-icon btn-round" style="cursor: pointer">
                                                     <i class="now-ui-icons ui-1_simple-add"></i>
-                                                    <input type="file" multiple id="gallery-photo-add" name="images[]" accept="image/png, image/jpg, image/jpeg">
+                                                    <input type="file" id="gallery-avatar-image" name="avatar-image-upload" accept=".jpg, .png, .jpeg">
                                                 </button>
-
                                             </div>
-                                            <div class="gallery"></div>
+                                            <div class="gallery-avatar-image"></div>
                                         </div>
                                     <div class="form-group">
-                                        <label for="full_des">Mô tả chi tiết</label>
-                                        <textarea rows="5" class="form-control" placeholder="Khoảng 50 từ..." value="" id="des" name="des"></textarea>
+                                        <label for="images">Hình ảnh chi tiết: </label>
+                                        <div class="">
+                                            <button class="btn btn-info btn-fab btn-icon btn-round" style="cursor: pointer">
+                                                <i class="now-ui-icons ui-1_simple-add"></i>
+                                                <input type="file" multiple id="gallery-product-image" name="product-image-upload[]" accept=".jpg, .png, .jpeg">
+                                            </button>
+
+                                        </div>
+                                        <div class="gallery-product-image"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="des">Mô tả chi tiết</label>
+                                        <textarea rows="5" class="form-control"  value="" id="des" name="des"></textarea>
                                     </div>
                                 </div>
 

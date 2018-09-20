@@ -9,6 +9,88 @@ class Product extends Model
     private $price = -1;
     private $salePercent = -1;
 
+    protected $table = 'products';
+
+    public function prices() {
+        return $this->hasMany(Cost::class);
+    }
+
+    public function images() {
+        return $this->hasMany(ImageProduct::class);
+    }
+
+//    public function salesOffProducts() {
+//        return $this->hasMany(SalesOffProduct::class);
+//    }
+//
+//    public function quantities() {
+//        return $this->hasMany(Quantity::class);
+//    }
+//
+//    public function productTypeTrademark() {
+//        return $this->belongsTo(ProductTypeTrademark::class);
+//    }
+//
+//    public function goodsReceiptNote() {
+//        return $this->hasMany(GoodsReceiptNote::class);
+//    }
+
+    public function orderProducts() {
+        return $this->hasMany(OrderProduct::class);
+    }
+
+    public function shoppingCartProducts() {
+        return $this->hasMany(ShoppingCart::class);
+    }
+
+//    public function status() {
+//        if ($this->is_deleted) {
+//            return 'Ngừng kinh doanh';
+//        }
+//        return ($this->is_activated) ? 'Đang bán' : 'Tạm hết hàng';
+//    }
+//
+//    public function currentPrice() {
+//        return $this->prices->max()->price;
+//    }
+//
+//    public function getQuantity() {
+//        return $this->quantities->first()->quantity;
+//    }
+//
+//    public function isSalesOff() {
+//        return $this->salesOffProducts()->count() > 0;
+//    }
+//
+//    public function getSalesOffPercent() {
+//        return ($this->isSalesOff()) ? $this->salesOffProducts()->first()->salesOff->value : 0;
+//    }
+//
+//    public function getSalesOffPrice() {
+//        return $this->currentPrice() - ($this->currentPrice() * $this->getSalesOffPercent() / 100);
+//    }
+//
+//    public function getChangedQuantity($quantity) {
+//        $changed_quantity = $this->getQuantity() + $quantity;
+//        return ($changed_quantity > 0) ? $changed_quantity : 0;
+//    }
+
+    public function matchedName($product_name) {
+        return ProductType::where('slug', str_slug($product_name))->count() > 0;
+    }
+
+    public function canDelete() {
+//        if (($this->orderProducts->count() > 0)
+//            || ($this->shoppingCartProducts->count() > 0)) {
+//            return false;
+//        }
+        return true;
+    }
+//
+//    public function getName() {
+//        return $this->getProductTypeName().' '.$this->name;
+//    }
+
     public function createNewInformation(array $data)
     {
         $product = new self();

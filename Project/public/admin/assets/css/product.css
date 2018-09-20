@@ -17,7 +17,7 @@
     height: auto;
 }
 
-.gallery img {
+.gallery-avatar-image img, .gallery-product-image img {
     object-fit: contain;
     width: 195px;
     height: 130px;
@@ -25,5 +25,20 @@
     border: 1px solid darkgrey;
     box-shadow: 2px 2px 5px 0px darkgrey;
     margin-bottom: 10px;
+
+}
+.img-tb{
+    /*object-fit: contain;*/
+    width: 120px;
+    height: 60px;
+    margin-right: 10px;
+    border: 1px solid darkgrey;
+    box-shadow: 2px 2px 5px 0px darkgrey;
+    margin-bottom: 10px;
+}
+.modal-dialog.modal-dialog-top.modal-info-product{
+    max-width: 1000px!important;
+}
+.img-list{
 
 }

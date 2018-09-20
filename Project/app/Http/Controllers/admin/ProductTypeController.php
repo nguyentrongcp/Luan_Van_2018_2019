@@ -39,7 +39,7 @@ class ProductTypeController extends Controller
 
         $productType->save();
 
-        return view('admin.productTypes.create_type.index',compact('tile_name_type','productType'))
+        return view('admin.productTypes.create.index',compact('tile_name_type','productType'))
             ->with('success',"Thêm $name_type thành công!");
     }
 
@@ -116,7 +116,7 @@ class ProductTypeController extends Controller
         else
         {
             $productType = ProductType::find($ids);
-            $productType->is_deleted = 1;
+            $productType->is_deleted = true;
 
             $productType->update();
         }
@@ -160,7 +160,7 @@ class ProductTypeController extends Controller
 
         $productTypes = ProductType::where('product_type_id',$id)->paginate(10);
 
-        return view('admin.productTypes.create_type.index',
+        return view('admin.productTypes.create.index',
             compact('productTypes','title_name','id'));
     }
 

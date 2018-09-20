@@ -15,7 +15,8 @@
 <script src="{{asset('admin/assets/js/now-ui-dashboard.min.js?v=1.1.0')}}" type="text/javascript"></script>
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{asset('admin/assets/demo/demo.js')}}"></script>
-
+<!-- JS plugin itoast -->
+<script src="{{asset('admin/assets/plugin/jq-toast/jquery.toast.min.js')}}" type="text/javascript"></script>
 <script>
     CKEDITOR.replace('des');
 </script>
@@ -34,8 +35,11 @@
                 }
             }
         };
-        $('#gallery-photo-add').on('change', function() {
-            imagesPreview(this, 'div.gallery');
+        $('#gallery-avatar-image').on('change', function() {
+            imagesPreview(this, 'div.gallery-avatar-image');
+        });
+        $('#gallery-product-image').on('change', function() {
+            imagesPreview(this, 'div.gallery-product-image');
         });
     });
 </script>

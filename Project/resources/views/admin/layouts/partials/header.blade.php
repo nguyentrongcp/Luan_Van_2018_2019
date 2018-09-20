@@ -18,6 +18,8 @@
     <link href="{{asset('admin/assets/demo/demo.css')}}" rel="stylesheet" />
     <!-- CSS dropzone-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" />
+    <!-- CSS plugin jtoats -->
+    <link rel="stylesheet" href="{{asset('admin/assets/plugin/jq-toast/jquery.toast.min.css')}}">
     <!-- CSS products -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/product.css')}}">
 
