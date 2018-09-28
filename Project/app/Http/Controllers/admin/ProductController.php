@@ -46,7 +46,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
         $validate = $this->validationStore($request);
         if ($validate->fails()) {
             return back()->withErrors($validate)->withInput($request->only('cost-pro', 'name-pro'));
@@ -82,7 +81,6 @@ class ProductController extends Controller
             ->move('admin\assets\images\avatar', "avatar-$product->id-$time.$ext");
         $product->avatar = str_replace('\\', '/', $path);
         $product->save();
-
 
         $cost = new Cost();
         $cost->cost = $cost_input;
