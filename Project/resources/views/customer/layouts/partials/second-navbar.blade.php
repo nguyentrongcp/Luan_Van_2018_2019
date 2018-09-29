@@ -1,4 +1,4 @@
-<div class="navbar-fixed" style="margin-top: 10px">
+<div class="navbar-fixed hide-on-med-and-down">
     <nav id="navbar-second">
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="hide-on-med-and-down">
@@ -14,7 +14,7 @@
                         </div>
                     </form>
                 </li>
-                <li style="width: 20%"><a href="#">
+                <li style="width: 20%"><a href="#" class="truncate">
                         <i class="material-icons left">event</i>Tin tức và khuyến mãi
                     </a></li>
                 <li style="width: 20%"><a class='dropdown-trigger' href='#' data-target='dropdown1'>
