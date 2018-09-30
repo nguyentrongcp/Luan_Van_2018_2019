@@ -17,7 +17,6 @@
             </div>
         </div>
     </nav>
-
 </div>
 
 <ul id="nav-mobile" class="sidenav">
@@ -39,8 +38,8 @@
             Tạo tài khoản
         </a>
     </li>
-    <li>
-        <a class="waves-effect" href="#">
+    <li class="active">
+        <a class="waves-effect waves-purple" href="#">
             Đăng nhập
         </a>
     </li>
@@ -106,6 +105,10 @@
     </li>
 </ul>
 
+<div class="container">
+    @include('customer.layouts.partials.second-navbar')
+</div>
+
 <style>
     .navbar-mobile {
         padding: 0 32px !important;
@@ -128,14 +131,3 @@
         padding: 0 32px;
     }
 </style>
-
-@push('script')
-    <script>
-        $(document).ready(function(){
-            $('.sidenav').sidenav({
-                edge: 'right'
-            });
-            $('.collapsible').collapsible();
-        });
-    </script>
-@endpush

@@ -48,3 +48,6 @@ Route::get('test', 'Customer\TestController@test')->name('test');
 
     // Home
     Route::get('/', 'Customer\HomeController@index')->name('home');
+
+    // Index
+    Route::get('/type', 'Customer\IndexController@index')->name('index');
