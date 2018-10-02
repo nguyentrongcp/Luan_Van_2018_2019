@@ -15,6 +15,10 @@
     .container {
         width: 98% !important;
     }
+
+    .mini-modal {
+        width: 40% !important;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -32,6 +36,10 @@
 
     a.sidenav-trigger.navbar-fixed {
         width: 56px !important;
+    }
+
+    .mini-modal {
+        width: 90% !important;
     }
 }
 
@@ -53,6 +61,15 @@
 
 .btn-fluid {
     width: 100%;
+}
+
+.modal-header {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.mini-modal {
+    width: 30%;
 }
 
     /*Navbar custom*/

@@ -4,11 +4,11 @@
         <div class="divider"></div>
     </div>
     <div class="col s12 m12 l3">
-        <div class="card">
+        <div class="card hoverable">
             <div class="card-image">
-                <img class="materialboxed" src="customer/image/slider1.jpg">
+                <img class="materialboxed" src="http://cafefcdn.com/thumb_w/650/2015/fast-food-1-1420987619016.jpg">
                 <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped"
-                   data-position="top" data-tooltip="Thêm vào giỏ hàng"">
+                   data-position="top" data-tooltip="Thêm vào giỏ hàng">
                     <i class="material-icons">add_shopping_cart</i>
                 </a>
             </div>

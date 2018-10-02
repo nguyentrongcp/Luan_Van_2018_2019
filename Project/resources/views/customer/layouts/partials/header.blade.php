@@ -12,6 +12,12 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="customer/css/materialize.min.css">
 
+    {{--Rating stars--}}
+    <link rel="stylesheet" href="customer/css/rating.min.css">
+
+    {{--Label--}}
+    <link rel="stylesheet" href="customer/css/label.min.css">
+
     <link rel="stylesheet" href="customer/css/custom.css">
 
     <!--Let browser know website is optimized for mobile-->

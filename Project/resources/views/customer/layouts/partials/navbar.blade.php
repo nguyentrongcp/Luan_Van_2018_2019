@@ -1,4 +1,4 @@
-<div class="navbar-fixed">
+<div class="navbar-fixed" data-target="red">
     <nav>
         <div class="container">
             <div class="nav-wrapper">
@@ -6,8 +6,14 @@
                     <img class="responsive-img" src="customer/image/logo.png">
                 </a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="#"><b>Tạo tài khoản</b></a></li>
-                    <li><a href="#"><b>Đăng nhập</b></a></li>
+                    @if(!Auth::guard('customer')->check())
+                        <li><a href="#"><b>Tạo tài khoản</b></a></li>
+                        <li><a href="#login-modal" class="modal-trigger"><b>Đăng nhập</b></a></li>
+                    @else
+                        <li><a class="dropdown-trigger" data-target="customer-profile">
+                                <b>{{ Auth::guard('customer')->user()->name }}</b>
+                            </a></li>
+                    @endif
                     <li><a href="#">
                             <i class="material-icons">shopping_cart</i>
                         </a></li>
@@ -19,95 +25,19 @@
     </nav>
 </div>
 
-<ul id="nav-mobile" class="sidenav">
-    {{--<li><div class="user-view">--}}
-            {{--<div class="background">--}}
-                {{--<img src="images/office.jpg">--}}
-            {{--</div>--}}
-            {{--<a href="#user"><img class="circle" src="images/yuna.jpg"></a>--}}
-            {{--<a href="#name"><span class="white-text name">John Doe</span></a>--}}
-            {{--<a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>--}}
-        {{--</div></li>--}}
-    {{--<li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>--}}
-    {{--<li><a href="#!">Second Link</a></li>--}}
-    {{--<li><div class="divider"></div></li>--}}
-    {{--<li><a class="subheader">Subheader</a></li>--}}
-    {{--<li><a class="waves-effect" href="#!">Third Link With Waves</a></li>--}}
-    <li>
-        <a class="waves-effect" href="#">
-            Tạo tài khoản
-        </a>
-    </li>
-    <li class="active">
-        <a class="waves-effect waves-purple" href="#">
-            Đăng nhập
-        </a>
-    </li>
-    <li class="search">
-        <div class="search-wrapper">
-            <input id="search-mobile" placeholder="Tìm kiếm...">
-            <div class="search-results"></div>
-        </div>
-    </li>
-    {{--<li><div class="divider"></div></li>--}}
-    {{--<li>--}}
-        {{--<a class="waves-effect" href="#">--}}
-            {{--<i class="material-icons left">shopping_cart</i>--}}
-            {{--Giỏ hàng--}}
-        {{--</a>--}}
-    {{--</li>--}}
-    {{--<li><div class="divider"></div></li>--}}
-    <li>
-        <ul class="collapsible">
-            <li>
-                <div class="collapsible-header waves-effect waves-purple navbar-mobile">Thức ăn</div>
-                <div class="collapsible-body">
-                    <ul>
-                        <li>
-                            <a href="#" class="waves-effect">First</a>
-                        </li>
-                        <li>
-                            <a href="#" class="waves-effect">Second</a>
-                        </li>
-                        <li>
-                            <a href="#" class="waves-effect">Third</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="collapsible-header waves-effect navbar-mobile">Nước uống</div>
-                <div class="collapsible-body">
-                    <ul>
-                        <li>
-                            <a href="#" class="waves-effect">First</a>
-                        </li>
-                        <li>
-                            <a href="#" class="waves-effect">Second</a>
-                        </li>
-                        <li>
-                            <a href="#" class="waves-effect">Third</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </li>
-    <li class="bold">
-        <a class="waves-effect" href="#">
-            Tạo tài khoản
-        </a>
-    </li>
-    <li>
-        <a class="waves-effect" href="#">
-            Đăng nhập
-        </a>
-    </li>
+<ul id="customer-profile" class="dropdown-content">
+    <li><a href="{{ route('customer.logout') }}">
+            Đăng xuất
+        </a></li>
 </ul>
 
-<div class="container">
-    @include('customer.layouts.partials.second-navbar')
-</div>
+@include('customer.layouts.components.login')
+
+@include('customer.layouts.partials.navbar-mobile')
+
+{{--<div class="container">--}}
+    {{--@include('customer.layouts.partials.second-navbar')--}}
+{{--</div>--}}
 
 <style>
     .navbar-mobile {
@@ -131,3 +61,11 @@
         padding: 0 32px;
     }
 </style>
+
+@push('script')
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
+@endpush

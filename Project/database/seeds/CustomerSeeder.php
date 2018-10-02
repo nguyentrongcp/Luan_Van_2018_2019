@@ -11,6 +11,16 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('customers')->insert([
+            [
+                'name' => 'Nguyễn Nguyễn',
+                'email' => 'nguyennguyencp@gmail.com',
+                'username' => 'nguyennguyencp',
+                'password' => bcrypt('635982359'),
+                'phone' => '01628446973',
+                'address' => 'Trên mặt đất / kế nhà tui',
+                'subscribed' => true
+            ]
+        ]);
     }
 }

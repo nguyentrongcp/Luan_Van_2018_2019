@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->dateTime('product_created_at');
             $table->dateTime('product_updated_at');
             $table->string('avatar', 100);
-            $table->string('describe', 255);
+            $table->string('describe', 255)->nullable();
             $table->integer('product_type_id')->unsigned();
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();

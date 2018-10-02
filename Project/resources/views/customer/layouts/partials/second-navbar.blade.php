@@ -17,7 +17,7 @@
                 <li style="width: 20%"><a href="#" class="truncate">
                         <i class="material-icons left">event</i>Tin tức và khuyến mãi
                     </a></li>
-                <li style="width: 20%"><a class='dropdown-trigger' href='#' data-target='dropdown1'>
+                <li style="width: 20%"><a class='dropdown-trigger' id="dropdown-type" data-target='dropdown1'>
                         <i class="material-icons left">menu</i>
                         Phân loại</a>
                     <ul id='dropdown1' class='dropdown-content nested'>
@@ -51,3 +51,13 @@
         </div>
     </nav>
 </div>
+
+@push('script')
+    <script>
+        $(document).ready(function(){
+            $('#dropdown-type').dropdown({
+                coverTrigger: false
+            })
+        });
+    </script>
+@endpush

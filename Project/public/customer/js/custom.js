@@ -5,8 +5,7 @@ $(document).ready(function(){
     $('.tooltipped').tooltip();
     $('.dropdown-trigger').dropdown({
         coverTrigger: false
-    });
-
+    })
 
     $('.sidenav').sidenav({
         edge: 'right'

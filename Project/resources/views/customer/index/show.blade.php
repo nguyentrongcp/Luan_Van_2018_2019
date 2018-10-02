@@ -1,43 +1,48 @@
-<div class="col s12 m9 l9 purple lighten-3 z-depth-1" style="height: 1000px">
-    <div class="col s12 no-padding">
-        <div class="card-panel grey lighten-5 z-depth-1" style="margin-top: 0">
-            <div class="row valign-wrapper">
-                <div class="col s3" style="padding-right: 1%">
-                    <img src="customer/image/slider1.jpg" alt="" class="responsive-img"> <!-- notice the "circle" class -->
+<div class="col s12 m9 l9 foody-col">
+    <div class="row"></div>
+    @foreach($foodys as $foody)
+        <div class="col s12 m4 l3 foody-card">
+            <div class="card hoverable">
+                <div class="card-image">
+                    {{--650 x 350--}}
+                    <img class="materialboxed" src="{{ $foody->avatar }}">
+                    <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped"
+                       data-position="top" data-tooltip="Thêm vào giỏ hàng">
+                        <i class="material-icons">add_shopping_cart</i>
+                    </a>
                 </div>
-                <div class="col s10 show-foody">
+                <div class="card-content">
                     <div class="row">
-                        <h5><b>Bánh mì nhân thịt người</b></h5>
+                        <a href="#">
+                            <p class="truncate black-text tooltipped" data-position="top"
+                               data-tooltip="{{ $foody->name }}">
+                                <b>{{ $foody->name }}</b></p></a>
                     </div>
                     <div class="row">
-                        <span>Test1</span>
-                    </div>
-                    <div class="row">
-                        <span>Test1</span>
-                    </div>
-                    <div class="row">
-                        <span>Test1</span>
+                        <span>
+                            <span class="old-cost">1,000,000</span>
+                            <sup>đ</sup>
+                        </span>
+                        <b class="red-text">145,000<sup>đ</sup></b>
+                        <span class="ui small label red">- 60%</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endforeach
 </div>
 
 <style>
-    .show-foody {
-        vertical-align: top !important;
-    }
-    .show-foody .row {
-        margin: 0;
-    }
-    .show-foody h5 {
-        top: 0 !important;
+    .foody-card .card {
+        margin-bottom: 10px;
+        margin-left: 5px;
     }
 </style>
 
 @push('script')
     <script>
-
+        $('.ui.rating')
+            .rating()
+        ;
     </script>
 @endpush
