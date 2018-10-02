@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title title text-black-50" id="exampleModalCenterTitle">Thêm loại mới</h5>
+                <h5 class="modal-title title text-black-50 text-center" id="exampleModalCenterTitle">THÊM LOẠI MỚI</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -37,8 +37,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h3 class="modal-title title text-black-50" id="list-edit-prot"
-                        style="font-size: 16px">CẬP NHẬT LOẠI PHẨM</h3>
+                    <h3 class="modal-title title text-black-50 text-center" id="list-edit-prot"
+                        style="font-size: 16px">CẬP NHẬT LOẠI THỰC ĐƠN</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -48,7 +48,7 @@
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="form-group">
-                            <label class="bmd-label-floating">Tên loại sản phẩm</label>
+                            <label class="bmd-label-floating">Tên loại thực đơn</label>
                             <input type="text" class="form-control" name="name-type" id="name-type"
                                    value="{{$prot->name}}" minlength="5" required>
                         </div>

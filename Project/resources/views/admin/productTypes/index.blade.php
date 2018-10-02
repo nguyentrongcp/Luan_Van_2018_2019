@@ -10,7 +10,8 @@
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <div class="card-header">
-                            <h5 class="title">DANH SÁCH CÁC LOẠI THỰC ĐƠN CỦA CỬA HÀNG</h5>
+                            <h5 class="title text-center">DANH SÁCH CÁC LOẠI THỰC ĐƠN CỦA CỬA HÀNG</h5>
+                            <hr>
                             <div class="add-productType">
                                 <button type="button" class="btn btn-info btn-round" onclick="$('#modal-add-prot').modal('show')">
                                     <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới

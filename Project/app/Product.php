@@ -3,7 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+/**
+ * @property mixed costs
+ * @property mixed name
+ * @property mixed product_type_id
+ * @property mixed trademark_id
+ * @property mixed id
+ */
 class Product extends Model
 {
     private $price = -1;
@@ -11,7 +17,7 @@ class Product extends Model
 
     protected $table = 'products';
 
-    public function prices() {
+    public function costs() {
         return $this->hasMany(Cost::class);
     }
 
@@ -50,9 +56,9 @@ class Product extends Model
 //        return ($this->is_activated) ? 'Đang bán' : 'Tạm hết hàng';
 //    }
 //
-//    public function currentPrice() {
-//        return $this->prices->max()->price;
-//    }
+    public function currentCost() {
+        return $this->costs->max()->cost;
+    }
 //
 //    public function getQuantity() {
 //        return $this->quantities->first()->quantity;

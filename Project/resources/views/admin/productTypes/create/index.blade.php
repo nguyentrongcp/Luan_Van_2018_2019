@@ -10,7 +10,9 @@
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <div class="card-header">
-                            <h5 class="title"><a href="{{route('product_type.index')}} " rel="tooltip" title="Quay lại" data-placement="bottom">Loại thực đơn</a> >> {{$title_name}}</h5>
+                            <h5 class="title"><a href="{{route('product_type.index')}} " rel="tooltip" title="Quay lại" data-placement="bottom">LOẠI THỰC ĐƠN</a>
+                                <i class="	fa fa-angle-double-right"></i>{{$title_name}}</h5>
+                            <hr>
                             <div class="add-productType">
                                 <button type="button" class="btn btn-info btn-round" onclick="$('#modal-add-prot').modal('show')">
                                     <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới

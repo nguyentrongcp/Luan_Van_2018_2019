@@ -11,6 +11,7 @@
     font-size: 0.8rem!important;
 }
 .gallery {
+    padding-top: 10px;
     display: inline-block;
     overflow: hidden;
     width: auto;
@@ -40,5 +41,16 @@
     max-width: 1000px!important;
 }
 .img-list{
+    width: 150px;
+    height: 80px;
+}
+.lb-info{
+    font-size: 16px!important;
+}
 
+.th-stt{
+    width: 30px!important;
+}
+.td-actions{
+    width: 100px;
 }

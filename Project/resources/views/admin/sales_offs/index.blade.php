@@ -1,24 +1,23 @@
 @extends('admin.layouts.master')
-@section('title','ADMIN | Sản phẩm')
+@section('title','ADMIN | Khuyến mãi')
 
 @section('content')
-
     <div class="content">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form action="{{route('products.destroy',[0])}}" method="post">
+                    <form action="{{route('product_type.destroy',[0])}}" method="post">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <div class="card-header">
-                            <h5 class="title text-center">DANH SÁCH CÁC THỰC ĐƠN CỦA CỬA HÀNG</h5>
+                            <h5 class="title text-center">QUẢN LÝ KHUYẾN MÃI</h5>
                             <hr>
-                            <div class="add-product">
-                                <a href="{{route('products.create')}}" class="btn btn-info btn-round" >
+                            <div class="add-productType">
+                                <button type="button" class="btn btn-info btn-round" onclick="$('#modal-add-sales').modal('show')">
                                     <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
-                                </a>
+                                </button>
                                 <button type="submit" class="btn btn-danger btn-round"
-                                        onclick="return confirm('Bạn có chắc muốn xóa nó chứ?')">
+                                        onclick="return confirm('Bạn chắc chắn muốn xóa chứ?')">
                                     <i class="now-ui-icons ui-1_simple-remove"></i> Xóa nhiều
                                 </button>
                             </div>
@@ -26,14 +25,16 @@
                         <div class="card-body all-icons">
                             <div class="row">
                                 <div class="wrapper-prot">
-                                    @include('admin.products.table')
-
+                                    @include('admin.sales_offs.table')
                                 </div>
                             </div>
                         </div>
                     </form>
+
                 </div>
+
             </div>
         </div>
     </div>
+    @include('admin.sales_offs.modals')
 @endsection

@@ -3,7 +3,7 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th class="text-left th-prot" >
+            <th class="text-left th-prot th-stt" >
                 <div class="form-check">
                     <label class="form-check-label">
                         <input class="form-check-input" id="check-all" type="checkbox"
@@ -12,7 +12,7 @@
                     </label>
                 </div>
             </th>
-            <th class="text-center th-prot">STT</th>
+            <th class="text-center th-prot th-stt">STT</th>
             <th class="th-prot text-center" id="th-name-type">Tên loại</th>
             <th class="th-prot text-center">Thực đơn</th>
             <th class="text-right th-prot">Thao tác</th>
@@ -21,7 +21,7 @@
         <tbody>
         @foreach($productTypes as $stt => $prot)
             <tr>
-                <td class="text-left td-prot">
+                <td class="text-left td-prot th-stt">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input" name="product-type-id[]" value="{{$prot->id}}" type="checkbox">
@@ -29,7 +29,7 @@
                         </label>
                     </div>
                 </td>
-                <td class="text-center td-prot">{{$stt + 1}}</td>
+                <td class="text-center td-prot th-stt">{{$stt + 1}}</td>
                 <td class="td-prot" id="th-name-type">{{$prot->name}}</td>
                 <td class="text-center td-prot">
                     <button type="button" rel="tooltip" class="btn btn-info btn-sm btn-round btn-icon"

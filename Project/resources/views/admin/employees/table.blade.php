@@ -13,56 +13,67 @@
                 </div>
             </th>
             <th class="text-center th-prot th-stt">STT</th>
-            <th class="th-prot text-center" id="th-name-type">Tên loại</th>
-            <th class="th-prot text-center">Thực đơn</th>
-            <th class="text-center th-prot">Thao tác</th>
+            <th class="th-prot text-center">Họ tên</th>
+            <th class="th-prot text-center">SĐT</th>
+            <th class="th-prot text-center">Email</th>
+            <th class="th-prot text-center">Tài khoản</th>
+            <th class="text-center th-prot">Sửa</th>
+            <th class="text-center th-prot">Đổi MK</th>
+
         </tr>
         </thead>
         <tbody>
-        @foreach($productTypes as $stt => $prot)
+        {{--@foreach($employees as $stt => $emp)--}}
             <tr>
                 <td class="text-left td-prot th-stt">
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input" name="product-type-id[]" value="{{$prot->id}}" type="checkbox">
+                            <input class="form-check-input" name="employee-id[]" value="" type="checkbox">
                             <span class="form-check-sign"></span>
                         </label>
                     </div>
                 </td>
-                <td class="text-center td-prot th-stt">{{$stt + 1}}</td>
+                <td class="text-center td-prot th-stt">1</td>
                 <td class="td-prot" id="th-name-type">
-                    <a class="a-prot" href="{{route('admin.addType',[$prot->id])}}">{{$prot->name}}</a>
+                    <a class="a-prot" href="">dSsS</a>
                 </td>
-                <td class="td-actions text-center td-prot">
-                    <button type="button" rel="tooltip" class="btn btn-info btn-sm btn-round btn-icon"
-                            onclick="$('#modal-info-prot-{{$prot->id}}').modal('show')">
-                        <i class="fa fa-eye"></i>
-                    </button>
-                </td>
-                <td class="td-actions text-center td-prot">
+                <td class="td-prot">sSada
 
+                </td>
+                </td>
+                <td class="td-prot">sSada
+
+                </td>
+                </td>
+                <td class="td-prot">sSada
+
+                </td>
+
+                <td class="text-center td-prot">
                     <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-round btn-icon"
-                            onclick="$('#modal-update-prot-{{$prot->id}}').modal('show')">
+                            onclick="$('#modal-edit-employees').modal('show')">
                         <i class="now-ui-icons ui-2_settings-90"></i>
                     </button>
+                </td>
+                <td class="text-center td-prot">
                     <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-round btn-icon"
-                            onclick="$('#modal-del-prot-{{$prot->id}}').modal('show')">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                            onclick="$('#modal-change-pwd').modal('show')">
+                        <i class="now-ui-icons arrows-1_refresh-69"></i>
                     </button>
                 </td>
             </tr>
-        @endforeach
+        {{--@endforeach--}}
         </tbody>
     </table>
     <div class="div-pagination">
-        {{$productTypes->links()}}
-    </div>
+        {{--{{$employees->links()}}--}}
+    </di            v>
 
 </div>
 
 <script>
     function eventCheckBox() {
-        let checkboxs = document.getElementsByName('products-type-id[]');
+        let checkboxs = document.getElementsByName('employees-id[]');
         let checkAll = document.getElementById('check-all');
         for (let i = 0; i < checkboxs.length; i++) {
             checkboxs[i].checked = checkAll.checked;

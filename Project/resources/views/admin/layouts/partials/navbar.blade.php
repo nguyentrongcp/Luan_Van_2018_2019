@@ -9,7 +9,8 @@
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Dashboard</a>
+            <a class="btn btn-info btn-round text-white" href="#pablo">
+                <i class="	fa fa-angle-double-left"></i>TRANG KHÁCH HÀNG</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -28,17 +29,9 @@
                 </div>
             </form>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#pablo">
-                        <i class="now-ui-icons media-2_sound-wave"></i>
-                        <p>
-                            <span class="d-lg-none d-md-block">Stats</span>
-                        </p>
-                    </a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="now-ui-icons location_world"></i>
+                        <i class="now-ui-icons ui-1_bell-53"></i>
                         <p>
                             <span class="d-lg-none d-md-block">Some Actions</span>
                         </p>
