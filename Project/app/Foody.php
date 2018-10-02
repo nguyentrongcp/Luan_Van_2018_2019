@@ -4,19 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Foody extends Model
 {
     private $price = -1;
     private $salePercent = -1;
-
-    protected $table = 'products';
 
     public function prices() {
         return $this->hasMany(Cost::class);
     }
 
     public function images() {
-        return $this->hasMany(ImageProduct::class);
+        return $this->hasMany(ImageFoodyProduct::class);
     }
 
 //    public function salesOffProducts() {
@@ -35,11 +33,11 @@ class Product extends Model
 //        return $this->hasMany(GoodsReceiptNote::class);
 //    }
 
-    public function orderProducts() {
-        return $this->hasMany(OrderProduct::class);
+    public function orderFoodies() {
+        return $this->hasMany(OrderFoody::class);
     }
 
-    public function shoppingCartProducts() {
+    public function shoppingCartFoodies() {
         return $this->hasMany(ShoppingCart::class);
     }
 
@@ -76,7 +74,7 @@ class Product extends Model
 //    }
 
     public function matchedName($product_name) {
-        return ProductType::where('slug', str_slug($product_name))->count() > 0;
+        return FoodyType::where('slug', str_slug($product_name))->count() > 0;
     }
 
     public function canDelete() {

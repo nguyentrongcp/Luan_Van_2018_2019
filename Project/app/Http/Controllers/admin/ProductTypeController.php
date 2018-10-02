@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\ProductType;
+use App\FoodyType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use function Sodium\compare;
@@ -16,7 +16,7 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        $productTypes = ProductType::where('product_type_id',null)->paginate(10);
+        $productTypes = FoodyType::where('product_type_id',null)->paginate(10);
 
         return view('admin.productTypes.index',compact('productTypes'));
     }
@@ -32,7 +32,7 @@ class ProductTypeController extends Controller
         $name_type = $request->get('name-type');
         $lug = str_slug($name_type);
 
-        $productType = new ProductType();
+        $productType = new FoodyType();
         $productType->name = $name_type;
         $productType->slug = $lug;
         $productType->product_type_id = $product_type_id;
@@ -54,7 +54,7 @@ class ProductTypeController extends Controller
         $name_type = $request->get('name-type');
         $slug = str_slug($name_type);
 
-        $productType = new ProductType();
+        $productType = new FoodyType();
         $productType->name = $name_type;
         $productType->slug = $slug;
         $productType->save();
@@ -74,7 +74,7 @@ class ProductTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $productType = ProductType::findOrFail($id);
+        $productType = FoodyType::findOrFail($id);
 
         $productType->name = $request->get('name-type');
         $productType->slug = str_slug($productType->name);
@@ -107,7 +107,7 @@ class ProductTypeController extends Controller
         if (is_array($ids))
         {
             foreach ($ids as $id) {
-                $productType = ProductType::find($id);
+                $productType = FoodyType::find($id);
                 $productType->is_deleted = 1;
 
                 $productType->update();
@@ -115,7 +115,7 @@ class ProductTypeController extends Controller
         }
         else
         {
-            $productType = ProductType::find($ids);
+            $productType = FoodyType::find($ids);
             $productType->is_deleted = true;
 
             $productType->update();
@@ -126,7 +126,7 @@ class ProductTypeController extends Controller
     }
     public function changeStatus($ids){
 
-        $productType = ProductType::find($ids);
+        $productType = FoodyType::find($ids);
         $productType->is_deleted = 0;
 
         $productType->update();
@@ -139,7 +139,7 @@ class ProductTypeController extends Controller
         if (is_array($ids) || is_object($ids))
         {
             foreach ($ids as $id) {
-                $productType = ProductType::findOrFail($id);
+                $productType = FoodyType::findOrFail($id);
 
                 if ($productType->noProduct())
                     continue;
@@ -155,10 +155,10 @@ class ProductTypeController extends Controller
     }
 
     public function movePageCreateType($id){
-        $type_id = ProductType::find($id);
+        $type_id = FoodyType::find($id);
         $title_name = $type_id->name;
 
-        $productTypes = ProductType::where('product_type_id',$id)->paginate(10);
+        $productTypes = FoodyType::where('product_type_id',$id)->paginate(10);
 
         return view('admin.productTypes.create.index',
             compact('productTypes','title_name','id'));

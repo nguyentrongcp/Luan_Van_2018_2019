@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreateFoodiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('foodies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->dateTime('product_created_at');
-            $table->dateTime('product_updated_at');
+            $table->dateTime('foody_created_at');
+            $table->dateTime('foody_updated_at');
             $table->string('avatar', 100);
             $table->string('describe', 255)->nullable();
-            $table->integer('product_type_id')->unsigned();
+            $table->integer('foody_type_id')->unsigned();
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
-            $table->foreign('product_type_id')->references('id')->on('product_types');
+            $table->foreign('foody_type_id')->references('id')->on('foody_types');
         });
     }
 
@@ -35,6 +35,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('foodies');
     }
 }

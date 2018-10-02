@@ -4,9 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Cost;
 use App\Image;
-use App\ImageProduct;
-use App\Product;
-use App\ProductType;
+use App\ImageFoodyProduct;
+use App\Foody;
+use App\FoodyType;
 use App\Vote;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,8 +20,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
-        $productTypes = ProductType::all();
+        $products = Foody::paginate(10);
+        $productTypes = FoodyType::all();
 
         return view('admin.products.index',compact('products','productTypes'));
     }
@@ -33,7 +33,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $productTypes = ProductType::all();
+        $productTypes = FoodyType::all();
 
         return view('admin.products.add.index',compact('productTypes'));
     }
@@ -65,7 +65,7 @@ class ProductController extends Controller
                 ->withInput($request->only('cost-pro', 'name-pro'));
         }
 
-        $product = new Product();
+        $product = new Foody();
         $product_name = $request->get('name-pro');
         $product->name = $product_name;
 
@@ -102,7 +102,7 @@ class ProductController extends Controller
                 $image->link = str_replace('\\', '/', $path);
                 $image->save();
 
-                $image_product = new ImageProduct();
+                $image_product = new ImageFoodyProduct();
                 $image_product->image_id = $image->id;
                 $image_product->product_id = $product->id;
                 $image_product->save();
@@ -121,7 +121,7 @@ class ProductController extends Controller
     public function show($id)
     {
 
-        $image_product = ImageProduct::all();
+        $image_product = ImageFoodyProduct::all();
 
         return view('admin.products.index',compact('image_product'));
     }
@@ -162,7 +162,7 @@ class ProductController extends Controller
         }
         $ids = $request->get('product-id');
         foreach($ids as $id) {
-            $product = Product::findOrFail($id);
+            $product = Foody::findOrFail($id);
             if ($product->canDelete()) {
                 $product->delete();
             }

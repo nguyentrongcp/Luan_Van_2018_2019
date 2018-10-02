@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\ProductType;
+use App\FoodyType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -30,7 +30,7 @@ class AddTypeController extends Controller
         $slug = str_slug($name_type);
         $type_id = $request->get('id-type');
 
-        $productType = new ProductType();
+        $productType = new FoodyType();
         $productType->name = $name_type;
         $productType->slug = $slug;
         $productType->product_type_id = $type_id;
@@ -47,7 +47,7 @@ class AddTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $productType = ProductType::findOrFail($id);
+        $productType = FoodyType::findOrFail($id);
 
         $productType->name = $request->get('name-type');
         $productType->slug = str_slug($productType->name);
@@ -80,7 +80,7 @@ class AddTypeController extends Controller
         if (is_array($ids))
         {
             foreach ($ids as $id) {
-                $productType = ProductType::find($id);
+                $productType = FoodyType::find($id);
                 $productType->is_deleted = 1;
 
                 $productType->update();
@@ -88,7 +88,7 @@ class AddTypeController extends Controller
         }
         else
         {
-            $productType = ProductType::find($ids);
+            $productType = FoodyType::find($ids);
             $productType->is_deleted = 1;
 
             $productType->update();
@@ -99,7 +99,7 @@ class AddTypeController extends Controller
     }
     public function changeStatus($ids){
 
-        $productType = ProductType::find($ids);
+        $productType = FoodyType::find($ids);
         $productType->is_deleted = 0;
 
         $productType->update();
@@ -112,7 +112,7 @@ class AddTypeController extends Controller
         if (is_array($ids) || is_object($ids))
         {
             foreach ($ids as $id) {
-                $productType = ProductType::findOrFail($id);
+                $productType = FoodyType::findOrFail($id);
 
                 if ($productType->noProduct())
                     continue;

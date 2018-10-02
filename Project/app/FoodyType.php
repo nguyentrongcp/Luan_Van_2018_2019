@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductType extends Model
+class FoodyType extends Model
 {
     protected $fillable = ['name-type', 'slug'];
 
     public function products() {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Foody::class);
     }
 
     public static function exit($slug) {

@@ -29,7 +29,7 @@
                     <i class="material-icons right">chevron_right</i>
                 </button>
             </div>
-            @foreach(\App\ProductType::where('product_type_id', $foody_type->id)->get() as $foody_type_child)
+            @foreach(\App\FoodyType::where('foody_type_id', $foody_type->id)->get() as $foody_type_child)
                 <div class="col s12 navbar-index">
                     <button class="waves-effect waves-purple btn white black-text btn-fluid">
                         {{ $foody_type_child->name }}

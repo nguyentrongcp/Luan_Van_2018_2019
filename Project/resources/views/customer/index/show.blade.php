@@ -1,11 +1,11 @@
 <div class="col s12 m9 l9 foody-col">
     <div class="row"></div>
-    @foreach($foodys as $foody)
+    @foreach($foodies as $foody)
         <div class="col s12 m4 l3 foody-card">
             <div class="card hoverable">
                 <div class="card-image">
                     {{--650 x 350--}}
-                    <img class="materialboxed" src="{{ $foody->avatar }}">
+                    <img src="{{ $foody->avatar }}">
                     <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped"
                        data-position="top" data-tooltip="Thêm vào giỏ hàng">
                         <i class="material-icons">add_shopping_cart</i>
