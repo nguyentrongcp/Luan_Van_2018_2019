@@ -1,5 +1,6 @@
-<div class="col s12 m9 l9 foody-col">
+<div class="col s12 m9 l9" id="show-foody">
     <div class="row"></div>
+
     @foreach($foodies as $foody)
         <div class="col s12 m4 l3 foody-card">
             <div class="card hoverable">

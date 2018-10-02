@@ -2,6 +2,7 @@
 
     @php
         use Illuminate\Support\Facades\Auth;
+        use Illuminate\Support\Facades\Request;
     @endphp
 
     @include('customer.layouts.partials.navbar')
