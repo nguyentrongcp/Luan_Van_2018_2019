@@ -36,7 +36,7 @@
                 </td>
                 <td class="td-prot" id="th-name-type">{{$pro->name}}</td>
 
-                @foreach(App\ProductType::where('id',$pro->product_type_id)->get() as $nameType)
+                @foreach(App\FoodyType::where('id',$pro->product_type_id)->get() as $nameType)
                 <td class="td-prot text-center">{{$nameType->name}}</td>
                 @endforeach
                 {{--@foreach(App\Cost::where('product_id',$pro->id)->get() as $cost)--}}

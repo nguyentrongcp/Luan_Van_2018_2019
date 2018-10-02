@@ -19,10 +19,10 @@ class CreateVotesTable extends Migration
             $table->float('quality')->default(0);
             $table->float('attitude')->default(0);
             $table->float('average')->default(0);
-            $table->integer('product_id')->unsigned();
+            $table->integer('foody_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('foody_id')->references('id')->on('foodies')->onDelete('cascade');
         });
     }
 

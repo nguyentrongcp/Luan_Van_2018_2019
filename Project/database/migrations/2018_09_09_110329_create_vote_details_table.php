@@ -18,11 +18,11 @@ class CreateVoteDetailsTable extends Migration
             $table->float('cost')->nullable();
             $table->float('quality')->nullable();
             $table->float('attitude')->nullable();
-            $table->integer('product_id')->unsigned();
+            $table->integer('foody_id')->unsigned();
             $table->integer('customer_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('foody_id')->references('id')->on('foodies')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }

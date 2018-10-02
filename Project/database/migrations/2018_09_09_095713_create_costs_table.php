@@ -17,10 +17,10 @@ class CreateCostsTable extends Migration
             $table->increments('id');
             $table->double('cost');
             $table->dateTime('cost_updated_at');
-            $table->integer('product_id')->unsigned();
+            $table->integer('foody_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('foody_id')->references('id')->on('foodies')->onDelete('cascade');
         });
     }
 

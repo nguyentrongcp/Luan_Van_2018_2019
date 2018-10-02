@@ -4,9 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Cost;
 use App\Image;
-use App\ImageProduct;
-use App\Product;
-use App\ProductType;
+use App\ImageFoodyProduct;
+use App\Foody;
+use App\FoodyType;
 use App\Vote;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,9 +24,14 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+<<<<<<< HEAD
         $products = Product::paginate(10);
         $productTypes = ProductType::all();
         $costs = Cost::all();
+=======
+        $products = Foody::paginate(10);
+        $productTypes = FoodyType::all();
+>>>>>>> 746f3da5452cb7884b53b5f1011f41d8d2fd0963
 
         return view('admin.products.index', compact('costs', 'products', 'productTypes'));
     }
@@ -38,7 +43,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $productTypes = ProductType::all();
+        $productTypes = FoodyType::all();
 
         return view('admin.products.add.index', compact('productTypes'));
     }
@@ -51,7 +56,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
         $validate = $this->validationStore($request);
         if ($validate->fails()) {
             return back()->withErrors($validate)->withInput($request->only('cost-pro', 'name-pro'));
@@ -70,7 +74,7 @@ class ProductController extends Controller
                 ->withInput($request->only('cost-pro', 'name-pro'));
         }
 
-        $product = new Product();
+        $product = new Foody();
         $product_name = $request->get('name-pro');
         $product->name = $product_name;
 
@@ -86,7 +90,6 @@ class ProductController extends Controller
             ->move('admin\assets\images\avatar', "avatar-$product->id-$time.$ext");
         $product->avatar = str_replace('\\', '/', $path);
         $product->save();
-
 
         $cost = new Cost();
         $cost->cost = $cost_input;
@@ -108,7 +111,7 @@ class ProductController extends Controller
                 $image->link = str_replace('\\', '/', $path);
                 $image->save();
 
-                $image_product = new ImageProduct();
+                $image_product = new ImageFoodyProduct();
                 $image_product->image_id = $image->id;
                 $image_product->product_id = $product->id;
                 $image_product->save();
@@ -141,6 +144,10 @@ class ProductController extends Controller
             $costUpdated = $cosp->cost_updated_at;
         }
 
+<<<<<<< HEAD
+=======
+        $image_product = ImageFoodyProduct::all();
+>>>>>>> 746f3da5452cb7884b53b5f1011f41d8d2fd0963
 
         return view('admin.products.update.index',
             compact('id', 'products', 'namePro', 'nameTypePro', 'cost', 'avatarPro', 'describe', 'costUpdated'));
@@ -181,8 +188,13 @@ class ProductController extends Controller
             return back();
         }
         $ids = $request->get('product-id');
+<<<<<<< HEAD
         foreach ($ids as $id) {
             $product = Product::findOrFail($id);
+=======
+        foreach($ids as $id) {
+            $product = Foody::findOrFail($id);
+>>>>>>> 746f3da5452cb7884b53b5f1011f41d8d2fd0963
             if ($product->canDelete()) {
                 $product->delete();
             } else {

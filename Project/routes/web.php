@@ -62,3 +62,13 @@ Route::group(['prefix' => 'admin'], function (){
 
 /**      Customer       **/
 
+Route::get('test', 'Customer\TestController@test')->name('test');
+
+    // Home
+    Route::get('/', 'Customer\CustomerController@index')->name('customer.home');
+
+    // Index
+    Route::get('/type', 'Customer\IndexController@index')->name('customer.index');
+
+    Route::post('/login', 'Customer\CustomerLoginController@login')->name('customer.login.submit');
+    Route::get('logout/', 'Customer\CustomerLoginController@logout')->name('customer.logout');

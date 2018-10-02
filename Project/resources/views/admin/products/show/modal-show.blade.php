@@ -53,8 +53,14 @@
                                     <div id="eatingCarousel" class="carousel slide w-100" data-ride="carousel">
                                         <div class="carousel-inner w-100" role="listbox">
                                             <div class="carousel-item row no-gutters active">
+<<<<<<< HEAD
                                                 @foreach (App\ImageProduct::where('product_id',$pro->id)->get() as $idImage)
                                                     @foreach (App\Image::where('id',$idImage->image_id)->get() as $id)
+=======
+                                                @foreach(App\ImageFoodyProduct::where('product_id',$pro->id) as $idImage)
+
+                                                    @foreach(App\Image::where('id',$idImage->image_id) as $images)
+>>>>>>> 746f3da5452cb7884b53b5f1011f41d8d2fd0963
                                                         <div class="col-4 float-left">
                                                             <div class="item-ct">
                                                                 <a href="#"><img
