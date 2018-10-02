@@ -26,24 +26,24 @@ Route::group(['prefix' => 'admin'], function (){
 //    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
 
-    /** Product type */
+    /** Foody type */
 
-    Route::resource('product_type','Admin\ProductTypeController',["except" => ["create","show", "edit"]]);
-    Route::get('add_product_type/{id}','Admin\ProductTypeController@movePageCreateType')
+    Route::resource('foody_type','Admin\FoodyTypeController',["except" => ["create","show", "edit"]]);
+    Route::get('add_foody_type/{id}','Admin\FoodyTypeController@movePageCreateType')
             ->name('admin.addType');
     Route::resource('add_new','Admin\AddTypeController',["except" => ["create","show", "edit"]]);
-    Route::get('product_type/{id}','Admin\ProductTypeController@changeStatus')
-        ->name('product_type.changeStatus');
+    Route::get('foody_type/{id}','Admin\FoodyTypeController@changeStatus')
+        ->name('foody_type.changeStatus');
 
-    /** Product */
+    /** Foody */
 
-    Route::resource('products','Admin\ProductController');
-    Route::post('products/change_cost/{id}','Admin\ProductController@changeCost')
-        ->name('product_change_cost');
-    Route::post('products/change_avatar/{id}','Admin\ProductController@changeAvatar')
-        ->name('product_change_avatar');
-    Route::post('products/change_multi_image/{id}','Admin\ProductController@changeMultiImage')
-        ->name('product_change_multi_image');
+    Route::resource('foodies','Admin\FoodyController');
+    Route::post('foodies/change_cost/{id}','Admin\FoodyController@changeCost')
+        ->name('foody_change_cost');
+    Route::post('foodies/change_avatar/{id}','Admin\FoodyController@changeAvatar')
+        ->name('foody_change_avatar');
+    Route::post('foodies/change_multi_image/{id}','Admin\FoodyController@changeMultiImage')
+        ->name('foody_change_multi_image');
 
     /**      Employee       **/
     Route::resource('employees','Admin\EmployeeController');

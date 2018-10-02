@@ -3,37 +3,27 @@
 namespace App\Http\Controllers\admin;
 
 use App\Cost;
-use App\Image;
-use App\ImageFoodyProduct;
 use App\Foody;
 use App\FoodyType;
+use App\Image;
+use App\ImageFoody;
 use App\Vote;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Validator;
-
-class ProductController extends Controller
+class FoodyController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-<<<<<<< HEAD
-        $products = Product::paginate(10);
-        $productTypes = ProductType::all();
+    public function index()
+    {        
+        $foodies = Foody::paginate(10);
+        $foodyTypes = FoodyType::all();
         $costs = Cost::all();
-=======
-        $products = Foody::paginate(10);
-        $productTypes = FoodyType::all();
->>>>>>> 746f3da5452cb7884b53b5f1011f41d8d2fd0963
-
-        return view('admin.products.index', compact('costs', 'products', 'productTypes'));
+        return view('admin.foodies.index', compact('costs', 'foodies', 'foodyTypes'));
     }
 
     /**
@@ -43,120 +33,115 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $productTypes = FoodyType::all();
+        $foodyTypes = FoodyType::all();
 
-        return view('admin.products.add.index', compact('productTypes'));
+        return view('admin.foodies.add.index', compact('foodyTypes'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validate = $this->validationStore($request);
         if ($validate->fails()) {
-            return back()->withErrors($validate)->withInput($request->only('cost-pro', 'name-pro'));
+            return back()->withErrors($validate)->withInput($request->only('cost-foody', 'name-foody'));
         }
-        $cost_input = str_replace(',', '', $request->get('cost-pro'));
+        $cost_input = str_replace(',', '', $request->get('cost-foody'));
         if ($cost_input < 1000) {
-            return back()->withErrors(['cost-pro' => 'Giá tiền không được nhỏ hơn 1,000đ !'])
-                ->withInput($request->only('cost-pro', 'name-pro'));
+            return back()->withErrors(['cost-food' => 'Giá tiền không được nhỏ hơn 1,000đ !'])
+                ->withInput($request->only('cost-foody', 'name-foody'));
         }
         if ($cost_input > 100000000) {
-            return back()->withErrors(['cost-pro' => 'Giá tiền không được vượt quá 100,000,000đ !'])
-                ->withInput($request->only('cost-pro', 'name-pro'));
+            return back()->withErrors(['cost-foody' => 'Giá tiền không được vượt quá 100,000,000đ !'])
+                ->withInput($request->only('cost-foody', 'name-foody'));
         }
         if (!$request->hasFile('avatar-image-upload')) {
             return back()->withErrors(['Bạn chưa upload hình ảnh!'])
-                ->withInput($request->only('cost-pro', 'name-pro'));
+                ->withInput($request->only('cost-foody', 'name-foody'));
         }
 
-        $product = new Foody();
-        $product_name = $request->get('name-pro');
-        $product->name = $product_name;
+        $foody = new Foody();
+        $foody_name = $request->get('name-foody');
+        $foody->name = $foody_name;
 
-        $product->product_created_at = date('Y-m-d H:i:s');
-        $product->product_updated_at = date('Y-m-d H:i:s');
-        $product->describe = $request->get('des');
-        $product->product_type_id = $request->get('name-type');
+        $foody->foody_created_at = date('Y-m-d H:i:s');
+        $foody->foody_updated_at = date('Y-m-d H:i:s');
+        $foody->describe = $request->get('des');
+        $foody->foody_type_id = $request->get('name-type');
 
         $time = time();
         $ext = $request->file('avatar-image-upload')->extension();
 
         $path = $request->file('avatar-image-upload')
-            ->move('admin\assets\images\avatar', "avatar-$product->id-$time.$ext");
-        $product->avatar = str_replace('\\', '/', $path);
-        $product->save();
+            ->move('admin\assets\images\avatar', "avatar-$foody->id-$time.$ext");
+        $foody->avatar = str_replace('\\', '/', $path);
+        $foody->save();
 
         $cost = new Cost();
         $cost->cost = $cost_input;
         $cost->cost_updated_at = date('Y-m-d H:i:s');
-        $cost->product_id = $product->id;
+        $cost->foody_id = $foody->id;
         $cost->save();
 
         $vote = new Vote();
-        $vote->product_id = $product->id;
+        $vote->foody_id = $foody->id;
         $vote->save();
 
-        if ($request->hasFile('product-image-upload')) {
-            $product_images = $request->File('product-image-upload');
-            foreach ($product_images as $key => $product_image) {
-                $ext = $product_image->extension();
+        if ($request->hasFile('foody-image-upload')) {
+            $foody_images = $request->File('foody-image-upload');
+            foreach ($foody_images as $key => $foody_image) {
+                $ext = $foody_image->extension();
                 $image = new Image();
-                $path = $product_image
-                    ->move('admin\assets\images\img_product', "image-$product->id-$key-$time.$ext");
+                $path = $foody_image
+                    ->move('admin\assets\images\img_product', "image-$foody->id-$key-$time.$ext");
                 $image->link = str_replace('\\', '/', $path);
                 $image->save();
 
-                $image_product = new ImageFoodyProduct();
-                $image_product->image_id = $image->id;
-                $image_product->product_id = $product->id;
-                $image_product->save();
+                $image_foody = new ImageFoody();
+                $image_foody->image_id = $image->id;
+                $image_foody->foody_id = $foody->id;
+                $image_foody->save();
             }
         }
 
 
-        return back()->with('success', "Thêm $product_name thành công!");
+        return back()->with('success', "Thêm $foody_name thành công!");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $products = Product::find($id);
-        $namePro = $products->name;
-        $avatarPro = $products->avatar;
-        $describe = $products->describe;
-        $typePro = ProductType::where('id', $products->product_type_id)->get();
-        foreach ($typePro as $type) {
-            $nameTypePro = $type->name;
+        $foodies = Foody::find($id);
+        $nameFoody = $foodies->name;
+        $avatarFoody = $foodies->avatar;
+        $describe = $foodies->describe;
+        $typeFoody = FoodyType::where('id', $foodies->foody_type_id)->get();
+        foreach ($typeFoody as $type) {
+            $nameTypeFoody = $type->name;
         }
 
-        $costPro = Cost::where('product_id', $id)->get();
-        foreach ($costPro as $cosp) {
-            $cost = $cosp->cost;
-            $costUpdated = $cosp->cost_updated_at;
+        $costFoody = Cost::where('foody_id', $id)->get();
+        foreach ($costFoody as $cosf) {
+            $cost = $cosf->cost;
+            $costUpdated = $cosf->cost_updated_at;
         }
-
-<<<<<<< HEAD
-=======
-        $image_product = ImageFoodyProduct::all();
->>>>>>> 746f3da5452cb7884b53b5f1011f41d8d2fd0963
-
-        return view('admin.products.update.index',
-            compact('id', 'products', 'namePro', 'nameTypePro', 'cost', 'avatarPro', 'describe', 'costUpdated'));
+        return view('admin.foodies.update.index',
+            compact('id', 'foodies', 'nameFoody', 'nameTypeFoody', 'cost', 'avatarFoody', 'describe', 'costUpdated'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -167,8 +152,8 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -179,33 +164,29 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
-        if (!$request->has('product-id')) {
+        if (!$request->has('foody-id')) {
             return back();
         }
-        $ids = $request->get('product-id');
-<<<<<<< HEAD
-        foreach ($ids as $id) {
-            $product = Product::findOrFail($id);
-=======
+        $ids = $request->get('foody-id');
+
+
         foreach($ids as $id) {
-            $product = Foody::findOrFail($id);
->>>>>>> 746f3da5452cb7884b53b5f1011f41d8d2fd0963
-            if ($product->canDelete()) {
-                $product->delete();
+            $foody = Foody::findOrFail($id);
+            if ($foody->canDelete()) {
+                $foody->delete();
             } else {
-                $product->is_deleted = true;
-                $product->update();
+                $foody->is_deleted = true;
+                $foody->update();
             }
         }
 
         return back()->with('success', 'Xóa thành công.');
     }
-
     public function changeCost(Request $request, $id)
     {
 
@@ -224,17 +205,17 @@ class ProductController extends Controller
 //        if($validate->fails()) {
 //            return back()->withErrors($validate)->withInput($request->only('cost-pro'));
 //        }
-        $cost_input = str_replace(',', '', $request->get('cost-pro'));
+        $cost_input = str_replace(',', '', $request->get('cost-foody'));
         if ($cost_input > 100000000) {
-            return back()->withErrors(['cost-pro' => 'Giá tiền không được vượt quá 100,000,000đ !']);
+            return back()->withErrors(['cost-foody' => 'Giá tiền không được vượt quá 100,000,000đ !']);
         }
         if ($cost_input < 1000) {
-            return back()->withErrors(['cos-pro' => 'Giá tiền không được thấp hơn 1000đ !']);
+            return back()->withErrors(['cost-foody' => 'Giá tiền không được thấp hơn 1000đ !']);
         }
 
         $cost = new Cost();
         $cost->cost = $cost_input;
-        $cost->product_id = $id;
+        $cost->foody_id = $id;
         $cost->cost_updated_at = date('Y-m-d H:i:s');
         $cost->save();
 
@@ -247,8 +228,8 @@ class ProductController extends Controller
         if (!$request->hasFile('avatar-image-upload')) {
             return back()->with('error', 'Bạn chưa upload hình ảnh!');
         } else {
-            $product = Product::findOrFail($id);
-            $oldPath = $product->avatar;
+            $foody = Foody::findOrFail($id);
+            $oldPath = $foody->avatar;
             if (!empty($oldPath)) {
                 File::delete($oldPath);
             }
@@ -257,8 +238,8 @@ class ProductController extends Controller
             $ext = $request->file('avatar-image-upload')->extension();
             $path = $request->file('avatar-image-upload')
                 ->move('admin\assets\images\avatar', "avatar-$id-$time.$ext");
-            $product->avatar = str_replace('\\', '/', $path);
-            $product->update();
+            $foody->avatar = str_replace('\\', '/', $path);
+            $foody->update();
 
             return back()->with('success', 'Cập nhật thành công.');
         }
@@ -267,20 +248,20 @@ class ProductController extends Controller
     public function addImage(Request $request, $id){
 
         $time  = time();
-        if ($request->hasFile('product-image-upload')) {
-            $product_images = $request->File('product-image-upload');
-            foreach ($product_images as $key => $product_image) {
-                $ext = $product_image->extension();
+        if ($request->hasFile('foody-image-upload')) {
+            $foody_images = $request->File('foody-image-upload');
+            foreach ($foody_images as $key => $foody_image) {
+                $ext = $foody_image->extension();
                 $image = new Image();
-                $path = $product_image
+                $path = $foody_image
                     ->move('admin\assets\images\img_product', "image-$id-$key-$time.$ext");
                 $image->link = str_replace('\\', '/', $path);
                 $image->save();
 
-                $image_product = new ImageProduct();
-                $image_product->image_id = $image->id;
-                $image_product->product_id = $id;
-                $image_product->save();
+                $image_foody = new ImageFoody();
+                $image_foody->image_id = $image->id;
+                $image_foody->foody_id = $id;
+                $image_foody->save();
             }
         }
     }
@@ -288,11 +269,11 @@ class ProductController extends Controller
     public function deleteImage(Request $request, $id)
     {
 
-        if (!$request->hasFile('product-image-upload')) {
+        if (!$request->hasFile('foody-image-upload')) {
             return back()->with('error', 'Bạn chưa upload hình ảnh!');
         } else {
 
-            foreach (ImageProduct::where('product_id', $id)->get() as $idImage) {
+            foreach (ImageFoody::where('foody_id', $id)->get() as $idImage) {
                 foreach (Image::where('id', $idImage->image_id)->get() as $image) {
                     $oldPath = $image->link;
 
@@ -301,11 +282,8 @@ class ProductController extends Controller
                         $image->delete();
                     }
 
-                    }
                 }
-
-
-
+            }
             return back()->with('success', 'Cập nhật thành công.');
         }
     }
@@ -315,8 +293,8 @@ class ProductController extends Controller
         $validate = Validator::make(
             $request->all(),
             [
-                'name-pro' => array('required', 'max:100', "regex:/^[A-ỹ][0-ỹ \+\(\)\/]*$/"),
-                'cost-pro' => array('required', 'regex:/^(([1-9]\d*)|([1-9]\d{0,2}(,\d{3})*))$/')
+                'name-foody' => array('required', 'max:100', "regex:/^[A-ỹ][0-ỹ \+\(\)\/]*$/"),
+                'cost-foody' => array('required', 'regex:/^(([1-9]\d*)|([1-9]\d{0,2}(,\d{3})*))$/')
             ],
             [
                 'required' => ':attribute không được bỏ trống!',
@@ -324,8 +302,8 @@ class ProductController extends Controller
                 'regex' => ':attribute không hợp lệ!'
             ],
             [
-                'name-pro' => 'Tên thực đơn',
-                'cost-pro' => 'Giá tiền'
+                'name-foody' => 'Tên thực đơn',
+                'cost-foody' => 'Giá tiền'
             ]
         );
 
@@ -337,7 +315,7 @@ class ProductController extends Controller
         $validate = Validator::make(
             $request->all(),
             [
-                "name-pro-$id" => array('required', 'max:100', "regex:/^[A-ỹ][0-ỹ \+\(\)\/]*$/"),
+                "name-foody-$id" => array('required', 'max:100', "regex:/^[A-ỹ][0-ỹ \+\(\)\/]*$/"),
             ],
             [
                 'required' => ':attribute không được bỏ trống!',
@@ -345,7 +323,7 @@ class ProductController extends Controller
                 'regex' => ':attribute không hợp lệ!'
             ],
             [
-                "name-pro-$id" => 'Tên thực đơn'
+                "name-foody-$id" => 'Tên thực đơn'
             ]
         );
 

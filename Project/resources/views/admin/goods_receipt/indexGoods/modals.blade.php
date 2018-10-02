@@ -1,4 +1,4 @@
-<!-- Modal add products type-->
+<!-- Modal add foodies type-->
 <div class="modal fade" id="modal-add-goods" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -41,7 +41,7 @@
 </div>
 <!--End modal-->
 
-<!-- Modal edit products type-->
+<!-- Modal edit foodies type-->
     <div class="modal fade" id="modal-update-goods" tabindex="-1" role="dialog"
          aria-labelledby="list-edit-prot" aria-hidden="true">
         <div class="modal-dialog" role="document">

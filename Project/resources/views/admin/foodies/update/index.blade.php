@@ -7,7 +7,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <a class="btn btn-round btn-info text-white" href="{{route('products.index')}}">&blacktriangleleft;&blacktriangleleft;TRỞ VỀ</a>
+                        <a class="btn btn-round btn-info text-white" href="{{route('foodies.index')}}">
+                            <i class="fa fa-arrow-circle-left" style="font-size: 18px"></i>TRỞ VỀ</a>
                         <h4 class="card-title title text-center">THÔNG TIN CHI TIẾT THỰC ĐƠN</h4>
                     </div>
                     <div class="card-body">
@@ -24,7 +25,7 @@
                                                         đơn: </label>
                                                 </td>
                                                 <td>
-                                                    <label class="lb-info">{{$namePro}}</label>
+                                                    <label class="lb-info">{{$nameFoody}}</label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -33,7 +34,7 @@
                                                         loại: </label>
                                                 </td>
                                                 <td>
-                                                    <label class="lb-info">{{$nameTypePro}}</label>
+                                                    <label class="lb-info">{{$nameTypeFoody}}</label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -79,7 +80,7 @@
                                                     diện</label>
                                             </div>
                                             <div class="gallery">
-                                                <img src="{{asset($avatarPro)}}" alt="{{$namePro}}">
+                                                <img src="{{asset($avatarFoody)}}" alt="{{$nameFoody}}">
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-info btn-round"
@@ -93,7 +94,7 @@
                                                         tiết</label>
                                                 </div>
                                                 <div class="gallery form-group">
-                                                    @foreach (App\ImageProduct::where('product_id',$id)->get() as $idImage)
+                                                    @foreach (App\ImageFoody::where('foody_id',$id)->get() as $idImage)
                                                         @foreach (App\Image::where('id',$idImage->image_id)->get() as $image)
                                                             <div class="col-4 float-left">
                                                                 <div class="item-ct">
@@ -153,9 +154,9 @@
             </div>
         </div>
     </div>
-    @include('admin.products.update.modal-change-cost')
-    @include('admin.products.update.modal-change-avatar')
-    @include('admin.products.update.modal-change-multi-image-detail')
+    @include('admin.foodies.update.modal-change-cost')
+    @include('admin.foodies.update.modal-change-avatar')
+    @include('admin.foodies.update.modal-change-multi-image-detail')
 
 @endsection
 <script>

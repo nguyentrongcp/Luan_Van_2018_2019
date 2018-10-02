@@ -21,14 +21,14 @@
                     <p>Thống kê</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/product_type') || Request::is('*/add_product_type/*')  ? 'active' : ''}}">
-                <a href="/admin/product_type">
+            <li class="{{Request::is('*/foody_type') || Request::is('*/add_foody_type/*')  ? 'active' : ''}}">
+                <a href="/admin/foody_type">
                     <i class="now-ui-icons location_map-big"></i>
                     <p>Loại thực đơn</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/products') || Request::is('*/products/create') ? 'active' : ''}}">
-                <a href="/admin/products">
+            <li class="{{Request::is('*/foodies') || Request::is('*/foodies/create') ? 'active' : ''}}">
+                <a href="/admin/foodies">
                     <i class="fa fa-align-justify"></i>
                     <p>Thực đơn</p>
                 </a>

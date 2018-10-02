@@ -6,7 +6,7 @@ use App\FoodyType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AddTypeController extends Controller
+class FoodyTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,37 @@ class AddTypeController extends Controller
      */
     public function index()
     {
+        $foodyTypes = FoodyType::where('foody_type_id',null)
+                                ->where('is_deleted',false)->paginate(10);
+
+        return view('admin.foodyTypes.index',compact('foodyTypes'));
+    }
+
+    public function addType(Request $request, $id)
+    {
+        $foody_type_id = $id;
+        $name_type = $request->get('name-type');
+        $lug = str_slug($name_type);
+
+        $foodyType = new FoodyType();
+        $foodyType->name = $name_type;
+        $foodyType->slug = $lug;
+        $foodyType->foody_type_id = $foody_type_id;
+
+        $foodyType->save();
+
+        return view('admin.foodyTypes.create.index',compact('tile_name_type','foodyType'))
+            ->with('success',"Thêm $name_type thành công!");
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -27,16 +58,36 @@ class AddTypeController extends Controller
     {
         $name_type = $request->get('name-type');
         $slug = str_slug($name_type);
-        $type_id = $request->get('id-type');
 
         $foodyType = new FoodyType();
         $foodyType->name = $name_type;
         $foodyType->slug = $slug;
-        $foodyType->foody_type_id = $type_id;
         $foodyType->save();
-
         return back()->with('success',"Thêm $name_type thành công!");
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -46,14 +97,11 @@ class AddTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $foodyType = FoodyType::findOrFail($id);
+        $foodType = FoodyType::findOrFail($id);
 
-        $foodyType->name = $request->get('name-type');
-        $foodyType->slug = str_slug($foodyType->name);
-
-
-        $foodyType->update();
-
+        $foodType->name = $request->get('name-type');
+        $foodType->slug = str_slug($foodType->name);
+        $foodType->update();
 
         return back()->with('success','Cập nhât thành công!');
     }
@@ -64,7 +112,7 @@ class AddTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $ids)
+    public function destroy(Request $request)
     {
         $ids = $request->get('foody-type-id');
 
@@ -88,7 +136,7 @@ class AddTypeController extends Controller
         else
         {
             $foodyType = FoodyType::find($ids);
-            $foodyType->is_deleted = 1;
+            $foodyType->is_deleted = true;
 
             $foodyType->update();
         }
@@ -125,6 +173,18 @@ class AddTypeController extends Controller
 
         return $errors;
     }
+
+    public function movePageCreateType($id){
+        $type_id = FoodyType::find($id);
+        $title_name = $type_id->name;
+
+        $foodyTypes = FoodyType::where('foody_type_id',$id)
+                                ->where('is_deleted',false)->paginate(10);
+
+        return view('admin.foodyTypes.create.index',
+            compact('foodyTypes','title_name','id'));
+    }
+
     private function createLinkToProduct($foodyType) {
         return "<a href='"
             . route('foodies.index') . "?pt="

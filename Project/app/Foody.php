@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-<<<<<<< HEAD:Project/app/Product.php
 /**
  * @property mixed costs
  * @property mixed name
@@ -11,27 +10,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed trademark_id
  * @property mixed id
  */
-class Product extends Model
-=======
+
 
 class Foody extends Model
->>>>>>> 746f3da5452cb7884b53b5f1011f41d8d2fd0963:Project/app/Foody.php
 {
     private $price = -1;
     private $salePercent = -1;
 
-<<<<<<< HEAD:Project/app/Product.php
-    protected $table = 'products';
+    protected $table = 'foodies';
 
-    public function costs() {
-=======
-    public function prices() {
->>>>>>> 746f3da5452cb7884b53b5f1011f41d8d2fd0963:Project/app/Foody.php
+    public function costs()
+    {
         return $this->hasMany(Cost::class);
     }
 
     public function images() {
-        return $this->hasMany(ImageFoodyProduct::class);
+        return $this->hasMany(ImageFoody::class);
     }
 
 //    public function salesOffProducts() {

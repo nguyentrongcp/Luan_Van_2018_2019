@@ -1,21 +1,20 @@
-<!-- Modal add products type-->
-<div class="modal fade" id="modal-add-prot" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Modal add foodies type-->
+<div class="modal fade" id="modal-add-fdt" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title title text-black-50" id="exampleModalCenterTitle">THÊM LOẠI MỚI</h5>
+                <h5 class="modal-title title text-black-50 text-center" id="exampleModalCenterTitle">THÊM LOẠI MỚI</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('add_new.store')}}" method="post">
+                <form action="{{route('foody_type.store')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label class="bmd-label-floating">Tên loại sản phẩm</label>
                         <input type="text" class="form-control" name="name-type" id="name-type"
                                placeholder="Nhập tên loại..." minlength="5" required>
-                        <input type="hidden" value="{{$id}}" name="id-type">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>
@@ -31,9 +30,9 @@
 </div>
 <!--End modal-->
 
-<!-- Modal edit products type-->
-@foreach($productTypes as $prot)
-    <div class="modal fade" id="modal-update-prot-{{$prot->id}}" tabindex="-1" role="dialog"
+<!-- Modal edit foodies type-->
+@foreach($foodyTypes as $fdt)
+    <div class="modal fade" id="modal-update-fdt-{{$fdt->id}}" tabindex="-1" role="dialog"
          aria-labelledby="list-edit-prot" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -45,13 +44,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                      <form action="{{route('add_new.update',[$prot->id])}}" method="post">
+                    <form action="{{route('foody_type.update',[$fdt->id])}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="form-group">
-                            <label class="bmd-label-floating">Tên loại sản phẩm</label>
+                            <label class="bmd-label-floating">Tên loại thực đơn</label>
                             <input type="text" class="form-control" name="name-type" id="name-type"
-                                   value="{{$prot->name}}" minlength="5" required>
+                                   value="{{$fdt->name}}" minlength="5" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>
@@ -68,8 +67,8 @@
 <!--  End Modal -->
 
 <!--  Modal delete -->
-@foreach($productTypes as $prot)
-    <div class="modal fade" id="modal-del-prot-{{$prot->id}}" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+@foreach($foodyTypes as $fdt)
+    <div class="modal fade" id="modal-del-fdt-{{$fdt->id}}" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -79,13 +78,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-black-50">Các dữ liệu liên quan đến <strong> {{$prot->name}} </strong>sẽ bị xóa hoàn toàn. Bạn cần suy nghĩ trước khi xóa?</p>
+                    <p class="text-black-50">Các dữ liệu liên quan đến <strong> {{$fdt->name}} </strong>sẽ bị xóa hoàn toàn. Bạn cần suy nghĩ trước khi xóa?</p>
                 </div>
                 <div class="modal-footer">
-                    <form action="{{route('add_new.destroy',[0])}}" method="post">
+                    <form action="{{route('foody_type.destroy',[0])}}" method="post">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
-                        <input type="hidden" name="product-type-id" value="{{ $prot->id }}">
+                        <input type="hidden" name="foody-type-id" value="{{ $fdt->id }}">
                         <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>
                         <button type="submit" class="btn btn-info btn-round">OK</button>
                     </form>
