@@ -76,16 +76,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
 /**      Customer       **/
 
-Route::get('test', 'Customer\TestController@test')->name('test');
+    // Index
+    Route::get('/', 'Customer\CustomerController@index')->name('customer.index');
 
     // Home
-    Route::get('/', 'Customer\CustomerController@index')->name('customer.home');
+    Route::get('/type', 'Customer\HomeController@index')->name('customer.home');
+    Route::get('/type/{slug}', 'Customer\HomeController@showFoody');
+    Route::post('/customer/like', 'Customer\HomeController@like');
+    Route::post('/customer/favorite', 'Customer\HomeController@favorite');
 
-    // Index
-    Route::get('/type', 'Customer\IndexController@index')->name('customer.index');
-    Route::get('/type/{slug}', 'Customer\IndexController@showFoody');
-    Route::post('/customer/like', 'Customer\IndexController@like');
-    Route::post('/customer/favorite', 'Customer\IndexController@favorite');
-
+    // Login & logout
     Route::post('/login', 'Customer\CustomerLoginController@login')->name('customer.login.submit');
     Route::get('logout/', 'Customer\CustomerLoginController@logout')->name('customer.logout');

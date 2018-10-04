@@ -193,4 +193,4 @@
 
 </style>
 
-@include('customer.index.js')
+@include('customer.home.js')

@@ -5,9 +5,9 @@
 @section('content')
 
     <div class="row">
-        @include('customer.index.navbar')
+        @include('customer.home.navbar')
 
-        @include('customer.index.show')
+        @include('customer.home.show')
     </div>
 
     @push('script')
