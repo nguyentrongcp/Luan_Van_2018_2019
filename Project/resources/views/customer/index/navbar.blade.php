@@ -19,26 +19,28 @@
         </div>
     </div>
 
-    @foreach($foody_types as $foody_type)
-        <div class="row">
-            <h6><b>{{ $foody_type->name }}</b></h6>
-            <div class="divider"></div>
-            <div class="col s12 navbar-index">
-                <button class="waves-effect waves-purple btn white black-text btn-fluid">
-                    Xem tất cả
-                    <i class="material-icons right">chevron_right</i>
-                </button>
-            </div>
-            @foreach(\App\FoodyType::where('foody_type_id', $foody_type->id)->get() as $foody_type_child)
+
+        @foreach($foody_types as $foody_type)
+            <div class="row">
+                <h6><b>{{ $foody_type->name }}</b></h6>
+                <div class="divider"></div>
                 <div class="col s12 navbar-index">
-                    <button class="waves-effect waves-purple btn white black-text btn-fluid">
-                        {{ $foody_type_child->name }}
+                    <a id="{{ $foody_type->slug }}" class="waves-effect waves-purple btn white black-text btn-fluid foody-type">
+                        Xem tất cả
                         <i class="material-icons right">chevron_right</i>
-                    </button>
+                    </a>
                 </div>
-            @endforeach
-        </div>
-    @endforeach
+                @foreach(\App\FoodyType::where('foody_type_id', $foody_type->id)->get() as $foody_type_child)
+                    <div class="col s12 navbar-index">
+                        <a id="{{ $foody_type_child->slug }}"
+                           class="waves-effect waves-purple btn white black-text btn-fluid foody-type">
+                            {{ $foody_type_child->name }}
+                            <i class="material-icons right">chevron_right</i>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        @endforeach
 </div>
 
 <style>
@@ -60,5 +62,10 @@
     }
     .divider {
         margin-bottom: 5px;
+    }
+
+    .btn.active {
+        color: white !important;
+        background-color: purple !important;
     }
 </style>

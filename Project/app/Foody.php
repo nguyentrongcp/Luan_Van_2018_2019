@@ -17,8 +17,6 @@ class Foody extends Model
     private $price = -1;
     private $salePercent = -1;
 
-    protected $table = 'foodies';
-
     public function costs()
     {
         return $this->hasMany(Cost::class);
@@ -26,6 +24,22 @@ class Foody extends Model
 
     public function images() {
         return $this->hasMany(ImageFoody::class);
+    }
+
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
+
+    public function getLiked() {
+        return $this->likes()->count();
+    }
+
+    public function favorites() {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function getFavorited() {
+        return $this->favorites()->count();
     }
 
 //    public function salesOffProducts() {

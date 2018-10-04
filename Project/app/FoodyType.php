@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class FoodyType extends Model
 {
-    protected $fillable = ['name-type', 'slug'];
 
-    public function products() {
+    public function foodies() {
         return $this->hasMany(Foody::class);
+    }
+
+    public function foody_types() {
+        return $this->hasMany(FoodyType::class);
     }
 
     public static function exit($slug) {
