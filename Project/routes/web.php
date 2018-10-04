@@ -69,7 +69,9 @@ Route::get('test', 'Customer\TestController@test')->name('test');
 
     // Index
     Route::get('/type', 'Customer\IndexController@index')->name('customer.index');
-    Route::get('/type/{slug}', 'Customer\IndexController@showFoody')->name('customer.show.foody');
+    Route::get('/type/{slug}', 'Customer\IndexController@showFoody');
+    Route::post('/customer/like', 'Customer\IndexController@like');
+    Route::post('/customer/favorite', 'Customer\IndexController@favorite');
 
     Route::post('/login', 'Customer\CustomerLoginController@login')->name('customer.login.submit');
     Route::get('logout/', 'Customer\CustomerLoginController@logout')->name('customer.logout');

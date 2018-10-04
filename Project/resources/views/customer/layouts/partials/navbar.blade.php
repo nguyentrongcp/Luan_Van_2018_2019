@@ -1,17 +1,19 @@
-<div class="navbar-fixed" data-target="red">
-    <nav>
+<div class="navbar-fixed" style="z-index: 998">
+    <nav class="purple">
         <div class="container">
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo left">
-                    <img class="responsive-img" src="customer/image/logo.png">
+                    <img class="responsive-img" src="customer/image/logo-white.png">
                 </a>
                 <ul class="right hide-on-med-and-down">
                     @if(!Auth::guard('customer')->check())
                         <li><a href="#"><b>Tạo tài khoản</b></a></li>
                         <li><a href="#login-modal" class="modal-trigger"><b>Đăng nhập</b></a></li>
                     @else
-                        <li><a class="dropdown-trigger" data-target="customer-profile">
-                                <b>{{ Auth::guard('customer')->user()->name }}</b>
+                        <li><a style="height: 64px;" id="profile" data-target="customer-profile">
+                                <img class="responsive-img circle" src="https://scontent.fsgn5-4.fna.fbcdn.net/v/t1.0-9/29244095_2127623837457107_1960178588228106477_n.jpg?_nc_cat=102&oh=2e5468930f3c7be683b7ed7428b9eaed&oe=5C5E95CB">
+
+                                <b style="position: relative; vertical-align: top">{{ Auth::guard('customer')->user()->name }}</b>
                             </a></li>
                     @endif
                     <li><a href="#">
@@ -26,18 +28,45 @@
 </div>
 
 <ul id="customer-profile" class="dropdown-content">
+    <li><a href="">
+            <i class="material-icons left">history</i>Lịch sử đặt món
+        </a></li>
+    <li><a href="">
+            <i class="material-icons left">account_box</i>Cập nhật tài khoản
+        </a></li>
     <li><a href="{{ route('customer.logout') }}">
+            <i class="material-icons left">power_settings_new</i>
             Đăng xuất
         </a></li>
 </ul>
+
+<div class="row" id="test-container">
+    <h6><b>Sắp xếp</b></h6>
+    <div class="divider" style="margin-bottom: 5px"></div>
+
+    <div class="col s12 navbar-index">
+        <a class="waves-effect waves-purple btn white black-text btn-fluid">
+            Giá tăng dần
+            <i class="material-icons left">arrow_upward</i>
+        </a>
+    </div>
+
+    <div class="col s12 navbar-index">
+        <button class="waves-effect waves-purple btn white black-text btn-fluid">
+            Giá giảm dần
+            Giá tăng dần
+            <i class="material-icons left">arrow_downward</i>
+        </button>
+    </div>
+</div>
 
 @include('customer.layouts.components.login')
 
 @include('customer.layouts.partials.navbar-mobile')
 
-{{--<div class="container">--}}
-    {{--@include('customer.layouts.partials.second-navbar')--}}
-{{--</div>--}}
+<div class="container">
+    @include('customer.layouts.partials.second-navbar')
+</div>
 
 <style>
     .navbar-mobile {
@@ -60,12 +89,28 @@
     #search-mobile {
         padding: 0 32px;
     }
+
+    .dropdown-content li>a>i {
+        margin: 0 15px 0 0;
+    }
+
+    .responsive-img.circle {
+        height: 40px;
+        width: 40px;
+        margin-top: 12px;
+        margin-right: 10px;
+    }
 </style>
 
 @push('script')
     <script>
         $(document).ready(function(){
             $('.modal').modal();
+            $('#profile').dropdown({
+                coverTrigger: false,
+                alignment: 'right',
+                constrainWidth: false
+            })
         });
     </script>
 @endpush
