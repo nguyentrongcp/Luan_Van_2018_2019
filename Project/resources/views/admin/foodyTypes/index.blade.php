@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title','ADMIN | Loại thực đơn')
+@section('title','Loại thực đơn | Fast Foody Shop')
 
 @section('content')
     <div class="content">
@@ -13,7 +13,7 @@
                             <h5 class="title text-center">DANH SÁCH CÁC LOẠI THỰC ĐƠN CỦA CỬA HÀNG</h5>
                             <hr>
                             <div class="add-productType">
-                                <button type="button" class="btn btn-info btn-round" onclick="$('#modal-add-fdt').modal('show')">
+                                <button type="button" class="btn btn-info btn-round" onclick="$('#modal-create-fdt').modal('show')">
                                     <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
                                 </button>
                                 <button type="submit" class="btn btn-danger btn-round"

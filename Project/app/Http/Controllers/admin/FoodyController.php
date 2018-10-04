@@ -10,6 +10,8 @@ use App\ImageFoody;
 use App\Vote;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Validator;
 class FoodyController extends Controller
 {
@@ -35,7 +37,7 @@ class FoodyController extends Controller
     {
         $foodyTypes = FoodyType::all();
 
-        return view('admin.foodies.add.index', compact('foodyTypes'));
+        return view('admin.foodies.create.index', compact('foodyTypes'));
     }
 
     /**
@@ -90,24 +92,6 @@ class FoodyController extends Controller
         $vote = new Vote();
         $vote->foody_id = $foody->id;
         $vote->save();
-
-        if ($request->hasFile('foody-image-upload')) {
-            $foody_images = $request->File('foody-image-upload');
-            foreach ($foody_images as $key => $foody_image) {
-                $ext = $foody_image->extension();
-                $image = new Image();
-                $path = $foody_image
-                    ->move('admin\assets\images\img_product', "image-$foody->id-$key-$time.$ext");
-                $image->link = str_replace('\\', '/', $path);
-                $image->save();
-
-                $image_foody = new ImageFoody();
-                $image_foody->image_id = $image->id;
-                $image_foody->foody_id = $foody->id;
-                $image_foody->save();
-            }
-        }
-
 
         return back()->with('success', "Thêm $foody_name thành công!");
     }

@@ -77,7 +77,7 @@
     </table>
     <div class="div-pagination">
         {{--{{$employees->links()}}--}}
-        </di            v>
+        </div>
 
     </div>
 

@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('product_change_avatar',[$id])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('foody_change_avatar',[$id])}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="images">Hình ảnh đại diện: </label>

@@ -11,7 +11,7 @@
                         <h5 class="title text-center">DANH SÁCH NHÂN VIÊN CỦA CỬA HÀNG</h5>
                         <hr>
                         <div class="add-product">
-                            <button class="btn btn-info btn-round" onclick="$('#modal-add-employee').modal('show')">
+                            <button class="btn btn-info btn-round" onclick="$('#modal-create-employee').modal('show')">
                                 <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
                             </button>
                             <button class="btn btn-danger btn-round">

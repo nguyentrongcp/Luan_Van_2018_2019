@@ -11,14 +11,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('product_change_multi_image',[$id])}}" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="images">Hình ảnh chi tiết: </label>
                         <div class="">
                             <button class="btn btn-info btn-fab btn-icon btn-round" style="cursor: pointer">
                                 <i class="now-ui-icons ui-1_simple-add"></i>
-                                <input type="file" multiple id="gallery-product-image" name="product-image-upload" accept=".jpg, .png, .jpeg">
+                                <input type="file" multiple id="gallery-product-image" name="foody-image-upload" accept=".jpg, .png, .jpeg">
                             </button>
                         </div>
                         <div class="gallery-product-image"></div>

@@ -54,3 +54,7 @@
 .td-actions{
     width: 100px;
 }
+.star-rating{
+    color: yellow;
+    font-size: 18px!important;
+}

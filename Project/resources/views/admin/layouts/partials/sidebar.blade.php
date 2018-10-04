@@ -16,10 +16,17 @@
                 </a>
             </li>
             <li class="{{Request::is('*/statistic') ? 'active' : '' }} ">
-                <a href="/admin/statistic" >
+                <a href="/admin/statistic" data-toggle="collapse" data-target="#collapseStatistic" aria-expanded="false" aria-controls="collapseStatistic">
                     <i class="fa fa-money"></i>
                     <p>Thống kê</p>
                 </a>
+                <div class="collapse" id="collapseStatistic">
+                    <ul class="nav">
+                        <li><a href="">Thu chi</a></li>
+                        <li><a href="">Đơn hàng</a></li>
+                        <li><a href="">Thực đơn</a></li>
+                    </ul>
+                </div>
             </li>
             <li class="{{Request::is('*/foody_type') || Request::is('*/add_foody_type/*')  ? 'active' : ''}}">
                 <a href="/admin/foody_type">
@@ -57,11 +64,17 @@
                     <p>Tin tức</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/shop') ? 'active' : ''}}">
-                <a href="/admin/shop">
+            <li class="{{Request::is('*/shop_infos') ? 'active' : ''}}">
+                <a href="/admin/shop_infos" data-toggle="collapse" data-target="#collapseShop" aria-expanded="false" aria-controls="collapseShop">
                     <i class="now-ui-icons travel_info"></i>
                     <p>Cửa hàng</p>
                 </a>
+                <div class="collapse" id="collapseShop">
+                    <ul class="nav">
+                        <li><a href="">Thông tin cửa hàng</a></li>
+                        <li><a href="">Slide quảng cáo</a></li>
+                    </ul>
+                </div>
             </li>
             <li class="{{Request::is('*/employees') ? 'active' : ''}}">
                 <a href="/admin/employees">

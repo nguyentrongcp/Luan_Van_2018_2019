@@ -11,7 +11,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('product_change_cost',[$id])}}" method="post">
+                    <form action="{{route('foody_change_cost',[$id])}}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label class="bmd-label-floating">Giá thay đổi</label>
@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label for="type">Lịch sử giá thực đơn</label>
                             <select name="product-cost-history" class="form-control" style="border-radius: 30px">
-                                @foreach(App\Cost::where('product_id',$id)->get() as $costs)
+                                @foreach(App\Cost::where('foody_id',$id)->get() as $costs)
                                     <option name="product-cost-history">
                                         {{$costs->cost . 'đ - ('.$costs->cost_updated_at.')'}}</option>
                                     @endforeach

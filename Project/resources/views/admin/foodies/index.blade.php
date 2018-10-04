@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title','ADMIN | Sản phẩm')
+@section('title','Thực đơn | Fast Foody Shop')
 
 @section('content')
 
@@ -13,7 +13,18 @@
                         <div class="card-header">
                             <h5 class="title text-center">DANH SÁCH CÁC THỰC ĐƠN CỦA CỬA HÀNG</h5>
                             <hr>
-                            <div class="add-product">
+                            <div class="">
+                                <a class="btn btn-info btn-round dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Bộ lọc <i class="fa fa-filter"></i>
+                                </a>
+                                <select class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                                    <label for="">Loại thực đơn</label>
+                                    {{--<select class="dropdown-item" name="foody-type" id="foody-type">--}}
+                                        @foreach($foodyTypes as $fdt)
+                                        <option class="dropdown-item" value="{{$fdt->id}}">{{$fdt->name}}</option>
+                                        @endforeach
+                                    {{--</select>--}}
+                                </select>
                                 <a href="{{route('foodies.create')}}" class="btn btn-info btn-round" >
                                     <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
                                 </a>

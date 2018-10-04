@@ -11,7 +11,7 @@
                         <h5 class="title text-center">QUẢN LÝ NHẬP HÀNG</h5>
                         <hr>
                         <div class="add-goods">
-                            <button onclick="$('#modal-add-goods').modal('show')" class="btn btn-info btn-round" >
+                            <button onclick="$('#modal-create-goods').modal('show')" class="btn btn-info btn-round" >
                                 <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
                             </button>
                             <button type="submit" class="btn btn-danger btn-round"

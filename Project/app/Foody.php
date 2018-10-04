@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property mixed costs
  * @property mixed name
- * @property mixed product_type_id
+ * @property mixed foody_type_id
  * @property mixed trademark_id
  * @property mixed id
  */

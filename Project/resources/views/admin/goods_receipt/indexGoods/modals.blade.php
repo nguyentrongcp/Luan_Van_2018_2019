@@ -1,4 +1,4 @@
-<!-- Modal add foodies type-->
+<!-- Modal create foodies type-->
 <div class="modal fade" id="modal-add-goods" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

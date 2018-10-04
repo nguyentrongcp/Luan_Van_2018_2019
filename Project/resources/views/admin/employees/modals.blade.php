@@ -1,4 +1,4 @@
-<!-- Modal add employee-->
+<!-- Modal create employee-->
 <div class="modal fade" id="modal-add-employee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -59,7 +59,7 @@
 </div>
 <!--End modal-->
 
-<!-- Modal add employee-->
+<!-- Modal create employee-->
 <div class="modal fade" id="modal-change-pwd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

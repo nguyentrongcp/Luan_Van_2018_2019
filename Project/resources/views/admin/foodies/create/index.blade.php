@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title','ADMIN | Loại sản phẩm')
+@section('title','ADMIN | Thực đơn')
 
 @section('content')
     <div class="content">
@@ -58,7 +58,6 @@
                                 <div class="col-md-12 form-group">
                                     <div class="card-header bg-info">
                                         <label class="title text-white lb-info" for="images">Hình ảnh đại diện </label>
-
                                     </div>
                                     <div class="">
                                         <button class="btn btn-info btn-fab btn-icon btn-round" style="cursor: pointer">
@@ -68,21 +67,6 @@
                                         </button>
                                     </div>
                                     <div class="gallery-avatar-image"></div>
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <div class="card-header bg-info">
-                                        <label class="title text-white lb-info" for="images">Hình ảnh chi tiết </label>
-
-                                    </div>
-                                    <div class="">
-                                        <button class="btn btn-info btn-fab btn-icon btn-round" style="cursor: pointer">
-                                            <i class="now-ui-icons ui-1_simple-add"></i>
-                                            <input type="file" multiple id="gallery-product-image"
-                                                   name="foody-image-upload[]" accept=".jpg, .png, .jpeg">
-                                        </button>
-
-                                    </div>
-                                    <div class="gallery-product-image"></div>
                                 </div>
                             </div>
                         </div>

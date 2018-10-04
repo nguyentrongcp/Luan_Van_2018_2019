@@ -18,7 +18,10 @@ Route::get('/', function () {
 
 
 /**      Admin       **/
-//Route::get('/admin/login','Admin\AdminController@index')->name('admin.login');
+Route::get('/admin/login', function (){
+   return view('admin.auth.login');
+});
+
 
 Route::group(['prefix' => 'admin'], function (){
 
@@ -32,8 +35,7 @@ Route::group(['prefix' => 'admin'], function (){
     Route::get('add_foody_type/{id}','Admin\FoodyTypeController@movePageCreateType')
             ->name('admin.addType');
     Route::resource('add_new','Admin\AddTypeController',["except" => ["create","show", "edit"]]);
-    Route::get('foody_type/{id}','Admin\FoodyTypeController@changeStatus')
-        ->name('foody_type.changeStatus');
+
 
     /** Foody */
 
@@ -57,6 +59,14 @@ Route::group(['prefix' => 'admin'], function (){
 
     /**      Sales offs       **/
     Route::resource('sales_offs','Admin\SalesOffsController');
+
+    /**      Shop information       **/
+    Route::resource('shop_infos','Admin\ShopInfoController');
+
+    /**      News       **/
+    Route::resource('news','Admin\NewsController');
+//    Route::get('news/{id}','Admin\NewsController');
+
 });
 
 

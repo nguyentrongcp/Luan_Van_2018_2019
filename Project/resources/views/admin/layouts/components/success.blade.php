@@ -1,5 +1,4 @@
 @if (session()->get('success') != '')
-    @push('script')
         <script>
             $.toast({
                 heading: 'Thông báo',
@@ -9,5 +8,4 @@
                 loader: false
             });
         </script>
-    @endpush
 @endif
