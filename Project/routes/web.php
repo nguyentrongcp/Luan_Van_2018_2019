@@ -20,14 +20,18 @@ Route::get('/', function () {
 /**      Admin       **/
 Route::get('/admin/login', function (){
    return view('admin.auth.login');
-});
+})->name('admin.login');
+Route::post('/admin/login', 'admin\AdminLoginController@login')->name('admin.login.submit');
 
 
-Route::group(['prefix' => 'admin'], function (){
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
 //    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
-//    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/logout', 'admin\AdminLoginController@logout')->name('admin.logout');
 
+    Route::get('dashboard', function () {
+        return view('admin.foodies.index');
+    })->name('admin.dashboard');
 
     /** Foody type */
 

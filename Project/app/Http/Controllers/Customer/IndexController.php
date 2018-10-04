@@ -63,7 +63,12 @@ class IndexController extends Controller
                                     <div class=\"extra content\">
                                         <span id=\"like-$foody->id\" data-target=\"$foody->id\" 
                                         onclick='like(this)' class=\"left floated like\">";
-                    if(empty($foody->likes()->where('customer_id',
+                    if(!Auth::guard('customer')->check()) {
+                        $data .=
+                            "<i id=\"i-like-$foody->id\" class=\"like icon\"></i>
+                             <a id=\"a-like-$foody->id\">Thích</a>";
+                    }
+                    elseif(empty($foody->likes()->where('customer_id',
                         Auth::guard('customer')->user()->id)->first())) {
                         $data .=
                             "<i id=\"i-like-$foody->id\" class=\"like icon\"></i>
@@ -79,8 +84,11 @@ class IndexController extends Controller
                         "</span>
                         <span id=\"favorite-$foody->id\" class=\"right floated star\"
                         onclick='favorite(this)' data-target=\"$foody->id\">";
-
-                    if(empty($foody->favorites()->where('customer_id',
+                    if(!Auth::guard('customer')->check()) {
+                        $data .= "<i id=\"i-favorite-$foody->id\" class=\"star icon\"></i>
+                                <a id=\"a-favorite-$foody->id\">Quan tâm</a>";
+                    }
+                    elseif(empty($foody->favorites()->where('customer_id',
                         Auth::guard('customer')->user()->id)->first())) {
                         $data .= "<i id=\"i-favorite-$foody->id\" class=\"star icon\"></i>
                                 <a id=\"a-favorite-$foody->id\">Quan tâm</a>";
@@ -104,12 +112,22 @@ class IndexController extends Controller
         }
 
         else {
-            $foodies = $foody_type->foodies;
+            $this->showFoodyAll($foody_type, $data);
+        }
 
-            foreach($foodies as $foody) {
-                $liked = $foody->getLiked();
-                $data .=
-                    "<div class=\"col s12 m6 l4 foody-card\">
+//        dd($data);
+
+
+        return Response($data);
+    }
+
+    public function showFoodyAll($foody_type, &$data) {
+        $foodies = $foody_type->foodies;
+
+        foreach($foodies as $foody) {
+            $liked = $foody->getLiked();
+            $data .=
+                "<div class=\"col s12 m6 l4 foody-card\">
 
                             <div class=\"ui cards hoverable\">
                                 <div class=\"card\">
@@ -139,34 +157,43 @@ class IndexController extends Controller
                                     <div class=\"extra content\">
                                         <span id=\"like-$foody->id\" data-target=\"$foody->id\" 
                                         onclick='like(this)' class=\"left floated like\">";
-                    if(empty($foody->likes()->where('customer_id',
-                        Auth::guard('customer')->user()->id)->first())) {
-                        $data .=
-                            "<i id=\"i-like-$foody->id\" class=\"like icon\"></i>
+            if(!Auth::guard('customer')->check()) {
+                $data .=
+                    "<i id=\"i-like-$foody->id\" class=\"like icon\"></i>
+                                 <a id=\"a-like-$foody->id\">Thích</a>";
+            }
+            elseif(empty($foody->likes()->where('customer_id',
+                Auth::guard('customer')->user()->id)->first())) {
+                $data .=
+                    "<i id=\"i-like-$foody->id\" class=\"like icon\"></i>
                              <a id=\"a-like-$foody->id\">Thích</a>";
-                    }
+            }
 
-                    else {
-                        $data .=
-                            "<i id=\"i-like-$foody->id\" class=\"like active icon\"></i>
+            else {
+                $data .=
+                    "<i id=\"i-like-$foody->id\" class=\"like active icon\"></i>
                              <a id=\"a-like-$foody->id\">Bỏ thích</a>";
-                    }
-                    $data .=
-                        "</span>
+            }
+            $data .=
+                "</span>
                         <span id=\"favorite-$foody->id\" onclick='favorite(this)'
                         class=\"right floated star\" data-target=\"$foody->id\">";
 
-                    if(empty($foody->favorites()->where('customer_id',
-                        Auth::guard('customer')->user()->id)->first())) {
-                        $data .= "<i id=\"i-favorite-$foody->id\" class=\"star icon\"></i>
+            if(!Auth::guard('customer')->check()) {
+                $data .= "<i id=\"i-favorite-$foody->id\" class=\"star icon\"></i>
+                                    <a id=\"a-favorite-$foody->id\">Quan tâm</a>";
+            }
+            elseif(empty($foody->favorites()->where('customer_id',
+                Auth::guard('customer')->user()->id)->first())) {
+                $data .= "<i id=\"i-favorite-$foody->id\" class=\"star icon\"></i>
                                 <a id=\"a-favorite-$foody->id\">Quan tâm</a>";
-                    }
-                    else {
-                        $data .= "<i id=\"i-favorite-$foody->id\" class=\"star active icon\"></i>
+            }
+            else {
+                $data .= "<i id=\"i-favorite-$foody->id\" class=\"star active icon\"></i>
                                 <a id=\"a-favorite-$foody->id\">Bỏ quan tâm</a>";
-                    }
-                    $data .=
-                        "</span>
+            }
+            $data .=
+                "</span>
                                 </div>
                                 <div class=\"ui bottom attached button\">
                                     <i class=\"cart plus icon\"></i>
@@ -175,16 +202,11 @@ class IndexController extends Controller
                             </div>
                         </div>
                         </div>";
-            }
         }
-
-//        dd($data);
-
-
-        return Response($data);
     }
 
     public function like(Request $request) {
+
         $foody_id = $request->get('foody_id');
         $customer_id = Auth::guard('customer')->user()->id;
         $number_of_liked = Foody::find($foody_id)->getLiked();
@@ -207,6 +229,9 @@ class IndexController extends Controller
     }
 
     public function favorite(Request $request) {
+        if (!Auth::guard('customer')->check())
+            return false;
+
         $foody_id = $request->get('foody_id');
         $customer_id = Auth::guard('customer')->user()->id;
 

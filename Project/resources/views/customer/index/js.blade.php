@@ -16,6 +16,9 @@
                 data: {
                     foody_id: foody_id
                 },
+                error: function () {
+                    $('#login-modal').modal('open');
+                },
                 success: function (data) {
                     $('#i-' + id).toggleClass('active');
                     $('#a-' + id).text(data.text);
@@ -38,6 +41,9 @@
                 url: "/customer/favorite",
                 data: {
                     foody_id: foody_id
+                },
+                error: function() {
+                    $('#login-modal').modal('open');
                 },
                 success: function (data) {
                     $('#i-' + id).toggleClass('active');
