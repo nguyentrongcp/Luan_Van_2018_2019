@@ -23,6 +23,7 @@ class CreateAdminsTable extends Migration
             $table->string('password', 100);
             $table->tinyInteger('role');
             $table->boolean('is_deleted')->default(false);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

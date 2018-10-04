@@ -20,14 +20,18 @@ Route::get('/', function () {
 /**      Admin       **/
 Route::get('/admin/login', function (){
    return view('admin.auth.login');
-});
+})->name('admin.login');
+Route::post('/admin/login', 'admin\AdminLoginController@login')->name('admin.login.submit');
 
 
-Route::group(['prefix' => 'admin'], function (){
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
 //    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
-//    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/logout', 'admin\AdminLoginController@logout')->name('admin.logout');
 
+    Route::get('dashboard', function () {
+        return view('admin.foodies.index');
+    })->name('admin.dashboard');
 
     /** Foody type */
 
@@ -73,16 +77,15 @@ Route::group(['prefix' => 'admin'], function (){
 
 /**      Customer       **/
 
-Route::get('test', 'Customer\TestController@test')->name('test');
+    // Index
+    Route::get('/', 'Customer\CustomerController@index')->name('customer.index');
 
     // Home
-    Route::get('/', 'Customer\CustomerController@index')->name('customer.home');
+    Route::get('/type', 'Customer\HomeController@index')->name('customer.home');
+    Route::get('/type/{slug}', 'Customer\HomeController@showFoody');
+    Route::post('/customer/like', 'Customer\HomeController@like');
+    Route::post('/customer/favorite', 'Customer\HomeController@favorite');
 
-    // Index
-    Route::get('/type', 'Customer\IndexController@index')->name('customer.index');
-    Route::get('/type/{slug}', 'Customer\IndexController@showFoody');
-    Route::post('/customer/like', 'Customer\IndexController@like');
-    Route::post('/customer/favorite', 'Customer\IndexController@favorite');
-
+    // Login & logout
     Route::post('/login', 'Customer\CustomerLoginController@login')->name('customer.login.submit');
     Route::get('logout/', 'Customer\CustomerLoginController@logout')->name('customer.logout');

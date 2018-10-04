@@ -32,7 +32,10 @@
                     <div class="extra content">
                         <span id="like-{{ $foody->id }}" data-target="{{ $foody->id }}"
                               onclick="like(this)" class="left floated like">
-                              @if(empty($foody->likes()->where('customer_id', Auth::guard('customer')->user()->id)->first()))
+                              @if(!Auth::guard('customer')->check())
+                                <i id="i-like-{{ $foody->id }}" class="like icon"></i>
+                                <a id="a-like-{{ $foody->id }}">Thích</a>
+                              @elseif(empty($foody->likes()->where('customer_id', Auth::guard('customer')->user()->id)->first()))
                                 <i id="i-like-{{ $foody->id }}" class="like icon"></i>
                                 <a id="a-like-{{ $foody->id }}">Thích</a>
                               @else
@@ -42,7 +45,10 @@
                         </span>
                         <span id="favorite-{{ $foody->id }}" class="right floated star"
                               onclick="favorite(this)" data-target="{{ $foody->id }}">
-                            @if(empty($foody->favorites()->where('customer_id', Auth::guard('customer')->user()->id)->first()))
+                            @if(!Auth::guard('customer')->check())
+                                <i id="i-favorite-{{ $foody->id }}" class="star icon"></i>
+                                <a id="a-favorite-{{ $foody->id }}">Quan tâm</a>
+                            @elseif(empty($foody->favorites()->where('customer_id', Auth::guard('customer')->user()->id)->first()))
                                 <i id="i-favorite-{{ $foody->id }}" class="star icon"></i>
                                 <a id="a-favorite-{{ $foody->id }}">Quan tâm</a>
                             @else
@@ -187,4 +193,4 @@
 
 </style>
 
-@include('customer.index.js')
+@include('customer.home.js')

@@ -6,7 +6,8 @@
         <div class="container">
             <div class="col-md-4 ml-auto mr-auto" style="padding-top: 120px">
                 <div class="card card-login" >
-                    <form class="form" method="" action="">
+                    <form class="form" method="post" action="{{ route('admin.login.submit') }}">
+                        @csrf
                         <div class="card-header text-center ">
                             <label for="title" class="title text-info" style="font-size: 22px">ĐĂNG NHẬP</label>
                         </div>
@@ -17,8 +18,8 @@
                                     <i class="now-ui-icons users_circle-08"></i>
                                   </span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Tài khoản..."
-                                        value="blabla@gmail.com">
+                                <input name="username" type="text" class="form-control" placeholder="Tài khoản..."
+                                        value="blabla">
                             </div>
 
                             <div class="input-group no-border input-lg">
@@ -27,13 +28,13 @@
                                     <i class="fa fa-unlock-alt"></i>
                                   </span>
                                 </div>
-                                <input type="password" placeholder="Mật khẩu..." class="form-control"
-                                        value="blablabla">
+                                <input name="password" type="password" placeholder="Mật khẩu..." class="form-control"
+                                        value="111111">
                             </div>
                         </div>
                         <div class="card-footer text-center">
-                            <a href=""
-                               class="btn btn-info btn-round btn-lg btn-block">Đăng nhập</a>
+                            <button type="submit"
+                               class="btn btn-info btn-round btn-lg btn-block">Đăng nhập</button>
 
                         </div>
                     </form>

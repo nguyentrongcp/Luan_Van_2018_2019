@@ -4,11 +4,11 @@
 
 @section('content')
 
-    @include('customer.home.slider')
+    @include('customer.index.slider')
 
-    @include('customer.home.hot-foody')
+    @include('customer.index.hot-foody')
 
-    @include('customer.home.hot-drink')
+    @include('customer.index.hot-drink')
 
     <style>
         /*.row .col {*/
