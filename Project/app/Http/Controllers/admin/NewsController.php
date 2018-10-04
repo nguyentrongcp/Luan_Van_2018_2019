@@ -118,36 +118,6 @@ class NewsController extends Controller
         $news->admin_id = random_int(1, 2);
         $news->update();
 
-        if (!$request->hasFile('news-image-upload')) {
-            return back()->with('error', 'Bạn chưa upload hình ảnh!');
-        } else {
-
-            foreach (ImageNews::where('news_id', $id)->get() as $idImage) {
-                foreach (Image::where('id', $idImage->image_id)->get() as $image) {
-                    $oldPath = $image->link;
-                    if (!empty($oldPath)) {
-                        File::delete($oldPath);
-                        $image->delete();
-                    }
-
-                }
-            }
-            $time = time();
-            $news_image = $request->File('news-image-upload');
-            $ext = $news_image->extension();
-
-            $image = Image();
-            $path = $news_image
-                ->move('admin\assets\images\news', "news-$id-$time.$ext");
-            $image->link = str_replace('\\', '/', $path);
-            $image->save();
-
-            $image_news = new ImageNews();
-            $image_news->image_id = $image->id;
-            $image_news->news_id = $id;
-            $image_news->save();
-
-        }
         return back()->with('success', 'Cập nhật thành công.');
 
     }
@@ -171,5 +141,29 @@ class NewsController extends Controller
         }
 
         return back()->with('success', 'Xóa thành công.');
+    }
+    public function changeImage(Request $request, $id){
+        if (!$request->hasFile('news-image-upload')) {
+            return back()->with('error', 'Bạn chưa upload hình ảnh!');
+        } else {
+
+            foreach (ImageNews::where('news_id', $id)->get() as $idImage) {
+                foreach (Image::where('id', $idImage->image_id)->get() as $image) {
+                    $oldPath = $image->link;
+                    if (!empty($oldPath)) {
+                        File::delete($oldPath);
+                    }
+                    $time = time();
+                    $news_image = $request->File('news-image-upload');
+                    $ext = $news_image->extension();
+                    $path = $news_image
+                        ->move('admin\assets\images\news', "news-$id-$time.$ext");
+                    $image->link = str_replace('\\', '/', $path);
+                    $image->update();
+                }
+            }
+
+        }
+        return back()->with('success','Thay đổi thành công!');
     }
 }

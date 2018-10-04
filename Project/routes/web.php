@@ -65,7 +65,8 @@ Route::group(['prefix' => 'admin'], function (){
 
     /**      News       **/
     Route::resource('news','Admin\NewsController');
-//    Route::get('news/{id}','Admin\NewsController');
+    Route::post('news/change_image/{id}','Admin\NewsController@changeImage')
+            ->name('news_change_image');
 
 });
 
