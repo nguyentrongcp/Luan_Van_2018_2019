@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\SalesOff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,9 @@ class SalesOffsController extends Controller
      */
     public function index()
     {
-        return view('admin.sales_offs.index');
+        $salesOffs = SalesOff::where('parent_id',null)->paginate(10);
+
+        return view('admin.sales_offs.index', compact('salesOffs'));
     }
 
     /**
@@ -24,24 +27,31 @@ class SalesOffsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $salesOff = new SalesOff();
+        $salesOff->name = $request->get('name-sales');
+        $salesOff->percent = $request->get('percent');
+        $salesOff->start_date = $request->get('start-date');
+        $salesOff->end_date = $request->get('end-date');
+        $salesOff->save();
+
+        return back()->with('success', 'Thêm mới khuyến mãi thành công!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,7 +62,7 @@ class SalesOffsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -63,23 +73,51 @@ class SalesOffsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $salesOff = SalesOff::findOrFail($id);
+
+        $salesOff->name = $request->get('name-sales');
+        $salesOff->percent = $request->get('percent');
+        $salesOff->start_date = $request->get('start-date');
+        $salesOff->end_date = $request->get('end-date');
+        $salesOff->update();
+
+        return back()->with('success', 'Khuyến mãi đã cập nhật thành công!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+
+        $ids = $request->get('sales-offs-id');
+        if (!$request->has('sales-offs-id')) {
+            return back()->with('error', 'Dữ liệu chưa được chọn');
+        }
+        foreach ($ids as $id) {
+            $salesOffs = SalesOff::findOrFail($id);
+            $salesOffs->delete();
+        }
+        return back()->with('success','Xóa thành công!');
+    }
+
+    public function movePageCreateSales($id){
+
+        $sales_id = SalesOff::find($id);
+        $sales_name = $sales_id->name;
+
+        $salesOffs = SalesOff::where('parent_id',$id)->paginate(10);
+
+        return view('admin.sales_offs.create.index',
+            compact('sales_name','salesOffs','id'));
     }
 }

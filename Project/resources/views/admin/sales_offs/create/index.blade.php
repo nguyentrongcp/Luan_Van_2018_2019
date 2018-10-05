@@ -10,7 +10,8 @@
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <div class="card-header">
-                            <h5 class="title text-center">QUẢN LÝ KHUYẾN MÃI</h5>
+                            <h5 class="title"><a href="{{route('sales_offs.index')}} " rel="tooltip" title="Quay lại" data-placement="bottom">KHUYẾN MÃI</a>
+                                <i class="fa fa-angle-double-right"></i> {{$sales_name}}</h5>
                             <hr>
                             <div class="add-productType">
                                 <button type="button" class="btn btn-info btn-round" onclick="$('#modal-create-sales').modal('show')">
@@ -25,7 +26,7 @@
                         <div class="card-body all-icons">
                             <div class="row">
                                 <div class="wrapper-prot">
-                                    @include('admin.sales_offs.table')
+                                    @include('admin.sales_offs.create.table')
                                 </div>
                             </div>
                         </div>
@@ -36,5 +37,5 @@
             </div>
         </div>
     </div>
-    @include('admin.sales_offs.modals')
+    @include('admin.sales_offs.create.modals')
 @endsection

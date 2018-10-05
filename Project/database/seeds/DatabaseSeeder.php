@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
              FoodyTypeSeeder::class,
              FoodySeeder::class,
              CostSeeder::class,
-             NewsSeeder::class
+             NewsSeeder::class,
+             SalesOffSeeder::class
 
          ]);
     }

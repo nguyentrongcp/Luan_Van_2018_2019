@@ -52,13 +52,13 @@
                     <p>Nhập hàng</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/sales_offs') ? 'active' : ''}}">
+            <li class="{{Request::is('*/sales_offs')||Request::is('*/sales_offs/*') ? 'active' : ''}}">
                 <a href="/admin/sales_offs">
                     <i class="now-ui-icons business_bulb-63"></i>
                     <p>Khuyến mãi</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/news') ? 'active' : ''}}">
+            <li class="{{Request::is('*/news')||Request::is('*/news/*')||Request::is('*/news/create') ? 'active' : ''}}">
                 <a href="/admin/news">
                     <i class="fa fa-bullhorn"></i>
                     <p>Tin tức</p>

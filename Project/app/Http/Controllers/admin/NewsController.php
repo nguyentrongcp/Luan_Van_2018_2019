@@ -8,6 +8,7 @@ use App\ImageNews;
 use App\News;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Validator;
@@ -50,7 +51,7 @@ class NewsController extends Controller
         $new->title = $titleNews;
         $new->content = $content;
         $new->date = date('Y-m-d H:i:s');
-        $new->admin_id = random_int(1, 2);
+        $new->admin_id = Auth::guard('admin')->id();
         $new->save();
 
         $time = time();
@@ -115,7 +116,7 @@ class NewsController extends Controller
         $news->title = $request->get('name-news');
         $news->content = $request->get('des');
         $news->date = date('Y-m-d H:i:s');
-        $news->admin_id = random_int(1, 2);
+        $news->admin_id = Auth::guard('admin')->id();
         $news->update();
 
         return back()->with('success', 'Cập nhật thành công.');
@@ -142,6 +143,7 @@ class NewsController extends Controller
 
         return back()->with('success', 'Xóa thành công.');
     }
+
     public function changeImage(Request $request, $id){
         if (!$request->hasFile('news-image-upload')) {
             return back()->with('error', 'Bạn chưa upload hình ảnh!');
