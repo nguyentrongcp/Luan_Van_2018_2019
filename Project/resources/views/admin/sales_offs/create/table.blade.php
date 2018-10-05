@@ -32,9 +32,8 @@
                     </div>
                 </td>
                 <td class="text-center td-prot th-stt">{{$stt+1}}</td>
-                <td class="td-prot text-info">
-                    <a class="text-info" href="{{route('admin.createSales',[$sales->id])}}">
-                        {{$sales->name}}</a>
+                <td class="td-prot">
+                        {{$sales->name}}
                 </td>
                 <td class="text-center td-prot">{{$sales->percent}}</td>
                 <td class="text-center td-prot">{{$sales->start_date}}</td>

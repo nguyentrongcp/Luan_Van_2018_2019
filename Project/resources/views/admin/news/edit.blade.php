@@ -9,7 +9,7 @@
                     <div class="card-header">
                         <a class="btn btn-round btn-info text-white" href="{{route('news.index')}}">
                             <i class="fa fa-arrow-circle-left" style="font-size: 18px"></i>TRỞ VỀ</a>
-                        <h5 class="title text-center">THÊM MỚI TIN TỨC</h5>
+                        <h5 class="title text-center">CẬP NHẬT LẠI BÀI VIẾT</h5>
                         <hr>
                     </div>
                     <div class="card-body">
@@ -27,27 +27,20 @@
                                                        placeholder="Nhập tiêu đề..." value="{{$news->title}}"
                                                        minlength="5" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="images" class="title">Hình ảnh </label>
-                                                <div class="">
-                                                    <button class="btn btn-info btn-fab btn-icon btn-round"
-                                                            style="cursor: pointer">Thay đổi
-                                                        <input type="file" multiple id="gallery-avatar-image"
-                                                               name="news-image-upload" accept=".jpg, .png, .jpeg">
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="title" for="">Preview hình ảnh</label>
-                                            @foreach (App\ImageNews::where('news_id', $news->id)->get() as $idImage)
-                                                @foreach (App\Image::where('id', $idImage->image_id)->get() as $image) {
-                                                <img class="img-list" src="{{asset($image->link)}}" alt="{{$news->title}}">
-                                                @endforeach
-                                            @endforeach
-                                            <div class="gallery-avatar-image">
 
+                                            <div class="card-header" style="padding-bottom: 30px">
+                                                @foreach (App\ImageNews::where('news_id', $news->id)->get() as $idImage)
+                                                    @foreach (App\Image::where('id', $idImage->image_id)->get() as $image)
+                                                    <img class="img-list" src="{{asset($image->link)}}" alt="{{$news->title}}">
+                                                    @endforeach
+                                                @endforeach
                                             </div>
+                                            <button type="button" class="btn btn-info btn-round " onclick="$('#modal-change-image').modal('show')">
+                                                Thay đổi
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -58,8 +51,8 @@
                                                   name="des">{{$news->content}}</textarea>
                                     </div>
                                     <div class="text-center">
-                                        <button type="button" class="btn btn-round">QUAY LẠI</button>
-                                        <button type="submit" class="btn btn-info btn-round">THÊM MỚI
+                                        <a href="{{route('news.index')}}" class="btn btn-round">QUAY LẠI</a>
+                                        <button type="submit" class="btn btn-info btn-round">LƯU THAY ĐỔI
                                         </button>
                                     </div>
                                 </form>
@@ -70,4 +63,6 @@
             </div>
         </div>
     </div>
+    @include('admin.news.modal')
 @endsection
+

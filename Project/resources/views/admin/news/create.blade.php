@@ -49,7 +49,7 @@
                                                   name="des"></textarea>
                                     </div>
                                     <div class="text-center">
-                                        <button type="button" class="btn btn-round">QUAY LẠI</button>
+                                        <a href="{{route('news.index')}}" class="btn btn-round">QUAY LẠI</a>
                                         <button type="submit" class="btn btn-info btn-round">THÊM MỚI
                                         </button>
                                     </div>

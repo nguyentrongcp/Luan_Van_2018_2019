@@ -18,7 +18,12 @@ class DatabaseSeeder extends Seeder
              FoodySeeder::class,
              CostSeeder::class,
              NewsSeeder::class,
+<<<<<<< HEAD
              ShoppingCartSeeder::class
+=======
+             SalesOffSeeder::class
+
+>>>>>>> master
          ]);
     }
 }
