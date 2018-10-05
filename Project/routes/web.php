@@ -80,10 +80,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::get('/', 'Customer\CustomerController@index')->name('customer.index');
 
     // Home
-    Route::get('/type', 'Customer\HomeController@index')->name('customer.home');
+    Route::get('/home', 'Customer\HomeController@index')->name('customer.home');
     Route::get('/type/{slug}', 'Customer\HomeController@showFoody');
     Route::post('/customer/like', 'Customer\HomeController@like');
     Route::post('/customer/favorite', 'Customer\HomeController@favorite');
+    Route::post('/customer/add_shopping_cart', 'Customer\ShoppingCartController@addCart');
+
+    // Foody
+    Route::get('/foody/{slug}', 'Customer\FoodyController@index')->name('customer.foody.show');
 
     // Login & logout
     Route::post('/login', 'Customer\CustomerLoginController@login')->name('customer.login.submit');

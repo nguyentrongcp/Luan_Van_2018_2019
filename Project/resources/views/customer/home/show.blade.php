@@ -10,7 +10,8 @@
                         <img src="{{ $foody->avatar }}">
                     </div>
                     <div class="content" style="padding-bottom: 5px">
-                        <a class="header truncate tooltipped" data-position="top" data-tooltip="{{ $foody->name }}">
+                        <a class="header truncate tooltipped" href="{{ route('customer.foody.show', [$foody->slug]) }}"
+                           data-position="top" data-tooltip="{{ $foody->name }}">
                             {{ $foody->name }}</a>
                         <span>
                             <span class="old-cost">1,000,000</span>
@@ -57,10 +58,13 @@
                             @endif
                         </span>
                     </div>
-                    <div class="ui bottom attached button">
+                    <a id="add-cart-{{ $foody->id }}" data-target="{{ $foody->id }}" onclick="addCart(this)"
+                       class="ui bottom attached button">
                         <i class="cart plus icon"></i>
-                        Thêm vào giỏ
-                    </div>
+                        Thêm vào giỏ (<span id="cart-added-home-{{ $foody->id }}" class="red-text">
+                            {{ Cart::matchedFoody($foody->id)->qty }}
+                        </span>)
+                    </a>
                 </div>
             </div>
 

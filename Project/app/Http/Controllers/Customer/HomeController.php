@@ -6,7 +6,6 @@ use App\Favorite;
 use App\Foody;
 use App\FoodyType;
 use App\Like;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -100,10 +99,11 @@ class HomeController extends Controller
                     $data .=
                                     "</span>
                                 </div>
-                                <div class=\"ui bottom attached button\">
+                                <a id=\"add-cart-$foody->id\" data-target=\"$foody->id\" onclick=\"addCart(this)\"
+                                    class=\"ui bottom attached button\">
                                     <i class=\"cart plus icon\"></i>
-                                    Thêm vào giỏ
-                                </div>
+                                    Thêm vào giỏ (<span id=\"cart-added-home\" class=\"red-text\">4</span>)
+                                </a>
                             </div>
                         </div>
                         </div>";
@@ -195,10 +195,11 @@ class HomeController extends Controller
             $data .=
                 "</span>
                                 </div>
-                                <div class=\"ui bottom attached button\">
+                                <a id=\"add-cart-$foody->id\" data-target=\"$foody->id\" onclick=\"addCart(this)\"
+                                    class=\"ui bottom attached button\">
                                     <i class=\"cart plus icon\"></i>
-                                    Thêm vào giỏ
-                                </div>
+                                    Thêm vào giỏ (<span id=\"cart-added-home\" class=\"red-text\">4</span>)
+                                </a>
                             </div>
                         </div>
                         </div>";
@@ -206,49 +207,49 @@ class HomeController extends Controller
     }
 
     public function like(Request $request) {
+        if (Auth::guard('customer')->check()) {
+            $foody_id = $request->get('foody_id');
+            $customer_id = Auth::guard('customer')->user()->id;
+            $number_of_liked = Foody::find($foody_id)->getLiked();
 
-        $foody_id = $request->get('foody_id');
-        $customer_id = Auth::guard('customer')->user()->id;
-        $number_of_liked = Foody::find($foody_id)->getLiked();
+            $liked = Like::where('customer_id', $customer_id)->where('foody_id', $foody_id)->first();
 
-        $liked = Like::where('customer_id', $customer_id)->where('foody_id', $foody_id)->first();
+            if (!empty($liked)) {
+                $liked->delete();
 
-        if (!empty($liked)) {
-            $liked->delete();
+                return Response(['text' => 'Thích', 'number_of_liked' => $number_of_liked - 1]);
+            }
+            else {
+                $like = new Like();
+                $like->customer_id = $customer_id;
+                $like->foody_id = $foody_id;
+                $like->save();
 
-            return Response(['text' => 'Thích', 'number_of_liked' => $number_of_liked - 1]);
-        }
-        else {
-            $like = new Like();
-            $like->customer_id = $customer_id;
-            $like->foody_id = $foody_id;
-            $like->save();
-
-            return Response(['text' => 'Bỏ thích', 'number_of_liked' => $number_of_liked + 1]);
+                return Response(['text' => 'Bỏ thích', 'number_of_liked' => $number_of_liked + 1]);
+            }
         }
     }
 
     public function favorite(Request $request) {
-        if (!Auth::guard('customer')->check())
-            return false;
+        if (Auth::guard('customer')->check()) {
+            $foody_id = $request->get('foody_id');
+            $customer_id = Auth::guard('customer')->user()->id;
 
-        $foody_id = $request->get('foody_id');
-        $customer_id = Auth::guard('customer')->user()->id;
+            $favorited = Favorite::where('customer_id', $customer_id)->where('foody_id', $foody_id)->first();
 
-        $favorited = Favorite::where('customer_id', $customer_id)->where('foody_id', $foody_id)->first();
+            if (!empty($favorited)) {
+                $favorited->delete();
 
-        if (!empty($favorited)) {
-            $favorited->delete();
+                return Response('Quan tâm');
+            }
+            else {
+                $favorite = new Favorite();
+                $favorite->customer_id = $customer_id;
+                $favorite->foody_id = $foody_id;
+                $favorite->save();
 
-            return Response('Quan tâm');
-        }
-        else {
-            $favorite = new Favorite();
-            $favorite->customer_id = $customer_id;
-            $favorite->foody_id = $foody_id;
-            $favorite->save();
-
-            return Response('Bỏ quan tâm');
+                return Response('Bỏ quan tâm');
+            }
         }
     }
 }

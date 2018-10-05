@@ -52,5 +52,33 @@
             })
         }
 
+        function addCart(foody) {
+            var foody_id = $('#' + foody.id).attr('data-target');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "post",
+                url: "/customer/add_shopping_cart",
+                data: {
+                    foody_id: foody_id
+                },
+                success: function (data) {
+                    if (data.status === 200) {
+                        $('#cart-count').text(data.count);
+                        $('#cart-added-home-' + foody_id).text(data.added_count);
+                    }
+                    else {
+                        M.Toast.dismissAll();
+                        M.toast({
+                            html: 'Số lượng đã đạt tối đa!'
+                        });
+                    }
+                }
+            })
+        }
+
     </script>
 @endpush

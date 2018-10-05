@@ -9,23 +9,23 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link type="text/css" rel="stylesheet" href="customer/css/custom.css">
+    <link type="text/css" rel="stylesheet" href="{{ asset("/customer/css/custom.css") }}">
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="customer/css/materialize.min.css">
+    <link rel="stylesheet" href="/customer/css/materialize.min.css">
 
     {{--Rating stars--}}
-    <link rel="stylesheet" href="customer/css/rating.min.css">
+    <link rel="stylesheet" href="/customer/css/rating.min.css">
 
     {{--Label--}}
-    <link rel="stylesheet" href="customer/css/label.min.css">
+    <link rel="stylesheet" href="/customer/css/label.min.css">
 
-    <link rel="stylesheet" href="customer/css/custom.css">
+    <link rel="stylesheet" href="/customer/css/custom.css">
 
-    <link rel="stylesheet" href="customer/semantic/dimmer.min.css">
-    <link rel="stylesheet" href="customer/semantic/card.min.css">
-    <link rel="stylesheet" href="customer/semantic/button.min.css">
-    <link rel="stylesheet" href="customer/semantic/icon.min.css">
+    <link rel="stylesheet" href="/customer/semantic/dimmer.min.css">
+    <link rel="stylesheet" href="/customer/semantic/card.min.css">
+    <link rel="stylesheet" href="/customer/semantic/button.min.css">
+    <link rel="stylesheet" href="/customer/semantic/icon.min.css">
     {{--<link rel="stylesheet" href="customer/css/font-awesome.css">--}}
 
     <!--Let browser know website is optimized for mobile-->

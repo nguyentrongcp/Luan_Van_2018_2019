@@ -3,7 +3,7 @@
         <div class="container">
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo left">
-                    <img class="responsive-img" src="customer/image/logo-white.png">
+                    <img class="responsive-img" src="{{ asset("customer/image/logo-white.png") }}">
                 </a>
                 <ul class="right hide-on-med-and-down">
                     @if(!Auth::guard('customer')->check())
@@ -17,7 +17,10 @@
                             </a></li>
                     @endif
                     <li><a href="#">
-                            <i class="material-icons">shopping_cart</i>
+                            <i class="cart icon" style="font-size: 18px"></i>
+                            <span id="cart-count" class="ui red mini floating label" style="top: 0;">
+                                {{ Cart::count() }}
+                            </span>
                         </a></li>
                 </ul>
                 <a href="#" data-target="nav-mobile" class="navbar-fixed sidenav-trigger hide-on-large-only right-align">
