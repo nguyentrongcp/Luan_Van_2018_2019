@@ -58,8 +58,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::resource('orders','Admin\OrderController');
 
     /**      Goods receipt notes       **/
-    Route::resource('goods_receipt','Admin\GoodsReceiptNotesController');
-    Route::resource('goods_receipt_detail','Admin\GoodsReceiptNotesDetailController');
+    Route::resource('goods_receipt_note','Admin\GoodsReceiptNotesController');
+    Route::get('goods_receipt_note_detail/{id}','Admin\GoodsReceiptNotesController@moveDetail')
+            ->name('admin.move_detail');
+
+
+    /**      Goods receipt notes detail       **/
+    Route::resource('goods_receipt_note_detail','Admin\GoodsReceiptNotesDetailController');
+
 
     /**      Sales offs       **/
     Route::resource('sales_offs','Admin\SalesOffsController',["except" => ["create","show", "edit"]]);

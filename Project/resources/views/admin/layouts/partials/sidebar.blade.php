@@ -46,8 +46,8 @@
                     <p>Đơn hàng</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/goods_receipt')||Request::is('*/goods_receipt_detail') ? 'active' : ''}}">
-                <a href="/admin/goods_receipt">
+            <li class="{{Request::is('*/goods_receipt_note')||Request::is('*/goods_receipt_note_detail') ? 'active' : ''}}">
+                <a href="/admin/goods_receipt_note">
                     <i class="now-ui-icons shopping_cart-simple"></i>
                     <p>Nhập hàng</p>
                 </a>

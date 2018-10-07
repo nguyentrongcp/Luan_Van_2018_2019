@@ -32,12 +32,12 @@
                     <div class="form-group">
                         <label class="title">Ngày bắt đầu</label>
                         <input type="date" class="form-control" name="start-date" id="start-date"
-                               value="" required>
+                               value="{{date('Y-m-d')}}" required>
                     </div>
                     <div class="form-group">
                         <label class="title">Ngày kết thúc</label>
                         <input type="date" class="form-control" name="end-date" id="end-date"
-                               value="" required>
+                               value="{{date('Y-m-d')}}" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>

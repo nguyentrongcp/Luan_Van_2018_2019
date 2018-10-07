@@ -1,8 +1,8 @@
-<!-- Modal create foodies type-->
-<div class="modal fade" id="modal-add-goods" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<!-- Modal create goods receipt notes-->
+<div class="modal fade" id="modal-create-goods" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content modal-size">
             <div class="modal-header">
                 <h5 class="modal-title title text-black-50 text-center" id="exampleModalCenterTitle">THÊM MỚI PHIẾU
                     NHẬP</h5>
@@ -11,26 +11,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
+                <form action="{{route('goods_receipt_note.store')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label class="bmd-label-floating">Ngày lập phiếu</label>
+                        <label class="title bmd-label-floating">Ngày lập phiếu</label>
                         <input type="date" class="form-control" name="date"
-                               minlength="5" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="bmd-label-floating">Nguyên liệu</label>
-                        <select name="goods[]" multiple id="goods" class="form-control">
-                            <option value="">1233</option>
-                            <option value="">1233</option>
-                            <option value="">1233</option>
-
-                        </select>
+                               value="{{date('Y-m-d')}}" required>
+                        <!-- input with datepicker -->
+                        {{--<div class="form-group">--}}
+                            {{--<input type="text" class="form-control date-picker" value="10/05/2016" data-datepicker-color="primary">--}}
+                        {{--</div>--}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>
                         <span></span>
-                        <button class="btn btn-info btn-round">
+                        <button type="submit" class="btn btn-info btn-round">
                             LƯU LẠI
                         </button>
                     </div>
@@ -42,30 +37,31 @@
 <!--End modal-->
 
 <!-- Modal edit foodies type-->
-    <div class="modal fade" id="modal-update-goods" tabindex="-1" role="dialog"
+@foreach($goodsReceipts as $goods)
+    <div class="modal fade" id="modal-update-goods-{{$goods->id}}" tabindex="-1" role="dialog"
          aria-labelledby="list-edit-prot" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content modal-size">
                 <div class="modal-header text-center">
                     <h3 class="modal-title title text-black-50 text-center" id="list-edit-prot"
-                        style="font-size: 16px">CẬP NHẬT LOẠI THỰC ĐƠN</h3>
+                        style="font-size: 16px">CẬP NHẬT PHIẾU NHẬP</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form action="{{route('goods_receipt_note.update',[$goods->id])}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="form-group">
-                            <label class="bmd-label-floating">Ngày lập phiếu</label>
+                            <label class="title bmd-label-floating">Ngày lập phiếu</label>
                             <input type="date" class="form-control" name="date"
-                                   minlength="5" required>
+                                   value="{{date('Y-m-d')}}" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>
                             <span></span>
-                            <button class="btn btn-info btn-round">LƯU LẠI
+                            <button type="submit" class="btn btn-info btn-round">LƯU LẠI
                             </button>
                         </div>
                     </form>
@@ -73,7 +69,7 @@
             </div>
         </div>
     </div>
-{{--@endforeach--}}
+@endforeach
 <!--  End Modal -->
 
 <!--  Modal delete -->
