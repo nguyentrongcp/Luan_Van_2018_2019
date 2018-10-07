@@ -19,11 +19,15 @@ class DatabaseSeeder extends Seeder
              CostSeeder::class,
              NewsSeeder::class,
              ShoppingCartSeeder::class,
+<<<<<<< Updated upstream
              SalesOffSeeder::class,
              GoodsReceiptNotesSeeder::class,
              GoodsReceiptNotesDetailSeeder::class,
              GoodsReceiptNotesCostSeeder::class
 
+=======
+             SalesOffSeeder::class
+>>>>>>> Stashed changes
          ]);
     }
 }

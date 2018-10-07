@@ -16,7 +16,7 @@
                                 <b style="position: relative; vertical-align: top">{{ Auth::guard('customer')->user()->name }}</b>
                             </a></li>
                     @endif
-                    <li><a href="#">
+                    <li><a href="{{ route('cart.test') }}">
                             <i class="cart icon" style="font-size: 18px"></i>
                             <span id="cart-count" class="ui red mini floating label" style="top: 0;">
                                 {{ Cart::count() }}

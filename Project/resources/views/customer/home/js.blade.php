@@ -68,12 +68,14 @@
                 success: function (data) {
                     if (data.status === 200) {
                         $('#cart-count').text(data.count);
-                        $('#cart-added-home-' + foody_id).text(data.added_count);
+                        $('#cart-added-home-' + foody_id).html(data.added_text);
                     }
                     else {
                         M.Toast.dismissAll();
                         M.toast({
-                            html: 'Số lượng đã đạt tối đa!'
+                            html: "<i class='material-icons red-text left'>error_outline</i><span>" +
+                                "Số lượng đã đạt tối đa!</span>",
+                            classes: 'message'
                         });
                     }
                 }

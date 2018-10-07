@@ -8,7 +8,7 @@ $(document).ready(function(){
     })
 
     $('.sidenav').sidenav({
-        edge: 'right'
+        edge: 'right',
     });
 
     $('.collapsible').collapsible();
