@@ -1,6 +1,6 @@
 <div class="row white">
-    <div class="col s12 involve">
-        <span class="involve-header">Cùng loại</span>
+    <div class="col s12 content">
+        <span class="content-header">Cùng loại</span>
         <div class="divider" style="margin-bottom: 10px"></div>
 
         <div class="row">
@@ -29,7 +29,7 @@
                     <img class="responsive-img" src="/{{ $foody->avatar }}">
                 </div>
                 <div class="col s8 involve-foody-name">
-                    <a href="#" class="truncate">{{ $foody->name }}</a>
+                    <span class="col s12"><a href="#" class="truncate">{{ $foody->name }}</a></span>
                     <span class="cost">{{ number_format($foody->currentCost()) }}<sup>đ</sup></span>
                 </div>
                 <div class="col s1 hide-on-small-only involve-foody-action right-align">

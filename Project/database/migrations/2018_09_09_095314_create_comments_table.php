@@ -17,15 +17,13 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->string('content', 255);
             $table->dateTime('date');
-            $table->string('name');
+            $table->string('title', 100);
             $table->integer('customer_id')->unsigned()->nullable();
-            $table->integer('admin_id')->unsigned()->nullable();
             $table->integer('foody_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('foody_id')->references('id')->on('foodies')->onDelete('cascade');
-            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
         });
     }
 

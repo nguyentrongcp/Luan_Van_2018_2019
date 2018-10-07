@@ -7,6 +7,13 @@
     /*padding-bottom: 5px !important;*/
     /*}*/
 
+    .foody-navbar {
+        position: fixed;
+        overflow-y: auto;
+        width: 22.5% !important;
+        height: 500px;
+    }
+
     .meta .right.floated {
         margin-left: 7px !important;
     }

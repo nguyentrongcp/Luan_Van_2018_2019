@@ -13,7 +13,6 @@
         <div class="col s12 navbar-index">
             <button class="waves-effect waves-purple btn white black-text btn-fluid">
                 Giá giảm dần
-                Giá tăng dần
                 <i class="material-icons left">arrow_downward</i>
             </button>
         </div>

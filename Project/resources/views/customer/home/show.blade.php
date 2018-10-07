@@ -1,4 +1,4 @@
-<div class="col s12 m9 l9" id="show-foody">
+<div class="col s12 m9 l9" id="show-foody" style="margin-left: 25% !important;">
     <div class="row"></div>
 
     @foreach($foodies as $foody)

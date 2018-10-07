@@ -3,7 +3,7 @@
         .foody-info {
             padding-left: 50px !important;
         }
-        .involve-col {
+        .content-col {
             padding: 0 10px !important;
         }
     }
@@ -111,11 +111,11 @@
         height: 50px;
         line-height: 50px;
     }
-    .involve-header {
+    .content-header {
         font-size: 20px;
         font-weight: 500;
     }
-    .involve {
+    .content {
         padding: 0 10px !important;
     }
     .involve-foody-name {
@@ -134,7 +134,10 @@
     .involve-footer {
         margin-top: 10px;
     }
-    .involve-col {
+    .content-col {
+        margin-bottom: 20px;
+    }
+    .content-col > .row {
         margin-bottom: 20px;
     }
     .rating-header {

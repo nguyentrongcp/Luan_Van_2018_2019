@@ -90,10 +90,11 @@
 
     <div class="row">
         <div class="col s2 hide-on-med-and-down" style="height: 100px">
-
         </div>
-        <div class="col s12 m12 l7 involve-col">
+        <div class="col s12 m12 l7 content-col">
             @include('customer.foody.involve-foody')
+
+            {{--@include('customer.foody.image')--}}
         </div>
         <div class="col s12 m12 l3">
             @include('customer.foody.rating')
@@ -104,9 +105,6 @@
 
     @include('customer.foody.style')
 
-    @push('script')
-        <script>
-        </script>
-    @endpush
+    @include('customer.foody.js')
 
 @endsection
