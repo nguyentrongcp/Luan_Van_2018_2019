@@ -5,7 +5,12 @@
         </div>
     </li>
     <li class="divider"></li>
-    <li class="col s12 cart-body">
+    <li class="col s12 cart-body" id="cart-body">
+        @if($carts->count() == 0)
+            <div class="row center-align">
+                Giỏ hàng trống
+            </div>
+        @endif
         @php $cost = 0 @endphp
         @foreach($carts as $cart)
             @php
@@ -34,7 +39,7 @@
                     {{ number_format($foody->currentCost() * $cart->qty) }}<sup>đ</sup>
                 </div>
                 <div class="col cart-remove">
-                    <i class="trash alternate icon"></i>
+                    <i onclick="removeCart({{ $cart->id }})" class="trash alternate icon"></i>
                 </div>
             </div>
         @endforeach
@@ -54,7 +59,8 @@
     <li class="divider"></li>
 
     <li class="cart-footer">
-        <button class="ui blue button waves-effect waves-light">
+        <button id="cart-payment" class="ui blue
+            {{ $carts->count() == 0 ? 'disabled' : '' }} button waves-effect waves-light">
             Thanh toán
         </button>
     </li>

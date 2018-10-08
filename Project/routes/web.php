@@ -104,6 +104,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::get('/testcart', 'Customer\ShoppingCartController@test')->name('cart.test');
     Route::post('/customer/add_shopping_cart', 'Customer\ShoppingCartController@addCart');
     Route::post('/customer/update_shopping_cart', 'Customer\ShoppingCartController@updateCart');
+    Route::post('/customer/remove_shopping_cart', 'Customer\ShoppingCartController@removeCart');
 
     // Foody
     Route::get('/foody/{slug}', 'Customer\FoodyController@index')->name('customer.foody.show');

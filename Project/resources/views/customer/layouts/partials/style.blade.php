@@ -27,6 +27,7 @@
         color: #666;
         overflow: hidden;
         max-height: calc(100vh - 64px);
+        height: auto !important;
     }
 
     .dropdown-content.cart-content:hover {
@@ -48,6 +49,7 @@
 
     .cart-content .cart-body {
         padding: 15px 0 !important;
+        min-height: 1px;
 
     }
 
