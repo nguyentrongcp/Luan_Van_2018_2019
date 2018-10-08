@@ -29,8 +29,32 @@ class ShoppingCartController extends Controller
 
     }
 
-    public function test() {
-        dd(Cart::content());
+    public function updateCart(Request $request) {
+        $foody = Foody::find($request->foody_id);
+
+        Cart::addCart($request->foody_id, $request->count);
+
+        $cart = Cart::matchedFoody($request->foody_id);
+
+        $cost = Cart::getCost($request->id);
+
+
+        $data = ['total_count' => Cart::count(),
+            'total_cost' => number_format($cost)];
+
+        if ($cart == null) {
+            $data += ['status' => 'deleted'];
+        }
+        elseif ($cart->qty != $request->count) {
+            $data += ['status' => 'updated', 'count' => $cart->qty,
+                'cost' => number_format($cart->qty * $foody->currentCost())];
+
+        }
+        else {
+            $data += ['status' => 'added'];
+        }
+
+        return Response($data);
     }
 
 
