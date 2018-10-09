@@ -21,7 +21,7 @@
                             </div>
                         </form>
                     </li>
-                    <li style="width: 180px;"><a class='center-align'
+                    <li><a class='center-align'
                                                  id="dropdown-category" data-target='category'>
                             <i class="bars icon" style="font-size: 18px; margin-right: 10px"></i>
                             <b>Phân loại</b></a>
@@ -38,6 +38,49 @@
                             <li><a href="#!">
                                     <i class="material-icons">bookmark</i>Đã lưu
                                 </a></li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#!">
+                                    <i class="material-icons">event</i>Tin tức và khuyến mãi
+                                </a></li>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <ul class="collapsible">
+                                    <li>
+                                        <div class="collapsible-header waves-effect waves-purple navbar-mobile">Thức ăn</div>
+                                        <div class="collapsible-body">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="waves-effect">First</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="waves-effect">Second</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="waves-effect">Third</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="collapsible-header waves-effect navbar-mobile">Nước uống</div>
+                                        <div class="collapsible-body">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="waves-effect">First</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="waves-effect">Second</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="waves-effect">Third</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     @if(!Auth::guard('customer')->check())

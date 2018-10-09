@@ -89,7 +89,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 /**      Customer       **/
 
     // Test sms api
-    Route::get('/testsms', 'Customer\FoodyController@testsms')->name('test.sms');
+    Route::get('/testsms', 'Customer\ShoppingCartController@testAPI')->name('test.sms');
 
     // Index
     Route::get('/', 'Customer\CustomerController@index')->name('customer.index');
@@ -105,6 +105,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::post('/customer/add_shopping_cart', 'Customer\ShoppingCartController@addCart');
     Route::post('/customer/update_shopping_cart', 'Customer\ShoppingCartController@updateCart');
     Route::post('/customer/remove_shopping_cart', 'Customer\ShoppingCartController@removeCart');
+
+    // Payment
+    Route::resource('/payment', 'Customer\PaymentController', ['only' => ['index', 'store']]);
 
     // Foody
     Route::get('/foody/{slug}', 'Customer\FoodyController@index')->name('customer.foody.show');

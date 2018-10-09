@@ -54,7 +54,8 @@
     }
 
     .cart-body .cart-row {
-        line-height: 30px !important;
+        line-height: 20px !important;
+        padding: 5px 0;
     }
 
     .cart-content .divider {
@@ -87,7 +88,7 @@
     .cart-remove {
         height: 30px;
     }
-    .cart-footer button {
+    .cart-footer .button {
         width: 90%;
         margin: 15px 0 15px 5% !important;
     }

@@ -99,5 +99,13 @@ class ShoppingCartController extends Controller
         return Response($data);
     }
 
+    public function testAPI() {
+        $smsAPI = new SpeedSMSAPI("23CwwNwz_M7cbNUAuB1cWoSnSdahEpnO");
+        $phone = ['0339883047'];
+        $content = "Ma OTP cua ban la 371910";
+        $response = $smsAPI->sendSMS($phone, $content, 4, '');
+
+        dd($response);
+    }
 
 }

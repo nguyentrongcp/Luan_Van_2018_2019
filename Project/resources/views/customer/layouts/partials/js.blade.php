@@ -16,7 +16,10 @@
             });
 
             $('#dropdown-category').dropdown({
-                coverTrigger: false
+                coverTrigger: false,
+                constrainWidth: false,
+                alignment: 'right',
+                closeOnClick: false
             });
 
         });
