@@ -1,7 +1,9 @@
 @push('script')
     <script>
         $(document).ready(function(){
-            $('.modal').modal();
+            $('#login-modal').modal({
+
+            });
             $('#dropdown-profile').dropdown({
                 coverTrigger: false,
                 alignment: 'right',
@@ -60,8 +62,8 @@
                             $('#cart-body').append("<div id=\"cart-empty\" class=\"row center-align\">\n" +
                                 "                Giỏ hàng trống\n" +
                                 "            </div>");
+                            $('#cart-payment').addClass('disabled');
                         }
-                        $('#cart-payment').addClass('disabled');
                     }
                     else {
                         if (data.role === 'new') {

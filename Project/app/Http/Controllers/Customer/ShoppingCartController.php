@@ -77,7 +77,7 @@ class ShoppingCartController extends Controller
                     $cart_cost<sup>đ</sup>
                 </div>
                 <div class='col cart-remove'>
-                    <i class='trash alternate icon'></i>
+                    <i onclick='removeCart($cart->id)' class='trash alternate icon'></i>
                 </div>
             </div>";
             $data += ['status' => 'added', 'role' => $role, 'cart_body' => $cart_body,
@@ -100,12 +100,14 @@ class ShoppingCartController extends Controller
     }
 
     public function testAPI() {
-        $smsAPI = new SpeedSMSAPI("23CwwNwz_M7cbNUAuB1cWoSnSdahEpnO");
-        $phone = ['0339883047'];
-        $content = "Ma OTP cua ban la 371910";
-        $response = $smsAPI->sendSMS($phone, $content, 4, '');
+//        $smsAPI = new SpeedSMSAPI("23CwwNwz_M7cbNUAuB1cWoSnSdahEpnO");
+//        $phone = ['0339883047'];
+//        $content = "Ma OTP cua ban la 371910";
+//        $response = $smsAPI->sendSMS($phone, $content, 4, '');
+//
+//        dd($response);
 
-        dd($response);
+        dd(time());
     }
 
 }

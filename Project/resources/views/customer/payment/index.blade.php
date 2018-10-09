@@ -5,25 +5,27 @@
 @section('content')
 
     <div class="row white payment">
-        <span class="col s12 payment-header">
+        <form>
+            @csrf
+            <span class="col s12 payment-header">
             Bạn đã sẵn sàng để thanh toán?
         </span>
-        <span class="col s12 payment-title">
+            <span class="col s12 payment-title">
             Thông tin giao hàng
         </span>
-        <div class="col s12 divider"></div>
-        <div class="col s12 payment-form">
-            <form class="col s12">
+            <div class="col s12 divider"></div>
+            <div class="col s12 payment-form">
                 <div class="row">
-                    <div class="col s6 payment-col-left">
+                    <div class="col s12 m6 l6 payment-col-left">
                         <div class="input-field col s12">
                             <input id="address" type="text">
                             <label for="address">
                                 Số nhà, tên hẻm (nếu có) và tên đường
+                                <span class="red-text">*</span>
                             </label>
                         </div>
                     </div>
-                    <div class="col s6 payment-col-right">
+                    <div class="col s12 m6 l6 payment-col-right">
                         <div class="input-field col s12">
                             <select>
                                 <option value="1">Căn hộ</option>
@@ -36,7 +38,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s6 payment-col-left">
+                    <div class="col s12 m6 l6 payment-col-left">
                         <div class="input-field col s12">
                             <select>
                                 <option value="" disabled selected>Quận</option>
@@ -47,7 +49,7 @@
                             <label>Chọn quận</label>
                         </div>
                     </div>
-                    <div class="col s6 payment-col-right">
+                    <div class="col s12 m6 l6 payment-col-right">
                         <div class="input-field col s12">
                             <select>
                                 <option value="" disabled selected>Quận</option>
@@ -60,39 +62,37 @@
                     </div>
                 </div>
                 {{--<div class="row">--}}
-                    {{----}}
+                {{----}}
                 {{--</div>--}}
-            </form>
-        </div>
+            </div>
 
-        <span class="col s12 payment-title">
+            <span class="col s12 payment-title">
             Thông tin cá nhân
         </span>
-        <div class="col s12 divider"></div>
-        <div class="col s12 payment-form">
-            <form class="col s12">
+            <div class="col s12 divider"></div>
+            <div class="col s12 payment-form">
                 <div class="row">
-                    <div class="col s6 payment-col-left">
+                    <div class="col s12 m6 l6 payment-col-left">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">account_circle</i>
                             <input id="name" type="text">
                             <label for="name">
-                                Họ và tên
+                                Họ và tên <span class="red-text">*</span>
                             </label>
                         </div>
                     </div>
-                    <div class="col s6 payment-col-right">
+                    <div class="col s12 m6 l6 payment-col-right">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">local_phone</i>
                             <input id="phone" type="text">
                             <label for="phone">
-                                Số điện thoại
+                                Số điện thoại <span class="red-text">*</span>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s6 payment-col-left">
+                    <div class="col s12 m6 l6 payment-col-left">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
                             <input id="email" type="text">
@@ -101,7 +101,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col s6 payment-col-right">
+                    <div class="col s12 m6 l6 payment-col-right">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">note</i>
                             <textarea id="note" class="materialize-textarea"></textarea>
@@ -112,98 +112,73 @@
                 {{--<div class="row">--}}
                 {{----}}
                 {{--</div>--}}
-            </form>
-        </div>
+            </div>
 
-        <span class="col s12 payment-title">
+            <span class="col s12 payment-title">
             Hình thức thanh toán
         </span>
-        <div class="col s12 divider"></div>
-        <div class="col s12 payment-type">
-            <div class="row" style="margin-bottom: 1rem">
-                <div class="col s6 payment-col-left">
-                    <label>
-                        <input name="payment-type" type="radio" checked>
-                        <span>Tiền mặt khi nhận hàng</span>
-                    </label>
-                </div>
-                <div class="col s6 payment-col-right">
-                    <label>
-                        <input name="payment-type" type="radio">
-                        <span>Thanh toán qua cổng ngân lượng</span>
-                    </label>
+            <div class="col s12 divider"></div>
+            <div class="col s12">
+                <div class="row">
+                    <div class="col s12 payment-type">
+                        <div class="col s12 m6 l6 payment-col-left" style="padding-bottom: 10px">
+                            <label>
+                                <input name="payment-type" type="radio" checked>
+                                <span>Tiền mặt khi nhận hàng</span>
+                            </label>
+                        </div>
+                        <div class="col s12 m6 l6 payment-col-right">
+                            <label>
+                                <input name="payment-type" type="radio">
+                                <span>Thanh toán qua cổng ngân lượng</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <span class="col s12 payment-title">
+            <span class="col s12 payment-title">
             Giỏ hàng và chi phí
         </span>
-        <div class="col s12 divider"></div>
+            <div class="col s12 divider" style="margin-bottom: 0"></div>
 
-        <div class="col s12 payment-cost">
-            <div class="row">
-                <div class="col s6 payment-col-left">
-                    <div class="col s12">
-                        <span class="col s8 right-align">Giá sản phẩm</span>
-                        <span class="col s4 right-align">
+            <div class="col s12">
+                <div class="row">
+                    <div class="col s12 payment-cost">
+                        @include('customer.payment.table')
+                    </div>
+                    <div class="col s12 payment-total">
+                        <span class="col s9 right-align">Giá sản phẩm</span>
+                        <span class="col s3 right-align">
+                            {{ number_format(Cart::getCost()) }}
+                            <sup>đ</sup></span>
+                    </div>
+                    <div class="col s12 payment-total">
+                        <span class="col s9 right-align">Phí vận chuyển</span>
+                        <span class="col s3 right-align">
                             2,999,999<sup>đ</sup></span>
                     </div>
-                    <div class="col s12">
-                        <span class="col s8 right-align">Phí vận chuyển</span>
-                        <span class="col s4 right-align">
-                            2,999,999<sup>đ</sup></span>
-                    </div>
-                    <div class="col s12">
-                        <span class="col s8 right-align"><b>Tổng tiền</b></span>
-                        <span class="col s4 right-align">
+                    <div class="col s12 payment-total">
+                        <span class="col s9 right-align"><b>Số tiền thanh toán</b></span>
+                        <span class="col s3 right-align">
                             <b>2,999,999<sup>đ</sup></b></span>
                     </div>
-                </div>
-                <div class="col s6 payment-col-right">
-                    <table class="striped">
-                        <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Giá tiền</th>
-                            <th>Số lượng</th>
-                            <th>Khuyến mãi</th>
-                            <th>Tổng tiền</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $stt => $cart)
-                                @php $foody = \App\Foody::find($cart->id) @endphp
-                                <tr>
-                                    <td>{{ $stt }}</td>
-                                    <td>{{ $cart->name }}</td>
-                                    <td>{{ number_format($foody->currentCost()) }}<sup>đ</sup></td>
-                                    <td>{{ $cart->qty }}</td>
-                                    <td>{{ "" }}</td>
-                                    <td>{{ number_format($foody->currentCost() * $cart->qty) }}
-                                        <sup>đ</sup></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
 
                 </div>
             </div>
-        </div>
 
-        <div class="col s12 payment-action">
-            <div class="col s6 payment-col-left">
-                <a class="waves-effect waves-light btn-fluid btn">
-                    Đặt hàng
-                </a>
+            <div class="col s12 m6 offset-m6 l6 offset-l6">
+                <div class="col s12 payment-action">
+                    <a href="#payment-otp-modal" onclick="setTimer(7)" class="waves-effect waves-light btn-fluid btn modal-trigger">
+                        Thanh toán
+                    </a>
+                </div>
             </div>
-            <div class="col s6 payment-col-right">
 
-            </div>
-        </div>
+        </form>
     </div>
+
+    @include('customer.payment.otp-modal')
 
     @include('customer.payment.style')
 
