@@ -1,0 +1,10 @@
+.div-comment{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.text-comment{
+    font-size: 18px!important;
+}
+.sidebar .nav li>a, .off-canvas-sidebar .nav li>a{
+    padding: 5px 6px!important;
+}

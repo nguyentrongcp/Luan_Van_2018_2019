@@ -14,7 +14,7 @@
             </th>
             <th class="text-center th-prot th-stt">STT</th>
             <th class="th-prot text-center" id="th-name-type">Tên khuyến mãi</th>
-            <th class="th-prot text-center">Phần trăm giảm (%)</th>
+            <th class="th-prot text-center">Số SP</th>
             <th class="th-prot text-center">Ngày bắt đầu</th>
             <th class="text-center th-prot">Ngày kết thúc</th>
             <th class="text-center th-prot">Thao tác</th>
@@ -36,11 +36,15 @@
                     <a class="text-info" href="{{route('admin.createSales',[$sales->id])}}">
                         {{$sales->name}}</a>
                 </td>
-                <td class="text-center td-prot">{{$sales->percent}}</td>
+                <td class="text-center td-prot">{{App\SalesOffsDetails::where('sales_offs_id',$sales->id)->count()}}</td>
                 <td class="text-center td-prot">{{$sales->start_date}}</td>
                 <td class="text-center td-prot">{{$sales->end_date}}</td>
 
                 <td class="td-actions text-center td-prot">
+                    <a rel="tooltip" title="Xem chi tiết" data-placement="bottom" class=" btn btn-sm btn-icon btn-info btn-round"
+                            href="{{route('sales_offs.show',[$sales->id])}}">
+                        <i class="fa fa-eye"></i>
+                    </a>
                     <button type="button" rel="tooltip" title="Sửa" data-placement="bottom" class=" btn btn-sm btn-icon btn-success btn-round"
                             onclick="$('#modal-update-sales-{{$sales->id}}').modal('show')">
                         <i class="now-ui-icons ui-2_settings-90"></i>

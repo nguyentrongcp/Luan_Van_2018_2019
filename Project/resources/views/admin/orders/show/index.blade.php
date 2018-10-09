@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title','Đơn hàng | Fast Foody Shop')
+@section('title','ADMIN | Đơn hàng')
 
 @section('content')
 

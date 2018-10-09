@@ -22,9 +22,9 @@
                 </a>
                 <div class="collapse" id="collapseStatistic">
                     <ul class="nav">
-                        <li><a href="">Thu chi</a></li>
-                        <li><a href="">Đơn hàng</a></li>
-                        <li><a href="">Thực đơn</a></li>
+                        <li class="sidebar-child"><a href=""><i class=""></i>Thu chi</a></li>
+                        <li class="sidebar-child"><a href="">Đơn hàng</a></li>
+                        <li class="sidebar-child"><a href="">Thực đơn</a></li>
                     </ul>
                 </div>
             </li>
@@ -35,10 +35,20 @@
                 </a>
             </li>
             <li class="{{Request::is('*/foodies') || Request::is('*/foodies/create') ? 'active' : ''}}">
-                <a href="/admin/foodies">
+
+                <a href="/admin/foodies" data-toggle="collapse" data-target="#collapseFoody" aria-expanded="false" aria-controls="collapseFoody">
                     <i class="fa fa-align-justify"></i>
-                    <p>Thực đơn</p>
+                    <div class="form-group row">
+                        Thực đơn<i class="fa fa-angle-down"></i>
+                    </div>
                 </a>
+                <div class="collapse" id="collapseFoody">
+                    <ul class="nav">
+                        <li class="sidebar-child"><a href="/admin/foodies"><i class="fa fa-info"></i>Thông tin</a></li>
+                        <li class="sidebar-child"><a href="/admin/feedbacks"><i class="fa fa-star"></i>Đánh giá</a></li>
+                        <li class="sidebar-child"><a href="/admin/comments"><i class="fa fa-comment"></i>Bình luận</a></li>
+                    </ul>
+                </div>
             </li>
             <li class="{{Request::is('*/orders') ? 'active' : ''}}">
                 <a href="/admin/orders">
@@ -66,13 +76,15 @@
             </li>
             <li class="{{Request::is('*/shop_infos') ? 'active' : ''}}">
                 <a href="/admin/shop_infos" data-toggle="collapse" data-target="#collapseShop" aria-expanded="false" aria-controls="collapseShop">
-                    <i class="now-ui-icons travel_info"></i>
-                    <p>Cửa hàng</p>
+                    <i class="fa fa-shopping-bag"></i>
+                    <div class="form-group row">
+                        <p>Cửa hàng</p><i class="fa fa-angle-down"></i>
+                    </div>
                 </a>
                 <div class="collapse" id="collapseShop">
                     <ul class="nav">
-                        <li><a href="">Thông tin cửa hàng</a></li>
-                        <li><a href="">Slide quảng cáo</a></li>
+                        <li class="sidebar-child"><a href="/admin/shop_infos"><i class="fa fa-info-circle"></i>Thông tin cửa hàng</a></li>
+                        <li class="sidebar-child"><a href=""><i class="	fa fa-file-image-o"></i>Slide quảng cáo</a></li>
                     </ul>
                 </div>
             </li>

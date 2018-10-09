@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\SalesOff;
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
-class CreateSalesController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,11 @@ class CreateSalesController extends Controller
      */
     public function index()
     {
-        //
+        $comments = DB::table('comments')
+            ->select('foody_id')
+            ->groupBy('foody_id')->paginate(10);
+
+        return view('admin.comment.index',compact('comments'));
     }
 
     /**
@@ -36,14 +41,7 @@ class CreateSalesController extends Controller
      */
     public function store(Request $request)
     {
-        $salesOff = new SalesOff();
-        $salesOff->name = $request->get('name-sales');
-        $salesOff->percent = $request->get('percent');
-        $salesOff->parent_id = $request->get('id-sales');
-        $salesOff->start_date = $request->get('start-date');
-        $salesOff->end_date = $request->get('end-date');
-        $salesOff->save();
-        return back()->with('success','Thêm mới thành công!');
+        //
     }
 
     /**
@@ -54,9 +52,9 @@ class CreateSalesController extends Controller
      */
     public function show($id)
     {
-        $salesOffsDetails = SalesOffsDetails::where('sales_offs_id',$id)->paginate(10);
+        $comments = Comment::where('foody_id',$id)->get();
 
-        return view('admin.sales_offs.show.index',compact('salesOffsDetails','id'));
+        return view('admin.comment.show',compact('comments','id'));
     }
 
     /**

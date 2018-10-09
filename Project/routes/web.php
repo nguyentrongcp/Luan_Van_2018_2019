@@ -68,19 +68,27 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
 
     /**      Sales offs       **/
-    Route::resource('sales_offs','Admin\SalesOffsController',["except" => ["create","show", "edit"]]);
-    Route::get('sales_offs/{id}','Admin\SalesOffsController@movePageCreateSales')
+    Route::resource('sales_offs','Admin\SalesOffsController',["except" => ["create", "edit"]]);
+    Route::get('create_sales_offs/{id}','Admin\SalesOffsController@movePageCreateSales')
         ->name('admin.createSales');
     Route::resource('create_sales','Admin\CreateSalesController',["except" => ["create","show", "edit"]]);
 
+    Route::resource('sales_offs_details','Admin\SalesOffsDetailsController');
 
     /**      Shop information       **/
     Route::resource('shop_infos','Admin\ShopInfoController');
+    Route::post('shop_infos/change_logo/{id}','Admin\ShopInfoController@changeLogo')
+        ->name('shop_change_logo');
 
     /**      News       **/
     Route::resource('news','Admin\NewsController');
     Route::post('news/change_image/{id}','Admin\NewsController@changeImage')
             ->name('news_change_image');
+
+    /** Comments **/
+    Route::resource('comments', 'Admin\CommentController');
+
+
 
 
 });

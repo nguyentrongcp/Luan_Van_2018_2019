@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\ShopInfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
 class ShopInfoController extends Controller
 {
@@ -14,7 +16,8 @@ class ShopInfoController extends Controller
      */
     public function index()
     {
-        return view('admin.shop_infos.index');
+        $shopInfos = ShopInfo::all();
+        return view('admin.shop_infos.index',compact('shopInfos'));
     }
 
     /**
@@ -35,7 +38,7 @@ class ShopInfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -67,9 +70,16 @@ class ShopInfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $shopInfos = ShopInfo::find($id);
+        $shopInfos->name = $request->get('name-shop');
+        $shopInfos->address = $request->get('shop-address');
+        $shopInfos->phone = $request->get('shop-phone');
+        $shopInfos->email = $request->get('shop-email');
+        $shopInfos->update();
+
+        return back()->with('success','Cập nhật thông tin thành công');
     }
 
     /**
@@ -81,5 +91,27 @@ class ShopInfoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeLogo(Request $request, $id){
+
+        if (!$request->hasFile('logo-upload')) {
+            return back()->with('error', 'Bạn chưa upload hình ảnh!');
+        } else {
+            $shopInfos = ShopInfo::find($id);
+
+            $oldPath = $shopInfos->logo;
+            if (!empty($oldPath)) {
+                File::delete($oldPath);
+            }
+            $time = time();
+            $ext = $request->file('logo-upload')->extension();
+            $path = $request->file('logo-upload')
+                ->move('admin\assets\images', "logo-$id-$time.$ext");
+            $shopInfos->logo = str_replace('\\', '/', $path);
+            $shopInfos->update();
+
+            return back()->with('success','Cập nhật thông tin thành công');
+        }
     }
 }

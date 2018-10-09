@@ -16,6 +16,7 @@ class CreateShopInfosTable extends Migration
         Schema::create('shop_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
+            $table->string('logo', 100);
             $table->string('address', 100);
             $table->string('phone', 20);
             $table->string('email', 100);

@@ -35,6 +35,12 @@ class SalesOffSeeder extends Seeder
                 'percent' => '20',
                 'start_date' => date('Y-m-d H:i:s'),
                 'end_date' => date('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'KM 1-06 Quốc tế thiếu nhi ',
+                'percent' => '25',
+                'start_date' => date('Y-m-d H:i:s'),
+                'end_date' => date('Y-m-d H:i:s')
             ]
         ]);
     }

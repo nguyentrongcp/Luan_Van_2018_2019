@@ -13,55 +13,55 @@
                 </div>
             </th>
             <th class="text-center th-prot th-stt">STT</th>
-            <th class="th-prot text-center" id="th-name-type">Tên khuyến mãi</th>
-            <th class="th-prot text-center">Phần trăm giảm (%)</th>
-            <th class="th-prot text-center">Ngày bắt đầu</th>
-            <th class="text-center th-prot">Ngày kết thúc</th>
+            <th class="th-prot text-center" id="th-name-type">Tên thực đơn</th>
+            <th class="th-prot text-center">Số lượt bình luận</th>
             <th class="text-center th-prot">Thao tác</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($salesOffs as $stt => $sales)
+        @foreach($comments as $stt => $comment)
             <tr>
                 <td class="text-left td-prot th-stt">
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input" name="sales-offs-id[]" value="{{$sales->id}}" type="checkbox">
+                            <input class="form-check-input" name="cmt-id[]" value="" type="checkbox">
                             <span class="form-check-sign"></span>
                         </label>
                     </div>
                 </td>
-                <td class="text-center td-prot th-stt">{{$stt+1}}</td>
-                <td class="td-prot">
-                        {{$sales->name}}
+                <td class="text-center td-prot th-stt">{{$stt + 1}}</td>
+                @php
+                    $idFoodys = App\Foody::where('id',$comment->foody_id)->get();
+                    foreach ($idFoodys as $idFoody){
+                        $nameFoody = $idFoody->name;
+                    }
+                @endphp
+                <td class="td-prot" id="th-name-type">
+                    {{$nameFoody}}
                 </td>
-                <td class="text-center td-prot">{{$sales->percent}}</td>
-                <td class="text-center td-prot">{{$sales->start_date}}</td>
-                <td class="text-center td-prot">{{$sales->end_date}}</td>
-
+                <td class="td-prot text-center" id="th-name-type">
+                    {{App\Comment::where('foody_id',$comment->foody_id)->count()}}
+                </td>
                 <td class="td-actions text-center td-prot">
-                    <a rel="tooltip" title="Xem chi tiết" data-placement="bottom" class=" btn btn-sm btn-icon btn-info btn-round"
-                       href="{{route('sales_offs.show',[$sales->id])}}">
+                    <a rel="tooltip" data-placement="bottom" title="Xem chi tiết" class="btn btn-info btn-sm btn-round btn-icon"
+                       href="{{route('comments.show',[$comment->foody_id])}}">
                         <i class="fa fa-eye"></i>
                     </a>
-                    <button type="button" rel="tooltip" title="Sửa" data-placement="bottom" class=" btn btn-sm btn-icon btn-success btn-round"
-                            onclick="$('#modal-update-sales-{{$sales->id}}').modal('show')">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                    </button>
                 </td>
+
             </tr>
         @endforeach
         </tbody>
     </table>
     <div class="div-pagination">
-        {{$salesOffs->links()}}
+        {{$comments->links()}}
     </div>
 
 </div>
 
 <script>
     function eventCheckBox() {
-        let checkboxs = document.getElementsByName('sales-offs-id[]');
+        let checkboxs = document.getElementsByName('cmt-id[]');
         let checkAll = document.getElementById('check-all');
         for (let i = 0; i < checkboxs.length; i++) {
             checkboxs[i].checked = checkAll.checked;

@@ -126,9 +126,7 @@ class GoodsReceiptNotesController extends Controller
         $goodsCosts = GoodsReceiptNoteCost::where('goods_receipt_note_id',$id)->get();
         $totalCost = 0;
         if (!empty($goodsCosts)){
-            foreach ($goodsCosts as $goodsCost){
-                $totalCost = $goodsCost->cost;
-            }
+                $totalCost = GoodsReceiptNoteDetail::where('goods_receipt_note_id',$id)->sum('cost');
         }
         else{
             return $totalCost;

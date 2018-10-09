@@ -145,6 +145,7 @@ class NewsController extends Controller
     }
 
     public function changeImage(Request $request, $id){
+
         if (!$request->hasFile('news-image-upload')) {
             return back()->with('error', 'Bạn chưa upload hình ảnh!');
         } else {

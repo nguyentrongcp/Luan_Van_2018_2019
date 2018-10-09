@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
-use App\SalesOff;
+use App\SalesOffsDetails;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CreateSalesController extends Controller
+class SalesOffsDetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,14 +36,15 @@ class CreateSalesController extends Controller
      */
     public function store(Request $request)
     {
-        $salesOff = new SalesOff();
-        $salesOff->name = $request->get('name-sales');
-        $salesOff->percent = $request->get('percent');
-        $salesOff->parent_id = $request->get('id-sales');
-        $salesOff->start_date = $request->get('start-date');
-        $salesOff->end_date = $request->get('end-date');
-        $salesOff->save();
-        return back()->with('success','Thêm mới thành công!');
+        $ids = $request->get('foody-id');
+        foreach ($ids as $id){
+            $salesOffsDetails = new SalesOffsDetails();
+            $salesOffsDetails->sales_offs_id = $request->get('sales-offs-id');
+            $salesOffsDetails->foody_id = $id;
+            $salesOffsDetails->save();
+//            }
+        }
+        return back()->with('success','Thêm thành công!');
     }
 
     /**
@@ -54,9 +55,7 @@ class CreateSalesController extends Controller
      */
     public function show($id)
     {
-        $salesOffsDetails = SalesOffsDetails::where('sales_offs_id',$id)->paginate(10);
-
-        return view('admin.sales_offs.show.index',compact('salesOffsDetails','id'));
+        //
     }
 
     /**
@@ -88,8 +87,16 @@ class CreateSalesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        $ids = $request->get('sales-offs-details-id');
+        if (!$request->has('sales-offs-details-id')) {
+            return back()->with('error', 'Dữ liệu chưa được chọn');
+        }
+        foreach ($ids as $id) {
+            $salesOffs = SalesOffsDetails::findOrFail($id);
+            $salesOffs->delete();
+        }
+        return back()->with('success','Xóa thành công!');
     }
 }

@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
              GoodsReceiptNotesSeeder::class,
              GoodsReceiptNotesDetailSeeder::class,
              GoodsReceiptNotesCostSeeder::class,
-             SalesOffSeeder::class
+             CommentsSeeder::class,
+             ShopInfosSeeder::class,
+             SalesOffsDetailsSeeder::class
          ]);
     }
 }

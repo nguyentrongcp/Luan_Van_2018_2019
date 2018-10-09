@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Foody;
 use App\SalesOff;
+use App\SalesOffsDetails;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -56,7 +58,10 @@ class SalesOffsController extends Controller
      */
     public function show($id)
     {
-        //
+        $foodies = Foody::all();
+        $salesOffsDetails = SalesOffsDetails::where('sales_offs_id',$id)->paginate(10);
+
+        return view('admin.sales_offs.show.index',compact('foodies','salesOffsDetails','id'));
     }
 
     /**
