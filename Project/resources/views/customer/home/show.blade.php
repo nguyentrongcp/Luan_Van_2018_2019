@@ -1,4 +1,4 @@
-<div class="col s12 m9 l9" id="show-foody" style="margin-left: 25% !important;">
+<div class="col s12 m9 l9 show-foody" id="show-foody">
     <div class="row"></div>
 
     @foreach($foodies as $foody)
@@ -58,8 +58,8 @@
                             @endif
                         </span>
                     </div>
-                    <a id="add-cart-{{ $foody->id }}" data-target="{{ $foody->id }}" onclick="addCart(this)"
-                       class="ui bottom attached button">
+                    <a id="add-cart-{{ $foody->id }}" data-target="{{ $foody->id }}"
+                       onclick="updateCart(this, {{ $foody->id }})" class="ui bottom attached button">
                         <i class="cart plus icon"></i>
                         Thêm vào giỏ
                         <span id='cart-added-home-{{ $foody->id }}'>

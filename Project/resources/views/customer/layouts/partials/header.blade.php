@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="/customer/semantic/card.min.css">
     <link rel="stylesheet" href="/customer/semantic/button.min.css">
     <link rel="stylesheet" href="/customer/semantic/icon.min.css">
+    <link rel="stylesheet" href="/customer/semantic/transition.min.css">
+    {{--<link rel="stylesheet" href="/customer/semantic/dropdown.min.css">--}}
     {{--<link rel="stylesheet" href="customer/css/font-awesome.css">--}}
 
     <!--Let browser know website is optimized for mobile-->

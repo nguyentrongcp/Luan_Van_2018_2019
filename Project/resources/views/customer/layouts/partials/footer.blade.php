@@ -26,7 +26,8 @@
 
     <script src="/customer/js/rating.min.js"></script>
     <script src="/customer/semantic/dimmer.min.js"></script>
-
+    <script src="/customer/semantic/transition.min.js"></script>
+    {{--<script src="/customer/semantic/dropdown.min.js"></script>--}}
 
     <script src="/customer/js/custom.js"></script>
 

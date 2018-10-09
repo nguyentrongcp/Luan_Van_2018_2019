@@ -1,7 +1,7 @@
 <div class="col s12 m3 l3 hide-on-small-only foody-navbar">
     <div class="row">
         <h6><b>Sắp xếp</b></h6>
-        <div class="divider" style="margin-bottom: 5px"></div>
+        <div class="divider"></div>
 
         <div class="col s12 navbar-index">
             <a class="waves-effect waves-purple btn white black-text btn-fluid">
@@ -60,7 +60,7 @@
         margin: 0 0 20px 0;
     }
     .divider {
-        margin-bottom: 5px;
+        /*margin-bottom: 5px;*/
     }
 
     .btn.active {

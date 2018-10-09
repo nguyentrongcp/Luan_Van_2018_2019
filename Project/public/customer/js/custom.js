@@ -3,9 +3,6 @@ $(document).ready(function(){
     $('.slider').slider();
     // $('.materialboxed').materialbox();
     $('.tooltipped').tooltip();
-    $('.dropdown-trigger').dropdown({
-        coverTrigger: false
-    })
 
     $('.sidenav').sidenav({
         edge: 'right',
@@ -13,8 +10,6 @@ $(document).ready(function(){
 
     $('.collapsible').collapsible();
 
-    $('.dropdown2').dropdown({
-        hover: true,
-        alignment: 'right'
-    });
+    $('select').formSelect();
+
 });

@@ -7,7 +7,9 @@
     <div class="row">
         @include('customer.home.navbar')
 
-        @include('customer.home.show')
+        <div class="row">
+            @include('customer.home.show')
+        </div>
     </div>
 
     @push('script')
