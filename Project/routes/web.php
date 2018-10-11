@@ -115,7 +115,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::post('/customer/remove_shopping_cart', 'Customer\ShoppingCartController@removeCart');
 
     // Payment
-    Route::resource('/payment', 'Customer\PaymentController', ['only' => ['index', 'store']]);
+    Route::get('/payment', 'Customer\PaymentController@index')->name('payment.index');
+    Route::post('/customer/get_payment_otp', 'Customer\PaymentController@getOTP');
+    Route::post('/customer/check_payment_otp', 'Customer\PaymentController@checkOTP');
+    Route::post('/customer/get_ward', 'Customer\PaymentController@getWard');
+    Route::post('/customer/get_transport_fee', 'Customer\PaymentController@getTransportFee');
+
+    Route::get('/customer/store_order', 'Customer\PaymentController@storeOrder')->name('order.store');
 
     // Foody
     Route::get('/foody/{slug}', 'Customer\FoodyController@index')->name('customer.foody.show');

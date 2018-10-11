@@ -14,6 +14,14 @@
         .payment-cost:hover {
             overflow: auto !important;
         }
+        #payment-otp-modal {
+            width: 30% !important;
+        }
+    }
+    @media screen and (min-width: 601px) and (max-width: 992px) {
+        #payment-otp-modal {
+            width: 45% !important;
+        }
     }
 
     .payment-header {
@@ -56,7 +64,10 @@
         margin-bottom: 20px;
     }
     #payment-otp-modal {
-        width: 30% !important;
+        width: 90%;
+    }
+    #otp-text a {
+        cursor: pointer;
     }
 
 </style>

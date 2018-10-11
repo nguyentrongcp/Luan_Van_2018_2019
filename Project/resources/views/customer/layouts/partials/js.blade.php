@@ -54,6 +54,7 @@
                         $('#cart-cost-' + id).html(data.cost + '<sup>đ</sup>');
                         $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
                         "</span>)");
+                        updatePayment(data.total_cost,data.count,data.cost,data.cost_simple);
                     }
                     else if (data.status === 'deleted') {
                         $('#' + id).remove();
@@ -64,6 +65,7 @@
                                 "            </div>");
                             $('#cart-payment').addClass('disabled');
                         }
+                        removePayment(data.total_cost,id,data.cost);
                     }
                     else {
                         if (data.role === 'new') {
@@ -101,8 +103,31 @@
                             "            </div>");
                         $('#cart-payment').addClass('disabled');
                     }
+                    removePayment(data.total_cost,id);
                 }
             })
+        }
+
+        function updatePayment(total_cost, count, cost, cost_simple) {
+            $('#payment-table-amount').text(count);
+            $('#payment-table-cost').html(cost_simple + '<sup>đ</sup>');
+            $('#payment-table-total').html(cost + '<sup>đ</sup>');
+            $('#payment-table-total-cost').html(total_cost + '<sup>đ</sup>');
+            $('#foody-cost').html(total_cost + '<sup>đ</sup>');
+            $('#foody-cost').attr('data-cost',total_cost);
+            if (typeof $('#transport-fee').attr('data-cost') !== 'undefined') {
+                getFee();
+            }
+        }
+
+        function removePayment(total_cost, id) {
+            $('#payment-table-row-' + id).remove();
+            $('#payment-table-total-cost').html(total_cost + '<sup>đ</sup>');
+            $('#foody-cost').html(total_cost + '<sup>đ</sup>');
+            $('#foody-cost').attr('data-cost',total_cost);
+            if (typeof $('#transport-fee').attr('data-cost') !== 'undefined') {
+                getFee();
+            }
         }
     </script>
 @endpush

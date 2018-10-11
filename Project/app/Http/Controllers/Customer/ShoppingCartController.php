@@ -48,12 +48,13 @@ class ShoppingCartController extends Controller
             $data += ['status' => 'deleted'];
         }
         elseif ($cart->qty != $request->count) {
-            $data += ['status' => 'updated', 'count' => $cart->qty,
-                'cost' => number_format($cart->qty * $foody->currentCost())];
+            $data += ['status' => 'updated', 'count' => $cart->qty, 'cost_simple' => number_format($foody->getSaleCost()),
+                'cost' => number_format($cart->qty * $foody->getSaleCost()),
+                'sale' => $foody->getSalePercent()];
 
         }
         else {
-            $cart_cost = number_format($foody->currentCost() * $cart->qty);
+            $cart_cost = number_format($foody->getSaleCost() * $cart->qty);
             $cart_body =
                 "<div class='cart-row row' id='$cart->id'>
                 <div class='col cart-count' id='cart-count-$cart->id'
@@ -106,8 +107,8 @@ class ShoppingCartController extends Controller
 //        $response = $smsAPI->sendSMS($phone, $content, 4, '');
 //
 //        dd($response);
-
-        dd(time());
+//
+//        dd(time());
     }
 
 }

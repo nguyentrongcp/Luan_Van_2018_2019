@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('.tabs').tabs();
+    $('.modal').modal();
     $('.slider').slider();
     // $('.materialboxed').materialbox();
     $('.tooltipped').tooltip();
@@ -22,7 +23,7 @@ function setTimer(time) {
             $('#otp-text').html("Bạn chưa nhận được mã? <a href=\"#\">Thử lại</a>");
         }
         else {
-            $('#otp-timer').text(time);
+            $('#otp-timer').text(time + 's');
             time--;
         }
     }, 1000);
