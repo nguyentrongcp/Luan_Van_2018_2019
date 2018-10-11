@@ -10,6 +10,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -20,35 +21,14 @@ class HomeController extends Controller
         return view('customer.home.index', compact(['foody_types', 'foodies']));
     }
 
-    public function showFoody($slug) {
-        $data = "<div class=\"row\"></div>";
-
-        $foody_type = FoodyType::where('slug', $slug)->first();
-
-        if ($foody_type->foody_type_id == null) {
-            $foody_types = FoodyType::where('foody_type_id', $foody_type->id)->get();
-            foreach($foody_types as $type) {
-
-                $foodies = $type->foodies;
-                foreach($foodies as $foody) {
-                    $data .= $this->getHTMLCode($foody);
-                }
-            }
+    public function showFoody(Request $request) {
+        if ($request->foody_type == 'all') {
+            $foodies = Foody::all();
         }
-
-        else {
-            $foodies = $foody_type->foodies;
-
-            foreach($foodies as $foody) {
-                $liked = $foody->getLiked();
-                $data .= $this->getHTMLCode($foody);
-            }
+        elseif($request->foody_type == 'favorite') {
+//            $foodies = DB::table('favorites')->join('foodies', 'foody_id', 'foodies.id')
+//                ->where('customer_id', Auth::guard('customer')->user)
         }
-
-//        dd($data);
-
-
-        return Response($data);
     }
 
     private function getHTMLCode($foody) {

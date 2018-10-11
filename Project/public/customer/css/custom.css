@@ -140,22 +140,63 @@ body {
 
     /*Navbar custom*/
 
+
+    #dropdown-category {
+        height: 64px;
+    }
+    .navbar-header {
+        height: 300px;
+        position: relative !important;
+        background: url("../../customer/image/background.png") no-repeat center center;
+        -webkit-background-size: cover;
+        /*-moz-background-size: cover;*/
+        /*-o-background-size: cover;*/
+        /*background-size: cover;*/
+    }
+    .navbar-header nav {
+        /*bottom: 0;*/
+        /*position: absolute;*/
+        /*width: 100%;*/
+        background-color: rgba(0,0,0,0) !important;
+    }
+    .navbar-first-button {
+        text-transform: unset;
+        background-color: rgba(0,0,0,0.6);
+    }
+    #navbar-search {
+        height: 64px;
+    }
+    #navbar-second {
+        position: absolute;
+        bottom: 0;
+    }
+    .navbar .nav-wrapper .brand-logo img {
+        height: 64px;
+    }
+    #navbar-second.pin-top {
+        position: absolute;
+        top: unset !important;
+    }
+    #navbar-second.pinned {
+        background: rgba(68,68,68,0.8) !important;
+        z-index: 1000;
+    }
+
+
+
+
+
     .navbar-fixed {
         /*margin-bottom: 10px;*/
     }
 
-    .navbar-fixed .nav-wrapper .brand-logo img {
-        height: 64px;
-    }
 
-    #navbar-search {
-        height: 64px;
-    }
+
+
 
     #navbar-second {
-        width: 90%;
-        background: #444;
-        background: rgba(68, 68, 68, 0.8);
+        /*background: #444;*/
+        /*background: rgba(68, 68, 68, 0.8);*/
     }
 
     /*.dropdown-content.nested {*/

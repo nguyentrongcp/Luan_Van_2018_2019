@@ -1,4 +1,4 @@
-<div class="col s12 m3 l3 hide-on-small-only foody-navbar">
+<div class="col s12 m3 l3 hide-on-small-only foody-navbar" id="foody-navbar">
     <div class="row">
         <h6><b>Sắp xếp</b></h6>
         <div class="divider"></div>

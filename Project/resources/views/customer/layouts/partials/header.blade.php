@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="/customer/semantic/button.min.css">
     <link rel="stylesheet" href="/customer/semantic/icon.min.css">
     <link rel="stylesheet" href="/customer/semantic/transition.min.css">
+    {{--<link rel="stylesheet" href="/customer/semantic/dimmer.min.css">--}}
     {{--<link rel="stylesheet" href="/customer/semantic/dropdown.min.css">--}}
     {{--<link rel="stylesheet" href="customer/css/font-awesome.css">--}}
 

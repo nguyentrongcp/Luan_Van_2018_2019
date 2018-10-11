@@ -12,7 +12,30 @@ $(document).ready(function(){
     $('.collapsible').collapsible();
 
     $('select').formSelect();
+    $('.cards.hoverable .image').dimmer({
+        on: 'hover'
+    });
+    $('.pushpin').pushpin();
+    $('#navbar-second').pushpin({
+        top: 236,
+    });
+    $('#foody-navbar').pushpin({
+        top: 236,
+        onPositionChange: function (status) {
+            if (status === 'pinned') {
+                $('#show-foody').addClass('special');
+            }
+            else {
+                $('#show-foody').removeClass('special');
+            }
+        }
+    });
+});
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
 });
 
 function setTimer(time) {

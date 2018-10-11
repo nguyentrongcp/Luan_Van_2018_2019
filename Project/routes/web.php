@@ -104,7 +104,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
     // Home
     Route::get('/home', 'Customer\HomeController@index')->name('customer.home');
-    Route::get('/type/{slug}', 'Customer\HomeController@showFoody');
+    Route::post('/customer/show_foody', 'Customer\HomeController@showFoody');
     Route::post('/customer/like', 'Customer\HomeController@like');
     Route::post('/customer/favorite', 'Customer\HomeController@favorite');
 

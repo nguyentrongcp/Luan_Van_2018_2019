@@ -15,13 +15,30 @@
                 alignment: 'right',
                 constrainWidth: false,
                 closeOnClick: false,
+                onOpenStart: function () {
+                    $('#dropdown-cart').addClass('teal');
+                },
+                onCloseEnd: function () {
+                    $('#dropdown-cart').removeClass('teal');
+                }
+            });
+
+            $('#dropdown-type').dropdown({
+                coverTrigger: false,
+                alignment: 'right',
+                onOpenStart: function () {
+                    $('#dropdown-type').addClass('teal');
+                },
+                onCloseEnd: function () {
+                    $('#dropdown-type').removeClass('teal');
+                }
             });
 
             $('#dropdown-category').dropdown({
                 coverTrigger: false,
                 constrainWidth: false,
                 alignment: 'right',
-                closeOnClick: false
+                closeOnClick: false,
             });
 
         });

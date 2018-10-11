@@ -72,6 +72,7 @@
             </div>
         </div>
     @endforeach
+
 </div>
 
 @include('customer.home.style')

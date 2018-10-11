@@ -54,11 +54,6 @@
 
         function addCart(foody) {
             var foody_id = $('#' + foody.id).attr('data-target');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
             $.ajax({
                 type: "post",
                 url: "/customer/add_shopping_cart",
@@ -78,6 +73,20 @@
                             classes: 'message'
                         });
                     }
+                }
+            })
+        }
+        
+        function showFoodyByType(id) {
+            $.ajax({
+                type: "post",
+                url: "/customer/show_foody",
+                data: {
+                    foody_type: id,
+                    foody_sort: $('.sort-active').attr('data-sort')
+                },
+                success: function (data) {
+
                 }
             })
         }

@@ -20,6 +20,7 @@
     .show-foody {
         width: calc(100% - 250px) !important;
         margin-left: 250px !important;
+        margin-top: 20px;
     }
 
     @media only screen and (max-width: 600px) {
