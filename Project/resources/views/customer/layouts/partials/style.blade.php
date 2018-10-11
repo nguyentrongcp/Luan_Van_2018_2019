@@ -80,17 +80,21 @@
         font-size: 10px;
     }
     .cart-remove i {
-        line-height: 30px !important;
+        line-height: 20px !important;
         margin: 0 15px;
         cursor: pointer;
-        height: 30px !important;
+        height: 20px !important;
     }
     .cart-remove {
-        height: 30px;
+        height: 20px;
     }
-    .cart-footer .button {
+    .cart-footer .btn {
         width: 90%;
         margin: 15px 0 15px 5% !important;
+        line-height: 36px;
+        padding: unset;
+        color: white;
+        font-size: 14px;
     }
     .cart-cost {
         /*line-height: 25px;*/

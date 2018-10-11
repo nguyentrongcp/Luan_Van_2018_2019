@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransportFeesTable extends Migration
+class CreateDistrictsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTransportFeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('transport_fees', function (Blueprint $table) {
+        Schema::create('districts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('district_id')->unsigned();
-            $table->string('ward', 50);
-            $table->double('cost');
+            $table->string('district', '50');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateTransportFeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transport_fees');
+        Schema::dropIfExists('districts');
     }
 }

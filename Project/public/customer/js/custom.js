@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('.tabs').tabs();
+    $('.modal').modal();
     $('.slider').slider();
     // $('.materialboxed').materialbox();
     $('.tooltipped').tooltip();
@@ -13,3 +14,17 @@ $(document).ready(function(){
     $('select').formSelect();
 
 });
+
+function setTimer(time) {
+    var timer = setInterval(function () {
+        if (time === -1) {
+            $('#otp-timer').text('');
+            clearInterval(timer);
+            $('#otp-text').html("Bạn chưa nhận được mã? <a href=\"#\">Thử lại</a>");
+        }
+        else {
+            $('#otp-timer').text(time + 's');
+            time--;
+        }
+    }, 1000);
+}

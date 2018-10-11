@@ -48,12 +48,13 @@ class ShoppingCartController extends Controller
             $data += ['status' => 'deleted'];
         }
         elseif ($cart->qty != $request->count) {
-            $data += ['status' => 'updated', 'count' => $cart->qty,
-                'cost' => number_format($cart->qty * $foody->currentCost())];
+            $data += ['status' => 'updated', 'count' => $cart->qty, 'cost_simple' => number_format($foody->getSaleCost()),
+                'cost' => number_format($cart->qty * $foody->getSaleCost()),
+                'sale' => $foody->getSalePercent()];
 
         }
         else {
-            $cart_cost = number_format($foody->currentCost() * $cart->qty);
+            $cart_cost = number_format($foody->getSaleCost() * $cart->qty);
             $cart_body =
                 "<div class='cart-row row' id='$cart->id'>
                 <div class='col cart-count' id='cart-count-$cart->id'
@@ -77,7 +78,7 @@ class ShoppingCartController extends Controller
                     $cart_cost<sup>đ</sup>
                 </div>
                 <div class='col cart-remove'>
-                    <i class='trash alternate icon'></i>
+                    <i onclick='removeCart($cart->id)' class='trash alternate icon'></i>
                 </div>
             </div>";
             $data += ['status' => 'added', 'role' => $role, 'cart_body' => $cart_body,
@@ -100,12 +101,14 @@ class ShoppingCartController extends Controller
     }
 
     public function testAPI() {
-        $smsAPI = new SpeedSMSAPI("23CwwNwz_M7cbNUAuB1cWoSnSdahEpnO");
-        $phone = ['0339883047'];
-        $content = "Ma OTP cua ban la 371910";
-        $response = $smsAPI->sendSMS($phone, $content, 4, '');
-
-        dd($response);
+//        $smsAPI = new SpeedSMSAPI("23CwwNwz_M7cbNUAuB1cWoSnSdahEpnO");
+//        $phone = ['0339883047'];
+//        $content = "Ma OTP cua ban la 371910";
+//        $response = $smsAPI->sendSMS($phone, $content, 4, '');
+//
+//        dd($response);
+//
+//        dd(time());
     }
 
 }

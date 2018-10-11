@@ -59,9 +59,9 @@
     <li class="divider"></li>
 
     <li class="cart-footer">
-        <a href="{{ route('payment.index') }}" id="cart-payment" class="ui blue
-            {{ $carts->count() == 0 ? 'disabled' : '' }} button waves-effect waves-light">
-            Thanh toán
+        <a href="{{ route('payment.index') }}" id="cart-payment" class="
+            {{ $carts->count() == 0 ? 'disabled' : '' }} btn waves-effect waves-light">
+            Đặt hàng
         </a>
     </li>
 </ul>

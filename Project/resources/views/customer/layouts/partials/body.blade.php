@@ -1,4 +1,4 @@
-<body>
+<body onload="document.refresh();">
 
     @php
         use Illuminate\Support\Facades\Auth;
