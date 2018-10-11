@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function index() {
-        $foody_types = FoodyType::where('foody_type_id', null)->get();
+        $foody_types = FoodyType::all();
         $foodies = Foody::all();
 
         return view('customer.home.index', compact(['foody_types', 'foodies']));

@@ -14,59 +14,79 @@ class FoodyTypeSeeder extends Seeder
         DB::table('foody_types')->insert([
             [
                 // id = 1
-                'name' => 'Nước uống',
-                'slug' => str_slug('Nước uống'),
-                'foody_type_id' => null
+                'name' => 'Italian & Pizza',
+                'slug' => str_slug('Italian & Pizza'),
             ],
             [
                 // id = 2
-                'name' => 'Thức ăn',
-                'slug' => str_slug('Thức ăn'),
-                'foody_type_id' => null
+                'name' => 'Món Nhật và Sushi',
+                'slug' => str_slug('Món Nhật và Sushi'),
             ],
             [
                 // id = 3
-                'name' => 'Món chè',
-                'slug' => str_slug('Món chè'),
-                'foody_type_id' => 1
+                'name' => 'Trà sữa',
+                'slug' => str_slug('Trà sữa - Café'),
             ],
             [
                 // id = 4
-                'name' => 'Nước ép & sinh tố',
-                'slug' => str_slug('Nước ép & sinh tố'),
-                'foody_type_id' => 1
+                'name' => 'Bánh mì & Xôi',
+                'slug' => str_slug('Bánh mì & Xôi'),
             ],
             [
                 // id = 5
-                'name' => 'Cà phê',
-                'slug' => str_slug('Cà phê'),
-                'foody_type_id' => 1
+                'name' => 'Món ăn vặt',
+                'slug' => str_slug('Món ăn vặt'),
             ],
             [
                 // id = 6
-                'name' => 'Trà sữa',
-                'slug' => str_slug('Trà sữa'),
-                'foody_type_id' => 1
+                'name' => 'Hamburger',
+                'slug' => str_slug('Hamburger'),
             ],
             [
                 // id = 7
-                'name' => 'Gà',
-                'slug' => str_slug('Gà'),
-                'foody_type_id' => 2
+                'name' => 'Bánh ngọt',
+                'slug' => str_slug('Bánh ngọt'),
             ],
             [
                 // id = 8
-                'name' => 'Các loại kem',
-                'slug' => str_slug('Các loại kem'),
-                'foody_type_id' => 2
+                'name' => 'Món tráng miệng',
+                'slug' => str_slug('Món tráng miệng'),
             ],
             [
                 // id = 9
-                'name' => 'Bánh ngọt',
-                'slug' => str_slug('Bánh ngọt'),
-                'foody_type_id' => 2
+                'name' => 'Kem',
+                'slug' => str_slug('Kem'),
             ],
-
+            [
+                // id = 10
+                'name' => 'Sandwich',
+                'slug' => str_slug('Sandwich'),
+            ],
+            [
+                // id = 11
+                'name' => 'Sinh tố & nước ép',
+                'slug' => str_slug('Sinh tố & nước ép'),
+            ],
+            [
+                // id = 12
+                'name' => 'Súp',
+                'slug' => str_slug('Súp'),
+            ],
+            [
+                // id = 13
+                'name' => 'Món chay',
+                'slug' => str_slug('Món chay'),
+            ],
+            [
+                // id = 14
+                'name' => 'Cơm tấm',
+                'slug' => str_slug('Cơm tấm'),
+            ],
+            [
+                // id = 15
+                'name' => 'Hồng Trà & Socolat Matcha',
+                'slug' => str_slug('Hồng Trà & Café'),
+            ],
         ]);
     }
 }

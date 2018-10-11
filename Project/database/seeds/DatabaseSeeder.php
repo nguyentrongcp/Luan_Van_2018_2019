@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
              CustomerSeeder::class,
              FoodyTypeSeeder::class,
              FoodySeeder::class,
+             FoodyStatusSeeder::class,
              CostSeeder::class,
              NewsSeeder::class,
              ShoppingCartSeeder::class,

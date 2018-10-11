@@ -7,7 +7,7 @@
             <div class="ui cards hoverable">
                 <div class="card">
                     <div class="image">
-                        <img src="{{ $foody->avatar }}">
+                        <img src="{{ asset($foody->avatar) }}" alt="{{ $foody->slug }}">
                     </div>
                     <div class="content" style="padding-bottom: 5px">
                         <a class="header truncate tooltipped" href="{{ route('customer.foody.show', [$foody->slug]) }}"

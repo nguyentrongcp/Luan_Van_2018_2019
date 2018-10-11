@@ -19,27 +19,25 @@
     </div>
 
 
+    <div class="row">
+        <h6><b>Ẩm thực</b></h6>
+        <div class="divider"></div>
+        <div class="col s12 navbar-index">
+            <a id="foody-type-all" class="waves-effect waves-purple btn white black-text btn-fluid foody-type">
+                Xem tất cả
+                <i class="material-icons right">chevron_right</i>
+            </a>
+        </div>
         @foreach($foody_types as $foody_type)
-            <div class="row">
-                <h6><b>{{ $foody_type->name }}</b></h6>
-                <div class="divider"></div>
-                <div class="col s12 navbar-index">
-                    <a id="{{ $foody_type->slug }}" class="waves-effect waves-purple btn white black-text btn-fluid foody-type">
-                        Xem tất cả
-                        <i class="material-icons right">chevron_right</i>
-                    </a>
-                </div>
-                @foreach(\App\FoodyType::where('foody_type_id', $foody_type->id)->get() as $foody_type_child)
-                    <div class="col s12 navbar-index">
-                        <a id="{{ $foody_type_child->slug }}"
-                           class="waves-effect waves-purple btn white black-text btn-fluid foody-type">
-                            {{ $foody_type_child->name }}
-                            <i class="material-icons right">chevron_right</i>
-                        </a>
-                    </div>
-                @endforeach
+            <div class="col s12 navbar-index">
+                <a id="{{ $foody_type->slug }}"
+                   class="waves-effect waves-purple btn white black-text btn-fluid foody-type">
+                    {{ $foody_type->name }}
+                    <i class="material-icons right">chevron_right</i>
+                </a>
             </div>
         @endforeach
+    </div>
 </div>
 
 <style>

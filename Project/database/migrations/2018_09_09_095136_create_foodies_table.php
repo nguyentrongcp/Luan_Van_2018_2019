@@ -22,6 +22,7 @@ class CreateFoodiesTable extends Migration
             $table->string('describe', 255)->nullable();
             $table->integer('foody_type_id')->unsigned();
             $table->string('slug', 100);
+            $table->boolean('is_extra')->default(false);
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
