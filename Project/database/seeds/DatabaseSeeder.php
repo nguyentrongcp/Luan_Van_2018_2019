@@ -25,7 +25,9 @@ class DatabaseSeeder extends Seeder
              GoodsReceiptNotesCostSeeder::class,
              CommentsSeeder::class,
              ShopInfosSeeder::class,
-             SalesOffsDetailsSeeder::class
+             SalesOffsDetailsSeeder::class,
+             DecentralizationSeeder::class,
+             DecentralizeEmployeesSeeder::class
          ]);
     }
 }

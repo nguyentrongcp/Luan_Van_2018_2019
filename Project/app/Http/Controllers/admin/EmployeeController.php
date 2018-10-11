@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Admin;
+use App\Decentralization;
+use App\DecentralizeEmployees;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +18,6 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Admin::paginate(10);
-
         return view('admin.employees.index',compact('employees'));
     }
 
@@ -38,7 +39,25 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $email = $request->get('email');
+        if (Admin::Existed($email))
+        {
+            return back()->with('errors', ["Email $email đã tồn tại"]);
+        }
+        $admins = new Admin();
+        $admins->name = $request->get('name');
+        $admins->phone = $request->get('phone');
+        $admins->email = $email;
+
+        $arr = explode("@",$email);
+        $admins->username = $arr[0];
+        $admins->address = $request->get('address');
+        $admins->password = bcrypt($request->get('pass'));
+
+        $idDecentralizes = $request->get('decentralization');
+        $admins->decentralizes()->sync($idDecentralizes);
+
+        return back()->with('success', 'Thêm nhân viên thành công');
     }
 
     /**

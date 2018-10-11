@@ -3,18 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Authenticatable
+class DecentralizeEmployees extends Model
 {
     public static function Existed($email)
     {
         return (Admin::where('email', $email)->count() > 0);
     }
+
     public function decentralizes() {
         return $this->belongsToMany(
-            DecentralizeEmployees::class,
-            'decentralize_employees',
+            Decentralization::class,
+            'decentralizations',
             'admin_id',
             'decentralization_id');
     }
@@ -45,7 +45,4 @@ class Admin extends Authenticatable
     public function matchedIds($id) {
         return $id == $this->id;
     }
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
 }

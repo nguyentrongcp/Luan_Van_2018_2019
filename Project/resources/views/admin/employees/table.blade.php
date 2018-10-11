@@ -23,7 +23,7 @@
         </tr>
         </thead>
         <tbody>
-        {{--@foreach($employees as $stt => $emp)--}}
+        @foreach($employees as $stt => $employee)
             <tr>
                 <td class="text-left td-prot th-stt">
                     <div class="form-check">
@@ -33,20 +33,20 @@
                         </label>
                     </div>
                 </td>
-                <td class="text-center td-prot th-stt">1</td>
+                <td class="text-center td-prot th-stt">{{$stt + 1}}</td>
                 <td class="td-prot" id="th-name-type">
-                    <a class="a-prot" href="">dSsS</a>
+                    {{$employee->name}}
                 </td>
-                <td class="td-prot">sSada
-
-                </td>
-                </td>
-                <td class="td-prot">sSada
-
+                <td class="td-prot">
+                    {{$employee->phone}}
                 </td>
                 </td>
-                <td class="td-prot">sSada
-
+                <td class="td-prot">
+                    {{$employee->email}}
+                </td>
+                </td>
+                <td class="td-prot">
+                    {{$employee->username}}
                 </td>
 
                 <td class="text-center td-prot">
@@ -62,12 +62,12 @@
                     </button>
                 </td>
             </tr>
-        {{--@endforeach--}}
+        @endforeach
         </tbody>
     </table>
     <div class="div-pagination">
-        {{--{{$employees->links()}}--}}
-    </di            v>
+        {{$employees->links()}}
+    </div>
 
 </div>
 
