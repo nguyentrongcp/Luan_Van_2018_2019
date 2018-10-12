@@ -77,16 +77,41 @@
             })
         }
         
-        function showFoodyByType(id) {
+        function showFoodyByType(foody_type) {
+            var foody_sort_id = $('.foody-sort.active').id;
             $.ajax({
                 type: "post",
                 url: "/customer/show_foody",
                 data: {
-                    foody_type: id,
-                    foody_sort: $('.sort-active').attr('data-sort')
+                    foody_type_id: foody_type.id,
+                    foody_sort_id: foody_sort_id,
+                    type: 'type'
                 },
                 success: function (data) {
-
+                    $('#show-foody').empty();
+                    $('#show-foody').html(data);
+                    $('.foody-type').removeClass('active');
+                    $(foody_type).addClass('active');
+                }
+            })
+        }
+        
+        function showFoodyBySort(foody_sort) {
+            var foody_type_id = $('.foody-type.active')[0].id;
+            $.ajax({
+                type: "post",
+                url: "/customer/show_foody",
+                data: {
+                    foody_sort_id: foody_sort.id,
+                    foody_type_id: foody_type_id,
+                    type: 'sort'
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#show-foody').empty();
+                    $('#show-foody').html(data);
+                    $('.foody-sort').removeClass('active');
+                    $(foody_sort).addClass('active');
                 }
             })
         }

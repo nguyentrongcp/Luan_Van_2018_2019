@@ -90,7 +90,7 @@
                             <li><a href="#login-modal" class="waves-effect waves-light btn modal-trigger navbar-first-button">
                                     <b>Đăng nhập</b></a></li>
                         @else
-                            <li><a style="height: 64px;" id="dropdown-profile" data-target="customer-profile">
+                            <li><a style="height: 64px;" class="dropdown-trigger" id="dropdown-profile" data-target="customer-profile">
                                     <img class="responsive-img circle" src="https://scontent.fsgn5-4.fna.fbcdn.net/v/t1.0-9/29244095_2127623837457107_1960178588228106477_n.jpg?_nc_cat=102&oh=2e5468930f3c7be683b7ed7428b9eaed&oe=5C5E95CB">
 
                                     <b style="position: relative; vertical-align: top">{{ Auth::guard('customer')->user()->name }}</b>
@@ -103,8 +103,8 @@
                             {{--</span>--}}
                             {{--</a></li>--}}
                     </ul>
-                    <a href="#" data-target="nav-mobile" class="navbar-fixed sidenav-trigger hide-on-large-only right-align">
-                        <i class="material-icons" style="font-size: 30px">menu</i></a>
+                    {{--<a href="#" data-target="nav-mobile" class="navbar-fixed sidenav-trigger hide-on-large-only right-align">--}}
+                        {{--<i class="material-icons" style="font-size: 30px">menu</i></a>--}}
                 </div>
             </div>
         </nav>

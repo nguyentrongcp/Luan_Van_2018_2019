@@ -22,7 +22,7 @@
                      style="width: 30px; margin-left: 15px">
                     {{ $cart->qty }}
                 </div>
-                <div class="col" style="margin-right: 10px">x</div>
+                <div class="col" style="width: 20px">x</div>
                 <div class="col cart-name">
                     {{ $cart->name }}
                 </div>

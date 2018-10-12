@@ -8,6 +8,7 @@ $(document).ready(function(){
     $('.sidenav').sidenav({
         edge: 'right',
     });
+    $('.dropdown-trigger').dropdown();
 
     $('.collapsible').collapsible();
 
@@ -31,6 +32,10 @@ $(document).ready(function(){
         }
     });
 });
+
+// $('#dropdown-cart').on('click', function () {
+//     $('#dropdown-cart').animate( { width: '452px'}, 500)
+// });
 
 $.ajaxSetup({
     headers: {

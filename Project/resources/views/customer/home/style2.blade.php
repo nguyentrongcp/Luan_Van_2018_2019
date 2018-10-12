@@ -1,19 +1,46 @@
 
 
 <style>
+
+    .navbar-home {
+        padding: 5px 5px 0 10px !important;
+    }
+
+    .navbar-home .btn {
+        text-transform: unset;
+        color: #666 !important;
+        text-align: left;
+    }
     .foody-navbar {
+        padding-right: 10px !important;
+        padding-top: 10px !important;
+    }
+    .foody-navbar .row {
+        margin: 0 0 20px 0;
+    }
+    .divider {
+        /*margin-bottom: 5px;*/
+    }
+
+    .btn.active {
+        color: white !important;
+        background-color: #26a69a !important;
+    }
+
+
+    .foody-navbar-overflow {
         overflow: hidden;
         width: 250px !important;
         max-height: calc(100vh - 74px);
+    }
+    .foody-navbar {
+        width: 250px !important;
     }
     .foody-navbar:hover {
         overflow: auto;
     }
     .foody-navbar .divider {
         margin-bottom: 5px !important;
-    }
-    .show-foody.special {
-        margin-left: 250px !important;
     }
     .show-foody {
         width: calc(100% - 250px) !important;
@@ -24,6 +51,18 @@
     }
     #foody-navbar.pinned {
         top: 64px !important;
+        overflow: hidden;
+        max-height: calc(100vh - 74px);
+    }
+    #foody-navbar.pinned:hover {
+        overflow: auto;
+    }
+
+    @media only screen and (min-width: 601px) {
+        .show-foody.special {
+            margin-left: 250px !important;
+        }
+
     }
 
     @media only screen and (max-width: 600px) {
@@ -36,6 +75,7 @@
         }
         .show-foody-image img {
             padding: 20px 0 0 0 !important;
+            width: 100%;
         }
         .show-foody-action .btn {
             width: 100%;
