@@ -30,7 +30,7 @@
         <h6><b>Ẩm thực</b></h6>
         <div class="divider"></div>
         <div class="col s12 navbar-home">
-            <a id="all" class="waves-effect waves-teal btn white black-text btn-fluid foody-type active">
+            <a id="all" onclick="showFoodyByType(this)" class="waves-effect waves-teal btn white black-text btn-fluid foody-type active">
                 Xem tất cả
                 <i class="material-icons right">chevron_right</i>
             </a>

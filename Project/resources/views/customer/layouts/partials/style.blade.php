@@ -9,7 +9,7 @@
     }
 
     @media only screen and (min-width: 601px) {
-        #navbar-search {
+        #navbar-search.navbar-search {
             width: calc((100% - 90px) / 3) !important;
         }
     }

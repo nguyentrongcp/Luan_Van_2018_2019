@@ -32,7 +32,7 @@
                     </a>
 
                     <a class="ui button" onclick="updateCart(this,{{ $cart->id }})"
-                       id="cart-minus-{{ $cart->id }}"><i class="minus icon"></i>
+                       data-amount="cart-minus-{{ $cart->id }}"><i class="minus icon"></i>
                     </a>
                 </div>
                 <div class="col right-align" style="width: 70px" id="cart-cost-{{ $cart->id }}">

@@ -27,6 +27,10 @@
         background-color: #26a69a !important;
     }
 
+    .foody-sort.btn, .foody-type.btn {
+        font-weight: unset;
+    }
+
 
     .foody-navbar-overflow {
         overflow: hidden;
@@ -140,5 +144,8 @@
     }
     .show-foody-favorite {
         margin-left: 10px;
+    }
+    .show-foody-favorite i {
+        cursor: pointer;
     }
 </style>

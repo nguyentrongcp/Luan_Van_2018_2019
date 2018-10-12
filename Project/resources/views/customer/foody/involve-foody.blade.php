@@ -6,7 +6,7 @@
         <div class="row">
             <div class="row">
                 <div class="col s4 m3 l3">
-                    <img class="responsive-img" src="/{{ $foody->avatar }}">
+                    <img class="responsive-img" src="{{ $foody->avatar }}">
                 </div>
                 <div class="col s8 involve-foody-name">
                     <a href="#" class="truncate">{{ $foody->name }}</a>
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="row">
                 <div class="col s4 m3 l3">
-                    <img class="responsive-img" src="/{{ $foody->avatar }}">
+                    <img class="responsive-img" src="{{ $foody->avatar }}">
                 </div>
                 <div class="col s8 involve-foody-name">
                     <span class="col s12"><a href="#" class="truncate">{{ $foody->name }}</a></span>
@@ -45,7 +45,7 @@
 
 
     <div class="col s12 involve-footer">
-        <a href="#" class="ui attached blue button waves-effect waves-light">
+        <a href="#" class="ui attached teal button waves-effect waves-light">
             Xem tất cả
         </a>
     </div>

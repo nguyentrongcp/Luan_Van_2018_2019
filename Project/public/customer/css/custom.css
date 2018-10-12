@@ -138,6 +138,11 @@ body {
     width: 100% !important;
 }
 
+.btn {
+    text-transform: unset;
+    font-weight: bolder;
+}
+
     /*Navbar custom*/
 
     .navbar-header {

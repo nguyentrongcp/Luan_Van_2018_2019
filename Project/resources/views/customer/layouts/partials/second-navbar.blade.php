@@ -8,7 +8,7 @@
                             <span class="hide-on-small-only">Trở về</span>
                             <i class="material-icons center hide-on-med-and-up">arrow_back</i>
                         </a></li>
-                    <li class="navbar-second-col hide-on-small-only" id="navbar-search">
+                    <li class="navbar-second-col hide-on-small-only navbar-search" id="navbar-search">
                         {{--<div class="ui icon input">--}}
                             {{--<i class="search icon"></i>--}}
                             {{--<input type="text" placeholder="Search...">--}}
@@ -31,13 +31,13 @@
                     <li class="navbar-search navbar-second-col navbar-hide hide-on-med-and-up">
                         <a><i class="material-icons center">search</i></a>
                     </li>
-                    <li class="navbar-second-col navbar-hide">
+                    <li class="navbar-second-col navbar-hide navbar-hide-med">
                         <a id="dropdown-category" class='dropdown-trigger' data-target='dropdown-category-content'>
                             <i class="material-icons left hide-on-small-only">menu</i>
                             <i class="material-icons center hide-on-med-and-up">menu</i>
                             <span class="hide-on-small-only">Phân loại</span></a>
                     </li>
-                    <li style="width: 90px" class="navbar-hide navbar-cart">
+                    <li style="width: 90px" class="navbar-hide navbar-cart navbar-hide-med">
                         <a id="dropdown-cart" data-target="cart" class="truncate dropdown-trigger">
                             <i class="material-icons left">shopping_cart</i>
                             <span id="cart-count" class="new badge" data-badge-caption="">{{ Cart::count() }}</span>

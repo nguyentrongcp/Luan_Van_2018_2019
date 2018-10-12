@@ -36,7 +36,7 @@ class HomeController extends Controller
         $foody_sorts = [];
         foreach($foodies as $foody) {
             $foody_sorts[] = ['id' => $foody->id, 'cost' => $foody->getSaleCost(), 'name' => $foody->name,
-                'avatar' => $foody->avatar, 'describe' => $foody->describe];
+                'avatar' => $foody->avatar, 'describe' => $foody->describe, 'slug' => $foody->slug];
         }
 
         if ($request->foody_sort_id == 'desc') {
@@ -56,17 +56,28 @@ class HomeController extends Controller
 //        return Response($foody_sorteds);
         $data = '';
         foreach ($foody_sorteds as $foody) {
+            $id = $foody['id'];
             $avatar = asset($foody['avatar']);
             $name = $foody['name'];
             $describe = $foody['describe'];
             $cost = number_format(Foody::find($foody['id'])->getSaleCost());
+            $favorite = 'bookmark outline';
+            $slug = $foody['slug'];
+            if (Auth::guard('customer')->check()) {
+                if (Favorite::where('foody_id', $foody['id'])
+                        ->where('customer_id', Auth::guard('customer')->user()->id)->count() > 0) {
+                    $favorite = 'bookmark';
+                }
+            }
             $data .= "
                 <div class=\"row white show-foody-row\">
             <div class=\"col s12 m4 l4 show-foody-image\">
                 <img src=\"$avatar\" class=\"responsive-img\">
             </div>
             <div class=\"col s12 m8 l8 show-foody-content\">
-                <div class=\"show-foody-title truncate\">$name</div>
+                <div class=\"show-foody-title truncate\">
+                    <a class=\"black-text\" href=\"/foody/$slug\">$name</a>
+                </div>
                 <div class=\"show-foody-cost\"><span class=\"cost\">
                         $cost<sup>đ</sup>
                     </span></div>
@@ -91,13 +102,14 @@ class HomeController extends Controller
                         <i class=\"comment icon\" style=\"font-size: 12px\"></i> 13
                     </span>
                     <span class=\"show-foody-favorite\">
-                        <a href=\"#\" class=\"\">
-                             <i class=\"bookmark outline icon\"></i>
-                        </a>
+                        <a onclick=\"favorite(this,$id)\" class=\"tooltipped\"
+                                   data-tooltip=\"Lưu món ăn\" data-position=\"left\">
+                                     <i id=\"favorite-$id\" class=\"$favorite icon\"></i>
+                                </a>
                     </span>
                 </div>
                 <div class=\"show-foody-action\">
-                    <a class=\"waves-effect waves-light btn\">
+                    <a class=\"waves-effect waves-light btn\" onclick=\"updateCart(this,$id)\">
                         <i class=\"cart plus icon\"></i>
                         Thêm vào giỏ
                     </a>
@@ -135,24 +147,26 @@ class HomeController extends Controller
 
     public function favorite(Request $request) {
         if (Auth::guard('customer')->check()) {
-            $foody_id = $request->get('foody_id');
             $customer_id = Auth::guard('customer')->user()->id;
 
-            $favorited = Favorite::where('customer_id', $customer_id)->where('foody_id', $foody_id)->first();
+            $favorited = Favorite::where('customer_id', $customer_id)->where('foody_id', $request->foody_id)->first();
 
             if (!empty($favorited)) {
                 $favorited->delete();
 
-                return Response('Quan tâm');
+                return Response('unfavorited');
             }
             else {
                 $favorite = new Favorite();
                 $favorite->customer_id = $customer_id;
-                $favorite->foody_id = $foody_id;
+                $favorite->foody_id = $request->foody_id;
                 $favorite->save();
 
-                return Response('Bỏ quan tâm');
+                return Response('favorited');
             }
+        }
+        else {
+            return Response('Hãy đăng nhập để lưu món ăn.', 404);
         }
     }
 }

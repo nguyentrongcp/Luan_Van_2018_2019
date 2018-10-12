@@ -5,7 +5,9 @@
                 <img src="{{ asset($foody->avatar) }}" class="responsive-img">
             </div>
             <div class="col s12 m8 l8 show-foody-content">
-                <div class="show-foody-title truncate">{{ $foody->name }}</div>
+                <div class="show-foody-title truncate">
+                    <a class="black-text" href="{{ route('customer.foody.show', [$foody->slug]) }}">{{ $foody->name }}</a>
+                </div>
                 <div class="show-foody-cost"><span class="cost">
                         {{ number_format($foody->getSaleCost()) }}<sup>đ</sup>
                     </span></div>
@@ -30,13 +32,28 @@
                         <i class="comment icon" style="font-size: 12px"></i> 13
                     </span>
                     <span class="show-foody-favorite">
-                        <a href="#" class="">
-                             <i class="bookmark outline icon"></i>
-                        </a>
+                        @if(Auth::guard('customer')->check())
+                            @if($foody->favorites()->where('customer_id', Auth::guard('customer')->user()->id)->count() > 0)
+                                <a onclick="favorite(this,{{ $foody->id }})" class="tooltipped"
+                                   data-tooltip="Lưu món ăn" data-position="left">
+                                     <i id="favorite-{{ $foody->id }}" class="bookmark icon"></i>
+                                </a>
+                            @else
+                                <a onclick="favorite(this,{{ $foody->id }})" class="tooltipped"
+                                   data-tooltip="Lưu món ăn" data-position="left">
+                                     <i id="favorite-{{ $foody->id }}" class="bookmark outline icon"></i>
+                                </a>
+                            @endif
+                        @else
+                            <a onclick="favorite(this,{{ $foody->id }})" class="tooltipped"
+                               data-tooltip="Lưu món ăn" data-position="left">
+                                <i id="favorite-{{ $foody->id }}" class="bookmark outline icon"></i>
+                            </a>
+                        @endif
                     </span>
                 </div>
                 <div class="show-foody-action">
-                    <a class="waves-effect waves-light btn">
+                    <a class="waves-effect waves-light btn" onclick="updateCart(this, {{ $foody->id }})">
                         <i class="cart plus icon"></i>
                         Thêm vào giỏ
                     </a>
