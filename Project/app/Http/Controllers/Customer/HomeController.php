@@ -6,10 +6,12 @@ use App\Favorite;
 use App\Foody;
 use App\FoodyType;
 use App\Like;
+use function foo\func;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -20,123 +22,103 @@ class HomeController extends Controller
         return view('customer.home.index', compact(['foody_types', 'foodies']));
     }
 
-    public function showFoody($slug) {
-        $data = "<div class=\"row\"></div>";
+    public function showFoody(Request $request) {
+        if ($request->foody_type_id == 'all') {
+            $foodies = Foody::all();
+        }
+        elseif (Foody::where('foody_type_id', $request->foody_type_id)->count() > 0) {
+            $foodies = Foody::where('foody_type_id', $request->foody_type_id)->get();
+        }
+        else {
+            return Response('Không có thực phẩm nào!');
+        }
 
-        $foody_type = FoodyType::where('slug', $slug)->first();
+        $foody_sorts = [];
+        foreach($foodies as $foody) {
+            $foody_sorts[] = ['id' => $foody->id, 'cost' => $foody->getSaleCost(), 'name' => $foody->name,
+                'avatar' => $foody->avatar, 'describe' => $foody->describe, 'slug' => $foody->slug];
+        }
 
-        if ($foody_type->foody_type_id == null) {
-            $foody_types = FoodyType::where('foody_type_id', $foody_type->id)->get();
-            foreach($foody_types as $type) {
+        if ($request->foody_sort_id == 'desc') {
+            $foody_sorteds = array_reverse(array_sort($foody_sorts, function($foody_sorts) {
+                return $foody_sorts['cost'];
+            }));
+        }
+        else if($request->foody_sort_id == 'asc') {
+            $foody_sorteds = array_sort($foody_sorts, function($foody_sorts) {
+                return $foody_sorts['cost'];
+            });
+        }
+        else {
+            $foody_sorteds = $foodies;
+        }
 
-                $foodies = $type->foodies;
-                foreach($foodies as $foody) {
-                    $data .= $this->getHTMLCode($foody);
+//        return Response($foody_sorteds);
+        $data = '';
+        foreach ($foody_sorteds as $foody) {
+            $id = $foody['id'];
+            $avatar = asset($foody['avatar']);
+            $name = $foody['name'];
+            $describe = $foody['describe'];
+            $cost = number_format(Foody::find($foody['id'])->getSaleCost());
+            $favorite = 'bookmark outline';
+            $slug = $foody['slug'];
+            if (Auth::guard('customer')->check()) {
+                if (Favorite::where('foody_id', $foody['id'])
+                        ->where('customer_id', Auth::guard('customer')->user()->id)->count() > 0) {
+                    $favorite = 'bookmark';
                 }
             }
-        }
-
-        else {
-            $foodies = $foody_type->foodies;
-
-            foreach($foodies as $foody) {
-                $liked = $foody->getLiked();
-                $data .= $this->getHTMLCode($foody);
-            }
-        }
-
-//        dd($data);
-
-
-        return Response($data);
-    }
-
-    private function getHTMLCode($foody) {
-        $liked = $foody->getLiked();
-        $data =
-            "<div class=\"col s12 m6 l4 foody-card\">
-                            <div class=\"ui cards hoverable\">
-                                <div class=\"card\">
-                                    <div class=\"image\">
-                                        <img src=\"$foody->avatar\">
-                                    </div>
-                                    <div class=\"content\" style=\"padding-bottom: 5px\">
-                                        <a class=\"header truncate tooltipped\" data-position=\"top\" 
-                                        data-tooltip=\"$foody->name\">
-                                        $foody->name</a>
-                                        <span>
-                                            <span class=\"old-cost\">1,000,000</span>
-                                            <sup>đ</sup>
-                                        </span>
-                                        <span class='cost'>145,000<sup>đ</sup></span>
-                                        <span class=\"ui mini red label\">- 60%</span>
-                                        <div class=\"meta\">
-                                            <span class=\"right floated\">
-                                                <i class=\"comment icon\"></i><span>3</span>
-                                            </span>
-                                            <span class=\"right floated\">
-                                                <i class=\"heart icon\"></i>
-                                                <span id=\"liked-$foody->id\">$liked</span>
-                                            </span>
-                                        </div>
-
-                                    </div>
-                                    <div class=\"extra content\">
-                                        <span id=\"like-$foody->id\" data-target=\"$foody->id\" 
-                                        onclick='like(this)' class=\"left floated like\">";
-        if(!Auth::guard('customer')->check()) {
-            $data .=
-                "<i id=\"i-like-$foody->id\" class=\"like icon\"></i>
-                             <a id=\"a-like-$foody->id\">Thích</a>";
-        }
-        elseif(empty($foody->likes()->where('customer_id',
-            Auth::guard('customer')->user()->id)->first())) {
-            $data .=
-                "<i id=\"i-like-$foody->id\" class=\"like icon\"></i>
-                             <a id=\"a-like-$foody->id\">Thích</a>";
-        }
-
-        else {
-            $data .=
-                "<i id=\"i-like-$foody->id\" class=\"like active icon\"></i>
-                             <a id=\"a-like-$foody->id\">Bỏ thích</a>";
-        }
-        $data .=
-            "</span>
-                        <span id=\"favorite-$foody->id\" class=\"right floated star\"
-                        onclick='favorite(this)' data-target=\"$foody->id\">";
-        if(!Auth::guard('customer')->check()) {
-            $data .= "<i id=\"i-favorite-$foody->id\" class=\"star icon\"></i>
-                                <a id=\"a-favorite-$foody->id\">Quan tâm</a>";
-        }
-        elseif(empty($foody->favorites()->where('customer_id',
-            Auth::guard('customer')->user()->id)->first())) {
-            $data .= "<i id=\"i-favorite-$foody->id\" class=\"star icon\"></i>
-                                <a id=\"a-favorite-$foody->id\">Quan tâm</a>";
-        }
-        else {
-            $data .= "<i id=\"i-favorite-$foody->id\" class=\"star active icon\"></i>
-                                <a id=\"a-favorite-$foody->id\">Bỏ quan tâm</a>";
-        }
-        $data .=
-            "</span>
-                                </div>
-                                <a id=\"add-cart-$foody->id\" data-target=\"$foody->id\" onclick=\"addCart(this)\"
-                                    class=\"ui bottom attached button\">
-                                    <i class=\"cart plus icon\"></i>
-                                    Thêm vào giỏ 
-                                    <span id='cart-added-home-$foody->id'>";
-        if (Cart::getCountByID($foody->id) > 0) {
-            $count = Cart::getCountByID($foody->id);
-            $data .= "(<span class='red-text'>$count</span>)";
-        }
-        $data .= "</span>
+            $data .= "
+                <div class=\"row white show-foody-row\">
+            <div class=\"col s12 m4 l4 show-foody-image\">
+                <img src=\"$avatar\" class=\"responsive-img\">
+            </div>
+            <div class=\"col s12 m8 l8 show-foody-content\">
+                <div class=\"show-foody-title truncate\">
+                    <a class=\"black-text\" href=\"/foody/$slug\">$name</a>
+                </div>
+                <div class=\"show-foody-cost\"><span class=\"cost\">
+                        $cost<sup>đ</sup>
+                    </span></div>
+                <div class=\"show-foody-describe\">$describe</div>
+                <div class=\"show-foody-rating\">
+                    <span class=\"rating-icon\">
+                        <i class=\"material-icons\">star</i>
+                        <i class=\"material-icons\">star</i>
+                        <i class=\"material-icons\">star</i>
+                        <i class=\"material-icons\">star_half</i>
+                        <i class=\"material-icons\">star_border</i>
+                    </span>
+                    <span class=\"rating-number\">
+                        3.5 / 5
+                    </span>
+                    <span class=\"rating-spacing\">|</span>
+                    <span>
+                        <i class=\"like icon\" style=\"font-size: 12px\"></i> 13
+                    </span>
+                    <span class=\"rating-spacing\">|</span>
+                    <span>
+                        <i class=\"comment icon\" style=\"font-size: 12px\"></i> 13
+                    </span>
+                    <span class=\"show-foody-favorite\">
+                        <a onclick=\"favorite(this,$id)\" class=\"tooltipped\"
+                                   data-tooltip=\"Lưu món ăn\" data-position=\"left\">
+                                     <i id=\"favorite-$id\" class=\"$favorite icon\"></i>
                                 </a>
-                            </div>
-                        </div>
-                        </div>";
-
-        return $data;
+                    </span>
+                </div>
+                <div class=\"show-foody-action\">
+                    <a class=\"waves-effect waves-light btn\" onclick=\"updateCart(this,$id)\">
+                        <i class=\"cart plus icon\"></i>
+                        Thêm vào giỏ
+                    </a>
+                </div>
+            </div>
+        </div>
+            ";
+        }
+        return Response($data);
     }
 
     public function like(Request $request) {
@@ -165,24 +147,26 @@ class HomeController extends Controller
 
     public function favorite(Request $request) {
         if (Auth::guard('customer')->check()) {
-            $foody_id = $request->get('foody_id');
             $customer_id = Auth::guard('customer')->user()->id;
 
-            $favorited = Favorite::where('customer_id', $customer_id)->where('foody_id', $foody_id)->first();
+            $favorited = Favorite::where('customer_id', $customer_id)->where('foody_id', $request->foody_id)->first();
 
             if (!empty($favorited)) {
                 $favorited->delete();
 
-                return Response('Quan tâm');
+                return Response('unfavorited');
             }
             else {
                 $favorite = new Favorite();
                 $favorite->customer_id = $customer_id;
-                $favorite->foody_id = $foody_id;
+                $favorite->foody_id = $request->foody_id;
                 $favorite->save();
 
-                return Response('Bỏ quan tâm');
+                return Response('favorited');
             }
+        }
+        else {
+            return Response('Hãy đăng nhập để lưu món ăn.', 404);
         }
     }
 }

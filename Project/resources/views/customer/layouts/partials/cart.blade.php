@@ -22,7 +22,7 @@
                      style="width: 30px; margin-left: 15px">
                     {{ $cart->qty }}
                 </div>
-                <div class="col" style="margin-right: 10px">x</div>
+                <div class="col" style="width: 20px">x</div>
                 <div class="col cart-name">
                     {{ $cart->name }}
                 </div>
@@ -32,7 +32,7 @@
                     </a>
 
                     <a class="ui button" onclick="updateCart(this,{{ $cart->id }})"
-                       id="cart-minus-{{ $cart->id }}"><i class="minus icon"></i>
+                       data-amount="cart-minus-{{ $cart->id }}"><i class="minus icon"></i>
                     </a>
                 </div>
                 <div class="col right-align" style="width: 70px" id="cart-cost-{{ $cart->id }}">

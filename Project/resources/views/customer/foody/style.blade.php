@@ -20,6 +20,10 @@
     @media only screen and (max-width: 992px) {
 
     }
+
+    #foody-info {
+        margin-top: 15px;
+    }
     .col .row {
         margin: 0;
     }

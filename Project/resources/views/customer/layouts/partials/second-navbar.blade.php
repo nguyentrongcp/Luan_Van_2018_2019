@@ -1,63 +1,74 @@
-<div class="navbar-fixed hide-on-med-and-down">
+<div class="navbar">
     <nav id="navbar-second">
-        <div class="nav-wrapper">
-            <ul id="nav-mobile" class="hide-on-med-and-down">
-                <li style="width: 15%"><a href="sass.html">
-                        <i class="material-icons left">arrow_back</i>Trở về
-                    </a></li>
-                <li style="width: 45%">
-                    <form id="navbar-search">
-                        <div class="input-field">
-                            <input id="search" type="search" placeholder="Tìm kiếm" required>
-                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons left">close</i>
+        <div class="container">
+            <div class="nav-wrapper">
+                <ul id="">
+                    <li class="navbar-second-col navbar-hide navbar-back"><a>
+                            <i class="material-icons left hide-on-small-only">arrow_back</i>
+                            <span class="hide-on-small-only">Trở về</span>
+                            <i class="material-icons center hide-on-med-and-up">arrow_back</i>
+                        </a></li>
+                    <li class="navbar-second-col hide-on-small-only navbar-search" id="navbar-search">
+                        {{--<div class="ui icon input">--}}
+                            {{--<i class="search icon"></i>--}}
+                            {{--<input type="text" placeholder="Search...">--}}
+                        {{--</div>--}}
+                        {{--<div id="navbar-search" class="hide-on-small-only">--}}
+                            {{--<div class="input-field">--}}
+                                {{--<input id="search" type="search" placeholder="Tìm kiếm" required>--}}
+                                {{--<label class="label-icon" for="search"><i class="material-icons">search</i></label>--}}
+                                {{--<i class="material-icons left">close</i>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        <div>
+                            <div class="input-field">
+                                <input id="search" type="search" placeholder="Tìm kiếm..." required>
+                                <label class="label-icon" for="search"><i class="material-icons center">search</i></label>
+                                <i class="material-icons left">close</i>
+                            </div>
                         </div>
-                    </form>
-                </li>
-                <li style="width: 20%"><a href="#" class="truncate">
-                        <i class="material-icons left">event</i>Tin tức và khuyến mãi
-                    </a></li>
-                <li style="width: 20%"><a class='dropdown-trigger' id="dropdown-type" data-target='dropdown1'>
-                        <i class="material-icons left">menu</i>
-                        Phân loại</a>
-                    <ul id='dropdown1' class='dropdown-content nested'>
-                        <li><a class="dropdown-trigger dropdown2" data-target="dropdown2">Thức ăn</a></li>
-                        <li><a href="#!">two</a></li>
-                        <li class="divider" tabindex="-1"></li>
-                        <li><a href="#!">three</a></li>
-                        <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                        <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-                    </ul>
-
-                    <ul id='dropdown2' class='dropdown-content dropdown2'>
-                        <li><a href="#!">Cai gi do</a></li>
-                        <li><a href="#!">Cai gi day</a></li>
-                        <li class="divider" tabindex="-1"></li>
-                        <li><a href="#!">Cai gi nao</a></li>
-                        <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                        <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-                    </ul>
-
-                    <ul id="dropdown3" class="dropdown-content">
-                        <li><a href="#!">Cai gi do</a></li>
-                        <li><a href="#!">Cai gi day</a></li>
-                        <li class="divider" tabindex="-1"></li>
-                        <li><a href="#!">Cai gi nao</a></li>
-                        <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                        <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-                    </ul>
-                </li>
-            </ul>
+                    </li>
+                    <li class="navbar-search navbar-second-col navbar-hide hide-on-med-and-up">
+                        <a><i class="material-icons center">search</i></a>
+                    </li>
+                    <li class="navbar-second-col navbar-hide navbar-hide-med">
+                        <a id="dropdown-category" class='dropdown-trigger' data-target='dropdown-category-content'>
+                            <i class="material-icons left hide-on-small-only">menu</i>
+                            <i class="material-icons center hide-on-med-and-up">menu</i>
+                            <span class="hide-on-small-only">Phân loại</span></a>
+                    </li>
+                    <li style="width: 90px" class="navbar-hide navbar-cart navbar-hide-med">
+                        <a id="dropdown-cart" data-target="cart" class="truncate dropdown-trigger">
+                            <i class="material-icons left">shopping_cart</i>
+                            <span id="cart-count" class="new badge" data-badge-caption="">{{ Cart::count() }}</span>
+                            {{--<span id="cart-count" class="ui mini red floating label"--}}
+                                  {{--style="top: 0;">{{ Cart::count() }}</span>--}}
+                        </a></li>
+                    {{--<li id="navbar-menu" style="width: 60px; margin-left: calc(50% - 105px)" class="hide-on-med-and-up">--}}
+                        {{--<a href="#" style="margin: 0" data-target="nav-mobile" class="sidenav-trigger hide-on-large-only right-align">--}}
+                            {{--<i class="material-icons" style="font-size: 30px">menu</i></a>--}}
+                </ul>
+            </div>
         </div>
     </nav>
 </div>
 
-@push('script')
-    <script>
-        $(document).ready(function(){
-            $('#dropdown-type').dropdown({
-                coverTrigger: false
-            })
-        });
-    </script>
-@endpush
+<ul id='dropdown-category-content' class='dropdown-content'>
+    <li><a href="#!">
+            <i class="material-icons">access_time</i>Mới nhất
+        </a></li>
+    <li><a href="#!">
+            <i class="material-icons">star</i>Đánh giá
+        </a></li>
+    <li><a href="#!">
+            <i class="material-icons">favorite</i>Yêu thích
+        </a></li>
+    <li><a href="#!">
+            <i class="material-icons">bookmark</i>Đã lưu
+        </a></li>
+    <li class="divider"></li>
+    <li>
+        <a href="#!">
+            <i class="material-icons">event</i>Tin tức và khuyến mãi
+        </a></li>
+</ul>

@@ -21,7 +21,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Italian&Pizza/honey-chicken-thigh-rice.png',
                 'describe' => 'Đùi gà rút xương tẩm mật ong nướng trên đĩa nóng, dùng kèm rau xào và cơm trắng',
                 'foody_type_id' => 1,
-                'slug' => 'Honey chicken thigh & rice',
+                'slug' => str_slug( 'Honey chicken thigh & rice'),
             ],
             [
                 // id = 2
@@ -32,7 +32,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Italian&Pizza/bolognaise.png',
                 'describe' => 'Mỳ Ý với thịt bò xay và xốt cà chua',
                 'foody_type_id' => 1,
-                'slug' => 'Bolognaise spaghetti',
+                'slug' => str_slug( 'Bolognaise spaghetti'),
             ],
             [
                 // id = 3
@@ -43,7 +43,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Italian&Pizza/beef-lasagna.png',
                 'describe' => 'Thịt bò nghiền bỏ lò với mỳ lá, xốt Bechamel với phomai dùng kèm salad',
                 'foody_type_id' => 1,
-                'slug' => 'Beef lasagna',
+                'slug' => str_slug( 'Beef lasagna'),
             ],
             [
                 // id = 4
@@ -54,7 +54,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Italian&Pizza/pizza-margherita.png',
                 'describe' => 'Sốt cà chua, fomai Mozzarella',
                 'foody_type_id' => 1,
-                'slug' => 'Pizza Margherita',
+                'slug' => str_slug( 'Pizza Margherita'),
             ],
             [
                 // id = 5
@@ -65,7 +65,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Italian&Pizza/pizza-prosciuto-e-funghi.png',
                 'describe' => 'Sốt cà chua, fomai Mozzarella, thịt jambon trắng, nấm tươi',
                 'foody_type_id' => 1,
-                'slug' => 'Pizza Prosciutto E Funghi',
+                'slug' => str_slug( 'Pizza Prosciutto E Funghi'),
             ],
             [
                 // id = 6
@@ -76,7 +76,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Italian&Pizza/pepperonis-pizza.png',
                 'describe' => 'Sốt cà chua, fomai Mozzarella, cà chua tươi, xúc xích cay và mùi tây',
                 'foody_type_id' => 1,
-                'slug' => 'Pizza Pepperonis',
+                'slug' => str_slug( 'Pizza Pepperonis'),
             ],
             [
                 // id = 7
@@ -87,7 +87,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Italian&Pizza/tropical-pizza.png',
                 'describe' => 'Thịt Nguội, Dứa, Phô Mai',
                 'foody_type_id' => 1,
-                'slug' => 'Tropical Pizza',
+                'slug' => str_slug( 'Tropical Pizza'),
             ],
             [
                 // id = 8
@@ -98,7 +98,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Italian&Pizza/spicy-chicken-pizza.png',
                 'describe' => 'Ức Gà Xào, Ớt, Ớt Chuông & Phô Mai',
                 'foody_type_id' => 1,
-                'slug' => 'Spicy Chicken Pizza',
+                'slug' => str_slug( 'Spicy Chicken Pizza'),
             ],
             [
                 // id = 9
@@ -109,7 +109,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Sushi/tuna-tataki-bowl.png',
                 'describe' => 'Dưa leo, bơ, đậu Nhật, salad rong biển, cà chua, mè',
                 'foody_type_id' => 2,
-                'slug' => 'Tuna Tataki Bowl',
+                'slug' => str_slug( 'Tuna Tataki Bowl'),
             ],
             [
                 // id = 10
@@ -120,7 +120,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Sushi/kasu-curry-don.png',
                 'describe' => 'chiên giòn thịt heo cốt lết/gà cà ri, cơm, súp miso',
                 'foody_type_id' => 2,
-                'slug' => 'Kasu curry',
+                'slug' => str_slug( 'Kasu curry'),
             ],
             [
                 // id = 11
@@ -131,7 +131,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Sushi/red-dragon-roll2.png',
                 'describe' => 'Tôm chiên giòn, bơ, dưa leo, sốt phô mai cay phủ cá hồi, trứng cá chuồn, sốt mayo',
                 'foody_type_id' => 2,
-                'slug' => 'Red dragon roll',
+                'slug' => str_slug( 'Red dragon roll'),
             ],
             [
                 // id = 12
@@ -142,7 +142,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Sushi/special-roll.png',
                 'describe' => 'Bên trong: tôm chiên giòn, bơ, dưa leo, sốt cay. Topping: 2 cá hồi, 2 cá ngừ, 2 bơ, 2 tobiko',
                 'foody_type_id' => 2,
-                'slug' => 'Special Roll',
+                'slug' => str_slug( 'Special Roll'),
             ],
             [
                 // id = 13
@@ -153,7 +153,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Sushi/tuna-tataki-sashimi.png',
                 'describe' => '',
                 'foody_type_id' => 2,
-                'slug' => 'Tuna Tataki Sashimi',
+                'slug' => str_slug( 'Tuna Tataki Sashimi'),
             ],
             [
                 // id = 14
@@ -164,7 +164,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Sushi/my-miso-ramen.png',
                 'describe' => '',
                 'foody_type_id' => 2,
-                'slug' => 'Mỳ Miso Ramen',
+                'slug' => str_slug( 'Mỳ Miso Ramen'),
             ],
             [
                 // id = 15
@@ -175,7 +175,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Sushi/sushi-tong-hop-co-vua.png',
                 'describe' => '',
                 'foody_type_id' => 2,
-                'slug' => 'Sushi tổng hợp cỡ vừa',
+                'slug' => str_slug( 'Sushi tổng hợp cỡ vừa'),
             ],
             [
                 // id = 16
@@ -186,7 +186,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/hong-tra-royal-kem-cheese.png',
                 'describe' => '',
                 'foody_type_id' => 15,
-                'slug' => 'Hồng Trà Royal Kem Cheese',
+                'slug' => str_slug( 'Hồng Trà Royal Kem Cheese'),
             ],
             [
                 // id = 17
@@ -197,7 +197,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/tra-xanh-royal-kem-cheese.png',
                 'describe' => '',
                 'foody_type_id' => 15,
-                'slug' => 'Trà Xanh Royal Kem Cheese',
+                'slug' => str_slug( 'Trà Xanh Royal Kem Cheese'),
             ],
             [
                 // id = 18
@@ -208,7 +208,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/all-cream-cheese-tea.png',
                 'describe' => '',
                 'foody_type_id' => 15,
-                'slug' => 'Trà ô Long Hoa Hồng Kem Cheese',
+                'slug' => str_slug( 'Trà ô Long Hoa Hồng Kem Cheese'),
             ],
             [
                 // id = 19
@@ -219,7 +219,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/tra-sua-kem-cheese.png',
                 'describe' => '',
                 'foody_type_id' => 3,
-                'slug' => 'Trà sữa kem cheese',
+                'slug' => str_slug( 'Trà sữa kem cheese'),
             ],
             [
                 // id = 20
@@ -230,7 +230,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/tra-sua-tran-chau-cake-cream.png',
                 'describe' => '',
                 'foody_type_id' => 3,
-                'slug' => 'Trà sữa oreo cake cream',
+                'slug' => str_slug( 'Trà sữa oreo cake cream'),
             ],
             [
                 // id = 21
@@ -241,7 +241,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/tra-sua-double-oreo.png',
                 'describe' => '',
                 'foody_type_id' => 3,
-                'slug' => 'Trà sữa double oreo',
+                'slug' => str_slug( 'Trà sữa double oreo'),
             ],
             [
                 // id = 22
@@ -252,7 +252,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/matcha-uji-45_000.png',
                 'describe' => '',
                 'foody_type_id' => 15,
-                'slug' => 'Matcha uji',
+                'slug' => str_slug( 'Matcha uji'),
             ],
             [
                 // id = 23
@@ -263,7 +263,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/matcha-kem-cheese.png',
                 'describe' => '',
                 'foody_type_id' => 15,
-                'slug' => 'Matcha kem cheese',
+                'slug' => str_slug( 'Matcha kem cheese'),
             ],
             [
                 // id = 24
@@ -274,7 +274,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/socola-cake-cream.png',
                 'describe' => '',
                 'foody_type_id' => 15,
-                'slug' => 'Socola cake cream',
+                'slug' => str_slug( 'Socola cake cream'),
             ],
             [
                 // id = 25
@@ -285,7 +285,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/tra-sua-cacao-cocoa-milk-tea.png',
                 'describe' => '',
                 'foody_type_id' => 3,
-                'slug' => 'Trà sữa cacao',
+                'slug' => str_slug( 'Trà sữa cacao'),
             ],
             [
                 // id = 26
@@ -296,7 +296,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/tra-sua-dau-do.png',
                 'describe' => '',
                 'foody_type_id' => 3,
-                'slug' => 'Trà sữa matcha đậu đỏ',
+                'slug' => str_slug( 'Trà sữa matcha đậu đỏ'),
             ],
             [
                 // id = 27
@@ -307,7 +307,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/tra-earl-grey-kem-cheese.png',
                 'describe' => '',
                 'foody_type_id' => 15,
-                'slug' => 'Trà Bá Tước Kem Cheese',
+                'slug' => str_slug( 'Trà Bá Tước Kem Cheese'),
             ],
             [
                 // id = 28
@@ -318,7 +318,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/tra-o-long-sakura-kem-cheese.png',
                 'describe' => '',
                 'foody_type_id' => 15,
-                'slug' => 'Trà Ô Long Sakura Kem Cheese',
+                'slug' => str_slug( 'Trà Ô Long Sakura Kem Cheese'),
             ],
             [
                 // id = 29
@@ -329,7 +329,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/tra-o-long-hoa-hong-kem-cheese.png',
                 'describe' => '',
                 'foody_type_id' => 15,
-                'slug' => 'Trà Ô Long Hoa Hồng Kem Cheese',
+                'slug' => str_slug( 'Trà Ô Long Hoa Hồng Kem Cheese'),
             ],
             [
                 // id = 30
@@ -340,7 +340,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TraSua&Cafe/tra-sua-tran-chau-cake-cream(1).png',
                 'describe' => '',
                 'foody_type_id' => 3,
-                'slug' => 'Trà Sữa Trân Châu Cake Cream',
+                'slug' => str_slug( 'Trà Sữa Trân Châu Cake Cream'),
             ],
             [
                 // id = 31
@@ -351,7 +351,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhMi&Xoi/kapsalon.png',
                 'describe' => 'Khoai tây chiên, heo & bò, phô mai, salad, sốt tzatziki, sốt cocktail, sốt special',
                 'foody_type_id' => 4,
-                'slug' => 'Kapsalon mix (thịt heo & thịt bò)',
+                'slug' => str_slug( 'Kapsalon mix (thịt heo & thịt bò)'),
             ],
             [
                 // id = 32
@@ -362,7 +362,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhMi&Xoi/quesadillas-chicken.png',
                 'describe' => 'Gà, phô mai, cà rốt, dừa, ngô, cà chua, kem chua, sốt chutney',
                 'foody_type_id' => 4,
-                'slug' => 'Chicken quesadillas',
+                'slug' => str_slug( 'Chicken quesadillas'),
             ],
             [
                 // id = 33
@@ -373,7 +373,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhMi&Xoi/banh-mi-viet-nam.png',
                 'describe' => 'Heo, nộm đu đủ, mùi ta, lạc, hành khô, sốt chutney, sốt ớt',
                 'foody_type_id' => 4,
-                'slug' => 'Heo nướng + khoai tây chiên nhỏ (Bánh mì Việt Nam)',
+                'slug' => str_slug( 'Heo nướng + khoai tây chiên nhỏ (Bánh mì Việt Nam)'),
             ],
             [
                 // id = 34
@@ -384,7 +384,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhMi&Xoi/banh-mi-viet-nam(1).png',
                 'describe' => 'Bò, nộm đu đủ, mùi ta, lạc, hành khô, sốt chutney, sốt ớt',
                 'foody_type_id' => 4,
-                'slug' => 'Bò nướng + khoai tây chiên nhỏ (Bánh mì Việt Nam)',
+                'slug' => str_slug( 'Bò nướng + khoai tây chiên nhỏ (Bánh mì Việt Nam)'),
             ],
             [
                 // id = 35
@@ -395,7 +395,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhMi&Xoi/banh-mi-mexico.png',
                 'describe' => 'Heo, guacamole, jalapeno, cải tím, mùi ta, kem chua',
                 'foody_type_id' => 4,
-                'slug' => 'Heo nướng + khoai tây chiên nhỏ (Bánh mì Mexico)',
+                'slug' => str_slug( 'Heo nướng + khoai tây chiên nhỏ (Bánh mì Mexico)'),
             ],
             [
                 // id = 36
@@ -406,7 +406,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhMi&Xoi/banh-mi-kebab.png',
                 'describe' => 'Bò, xà lách xoăn, cải tím, cà chua, hành tây, sốt taztziki, sốt cocktail',
                 'foody_type_id' => 4,
-                'slug' => 'Bò nướng + khoai tây chiên nhỏ (Bánh mì Kebab)',
+                'slug' => str_slug( 'Bò nướng + khoai tây chiên nhỏ (Bánh mì Kebab)'),
             ],
             [
                 // id = 37
@@ -417,7 +417,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhMi&Xoi/might-plate.png',
                 'describe' => 'Heo, salad, cơm việt, khoai tây chiên , sốt cocktail, sốt tzatziki, sốt tỏi',
                 'foody_type_id' => 4,
-                'slug' => 'Might plate thịt heo nướng',
+                'slug' => str_slug( 'Might plate thịt heo nướng'),
             ],
             [
                 // id = 38
@@ -428,7 +428,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhMi&Xoi/kapsalon(1).png',
                 'describe' => 'Khoai tây chiên, heo, phô mai, salad, sốt tzatziki, sốt cocktail, sốt special',
                 'foody_type_id' => 4,
-                'slug' => 'Kapsalon thịt heo nướng',
+                'slug' => str_slug( 'Kapsalon thịt heo nướng'),
             ],
             [
                 // id = 39
@@ -439,7 +439,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhMi&Xoi/might-plate(1).png',
                 'describe' => 'Bò + heo, salad, cơm việt, khoai tây chiên , sốt cocktail, sốt tzatziki, sốt tỏi',
                 'foody_type_id' => 4,
-                'slug' => 'Might plate mix (thịt heo & thịt bò)',
+                'slug' => str_slug( 'Might plate mix (thịt heo & thịt bò)'),
             ],
             [
                 // id = 40
@@ -450,7 +450,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/AnVat/met-vit-9-mon.png',
                 'describe' => 'Vịt nướng than hoa, vịt hấp, vịt rang muối, xiên tim ngũ vị, nem chị dậu, xôi nếp nương, canh măng vịt, nộm chân gà rút xương, bún',
                 'foody_type_id' => 5,
-                'slug' => 'Mẹt vịt 9 món',
+                'slug' => str_slug( 'Mẹt vịt 9 món'),
             ],
             [
                 // id = 41
@@ -461,7 +461,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/AnVat/met-ca-lang.png',
                 'describe' => '1 con từ 2,5kg đến 5kg cá lăng trộn, lòng cá xào dứa, cá lăng cuốn mẹt, lẩu chua, om chuối đậu, cá 100% tươi sống',
                 'foody_type_id' => 5,
-                'slug' => 'Mẹt cá lăng',
+                'slug' => str_slug( 'Mẹt cá lăng'),
             ],
             [
                 // id = 42
@@ -472,7 +472,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/AnVat/ga-nuong-mat-ong-nua-con.png',
                 'describe' => '',
                 'foody_type_id' => 5,
-                'slug' => 'Gà nướng mật ong nửa con',
+                'slug' => str_slug( 'Gà nướng mật ong nửa con'),
             ],
             [
                 // id = 43
@@ -483,7 +483,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/AnVat/ga-ran-tam-bot-nua-con.png',
                 'describe' => '',
                 'foody_type_id' => 5,
-                'slug' => 'Gà rán tẩm bột nửa con',
+                'slug' => str_slug( 'Gà rán tẩm bột nửa con'),
             ],
             [
                 // id = 44
@@ -494,7 +494,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/AnVat/chan-ga-sa-ot.png',
                 'describe' => '',
                 'foody_type_id' => 5,
-                'slug' => 'Chân gà sả ớt nhỏ',
+                'slug' => str_slug( 'Chân gà sả ớt nhỏ'),
             ],
             [
                 // id = 45
@@ -505,7 +505,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/AnVat/chan-ga-sa-ot(1).png',
                 'describe' => '',
                 'foody_type_id' => 5,
-                'slug' => 'Chân gà sả ớt to',
+                'slug' => str_slug( 'Chân gà sả ớt to'),
             ],
             [
                 // id = 46
@@ -516,7 +516,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/AnVat/chan-ga-rut-xuong-xa-ot.png',
                 'describe' => '12-13 chân to',
                 'foody_type_id' => 5,
-                'slug' => 'Chân gà rút xương xả ớt',
+                'slug' => str_slug( 'Chân gà rút xương xả ớt'),
             ],
             [
                 // id = 47
@@ -527,7 +527,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/AnVat/chim-cau-quay-xu-lang.png',
                 'describe' => '',
                 'foody_type_id' => 5,
-                'slug' => 'Chim câu quay xứ Lạng (350g)',
+                'slug' => str_slug( 'Chim câu quay xứ Lạng (350g)'),
             ],
             [
                 // id = 48
@@ -538,7 +538,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/AnVat/sup-hai-san-bep-truong.png',
                 'describe' => '',
                 'foody_type_id' => 5,
-                'slug' => 'Súp hải sản bếp trưởng (2 suất) ',
+                'slug' => str_slug( 'Súp hải sản bếp trưởng (2 suất) '),
             ],
             [
                 // id = 49
@@ -549,7 +549,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Hamburger/burger-chili.png',
                 'describe' => 'Thịt bò, phô mai cheddar, jalapenos, sốt cay, xà lách, cà chua, hành tây',
                 'foody_type_id' => 6,
-                'slug' => 'Burger Chili ',
+                'slug' => str_slug( 'Burger Chili '),
             ],
             [
                 // id = 50
@@ -560,7 +560,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Hamburger/burger-mac_n-cheese-_-beef.png',
                 'describe' => 'Thịt bò, mac\'n cheese chiên, mayonnaise, xà lách, cà chua, hành tây, phô mai Cheddar',
                 'foody_type_id' => 6,
-                'slug' => 'Burger Mac\'n Cheese & Beef',
+                'slug' => str_slug( 'Burger Mac\'n Cheese & Beef'),
             ],
             [
                 // id = 51
@@ -571,7 +571,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Hamburger/burger-double-beef.png',
                 'describe' => 'Nhân đôi thịt bò, thịt xông khói x2, phô mai x2, mayonnaise, cà chua, xà lách, hành tây',
                 'foody_type_id' => 6,
-                'slug' => 'Double beef Burger',
+                'slug' => str_slug( 'Double beef Burger'),
             ],
             [
                 // id = 52
@@ -582,7 +582,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Hamburger/burger-beef-_-bacon.png',
                 'describe' => 'Thịt bò, thịt xông khói, phô mai Cheddar, mayonnaise, cà chua, xà lách, hành tây',
                 'foody_type_id' => 6,
-                'slug' => 'Beef Bacon Burger',
+                'slug' => str_slug( 'Beef Bacon Burger'),
             ],
             [
                 // id = 53
@@ -593,7 +593,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Hamburger/burger-mac_n-cheese-_-beef(1).png',
                 'describe' => "Thịt bò, mac'n cheese chiên, mayonnaise, xà lách, cà chua, hành tây, phô mai Cheddar",
                 'foody_type_id' => 6,
-                'slug' => "Burger Mac'n Cheese & Beef",
+                'slug' => str_slug( "Burger Mac'n Cheese & Beef"),
             ],
             [
                 // id = 54
@@ -604,7 +604,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Hamburger/bo-go-tom.png',
                 'describe' => '',
                 'foody_type_id' => 6,
-                'slug' => 'Bơ-Gơ Tôm',
+                'slug' => str_slug( 'Bơ-Gơ Tôm'),
             ],
             [
                 // id = 55
@@ -615,7 +615,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhNgot/turkeydinner.png',
                 'describe' => 'Bánh sandwich gà tây',
                 'foody_type_id' => 7,
-                'slug' => 'Turkey Dinner Sandwich',
+                'slug' => str_slug( 'Turkey Dinner Sandwich'),
             ],
             [
                 // id = 56
@@ -626,7 +626,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhNgot/the-double-double.png',
                 'describe' => 'Bánh trứng egger ban đầu với trứng tăng gấp đôi, ham & pho mát',
                 'foody_type_id' => 7,
-                'slug' => 'The Double Double',
+                'slug' => str_slug( 'The Double Double'),
             ],
             [
                 // id = 57
@@ -637,7 +637,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhNgot/cheesesteak.png',
                 'describe' => 'Bánh sandwich phô mai bò',
                 'foody_type_id' => 7,
-                'slug' => 'Cheesesteak sandwich',
+                'slug' => str_slug( 'Cheesesteak sandwich'),
             ],
             [
                 // id = 58
@@ -648,7 +648,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhNgot/04_bagel_egger_49_l_new.png',
                 'describe' => 'Trứng, jambong và phô mai',
                 'foody_type_id' => 7,
-                'slug' => 'The New Yorker',
+                'slug' => str_slug( 'The New Yorker'),
             ],
             [
                 // id = 59
@@ -659,7 +659,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhNgot/the-texan.png',
                 'describe' => 'Trứng, cheddar, thịt xông khói trên bagel tiêu',
                 'foody_type_id' => 7,
-                'slug' => 'The Texan',
+                'slug' => str_slug( 'The Texan'),
             ],
             [
                 // id = 60
@@ -670,7 +670,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhNgot/the-nova-scotia.png',
                 'describe' => 'Cá hồi hun khói, trứng + hẹ, phô mai kem, bánh multi grain bagel',
                 'foody_type_id' => 7,
-                'slug' => 'The Nova Scotia',
+                'slug' => str_slug( 'The Nova Scotia'),
             ],
             [
                 // id = 61
@@ -681,7 +681,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhNgot/the-parisian.png',
                 'describe' => 'trứng + hẹ, thịt xông khói, cheddar trên croissant nướng',
                 'foody_type_id' => 7,
-                'slug' => 'The Parisian',
+                'slug' => str_slug( 'The Parisian'),
             ],
             [
                 // id = 62
@@ -692,7 +692,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/BanhNgot/the-italian.png',
                 'describe' => 'Trứng + hẹ, cà chua & pesto (có chứa hạt) trên croissant nướng',
                 'foody_type_id' => 7,
-                'slug' => 'The Italian',
+                'slug' => str_slug( 'The Italian'),
             ],
             [
                 // id = 63
@@ -703,7 +703,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TrangMieng/che-thach-dao.png',
                 'describe' => '',
                 'foody_type_id' => 8,
-                'slug' => 'Chè thạch đào',
+                'slug' => str_slug( 'Chè thạch đào'),
             ],
             [
                 // id = 64
@@ -714,7 +714,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TrangMieng/che-thach-xoai.png',
                 'describe' => '',
                 'foody_type_id' => 8,
-                'slug' => 'Chè thạch xoài',
+                'slug' => str_slug( 'Chè thạch xoài'),
             ],
             [
                 // id = 65
@@ -725,7 +725,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TrangMieng/sen-nhan-tao-do.png',
                 'describe' => '',
                 'foody_type_id' => 8,
-                'slug' => 'Chè sen nhãn táo đỏ',
+                'slug' => str_slug( 'Chè sen nhãn táo đỏ'),
             ],
             [
                 // id = 66
@@ -736,7 +736,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TrangMieng/che-khuc-bach.png',
                 'describe' => '',
                 'foody_type_id' => 8,
-                'slug' => 'Chè khúc bạch',
+                'slug' => str_slug( 'Chè khúc bạch'),
             ],
             [
                 // id = 67
@@ -747,7 +747,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TrangMieng/rau-cau-dua.png',
                 'describe' => '',
                 'foody_type_id' => 8,
-                'slug' => 'Rau câu dừa',
+                'slug' => str_slug( 'Rau câu dừa'),
             ],
             [
                 // id = 68
@@ -758,7 +758,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TrangMieng/rau-cau-pho-mai.png',
                 'describe' => '',
                 'foody_type_id' => 8,
-                'slug' => 'Rau câu phô mai',
+                'slug' => str_slug( 'Rau câu phô mai'),
             ],
             [
                 // id = 69
@@ -769,7 +769,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TrangMieng/sua-chua-hoa-qua.png',
                 'describe' => '',
                 'foody_type_id' => 8,
-                'slug' => 'Sữa chua hoa quả',
+                'slug' => str_slug( 'Sữa chua hoa quả'),
             ],
             [
                 // id = 70
@@ -780,7 +780,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/TrangMieng/caramen-tran-chau.png',
                 'describe' => '',
                 'foody_type_id' => 8,
-                'slug' => 'Caramen trân châu',
+                'slug' => str_slug( 'Caramen trân châu'),
             ],
             [
                 // id = 71
@@ -791,7 +791,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Kem/caramelmuoi.png',
                 'describe' => '',
                 'foody_type_id' => 9,
-                'slug' => 'Kem Caramen muối Hộp 650ML',
+                'slug' => str_slug( 'Kem Caramen muối Hộp 650ML'),
             ],
             [
                 // id = 72
@@ -802,7 +802,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Kem/phucbontu.png',
                 'describe' => '',
                 'foody_type_id' => 9,
-                'slug' => 'Kem Phúc Bồn Tử Hộp 650ML',
+                'slug' => str_slug( 'Kem Phúc Bồn Tử Hộp 650ML'),
             ],
             [
                 // id = 73
@@ -813,7 +813,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Kem/socola3.png',
                 'describe' => '',
                 'foody_type_id' => 9,
-                'slug' => 'Kem Sôcôla Hộp 650ML',
+                'slug' => str_slug( 'Kem Sôcôla Hộp 650ML'),
             ],
             [
                 // id = 74
@@ -824,7 +824,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Kem/madagascar-cmyk.png',
                 'describe' => 'kem Dâu trộn, kem Vani, kem tươi, hạt điều, bánh Choco pie, trái dâu tươi và phúc bồn tử',
                 'foody_type_id' => 9,
-                'slug' => 'Madagascar',
+                'slug' => str_slug( 'Madagascar'),
             ],
             [
                 // id = 75
@@ -835,7 +835,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Kem/ala-romana-cmyk.png',
                 'describe' => 'kem bạc hà socola, straccitella, kem tươi, bánh Sampan, socola đen',
                 'foody_type_id' => 9,
-                'slug' => 'Alla Romana',
+                'slug' => str_slug( 'Alla Romana'),
             ],
             [
                 // id = 76
@@ -846,7 +846,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Kem/belgium-cmyk.png',
                 'describe' => 'kem vani, kem socola, sốt socola, kem tươi, hạnh nhân, socola và bánh quế',
                 'foody_type_id' => 9,
-                'slug' => 'Belgium',
+                'slug' => str_slug( 'Belgium'),
             ],
             [
                 // id = 77
@@ -857,7 +857,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Kem/amazon-cmyk.png',
                 'describe' => 'kem trà xanh, kem dừa, kem tươi, mứt dừa, rượu malibu, socola trắng, trái dâu tây, dâu đen',
                 'foody_type_id' => 9,
-                'slug' => 'Amazon',
+                'slug' => str_slug( 'Amazon'),
             ],
             [
                 // id = 78
@@ -868,7 +868,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Kem/sofia-cmyk.png',
                 'describe' => 'kem phúc bồn tử và rum nho, kem tươi, socola trắng, sốt dâu, mứt vỏ cam và trái phúc bồn tử',
                 'foody_type_id' => 9,
-                'slug' => 'Sofia',
+                'slug' => str_slug( 'Sofia'),
             ],
             [
                 // id = 79
@@ -879,7 +879,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Kem/ic01.png',
                 'describe' => 'Thành phần: Kem Dâu tây, Phúc bồn tử, Dâu sữa chocolate đen, hat điều và kem tươi (Vui lòng đặt trước 6 tiếng)',
                 'foody_type_id' => 9,
-                'slug' => 'Fairy Land',
+                'slug' => str_slug( 'Fairy Land'),
             ],
             [
                 // id = 80
@@ -890,7 +890,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Kem/ic02.png',
                 'describe' => 'Thành phần: Kem Trà xanh, Dừa, Đào lạc, chocolate, hạt điều, quả Kiwi, phúc bồn tử và kem tươi (Vui lòng đặt trước 6 tiếng)',
                 'foody_type_id' => 9,
-                'slug' => 'Pinwheel Forest',
+                'slug' => str_slug( 'Pinwheel Forest'),
             ],
             [
                 // id = 81
@@ -901,7 +901,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/SinhTo&NuocEp/nuoc-chanh-tuoi.png',
                 'describe' => '',
                 'foody_type_id' => 11,
-                'slug' => 'Nước chanh tươi',
+                'slug' => str_slug( 'Nước chanh tươi'),
             ],
             [
                 // id = 82
@@ -912,7 +912,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/SinhTo&NuocEp/chanh-leo2.png',
                 'describe' => '',
                 'foody_type_id' => 11,
-                'slug' => 'Nước chanh leo',
+                'slug' => str_slug( 'Nước chanh leo'),
             ],
             [
                 // id = 83
@@ -923,7 +923,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/SinhTo&NuocEp/quat2.png',
                 'describe' => '',
                 'foody_type_id' => 11,
-                'slug' => 'Nước quất',
+                'slug' => str_slug( 'Nước quất'),
             ],
             [
                 // id = 84
@@ -934,7 +934,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/SinhTo&NuocEp/dua-pineapple.png',
                 'describe' => '',
                 'foody_type_id' => 11,
-                'slug' => 'Nước ép dứa',
+                'slug' => str_slug( 'Nước ép dứa'),
             ],
             [
                 // id = 84
@@ -945,7 +945,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/SinhTo&NuocEp/dua-carot.png',
                 'describe' => '',
                 'foody_type_id' => 11,
-                'slug' => 'Nước ép dứa - cà rốt',
+                'slug' => str_slug( 'Nước ép dứa - cà rốt'),
             ],
             [
                 // id = 85
@@ -956,7 +956,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/SinhTo&NuocEp/dua-hau.png',
                 'describe' => '',
                 'foody_type_id' => 11,
-                'slug' => 'Nước dưa hấu',
+                'slug' => str_slug( 'Nước dưa hấu'),
             ],
             [
                 // id = 86
@@ -967,7 +967,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/SinhTo&NuocEp/oi2.png',
                 'describe' => '',
                 'foody_type_id' => 11,
-                'slug' => 'Nước ép ổi',
+                'slug' => str_slug( 'Nước ép ổi'),
             ],
             [
                 // id = 87
@@ -978,7 +978,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/SinhTo&NuocEp/cam.png',
                 'describe' => '',
                 'foody_type_id' => 11,
-                'slug' => 'Nước ép cam',
+                'slug' => str_slug( 'Nước ép cam'),
             ],
             [
                 // id = 88
@@ -989,7 +989,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Sup/forest-mushroom-consomme.png',
                 'describe' => 'Nước hầm gà và các loại nấm, các loại rau củ, ăn với nấm tươi',
                 'foody_type_id' => 12,
-                'slug' => 'Súp nấm đặc biệt',
+                'slug' => str_slug( 'Súp nấm đặc biệt'),
             ],
             [
                 // id = 89
@@ -1000,7 +1000,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Chay/mi-y-sot-pesto.png',
                 'describe' => 'Mỳ Ý Sốt Pesto & Cà Chua Bỏ Lò chinh phục khách hàng bởi sự kết hợp hài hoà giữa mì Ý; vị ngậy, béo, thơm ngọt của Pesto với cái vị đậm đà khó mà miêu tả bằng lời của cà chua bỏ lò.',
                 'foody_type_id' => 13,
-                'slug' => 'Mỳ Ý Sốt Pesto & Cà Chua Bi Bỏ Lò',
+                'slug' => str_slug( 'Mỳ Ý Sốt Pesto & Cà Chua Bi Bỏ Lò'),
             ],
             [
                 // id = 90
@@ -1011,7 +1011,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Chay/cha-dau-ga-rong-bien.png',
                 'describe' => 'Là món ăn đường phố nổi tiếng có nguồn gốc từ các nước Trung Đông, Chả Đậu Gà Rong Biển trở nên nổi tiếng trên thế giới bởi hương vị thơm ngon của nó khi vị bùi ngọt của đậu gà hoà quyền cùng nhiều loại gia vị như tỏi, hành tây hay rau mùi.',
                 'foody_type_id' => 13,
-                'slug' => 'Chả Đậu Gà Rong Biển',
+                'slug' => str_slug( 'Chả Đậu Gà Rong Biển'),
             ],
             [
                 // id = 91
@@ -1022,7 +1022,7 @@ class FoodySeeder extends Seeder
                 'avatar' => '/customer/image/Chay/ca-tim-nuong-pate.png',
                 'describe' => 'Cà Tím Nướng Sốt Mỡ Hành Và Pate Chay là một gợi ý hấp dẫn cho Món Chính. Nó là sự kết hợp hoàn hảo giữa vị ngọt của cà tím, mùi thơm của sốt mỡ hành và vị ngậy từ Pate thuần chay.',
                 'foody_type_id' => 13,
-                'slug' => 'Cà Tím Nướng Pate Chay',
+                'slug' => str_slug( 'Cà Tím Nướng Pate Chay'),
             ],
 //            [
 //                // id =
@@ -1033,7 +1033,7 @@ class FoodySeeder extends Seeder
 //                'avatar' => '',
 //                'describe' => '',
 //                'foody_type_id' => ,
-//                'slug' => '',
+//                'slug' => str_slug('',
 //            ],
 
 

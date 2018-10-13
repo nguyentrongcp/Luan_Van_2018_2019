@@ -8,11 +8,44 @@ $(document).ready(function(){
     $('.sidenav').sidenav({
         edge: 'right',
     });
+    $('.dropdown-trigger').dropdown();
 
     $('.collapsible').collapsible();
 
     $('select').formSelect();
+    $('.cards.hoverable .image').dimmer({
+        on: 'hover'
+    });
+    $('.pushpin').pushpin();
+    $('#navbar-second').pushpin({
+        top: 236,
+    });
+    $('#foody-navbar').pushpin({
+        top: 236,
+        onPositionChange: function (status) {
+            if (status === 'pinned') {
+                $('#show-foody').addClass('special');
+            }
+            else {
+                $('#show-foody').removeClass('special');
+            }
+        }
+    });
+    $(window).bind("pageshow", function(event) {
+        if (event.originalEvent.persisted) {
+            window.location.reload();
+        }
+    });
+});
 
+// $('#dropdown-cart').on('click', function () {
+//     $('#dropdown-cart').animate( { width: '452px'}, 500)
+// });
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
 });
 
 function setTimer(time) {

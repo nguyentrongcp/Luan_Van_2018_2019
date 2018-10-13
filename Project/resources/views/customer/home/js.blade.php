@@ -27,38 +27,37 @@
             })
         }
 
-        function favorite(favorite) {
-            var id = favorite.id;
-            var foody_id = $('#' + id).attr('data-target');
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        function favorite(favorite, id) {
             $.ajax({
                 type: "post",
                 url: "/customer/favorite",
                 data: {
-                    foody_id: foody_id
+                    foody_id: id
                 },
                 error: function() {
                     $('#login-modal').modal('open');
                 },
                 success: function (data) {
-                    $('#i-' + id).toggleClass('active');
-                    $('#a-' + id).text(data);
+                    $('#favorite-' + id).toggleClass('outline');
+                    M.Toast.dismissAll();
+                    if (data === 'favorited') {
+                        M.toast({
+                            html: "<i class='material-icons teal-text left'>check</i>Đã lưu",
+                            displayLength: 2000
+                        });
+                    }
+                    else {
+                        M.toast({
+                            html: "<i class='material-icons teal-text left'>check</i>Đã hủy lưu",
+                            displayLength: 2000
+                        });
+                    }
                 }
             })
         }
 
         function addCart(foody) {
             var foody_id = $('#' + foody.id).attr('data-target');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
             $.ajax({
                 type: "post",
                 url: "/customer/add_shopping_cart",
@@ -78,6 +77,44 @@
                             classes: 'message'
                         });
                     }
+                }
+            })
+        }
+        
+        function showFoodyByType(foody_type) {
+            var foody_sort_id = $('.foody-sort.active').id;
+            $.ajax({
+                type: "post",
+                url: "/customer/show_foody",
+                data: {
+                    foody_type_id: foody_type.id,
+                    foody_sort_id: foody_sort_id,
+                    type: 'type'
+                },
+                success: function (data) {
+                    $('#show-foody').empty();
+                    $('#show-foody').html(data);
+                    $('.foody-type').removeClass('active');
+                    $(foody_type).addClass('active');
+                }
+            })
+        }
+        
+        function showFoodyBySort(foody_sort) {
+            var foody_type_id = $('.foody-type.active')[0].id;
+            $.ajax({
+                type: "post",
+                url: "/customer/show_foody",
+                data: {
+                    foody_sort_id: foody_sort.id,
+                    foody_type_id: foody_type_id,
+                    type: 'sort'
+                },
+                success: function (data) {
+                    $('#show-foody').empty();
+                    $('#show-foody').html(data);
+                    $('.foody-sort').removeClass('active');
+                    $(foody_sort).addClass('active');
                 }
             })
         }

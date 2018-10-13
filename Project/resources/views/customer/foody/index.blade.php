@@ -4,10 +4,10 @@
 
 @section('content')
 
-    <div class="row">
+    <div class="row" id="foody-info">
 
         <div class="col s12 m12 l5 left floated z-depth-1" style="line-height: 0; margin-bottom: 15px">
-            <img class="responsive-img foody-image" src="/{{ $foody->avatar }}"></img>
+            <img class="responsive-img foody-image" src="{{ $foody->avatar }}"></img>
         </div>
 
         <div class="col s12 m12 l7 right floated foody-info" style="padding-left: 0">
@@ -52,11 +52,12 @@
                 </a>
             </div>
             <div class="foody-cart">
-                <button class="waves-effect waves-light ui button col s3" style="width: 170px">
+                <button data-amount="cart-add-{{ $foody->id }}" onclick="updateCart(this, {{ $foody->id }})"
+                        class="waves-effect waves-light btn col s3" style="width: 170px">
                     <i class="shopping cart plus icon"></i>
                     Thêm vào giỏ
                 </button>
-                <input class="input-field col s1 cart-number" type="number" value="1">
+                <input id="cart-amount-{{ $foody->id }}" class="input-field col s2 cart-number" type="number" value="1">
                 <span class="cost cart-number">{{ number_format($foody->currentCost()) }}<sup>đ</sup></span>
             </div>
             <div class="foody-action navbar col s12">
