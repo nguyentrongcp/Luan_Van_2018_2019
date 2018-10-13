@@ -3,12 +3,13 @@
         <div class="container">
             <div class="nav-wrapper">
                 <ul id="">
-                    <li class="navbar-second-col navbar-hide navbar-back"><a>
+                    <li class="navbar-second-col navbar-hide navbar-back" id="navbar-back"><a>
                             <i class="material-icons left hide-on-small-only">arrow_back</i>
                             <span class="hide-on-small-only">Trở về</span>
                             <i class="material-icons center hide-on-med-and-up">arrow_back</i>
                         </a></li>
-                    <li class="navbar-second-col hide-on-small-only navbar-search" id="navbar-search">
+                    <li data-search="{{ Request::is('home*') ? 'home' : 'result' }}"
+                        class="navbar-second-col hide-on-small-only navbar-search" id="navbar-search">
                         {{--<div class="ui icon input">--}}
                             {{--<i class="search icon"></i>--}}
                             {{--<input type="text" placeholder="Search...">--}}
@@ -31,7 +32,7 @@
                     <li class="navbar-search navbar-second-col navbar-hide hide-on-med-and-up">
                         <a><i class="material-icons center">search</i></a>
                     </li>
-                    <li class="navbar-second-col navbar-hide navbar-hide-med">
+                    <li class="navbar-second-col navbar-hide navbar-hide-med" id="navbar-category">
                         <a id="dropdown-category" class='dropdown-trigger' data-target='dropdown-category-content'>
                             <i class="material-icons left hide-on-small-only">menu</i>
                             <i class="material-icons center hide-on-med-and-up">menu</i>

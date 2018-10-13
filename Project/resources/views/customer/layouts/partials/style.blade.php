@@ -1,7 +1,7 @@
 <style>
     @media only screen and (max-width: 600px) {
         #navbar-search {
-            width: 0;
+            /*width: 0;*/
         }
         #search {
             height: 56px !important;

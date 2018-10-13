@@ -20,7 +20,9 @@
             <td class="center-align"><img class="responsive-img payment-image" src="{{ $foody->avatar }}"></td>
             <td>{{ $cart->name }}</td>
             <td class="center-align" id="payment-table-amount">{{ $cart->qty }}</td>
-            <td class="right-align" id="payment-table-cost">{{ number_format($foody->getSaleCost()) }}<sup>đ</sup></td>
+            <td class="right-align payment-table-cost" data-id="{{ $foody->id }}"
+                data-cost="{{ $foody->getSaleCost() }}">
+                {{ number_format($foody->getSaleCost()) }}<sup>đ</sup></td>
             <td class="center-align">
                 <span class="ui red small label">-60%</span>
             </td>

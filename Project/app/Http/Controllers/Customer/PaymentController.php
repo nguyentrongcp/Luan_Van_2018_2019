@@ -17,7 +17,6 @@ use App\Http\Controllers\Controller;
 class PaymentController extends Controller
 {
     public function index() {
-        session(['total_of_cost' => Cart::getCost()]);
         $districts = District::all();
 
         return view('customer.payment.index', compact('districts'));
@@ -138,6 +137,8 @@ class PaymentController extends Controller
 
         }
 
+        session($request->cost);
+
         return Response(['time' => $time, 'otp' => session('otp')]);
 
     }
@@ -185,8 +186,10 @@ class PaymentController extends Controller
     }
 
     public function checkOTP(Request $request) {
-        if (session('total_of_cost') != Cart::getCost()) {
-            return Response('Giá sản phẩm có thay đổi. Hãy cập nhật lại trước khi gửi đơn hàng.', 500);
+        foreach(Cart::content() as $cart) {
+            if (Foody::find($cart->id)->getSaleCost() != session("$cart->id")) {
+                return Response('Giá sản phẩm có thay đổi. Hãy cập nhật lại trước khi gửi đơn hàng.', 500);
+            }
         }
         if ($request->otp == session('otp')) {
             $this->storeOrder();

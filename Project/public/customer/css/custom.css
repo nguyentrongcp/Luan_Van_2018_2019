@@ -143,6 +143,10 @@ body {
     font-weight: bolder;
 }
 
+.input-field.col label {
+    left: 0;
+}
+
     /*Navbar custom*/
 
     .navbar-header {

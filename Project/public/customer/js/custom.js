@@ -18,7 +18,7 @@ $(document).ready(function(){
     });
     $('.pushpin').pushpin();
     $('#navbar-second').pushpin({
-        top: 236,
+        top: 300 - $('#navbar-second').height(),
     });
     $('#foody-navbar').pushpin({
         top: 236,

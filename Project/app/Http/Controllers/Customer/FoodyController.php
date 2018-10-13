@@ -32,4 +32,42 @@ class FoodyController extends Controller
         $obj = json_decode($result,true);
         dd($obj);
     }
+
+    public function search(Request $request) {
+        $slug = str_slug($request->value);
+        $foodies = Foody::where('slug','like', "%$slug%")->get();
+        $data = '';
+        foreach($foodies as $key => $foody) {
+            if ($key == 0) {
+                $divider = '';
+            }
+            else {
+                $divider = "<div class=\"divider\"></div>";
+            }
+            $cost = number_format($foody->getSaleCost());
+            $sales_off = '';
+            if ($foody->isSalesOff()) {
+                $sale_percent = $foody->getSalePercent();
+                $sales_off = "";
+            }
+            $data .= "$divider
+                <div class=\"row search-result-row\">
+        <img src='$foody->avatar'>
+        <a href='#' class=\"search-result-content\">
+            <div class=\"col s12 search-result-title truncate\">$foody->name</div>
+            <div class=\"col s12 search-result-cost\">$cost<sup>đ</sup>$sales_off</div>
+            <div class=\"col s12 search-result-rate\">
+                <i class=\"material-icons\">star</i>
+                <i class=\"material-icons\">star</i>
+                <i class=\"material-icons\">star</i>
+                <i class=\"material-icons\">star_half</i>
+                <i class=\"material-icons\">star_half</i>
+            </div>
+        </a>
+    </div>
+            ";
+        }
+
+        return Response($data);
+    }
 }

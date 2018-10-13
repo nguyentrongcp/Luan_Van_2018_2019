@@ -12,21 +12,21 @@
     <link type="text/css" rel="stylesheet" href="{{ asset("/customer/css/custom.css") }}">
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="/customer/css/materialize.min.css">
+    <link rel="stylesheet" href="{{ asset('/customer/css/materialize.min.css') }}">
 
     {{--Rating stars--}}
-    <link rel="stylesheet" href="/customer/css/rating.min.css">
+    <link rel="stylesheet" href="{{ asset('/customer/css/rating.min.css') }}">
 
     {{--Label--}}
-    <link rel="stylesheet" href="/customer/css/label.min.css">
+    <link rel="stylesheet" href="{{ asset('/customer/css/label.min.css') }}">
 
-    <link rel="stylesheet" href="/customer/css/custom.css">
+    <link rel="stylesheet" href="{{ asset('/customer/css/custom.css') }}">
 
-    <link rel="stylesheet" href="/customer/semantic/dimmer.min.css">
-    <link rel="stylesheet" href="/customer/semantic/card.min.css">
-    <link rel="stylesheet" href="/customer/semantic/button.min.css">
-    <link rel="stylesheet" href="/customer/semantic/icon.min.css">
-    <link rel="stylesheet" href="/customer/semantic/transition.min.css">
+    <link rel="stylesheet" href="{{ asset('/customer/semantic/dimmer.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/customer/semantic/card.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/customer/semantic/button.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/customer/semantic/icon.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/customer/semantic/transition.min.css') }}">
     {{--<link rel="stylesheet" href="/customer/semantic/dimmer.min.css">--}}
     {{--<link rel="stylesheet" href="/customer/semantic/dropdown.min.css">--}}
     {{--<link rel="stylesheet" href="customer/css/font-awesome.css">--}}

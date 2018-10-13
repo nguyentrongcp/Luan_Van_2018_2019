@@ -103,10 +103,9 @@
             }
             else {
                 if (!checkEmpty()) {
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
+                    let cost = [];
+                    $('.payment-table-cost').each(function (key, value) {
+                        cost[$(value).attr('data-id')] = $(value).attr('data-cost');
                     });
                     $.ajax({
                         type: "post",
@@ -120,7 +119,8 @@
                             phone: $('#phone').val(),
                             email: $('#email').val(),
                             note: $('#note').val(),
-                            type: type
+                            type: type,
+                            cost: cost
                         },
                         error: function(data) {
                             empty();
@@ -164,11 +164,6 @@
                 $('#error-payment-otp').removeClass('hide');
             }
             else {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
                 $.ajax({
                     type: "post",
                     url: "/customer/check_payment_otp",

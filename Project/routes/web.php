@@ -27,7 +27,7 @@ Route::post('/admin/login', 'admin\AdminLoginController@login')->name('admin.log
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
 //    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
-    Route::get('/logout', 'admin\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/logout', 'admin\adminLoginController@logout')->name('admin.logout');
 
     Route::get('dashboard', function () {
         return view('admin.foodies.index');
@@ -35,58 +35,58 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
     /** Foody type */
 
-    Route::resource('foody_type','Admin\FoodyTypeController',["except" => ["create","show", "edit"]]);
-    Route::get('add_foody_type/{id}','Admin\FoodyTypeController@movePageCreateType')
+    Route::resource('foody_type','admin\FoodyTypeController',["except" => ["create","show", "edit"]]);
+    Route::get('add_foody_type/{id}','admin\FoodyTypeController@movePageCreateType')
             ->name('admin.addType');
-    Route::resource('add_new','Admin\AddTypeController',["except" => ["create","show", "edit"]]);
+    Route::resource('add_new','admin\AddTypeController',["except" => ["create","show", "edit"]]);
 
 
     /** Foody */
 
-    Route::resource('foodies','Admin\FoodyController');
-    Route::post('foodies/change_cost/{id}','Admin\FoodyController@changeCost')
+    Route::resource('foodies','admin\FoodyController');
+    Route::post('foodies/change_cost/{id}','admin\FoodyController@changeCost')
         ->name('foody_change_cost');
-    Route::post('foodies/change_avatar/{id}','Admin\FoodyController@changeAvatar')
+    Route::post('foodies/change_avatar/{id}','admin\FoodyController@changeAvatar')
         ->name('foody_change_avatar');
-    Route::post('foodies/change_multi_image/{id}','Admin\FoodyController@changeMultiImage')
+    Route::post('foodies/change_multi_image/{id}','admin\FoodyController@changeMultiImage')
         ->name('foody_change_multi_image');
 
     /**      Employee       **/
-    Route::resource('employees','Admin\EmployeeController');
+    Route::resource('employees','admin\EmployeeController');
 
     /**      orders       **/
-    Route::resource('orders','Admin\OrderController');
+    Route::resource('orders','admin\OrderController');
 
     /**      Goods receipt notes       **/
-    Route::resource('goods_receipt_note','Admin\GoodsReceiptNotesController');
-    Route::get('goods_receipt_note_detail/{id}','Admin\GoodsReceiptNotesController@moveDetail')
+    Route::resource('goods_receipt_note','admin\GoodsReceiptNotesController');
+    Route::get('goods_receipt_note_detail/{id}','admin\GoodsReceiptNotesController@moveDetail')
             ->name('admin.move_detail');
 
 
     /**      Goods receipt notes detail       **/
-    Route::resource('goods_receipt_note_detail','Admin\GoodsReceiptNotesDetailController');
+    Route::resource('goods_receipt_note_detail','admin\GoodsReceiptNotesDetailController');
 
 
     /**      Sales offs       **/
-    Route::resource('sales_offs','Admin\SalesOffsController',["except" => ["create", "edit"]]);
-    Route::get('create_sales_offs/{id}','Admin\SalesOffsController@movePageCreateSales')
+    Route::resource('sales_offs','admin\SalesOffsController',["except" => ["create", "edit"]]);
+    Route::get('create_sales_offs/{id}','admin\SalesOffsController@movePageCreateSales')
         ->name('admin.createSales');
-    Route::resource('create_sales','Admin\CreateSalesController',["except" => ["create","show", "edit"]]);
+    Route::resource('create_sales','admin\CreateSalesController',["except" => ["create","show", "edit"]]);
 
-    Route::resource('sales_offs_details','Admin\SalesOffsDetailsController');
+    Route::resource('sales_offs_details','admin\SalesOffsDetailsController');
 
     /**      Shop information       **/
-    Route::resource('shop_infos','Admin\ShopInfoController');
-    Route::post('shop_infos/change_logo/{id}','Admin\ShopInfoController@changeLogo')
+    Route::resource('shop_infos','admin\ShopInfoController');
+    Route::post('shop_infos/change_logo/{id}','admin\ShopInfoController@changeLogo')
         ->name('shop_change_logo');
 
     /**      News       **/
-    Route::resource('news','Admin\NewsController');
-    Route::post('news/change_image/{id}','Admin\NewsController@changeImage')
+    Route::resource('news','admin\NewsController');
+    Route::post('news/change_image/{id}','admin\NewsController@changeImage')
             ->name('news_change_image');
 
     /** Comments **/
-    Route::resource('comments', 'Admin\CommentController');
+    Route::resource('comments', 'admin\CommentController');
 
 
 
@@ -125,7 +125,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
     // Foody
     Route::get('/foody/{slug}', 'Customer\FoodyController@index')->name('customer.foody.show');
+    Route::get('/customer/search', 'Customer\FoodyController@search');
 
     // Login & logout
-    Route::post('/login', 'Customer\CustomerLoginController@login')->name('customer.login.submit');
+    Route::post('/customer/login', 'Customer\CustomerLoginController@login');
     Route::get('logout/', 'Customer\CustomerLoginController@logout')->name('customer.logout');

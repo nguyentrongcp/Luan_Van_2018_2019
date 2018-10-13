@@ -49,26 +49,95 @@
                     $('#navbar-search').removeClass('hide-on-small-only');
                     $('#navbar-search').css('display', 'unset');
                     // $('#navbar-search').removeClass('hide');
+                    $('#navbar-search').css({
+                        width: '100%'
+                    });
                     $('#search').focus();
-                    $('#navbar-search').animate({width: '100%'}, 750);
                 }
             });
             $('#search').focusout(function () {
-                $('#navbar-search').animate({width: 0}, 500, function () {
-                    $('.navbar-hide').removeClass('hide');
-                    $('#navbar-search').addClass('hide-on-small-only');
-                    $('#navbar-search').addClass('navbar-search');
-                });
-
+                $('#search-result').removeClass('search-result');
+                $('#navbar-search').addClass('hide-on-small-only');
+                $('.navbar-hide').removeClass('hide');
+                $('#navbar-search').addClass('navbar-search');
             });
 
             $('#search').focus(function () {
-                if (($(window).width() > 585) && ($(window).width() < 976)) {
-                    console.log('fsd');
-                    let calc = ($(window).width() * 196 / 100 + 90) / 3 + 'px';
+                $('#search-result').pushpin({
+                    top: 300 - $('#navbar-second').height()
+                });
+                if ($('#search').val() !== '') {
+                    $('#search-result').addClass('search-result');
+                }
+                if (($(window).width() > 585)) {
+                    let calc = ($(window).width() * 180 / 100 + 90) / 3 + 'px';
+                    if ($(window).width() < 976) {
+                        calc = ($(window).width() * 196 / 100 + 90) / 3 + 'px';
+                    }
                     $('.navbar-hide-med').addClass('hide');
                     $('#navbar-search').removeClass('navbar-search');
-                    $('#navbar-search').animate({width: calc}, 750);
+                    $('#navbar-search').css('width', calc);
+                }
+                let top = $('#navbar-second').offset().top + $('#navbar-second').height();
+                let width = $('#navbar-search').width();
+                let left = $('#navbar-search').position().left;
+                let overflow = 'hidden';
+                if ($(window).width() < 978) {
+                    left += $(window).width() / 100;
+                }
+                else {
+                    left += $(window).width() * 5 / 100;
+                }
+                $('#search-result').css({
+                    top: top,
+                    width: width,
+                    left: left,
+                });
+                // else if ($(window).width() > 975) {
+                //     $('#navbar-category').addClass('hide');
+                //     let calc = ($(window).width() * 180 / 100 - 180) / 3 + 'px';
+                //     $('#navbar-search').removeClass('navbar-search');
+                //     $('#navbar-search').animate({width: calc}, 750);
+                // }
+            });
+
+            $('#search').on('input', function () {
+                var value = $(this).val();
+                console.log(value);
+                if ($('#navbar-search').attr('data-search') === 'result') {
+                    if (value === '') {
+                        $('#search-result').removeClass('search-result');
+                        $('#search-result').empty();
+                    }
+                    else {
+                        $('#search-result').addClass('search-result');
+                        $.ajax({
+                            type: 'get',
+                            url: '/customer/search',
+                            data: {
+                                value: value
+                            },
+                            success: function (data) {
+                                $('#search-result').html(data);
+                                let height = $(window).height() - $('#navbar-second').height();
+                                if ($('#search-result').height() > height) {
+                                    $('#search-result').css({
+                                        'overflow' : 'auto',
+                                        'max-height': height
+                                    });
+                                }
+                                else {
+                                    $('#search-result').css({
+                                        overflow: 'hidden',
+                                        'max-height' : 'unset'
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+                else {
+
                 }
             });
 
