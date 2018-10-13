@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Admin;
 use App\Decentralization;
 use App\DecentralizeEmployees;
+use App\Employees;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -40,11 +41,11 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $email = $request->get('email');
-        if (Admin::Existed($email))
+        if (Employees::Existed($email))
         {
             return back()->with('errors', ["Email $email đã tồn tại"]);
         }
-        $admins = new Admin();
+        $admins = new Employees();
         $admins->name = $request->get('name');
         $admins->phone = $request->get('phone');
         $admins->email = $email;
@@ -53,8 +54,9 @@ class EmployeeController extends Controller
         $admins->username = $arr[0];
         $admins->address = $request->get('address');
         $admins->password = bcrypt($request->get('pass'));
+        $admins->save();
 
-        $idDecentralizes = $request->get('decentralization');
+        $idDecentralizes = $request->get('decentralization');dd(decentralizes());
         $admins->decentralizes()->sync($idDecentralizes);
 
         return back()->with('success', 'Thêm nhân viên thành công');

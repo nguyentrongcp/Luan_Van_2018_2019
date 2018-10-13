@@ -1,5 +1,7 @@
 @if (session()->get('success') != '')
-        <script>
+    <script language="JavaScript" type="text/javascript">
+
+        $(document).ready(function () {
             $.toast({
                 heading: 'Thông báo',
                 text: '{{ Session()->get('success') }}',
@@ -7,5 +9,7 @@
                 position: 'bottom-right',
                 loader: false
             });
-        </script>
+        });
+    </script>
 @endif
+
