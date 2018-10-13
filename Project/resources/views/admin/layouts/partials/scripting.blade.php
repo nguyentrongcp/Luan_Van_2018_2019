@@ -17,10 +17,10 @@
 <script src="{{asset('admin/assets/demo/demo.js')}}"></script>
 <!-- JS plugin itoast -->
 <script src="{{asset('admin/assets/plugin/jq-toast/jquery.toast.min.js')}}" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
     CKEDITOR.replace('des');
 </script>
-
 <script>
     $(function() {
         var imagesPreview = function(input, placeToInsertImagePreview) {

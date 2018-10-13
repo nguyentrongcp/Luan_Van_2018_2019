@@ -15,33 +15,33 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label class="bmd-label-floating">Họ và tên</label>
-                        <input type="text" class="form-control" name="name-emp"
-                               placeholder="Nhập họ tên..." minlength="5" required>
+                        <input type="text" class="form-control" name="name"
+                               placeholder="Nhập họ tên..." value="Nguyễn Văn A" minlength="5" required>
                     </div>
                     <div class="form-group">
                         <label class="bmd-label-floating">Số điện thoại</label>
-                        <input type="number" class="form-control" name="number-phone"
-                               placeholder="Nhập số điện thoại..." minlength="5" required>
+                        <input type="number" class="form-control" name="phone"
+                               placeholder="Nhập số điện thoại..." value="0122444567" minlength="5" required>
                     </div>
                     <div class="form-group">
                         <label class="bmd-label-floating">Email</label>
                         <input type="email" class="form-control" name="email"
-                               placeholder="Nhập email..." minlength="5" required>
+                               placeholder="Nhập email..." value="nvana@gmail.com" minlength="5" required>
                     </div>
                     <div class="form-group">
                         <label class="bmd-label-floating">Địa chỉ</label>
                         <input type="text" class="form-control" name="address"
-                               placeholder="Nhập địa chỉ..." minlength="5" required>
+                               placeholder="Nhập địa chỉ..." value="Ninh Kiều - Cần Thơ" minlength="5" required>
                     </div>
                     <div class="form-group">
                         <label class="bmd-label-floating">Mật khẩu</label>
                         <input type="password" class="form-control" name="pass"
-                               placeholder="Nhập mật khẩu..." minlength="5" required>
+                               placeholder="Nhập mật khẩu..." value="123456" minlength="5" required>
                     </div>
                     <div class="form-group">
                         <label class="bmd-label-floating">Nhập lại mật khẩu</label>
                         <input type="password" class="form-control" name="pass-confirm"
-                               placeholder="Nhập lại mật khẩu..." minlength="5" required>
+                               placeholder="Nhập lại mật khẩu..." value="123456" minlength="5" required>
                     </div>
                     <div class="form-group">
                         <label class="bmd-label-floating">Cấp quyền</label>
