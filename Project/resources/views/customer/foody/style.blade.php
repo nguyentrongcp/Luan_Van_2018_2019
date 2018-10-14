@@ -173,4 +173,92 @@
     .rating-footer {
         margin: 15px 0;
     }
+
+
+
+    #foody-comment-modal {
+        width: 608px !important;
+        max-height: 80%;
+        height: 80%;
+        overflow: hidden;
+    }
+    #foody-comment-modal .modal-content {
+        height: calc(100% - 156px);
+    }
+    #comment-modal-image {
+        height: 98px;
+        bottom: 56px;
+        position: absolute;
+        padding-right: 24px;
+        display: inline-flex;
+    }
+    .comment-modal-image {
+        height: 98px;
+        display: inline-block;
+        /*position: relative;*/
+        margin-left: 4px;
+    }
+    .comment-modal-add-image {
+        height: 98px;
+        display: inline-block;
+        width: 90px;
+        padding: 4px 0;
+    }
+    .comment-modal-add-image div {
+        height: 100%;
+        cursor: pointer;
+    }
+    .comment-modal-add-image div:hover {
+        background-color: #cfd8dc !important;
+    }
+    .comment-modal-add-image i {
+        position: absolute;
+        top: 30px;
+        margin-left: 30px;
+        font-weight: 900;
+        font-size: 30px;
+        /*cursor: default;*/
+        color: #535353;
+    }
+    .comment-modal-image img {
+        height: 98px;
+        width: 90px;
+        padding: 4px 0;
+    }
+    #dimmer-image {
+        height: 98px;
+        width: 90px;
+        padding: 4px 0;
+    }
+    .comment-modal-image i {
+        position: absolute;
+        top: 4px;
+        margin-left: 75px;
+        font-size: 15px;
+        color: white;
+        font-weight: 900;
+        cursor: pointer;
+    }
+    .comment-modal-image i:hover {
+        background-color: #FE6D6D;
+    }
+    .comment-modal-content {
+        margin-bottom: 0;
+        height: calc(100% - 137px);
+    }
+    .comment-modal-content textarea {
+        margin-bottom: 0;
+        height: 100% !important;
+        overflow: auto;
+        margin-top: .3rem;
+        padding-top: .5rem;
+    }
+    .comment-modal-next i {
+        /*line-height: 98px;*/
+        cursor: pointer;
+        margin-top: 37px;
+    }
+    .comment-modal-next i:hover {
+        color: blue;
+    }
 </style>

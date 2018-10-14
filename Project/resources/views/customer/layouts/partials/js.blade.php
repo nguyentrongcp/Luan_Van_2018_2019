@@ -60,9 +60,11 @@
                 $('#navbar-search').addClass('hide-on-small-only');
                 $('.navbar-hide').removeClass('hide');
                 $('#navbar-search').addClass('navbar-search');
+                $('#search').addClass('white-text');
             });
 
             $('#search').focus(function () {
+                $('#search').removeClass('white-text');
                 $('#search-result').pushpin({
                     top: 300 - $('#navbar-second').height()
                 });

@@ -20,6 +20,7 @@ class CreateCommentsTable extends Migration
             $table->string('title', 100);
             $table->integer('customer_id')->unsigned()->nullable();
             $table->integer('foody_id')->unsigned();
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');

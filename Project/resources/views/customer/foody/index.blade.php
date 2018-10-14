@@ -104,6 +104,8 @@
 
     @include('customer.foody.comment-modal')
 
+    @include('customer.foody.comment-modal-success')
+
     @include('customer.foody.style')
 
     @include('customer.foody.js')

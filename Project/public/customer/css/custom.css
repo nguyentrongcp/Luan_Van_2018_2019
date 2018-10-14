@@ -261,6 +261,10 @@ body {
         text-decoration: line-through;
     }
 
+    .waves-effect.red.lighten-2:hover {
+        background-color: #EF9A9A !important;
+    }
+
     /*Stars rating custom*/
 
 

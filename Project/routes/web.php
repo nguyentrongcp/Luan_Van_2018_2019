@@ -127,6 +127,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     // Foody
     Route::get('/foody/{slug}', 'Customer\FoodyController@index')->name('customer.foody.show');
     Route::get('/customer/search', 'Customer\FoodyController@search');
+    Route::post('/customer/foody/comment', 'Customer\FoodyController@comment');
 
     // Login & logout
     Route::post('/customer/login', 'Customer\CustomerLoginController@login');
