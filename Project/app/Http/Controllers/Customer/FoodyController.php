@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Comment;
 use App\Foody;
+use App\Image;
+use App\ImageComment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class FoodyController extends Controller
 {
@@ -69,5 +74,64 @@ class FoodyController extends Controller
         }
 
         return Response($data);
+    }
+
+    public function comment(Request $request) {
+        $customer_id = Auth::guard('customer')->user()->id;
+
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'title' => array('required', 'max:255'),
+                'content' => array('required', 'max:2000'),
+            ],
+            [
+                'required' => 'Vui lòng không bỏ trống :attribute!',
+                'max' => ':attribute không được vượt quá :max ký tự!',
+//                'regex' => ':attribute không đúng định dạng!'
+            ],
+            [
+                'title' => 'Tiêu đề',
+                'content' => 'Nội dung'
+            ]
+        );
+
+        if ($validate->fails()) {
+            return Response(['errors' => $validate->getMessageBag()->toArray(), 'status' => 'error']);
+        }
+
+        $comment = new Comment();
+        $comment->content = $request->get('content');
+        $comment->title = $request->title;
+        $comment->date = date('Y-m-d h:i:s');
+        $comment->customer_id = $customer_id;
+        $comment->foody_id = $request->foody_id;
+        $comment->save();
+
+        if ($request->images != '') {
+            foreach($request->images as $key => $image) {
+                $img = explode(";base64,", $image);
+                $img_type_aux = explode("image/", $img[0]);
+                $img_type = $img_type_aux[1];
+                $img_base64 = base64_decode($img[1]);
+                $name = "$customer_id-".time()."-$key.$img_type";
+                file_put_contents("customer/image_comment/$name", $img_base64);
+
+                $image_db = new Image();
+                $image_db->link = "/customer/image_comment/$name";
+                $image_db->save();
+
+                $image_comment = new ImageComment();
+                $image_comment->image_id = $image_db->id;
+                $image_comment->comment_id = $comment->id;
+                $image_comment->save();
+            }
+        }
+
+        return Response(['status' => 'success']);
+
+//        if ($request->hasFile('files')) {
+//            return Response('fdsfsd');
+//        }
     }
 }

@@ -17,6 +17,7 @@ $(document).ready(function(){
         on: 'hover'
     });
     $('.pushpin').pushpin();
+    $('.carousel').carousel();
     $('#navbar-second').pushpin({
         top: 300 - $('#navbar-second').height(),
     });
@@ -61,3 +62,8 @@ function setTimer(time) {
         }
     }, 1000);
 }
+
+
+
+
+// upload image preview
