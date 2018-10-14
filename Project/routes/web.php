@@ -44,12 +44,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     /** Foody */
 
     Route::resource('foodies','admin\FoodyController');
+    Route::post('foodies/{id}','admin\FoodyController@update');
     Route::post('foodies/change_cost/{id}','admin\FoodyController@changeCost')
         ->name('foody_change_cost');
     Route::post('foodies/change_avatar/{id}','admin\FoodyController@changeAvatar')
         ->name('foody_change_avatar');
-    Route::post('foodies/change_multi_image/{id}','admin\FoodyController@changeMultiImage')
-        ->name('foody_change_multi_image');
+//    Route::post('foodies/change_multi_image/{id}','admin\FoodyController@changeMultiImage')
+//        ->name('foody_change_multi_image');
 
     /**      Employee       **/
     Route::resource('employees','admin\EmployeeController');

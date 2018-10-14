@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Cost;
 use App\Foody;
+use App\FoodyStatus;
 use App\FoodyType;
 use App\Image;
 use App\ImageFoody;
@@ -69,6 +70,7 @@ class FoodyController extends Controller
         $foody = new Foody();
         $foody_name = $request->get('name-foody');
         $foody->name = $foody_name;
+        $foody->slug = str_slug($foody_name);
 
         $foody->foody_created_at = date('Y-m-d H:i:s');
         $foody->foody_updated_at = date('Y-m-d H:i:s');
@@ -82,6 +84,11 @@ class FoodyController extends Controller
             ->move('admin\assets\images\avatar', "avatar-$foody->id-$time.$ext");
         $foody->avatar = str_replace('\\', '/', $path);
         $foody->save();
+
+        $foodyStatus = new FoodyStatus();
+        $foodyStatus->foody_id = $foody->id;
+        $foodyStatus->status = true;
+        $foodyStatus->save();
 
         $cost = new Cost();
         $cost->cost = $cost_input;
@@ -104,14 +111,12 @@ class FoodyController extends Controller
      */
     public function show($id)
     {
+        $foodyTypes = FoodyType::all();
         $foodies = Foody::find($id);
         $nameFoody = $foodies->name;
         $avatarFoody = $foodies->avatar;
         $describe = $foodies->describe;
         $typeFoody = FoodyType::where('id', $foodies->foody_type_id)->get();
-        foreach ($typeFoody as $type) {
-            $nameTypeFoody = $type->name;
-        }
 
         $costFoody = Cost::where('foody_id', $id)->get();
         foreach ($costFoody as $cosf) {
@@ -119,7 +124,7 @@ class FoodyController extends Controller
             $costUpdated = $cosf->cost_updated_at;
         }
         return view('admin.foodies.update.index',
-            compact('id', 'foodies', 'nameFoody', 'nameTypeFoody', 'cost', 'avatarFoody', 'describe', 'costUpdated'));
+            compact('id', 'foodies', 'nameFoody','foodyTypes', 'cost', 'avatarFoody', 'describe', 'costUpdated'));
     }
 
     /**
@@ -142,7 +147,20 @@ class FoodyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $foodyName = $request->get('foody-name');
+
+        $foodys = Foody::findOrFail($id);
+        $foodys->name = $foodyName;
+        $foodys->slug = str_slug($foodyName);
+        $foodys->foody_type_id = $request->get('foody-type');
+        $foodys->describe = $request->get('des');
+        $foodys->update();
+
+        $foodyStatus = FoodyStatus::findOrFail($id);
+        $foodyStatus->status = $request->get('foody-status');
+        $foodyStatus->update();
+
+        return back()->with('success','Cập nhật thành công!');
     }
 
     /**

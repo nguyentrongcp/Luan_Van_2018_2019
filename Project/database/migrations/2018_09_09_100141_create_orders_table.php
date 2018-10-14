@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('order_code', 12);
             $table->string('receiver', 50);
-            $table->string('to', 50);
+            $table->string('to', 100);
             $table->integer('customer_id')->unsigned()->nullable();
             $table->string('email', 100);
             $table->string('phone', 20);
