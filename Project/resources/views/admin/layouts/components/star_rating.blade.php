@@ -7,13 +7,13 @@
     @endphp
 
     @for ($i = 0; $i < $floor; $i++)
-        <img src="{{asset('assets/images/star/star-on.png')}}">
+                <i class="fa fa-star star-rating"></i>
     @endfor
 
     @if ($star - $floor > 0)
-        <img src="{{asset('assets/images/star/star-half-mono.png')}}">
+                <i class="fa fa fa-star-half-o star-rating"></i>
     @endif
     @for ($i = 0; $i < $off_star; $i++)
-        <img src="{{asset('assets/images/star/star-off.png')}}">
+                <i class="fa fa-star-o star-rating"></i>
     @endfor
 </div>

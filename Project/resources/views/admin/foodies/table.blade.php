@@ -2,7 +2,7 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th class="text-center th-prot th-stt" >
+            <th class="text-center th-prot th-stt">
                 <div class="form-check">
                     <label class="form-check-label">
                         <input class="form-check-input" id="check-all" type="checkbox"
@@ -16,7 +16,8 @@
             <th class="th-prot text-center">Tên thực đơn</th>
             <th class="th-prot text-center">Thuộc loại</th>
             <th class="th-prot text-center">Giá</th>
-            <th class="text-center th-prot">Thao tác</th>
+            <th class="th-prot text-center">Trạng thái</th>
+            <th class="text-center th-prot">Xem chi tiết</th>
         </tr>
         </thead>
         <tbody>
@@ -37,31 +38,29 @@
                 <td class="td-prot" id="th-name-type">{{$fd->name}}</td>
 
                 @foreach(App\FoodyType::where('id',$fd->foody_type_id)->get() as $nameType)
-                <td class="td-prot text-center">{{$nameType->name}}</td>
+                    <td class="td-prot text-center">{{$nameType->name}}</td>
                 @endforeach
 
-                    <td class="td-prot text-center">{{number_format($fd->currentCost()).' đ'}}</td>
-
-
-                <td class="text-center td-prot">
-                    <a rel="tooltip" title="Xem chi tiết" data-placement="bottom" class="btn btn-info btn-sm btn-round btn-icon text-white"
-                            href="{{route('foodies.show',[$fd->id])}}">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <button type="button" rel="tooltip" title="Sửa" data-placement="bottom" class="btn btn-success btn-sm btn-round btn-icon"
-                            onclick="$('#modal-update-fd-{{$fd->id}}').modal('show')">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="Xóa" data-placement="bottom" class="btn btn-danger btn-sm btn-round btn-icon"
-                            onclick="$('#modal-del-fd-{{$fd->id}}').modal('show')">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                    </button>
-                </td>
+                <td class="td-prot text-center">{{number_format($fd->currentCost()).' đ'}}</td>
+                @foreach(App\FoodyStatus::where('foody_id',$fd->id)->get() as $foodyStatus)
+                    @if($foodyStatus->status == 0)
+                        <td class="td-prot text-center text-danger title"><i class="fa fa-close"></i>Tạm hết</td>
+                    @else
+                        <td class="td-prot text-center text-success title"><i class="fa fa-check"></i>Đang bán</td>
+                    @endif
+                @endforeach
+                    <td class="text-center td-prot">
+                        <a rel="tooltip" title="Xem chi tiết" data-placement="bottom"
+                           class="btn btn-info btn-sm btn-round btn-icon text-white"
+                           href="{{route('foodies.show',[$fd->id])}}">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-    <div class="pagination">
+    <div class="div-pagination">
         {{$foodies->links()}}
     </div>
 </div>

@@ -15,7 +15,7 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label class="bmd-label-floating">Giá thay đổi</label>
-                            <input type="text" class="form-control" name="cost-pro" id="cost-pro"
+                            <input type="text" class="form-control" name="cost-foody" id="cost-foody"
                                    value="{{old('cost')}}" minlength="5" required>
                         </div>
                         <div class="form-group">
