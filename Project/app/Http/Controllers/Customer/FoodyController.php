@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Customer;
 
 use App\Comment;
 use App\Foody;
+use App\FoodyType;
 use App\Image;
 use App\ImageComment;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -15,8 +17,9 @@ class FoodyController extends Controller
 {
     public function index($slug) {
         $foody = Foody::where('slug', $slug)->first();
+        $foody_type = FoodyType::find($foody->id);
 
-        return view('customer.foody.index', compact(['foody']));
+        return view('customer.foody.index', compact(['foody', 'foody_type']));
     }
 
     public function testsms() {
@@ -83,7 +86,7 @@ class FoodyController extends Controller
             $request->all(),
             [
                 'title' => array('required', 'max:255'),
-                'content' => array('required', 'max:2000'),
+                'content' => array('required', 'max:4000'),
             ],
             [
                 'required' => 'Vui lòng không bỏ trống :attribute!',
@@ -100,6 +103,7 @@ class FoodyController extends Controller
             return Response(['errors' => $validate->getMessageBag()->toArray(), 'status' => 'error']);
         }
 
+        $content = str_replace('\\n', '<br>', $request->get('content'));
         $comment = new Comment();
         $comment->content = $request->get('content');
         $comment->title = $request->title;

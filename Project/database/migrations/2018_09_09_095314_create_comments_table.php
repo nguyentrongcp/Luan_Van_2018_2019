@@ -15,9 +15,9 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('content', 255);
+            $table->string('content', 4000);
             $table->dateTime('date');
-            $table->string('title', 100);
+            $table->string('title', 255);
             $table->integer('customer_id')->unsigned()->nullable();
             $table->integer('foody_id')->unsigned();
             $table->boolean('is_approved')->default(false);

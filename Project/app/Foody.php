@@ -30,6 +30,10 @@ class Foody extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
     public function getLiked() {
         return $this->likes()->count();
     }

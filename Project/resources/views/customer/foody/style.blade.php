@@ -129,6 +129,9 @@
         font-size: 18px;
         color: black ;
     }
+    .involve-foody-name .describe {
+        font-size: 13.5px;
+    }
     .involve-foody-action a i {
         margin: 0 !important;
     }
@@ -260,5 +263,57 @@
     }
     .comment-modal-next i:hover {
         color: blue;
+    }
+
+
+    .comment-title {
+        margin-top: 15px !important;
+    }
+    .comment-avatar {
+        width: 40px;
+    }
+    .comment-avatar img {
+        width: 40px;
+        height: 40px;
+    }
+    .comment-name {
+        display: inline-block;
+        margin-left: 5px;
+    }
+    .comment-customer-name {
+        font-weight: bolder;
+    }
+    .comment-time {
+        font-size: 12px;
+        font-weight: 300;
+    }
+    .comment-rate {
+        float: right;
+    }
+    .comment-rate .ui.label {
+        width: 35px;
+        height: 35px;
+        padding: 11px 8.6px;
+        border-radius: 50% !important;
+    }
+    .comment-content {
+        margin: 10px 0 20px 0 !important;
+    }
+    .comment-content-title {
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .comment .content {
+        margin-bottom: 5px;
+    }
+    .comment-content-content {
+        font-size: 14px;
+        line-height: 1.5em;
+    }
+    .comment-image img {
+        display: block;
+        float: left;
+        cursor: zoom-in;
     }
 </style>

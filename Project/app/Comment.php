@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\App;
 
 class Comment extends Model
@@ -14,5 +15,13 @@ class Comment extends Model
             $amountOfComment = Comment::where('foody_id', $foodies->id)->count();
         }
         return $amountOfComment;
+    }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function imageComments() {
+        return $this->hasMany(ImageComment::class);
     }
 }

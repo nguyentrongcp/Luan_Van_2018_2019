@@ -4,6 +4,7 @@ $(document).ready(function(){
     $('.slider').slider();
     // $('.materialboxed').materialbox();
     $('.tooltipped').tooltip();
+    $('.materialboxed').materialbox();
 
     $('.sidenav').sidenav({
         edge: 'right',
@@ -32,11 +33,12 @@ $(document).ready(function(){
             }
         }
     });
-    $(window).bind("pageshow", function(event) {
-        if (event.originalEvent.persisted) {
-            window.location.reload();
-        }
-    });
+});
+
+$(window).bind("pageshow", function(event) {
+    if (event.originalEvent.persisted) {
+        window.location.reload();
+    }
 });
 
 // $('#dropdown-cart').on('click', function () {

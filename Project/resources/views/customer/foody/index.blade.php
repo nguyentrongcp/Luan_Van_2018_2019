@@ -95,12 +95,16 @@
         <div class="col s12 m12 l7 content-col">
             @include('customer.foody.involve-foody')
 
+            @include('customer.foody.comment')
+
             {{--@include('customer.foody.image')--}}
         </div>
         <div class="col s12 m12 l3">
             @include('customer.foody.rating')
         </div>
     </div>
+
+    @include('customer.foody.image-viewer')
 
     @include('customer.foody.comment-modal')
 
