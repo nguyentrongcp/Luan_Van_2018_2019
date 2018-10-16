@@ -314,6 +314,6 @@
     .comment-image img {
         display: block;
         float: left;
-        cursor: zoom-in;
+        cursor: pointer;
     }
 </style>

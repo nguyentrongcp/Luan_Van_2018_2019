@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-light red lighten-2 btn">Thoát</a>
+        <a class="modal-close waves-effect waves-light red lighten-2 btn">Thoát</a>
         <a id="testtest" class="waves-effect waves-light btn" onclick="uploadToServer({{ $foody->id }})">Đăng bài</a>
     </div>
 </div>

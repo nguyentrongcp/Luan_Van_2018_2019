@@ -1,6 +1,6 @@
 <div class="row comment">
 
-    @foreach($foody->comments as $comment)
+    @foreach($foody->comments as $stt => $comment)
         <div class="col s12 white content">
             <div class="row comment">
                 <div class="row comment-title">
@@ -37,7 +37,8 @@
                             }
                             $width = 'calc((100% - '.($count - 1).' * 2px) / '.$count.')';
                                 @endphp
-                        <img onclick="openViewer()" style="width: {{ $width }}; margin: 0 0 2px {{ $margin }}" src="{{ $image->image->link }}">
+                        <img class="{{ $stt }}-comment-image" onclick="openViewer($('.{{ $stt }}-comment-image'), {{ $key }})"
+                             style="width: {{ $width }}; margin: 0 0 2px {{ $margin }}" src="{{ $image->image->link }}">
                     @endforeach
                 </div>
             </div>
