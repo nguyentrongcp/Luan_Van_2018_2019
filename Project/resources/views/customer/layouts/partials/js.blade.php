@@ -16,6 +16,7 @@
                 constrainWidth: false,
                 closeOnClick: false,
                 inDuration: 500,
+                outDuration: 500,
                 onOpenStart: function () {
                     $('#dropdown-cart').addClass('teal');
                     $('#cart-count').addClass('white black-text');

@@ -62,6 +62,6 @@ class CustomerLoginController extends Controller
         Cart::destroy();
         Auth::guard('customer')->logout();
 
-        return redirect('/');
+        return redirect('/home');
     }
 }

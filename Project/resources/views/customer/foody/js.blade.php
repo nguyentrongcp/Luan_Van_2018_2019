@@ -28,6 +28,15 @@
             $('#comment-modal-content').on('input', function () {
                 $('#comment-modal-content-error').empty();
             });
+            $(window).resize(function () {
+                $.each($('.comment-image img'), function (key, value) {
+                    $(value).css('height', $(value).width());
+                });
+            });
+        });
+
+        $.each($('.comment-image img'), function (key, value) {
+            $(value).css('height', $(value).width());
         });
 
         // $('#testtest').click(function () {
@@ -141,6 +150,7 @@
         }
 
         function uploadToServer(foody_id) {
+            console.log($('#comment-modal-content').val().replace(/\n/g, '<br />'));
             if (($('#comment-modal-title').val() === '') || ($('#comment-modal-content').val() === '')) {
                 if ($('#comment-modal-title').val() === '') {
                     $('#comment-modal-title-error').html("<span class=\"helper-text red-text\" >Vui lòng không bỏ trống tiêu đề!</span>");
@@ -153,7 +163,6 @@
                 var files = [];
                 $.each($('.comment-modal-image img'), function (key, value) {
                     files[key] = $(value).attr('src');
-                    // console.log($(value).attr('src'));
                 });
                 $.ajax({
                     type: 'post',
@@ -161,11 +170,10 @@
                     data: {
                         images: files,
                         title: $('#comment-modal-title').val(),
-                        content: $('#comment-modal-content').val(),
+                        content: $('#comment-modal-content').val().replace(/\n/g, '<br>'),
                         foody_id: foody_id
                     },
                     success: function (data) {
-                        console.log(data);
                         if (data.status === 'error') {
                             var response = JSON.parse(data.errors.responseText);
                             $.each(response.errors, function (key, value) {
@@ -173,6 +181,8 @@
                             });
                         }
                         else {
+                            $('#comment-modal-title').val('');
+                            $('#comment-modal-content').val('');
                             $('#foody-comment-modal').modal('close');
                             $('#comment-modal-success-text').text('Bình luận của bạn đã được gửi. Chúng tôi sẽ xem xét và phê duyệt trong thời gian sớm nhất.');
                             $('#comment-modal-success').modal('open');
