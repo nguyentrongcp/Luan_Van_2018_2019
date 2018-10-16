@@ -20,15 +20,15 @@
                             <div class="card">
                                 <div class="col-md-6 mr-auto ml-auto">
                                     {{--<div class="card">--}}
-                                        <div class="card-header">
-                                            <div class="card-header text-center title text-warning">
-                                                {{App\Foody::find($id)->name}}
-                                            </div>
+                                    <div class="card-header">
+                                        <div class="card-header text-center title text-warning">
+                                            {{App\Foody::find($id)->name}}
                                         </div>
-                                        <div class="card-body">
-                                            <img src="{{App\Foody::find($id)->avatar}}"
-                                                 alt="{{App\Foody::find($id)->name}}">
-                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <img src="{{App\Foody::find($id)->avatar}}"
+                                             alt="{{App\Foody::find($id)->name}}">
+                                    </div>
                                     {{--</div>--}}
                                 </div>
                                 <div class="card-footer">
@@ -47,6 +47,18 @@
                                             </div>
                                             <div class="card-body">
                                                 {!! $comment->content !!}
+                                                @if($comment->is_approved == false)
+                                                    <form action="{{route('admin.approved',[$comment->id])}}" method="post">
+                                                        {{ csrf_field() }}
+                                                            <div class="float-right">
+                                                                <button type="submit" rel="tooltip" data-placement="bottom" title="Duyệt"
+                                                                        class="btn btn-success  btn-round "
+                                                                        onclick="return confirm('Bạn chắc chắn muốn duyệt bài đăng này chứ?')">
+                                                                    <i class="fa fa-check-circle"></i> Duyệt
+                                                                </button>
+                                                            </div>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </div>
                                     @endforeach

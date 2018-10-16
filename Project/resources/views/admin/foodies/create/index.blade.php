@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title','ADMIN | Thực đơn')
+@section('title','Thực đơn | Fast Foody Shop')
 
 @section('content')
     <div class="content">
@@ -11,6 +11,10 @@
                         <i class="fa fa-arrow-circle-left" style="font-size: 18px"></i> Trở về</a>
                     <h4 class="card-title title text-center">
                         THÊM THỰC ĐƠN MỚI</h4>
+                    <span class="show-message">
+                                @include('admin.layouts.components.success')
+                        @include('admin.layouts.components.error')
+                            </span>
                 </div>
                 <div class="card-body">
                     <form action="{{route('foodies.store')}}" method="post" enctype="multipart/form-data">
@@ -24,7 +28,12 @@
                                         <div class="col-md-12 form-group">
                                             <label class="title text-black-50 lb-info" for="name">Tên thực đơn</label>
                                             <input type="text" name="name-foody" placeholder="Nhập tên thực đơn..."
-                                                   class="form-control">
+                                                   value="{{ old('name-foody') }}" class="form-control">
+                                            @if($errors->has('name-foody'))
+                                                <div style="color: red; margin-top: 5px; padding-left: 20px;font-size: 13px">
+                                                    {{ $errors->first('name-foody') }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="col-md-12 form-group">
                                             <label class="title text-black-50 lb-info" for="type">Thuộc loại</label>
@@ -40,11 +49,16 @@
                                             <div class="col-10">
                                                 <label class="title text-black-50 lb-info" for="costs">Giá </label>
                                                 <input type="number" name="cost-foody" placeholder="Nhập giá..."
-                                                       class="form-control">
+                                                       value="{{ old('cost-foody') }}" class="form-control">
                                             </div>
                                             <div class="col-2">
                                                 <label></br></br>VNĐ</label>
                                             </div>
+                                            @if($errors->has('cost-foody'))
+                                                <div style="color: red; margin-top: 5px;padding-left: 20px; font-size: 13px">
+                                                    {!! $errors->first('cost-foody')!!}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="card-footer text-warning text-center">
@@ -66,7 +80,14 @@
                                                    accept=".jpg, .png, .jpeg">
                                         </button>
                                     </div>
-                                    <div class="gallery-avatar-image"></div>
+                                    <div class="gallery-avatar-image">
+                                        <img id='avatar' src="" alt="">
+                                    </div>
+                                    @if($errors->has('avatar-image-upload'))
+                                        <div style="color: red; margin-top: 5px;padding-left: 20px; font-size: 13px">
+                                            {!! $errors->first('avatar-image-upload')!!}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -76,15 +97,15 @@
                             </div>
                             <textarea rows="5" class="form-control" value="" id="des" name="des"></textarea>
                         </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-round">QUAY LẠI</button>
-                    <button type="submit" class="btn btn-info btn-round">THÊM MỚI
-                    </button>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-round">QUAY LẠI</button>
+                            <button type="submit" class="btn btn-info btn-round">THÊM MỚI
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
-    </div>
     </div>
 
 @endsection

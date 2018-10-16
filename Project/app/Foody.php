@@ -42,9 +42,9 @@ class Foody extends Model
         return $this->favorites()->count();
     }
 
-//    public function salesOffProducts() {
-//        return $this->hasMany(SalesOffProduct::class);
-//    }
+    public function salesOffDetail() {
+        return $this->hasMany(SalesOffsDetails::class);
+    }
 //
 //    public function quantities() {
 //        return $this->hasMany(Quantity::class);
@@ -82,15 +82,13 @@ class Foody extends Model
 //    }
 //
     public function isSalesOff() {
-//        return $this->salesOffProducts()->count() > 0;
-        return false;
+        return $this->salesOffDetail()->count() > 0;
     }
-//
+
     public function getSalePercent() {
-//        return ($this->isSalesOff()) ? $this->salesOffProducts()->first()->salesOff->value : 0;
-        return 0;
+        return ($this->isSalesOff()) ? $this->salesOffDetail()->first()->salesOff->percent : 0;
     }
-//
+
     public function getSaleCost() {
         return $this->costs->max()->cost;
     }
@@ -101,7 +99,7 @@ class Foody extends Model
 //    }
 
     public function matchedName($product_name) {
-        return FoodyType::where('slug', str_slug($product_name))->count() > 0;
+        return Foody::where('slug', str_slug($product_name))->count() > 0;
     }
 
     public function canDelete() {

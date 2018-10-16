@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Order;
+use App\OrderFoody;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     /**
@@ -15,7 +16,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate(10);
+        $orders = DB::table('orders')->join('order_statuses','orders.id','=','order_statuses.order_id')
+                    ->orderBy('order_statuses.status','ASC')->paginate(10);
 
         return view('admin.orders.index',compact('orders'));
     }
@@ -49,7 +51,12 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $orders = Order::findOrFail($id);
+        $orderFoodys = OrderFoody::where('order_id',$id)->get();
+        $orderCode = $orders->order_code;
+
+
+        return view('admin.orders.show.index',compact('orders','orderFoodys','orderCode'));
     }
 
     /**
@@ -84,5 +91,12 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function filter($id){
+        $orderFilters = DB::table('orders')->join('order_statuses','orders.id','=','order_statuses.order_id')
+            ->where('order_statuses.status','=',$id)->paginate(10);
+
+        return view('admin.orders.filter.index',compact('orderFilters'));
     }
 }

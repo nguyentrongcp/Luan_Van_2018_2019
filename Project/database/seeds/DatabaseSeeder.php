@@ -30,7 +30,9 @@ class DatabaseSeeder extends Seeder
              DecentralizationSeeder::class,
              DecentralizeEmployeesSeeder::class,
              DistrictSeeder::class,
-             TransportFeeSeeder::class
+             TransportFeeSeeder::class,
+             OrdersSeeder::class,
+             OrderFoodiesSeeder::class
          ]);
     }
 }

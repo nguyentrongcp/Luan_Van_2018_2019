@@ -15,9 +15,10 @@
                                 Bộ lọc <i class="fa fa-filter"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Chưa duyệt</a>
-                                <a class="dropdown-item" href="#">Đang giao hàng</a>
-                                <a class="dropdown-item" href="#">Đã hủy</a>
+                                <a class="dropdown-item" href="{{route('orders.index')}}">Tất cả</a>
+                                <a class="dropdown-item text-warning" href="{{route('admin_orders_filter',[0])}}">Chưa duyệt</a>
+                                <a class="dropdown-item text-success" href="{{route('admin_orders_filter',[1])}}">Đang giao hàng</a>
+                                <a class="dropdown-item text-danger" href="#">Đã hủy</a>
                             </div>
                         </div>
                     </div>
@@ -32,5 +33,4 @@
             </div>
         </div>
     </div>
-    @include('admin.employees.modals')
 @endsection

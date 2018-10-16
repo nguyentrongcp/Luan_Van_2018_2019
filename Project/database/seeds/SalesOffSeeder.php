@@ -14,31 +14,31 @@ class SalesOffSeeder extends Seeder
         DB::table('sales_offs')->insert([
             [
                 'name' => 'KM 02-09 Quốc Khánh',
-                'percent' => '10',
+                'percent' => '0',
                 'start_date' => date('Y-m-d H:i:s'),
                 'end_date' => date('Y-m-d H:i:s')
             ],
             [
                 'name' => 'KM 20-10 Phụ nữ Việt Nam',
-                'percent' => '15',
+                'percent' => '0',
                 'start_date' => date('Y-m-d H:i:s'),
                 'end_date' => date('Y-m-d H:i:s')
             ],
             [
                 'name' => 'KM 20-11 Nhà Giáo Việt Nam',
-                'percent' => '10',
+                'percent' => '0',
                 'start_date' => date('Y-m-d H:i:s'),
                 'end_date' => date('Y-m-d H:i:s')
             ],
             [
                 'name' => 'KM 14-02 Lễ tình nhân ',
-                'percent' => '20',
+                'percent' => '0',
                 'start_date' => date('Y-m-d H:i:s'),
                 'end_date' => date('Y-m-d H:i:s')
             ],
             [
                 'name' => 'KM 1-06 Quốc tế thiếu nhi ',
-                'percent' => '25',
+                'percent' => '0',
                 'start_date' => date('Y-m-d H:i:s'),
                 'end_date' => date('Y-m-d H:i:s')
             ]
