@@ -5,6 +5,7 @@ $(document).ready(function(){
     // $('.materialboxed').materialbox();
     $('.tooltipped').tooltip();
     $('.materialboxed').materialbox();
+    $('.scrollspy').scrollSpy();
 
     $('.sidenav').sidenav({
         edge: 'right',

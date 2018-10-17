@@ -4,6 +4,7 @@
             $('#login-modal').modal({
 
             });
+            $('#login-require').modal();
             $('#dropdown-profile').dropdown({
                 coverTrigger: false,
                 alignment: 'right',

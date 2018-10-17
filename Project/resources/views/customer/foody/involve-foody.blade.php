@@ -1,5 +1,5 @@
 @if(!empty($foody_type->foodies))
-    <div class="row white">
+    <div id="involve-foody-container" class="row white section scrollspy">
         <div class="col s12 content">
             <span class="content-header">Cùng loại</span>
             <div class="divider" style="margin-bottom: 10px"></div>

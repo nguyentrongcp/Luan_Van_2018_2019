@@ -37,7 +37,7 @@
         left: 0;
         right: 0;
         will-change: opacity;
-        z-index: 1000;
+        z-index: 1004;
         width: 100%;
         height: 100%;
         background-color: #292929;
@@ -255,6 +255,8 @@
             $('body').css('overflow', 'hidden');
             initImageViewer(list_image, image_selected);
 
+            console.log($(list_image[0]));
+
             $('#image-viewer').removeClass('hide');
             setMiddle($('#image-viewer-main'));
             $(window).resize(function () {
@@ -360,7 +362,6 @@
             $('#image-viewer').addClass('hide');
             $('#image-viewer-list').empty();
             $('body').css('overflow', 'auto');
-            $(window).off('resize');
         }
     </script>
 @endpush

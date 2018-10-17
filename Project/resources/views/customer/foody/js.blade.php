@@ -32,10 +32,32 @@
                 $.each($('.comment-image img'), function (key, value) {
                     $(value).css('height', $(value).width());
                 });
+                $.each($('.foody-images'), function (key, value) {
+                    $(value).css('height', $(value).width());
+                });
+            });
+            $('#foody-scrollspy-container').pushpin({
+                top: $('#foody-content-container').offset().top - $('#navbar-second').height()
+            });
+            $('#foody-rating-show').pushpin({
+                top: $('#foody-rating-show').offset().top - $('#navbar-second').height()
             });
         });
 
+        $('#foody-comment-show').on('click', function () {
+            let logged = '{{ $logged }}';
+            if (logged === 'false') {
+                $('#login-require').modal('open');
+            }
+            else {
+                $('#foody-comment-modal').modal('open');
+            }
+        });
+
         $.each($('.comment-image img'), function (key, value) {
+            $(value).css('height', $(value).width());
+        });
+        $.each($('.foody-images'), function (key, value) {
             $(value).css('height', $(value).width());
         });
 
@@ -81,7 +103,8 @@
                             let time = $.now();
                             let imagePreview = "<div id='" + time + "'" + " data-target=\"" + e.target.result + "\"" +
                                 " class='comment-modal-image " + hide + "'>\n" +
-                                "            <img src='" + e.target.result + "'>\n" +
+                                "            <img src='" + e.target.result + "' onclick=\"openViewer($('.comment-modal-image img'), " +
+                                key + ")\"" + "'>\n" +
                                 "            <i class='material-icons'" + "' onclick='removeImage(" + time + ")'>clear</i>\n" +
                                 "        </div>";
                             $('#comment-modal-image-location').append(imagePreview);
@@ -181,8 +204,9 @@
                             });
                         }
                         else {
-                            $('#comment-modal-title').val('');
-                            $('#comment-modal-content').val('');
+                            $('#comment-modal-title').val(null);
+                            $('#comment-modal-content').val(null);
+                            $('#comment-modal-image-location').empty();
                             $('#foody-comment-modal').modal('close');
                             $('#comment-modal-success-text').text('Bình luận của bạn đã được gửi. Chúng tôi sẽ xem xét và phê duyệt trong thời gian sớm nhất.');
                             $('#comment-modal-success').modal('open');

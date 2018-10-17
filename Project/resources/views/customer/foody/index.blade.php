@@ -4,13 +4,15 @@
 
 @section('content')
 
-    <div class="row" id="foody-info">
+    @php $logged = Auth::guard('customer')->check() ? 'true' : 'false'; @endphp
 
-        <div class="col s12 m12 l5 left floated z-depth-1" style="line-height: 0; margin-bottom: 15px">
+    <div class="row section scrollspy" id="foody-info">
+
+        <div class="col s12 m12 l5 z-depth-1" style="line-height: 0; margin-bottom: 15px">
             <img class="responsive-img foody-image" src="{{ $foody->avatar }}"></img>
         </div>
 
-        <div class="col s12 m12 l7 right floated foody-info" style="padding-left: 0">
+        <div class="col s12 m12 l7 foody-info" style="padding-left: 0">
             <div class="navigation truncate">
                 <a href="#">Trang chủ</a>
                 <i class="angle double right small icon"></i>
@@ -28,6 +30,9 @@
                 <span>
                     <span class="ui red label pulse">Mua 2 tặng 1</span>
                 </span>
+            </div>
+            <div class="foody-describe">
+                {{ $foody->describe }}
             </div>
             <div class="foody-rating">
                 <i class="material-icons left">star</i>
@@ -65,42 +70,63 @@
                     <div class="nav-wrapper">
                         <ul>
                             <li class="col s4 text-center waves-effect waves-light">
-                                <a href="#foody-comment-modal" class="modal-trigger">
+                                <a id="foody-comment-show">
                                     <i class="comment icon"></i>
                                     Bình luận
                                 </a>
                             </li>
                             <li class="col s4 waves-effect waves-light">
                                 <a href="#">
-                                    <i class="pencil alternate icon"></i>
-                                    Bài đăng
+                                    <i class="star icon"></i>
+                                    Đánh giá
                                 </a>
                             </li>
                             <li class="col s4 waves-effect waves-light">
-                                <a href="#">
-                                    <i class="images icon"></i>
-                                    Hình ảnh
+                                <a onclick="$('#commentcomment').click()">
+                                    <i class="share alternate icon"></i>
+                                    Chia sẻ
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </nav>
             </div>
+
+            <!-- Your share button code -->
+            <div id="foody-share" class="fb-share-button hide" data-mobile_iframe="true">
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col s2 hide-on-med-and-down" style="height: 100px">
+    <div class="row" id="foody-content-container">
+        <div id="foody-scrollspy-container" class="col s2 hide-on-small-only foody-scrollspy-container">
+            <ul class="section table-of-contents foody-scrollspy">
+                <li><a href="#foody-info">Thông tin</a></li>
+                <li><a href="#involve-foody-container">Cùng loại</a></li>
+                <li><a href="#initialization">Đánh giá cao</a></li>
+                <li><a href="#foody-images-container">Hình ảnh</a></li>
+                <li><a href="#comment-container">Bình luận</a></li>
+            </ul>
+            <div class="slider-ads-portrait">
+                <img src="/customer/image/slider-ads2.jpg">
+            </div>
         </div>
-        <div class="col s12 m12 l7 content-col">
-            @include('customer.foody.involve-foody')
+        <div class="col s12 m12 l10 right foody-content-container">
+            <div class="col s12 slider-ads-landscape">
+                <img src="/customer/image/slider-ads.jpg">
+            </div>
+            <div id="foody-rating-show" class="col s12 m12 l4 right foody-rating-show">
+                @include('customer.foody.rating')
+            </div>
+            <div class="col s12 m12 l8 content-col left">
+                @include('customer.foody.involve-foody')
 
-            @include('customer.foody.comment')
+                @include('customer.foody.images')
 
-            {{--@include('customer.foody.image')--}}
-        </div>
-        <div class="col s12 m12 l3">
-            @include('customer.foody.rating')
+                @include('customer.foody.comment')
+
+                {{--@include('customer.foody.image')--}}
+            </div>
         </div>
     </div>
 
@@ -113,5 +139,15 @@
     @include('customer.foody.style')
 
     @include('customer.foody.js')
+
+    @push('script')
+        <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+    @endpush
 
 @endsection

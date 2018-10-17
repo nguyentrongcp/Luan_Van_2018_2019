@@ -19,7 +19,7 @@
         </div>
         <div class="comment-modal-add-image" id="comment-add-image">
             <div class="blue-grey lighten-3">
-                <i class="material-icons">add_a_photo</i>
+                <i class="material-icons">photo_camera</i>
             </div>
         </div>
         <input onchange="uploadImage(this)" id="comment-input-file" class="hide" type="file"

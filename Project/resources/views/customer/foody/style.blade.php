@@ -4,12 +4,15 @@
             padding-left: 50px !important;
         }
         .content-col {
-            padding: 0 10px !important;
+            padding-right: 10px !important;
         }
     }
     @media only screen and (min-width: 601px) {
         .involve-foody-name {
             padding: 10px 0 0 10px !important;
+        }
+        .foody-content-container {
+            width: calc(100% - 180px) !important;
         }
     }
     /*@media only screen and (max-width: 600px) {*/
@@ -17,10 +20,20 @@
             /*padding: 0 !important;*/
         /*}*/
     /*}*/
-    @media only screen and (max-width: 992px) {
+    @media only screen and (max-width: 600px) {
 
     }
 
+    .table-of-contents a.active {
+        border-left: 2px solid #26a69a;
+    }
+    .table-of-contents a:hover {
+        border-left: 1px solid #26a69a;
+    }
+
+    .section {
+        padding: 0;
+    }
     #foody-info {
         margin-top: 15px;
     }
@@ -34,8 +47,12 @@
         margin: 0;
     }
     .foody-name {
-        margin: 10px 0;
+        margin: 10px 0 5px 0;
         font-weight: 500 !important;
+    }
+    .foody-describe {
+        font-size: 13px;
+        margin-top: 4px;
     }
     .foody-cost span {
         margin-left: 5px;
@@ -72,6 +89,18 @@
     .foody-image {
         width: 100%;
         /*max-height: 200px;*/
+    }
+    .foody-images {
+        display: block;
+        float: left;
+        cursor: pointer;
+    }
+    .foody-images i {
+        color: #535353;
+        margin-top: calc((100% - 40px) / 2);
+        left: calc((100% - 40px) / 2);
+        position: relative;
+        font-size: 40px;
     }
     .foody-like {
         margin-top: 10px;
@@ -147,6 +176,15 @@
     .content-col > .row {
         margin-bottom: 20px;
     }
+    .foody-rating-show {
+        margin-bottom: 20px;
+    }
+    .foody-rating-show.pinned {
+        top: 64px !important;
+        right: 5% !important;
+        float: right !important;
+        width: calc((90% - 180px) * 1 / 3) !important;
+    }
     .rating-header {
         height: 50px;
         text-align: center;
@@ -200,6 +238,9 @@
         display: inline-block;
         /*position: relative;*/
         margin-left: 4px;
+    }
+    .comment-modal-image img {
+        cursor: pointer;
     }
     .comment-modal-add-image {
         height: 98px;
@@ -311,9 +352,72 @@
         font-size: 14px;
         line-height: 1.5em;
     }
+    .comment-image {
+        margin-bottom: 10px !important;
+    }
     .comment-image img {
         display: block;
         float: left;
         cursor: pointer;
     }
+    .comment-footer-container {
+        background-color: #F9F8F8;
+        position: relative;
+        left: -10px;
+        padding: 0 10px;
+        width: calc(100% + 20px);
+    }
+    .comment-comment-container {
+        margin-top: 8px;
+    }
+    .comment-comment-container .comment-avatar {
+        width: 35px;
+        float: left;
+    }
+    .comment-comment-container .comment-avatar img {
+        width: 35px;
+        height: 35px;
+    }
+    .comment-comment-content-container, .comment-comment-time-container {
+        width: calc(100% - 45px) !important;
+        float: right !important;
+        font-size: 12px;
+    }
+    .comment-comment-name {
+        margin-right: 5px;
+    }
+    .comment-comment-time-container {
+        font-size: 11px;
+        font-weight: 300;
+    }
+    .comment-comment-content-container textarea {
+        margin-bottom: 0;
+        font-size: 12px;
+        min-height: 1px;
+        height: 35px;
+    }
+    .slider-ads-landscape img {
+        width: 100%;
+        max-height: 120px;
+        margin-bottom: 10px;
+    }
+    .slider-ads-portrait img {
+        width: 160px;
+        max-height: 320px;
+        /*max-height: 120px;*/
+        /*margin-bottom: 10px;*/
+    }
+    .foody-scrollspy {
+        /*width: 120px;*/
+        /*margin: auto;*/
+    }
+    .foody-scrollspy-container {
+        width: 180px !important;
+    }
+    .foody-scrollspy-container.pinned {
+        top: 64px !important;
+        max-height: calc(100vh - 64px) !important;
+        overflow: auto;
+    }
+
 </style>

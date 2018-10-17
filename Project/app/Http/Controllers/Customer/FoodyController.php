@@ -11,6 +11,7 @@ use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class FoodyController extends Controller
@@ -18,8 +19,11 @@ class FoodyController extends Controller
     public function index($slug) {
         $foody = Foody::where('slug', $slug)->first();
         $foody_type = FoodyType::find($foody->id);
+        $images = DB::table('foodies')->join('comments', 'foodies.id', 'foody_id')
+            ->join('image_comments', 'comments.id', 'comment_id')->join('images', 'image_id', 'images.id')
+            ->select('images.link')->get();
 
-        return view('customer.foody.index', compact(['foody', 'foody_type']));
+        return view('customer.foody.index', compact(['foody', 'foody_type', 'images']));
     }
 
     public function testsms() {
@@ -107,7 +111,7 @@ class FoodyController extends Controller
         $comment = new Comment();
         $comment->content = $request->get('content');
         $comment->title = $request->title;
-        $comment->date = date('Y-m-d h:i:s');
+        $comment->date = date('Y-m-d H:i:s');
         $comment->customer_id = $customer_id;
         $comment->foody_id = $request->foody_id;
         $comment->save();

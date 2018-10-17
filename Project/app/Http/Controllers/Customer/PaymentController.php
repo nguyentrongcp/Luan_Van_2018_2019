@@ -143,11 +143,7 @@ class PaymentController extends Controller
 
     }
 
-    public function storeOrder() {
-        do {
-            $order_code = str_random(12);
-        }
-        while (Order::where('order_code', $order_code)->count() > 0);
+    public function storeOrder($order_code) {
 
         $order = new Order();
         $order->order_code = $order_code;
@@ -192,8 +188,20 @@ class PaymentController extends Controller
             }
         }
         if ($request->otp == session('otp')) {
-            $this->storeOrder();
-            $this->forget($request);
+            do {
+                $order_code = str_random(12);
+            }
+            while (Order::where('order_code', $order_code)->count() > 0);
+            if (session('type') == 0) {
+                $this->storeOrder($order_code);
+                $this->forget($request);
+            }
+            else {
+                $total_cost = Cart::getCost() + (double)session('transport_fee');
+                return Response(['type' => 'payment', 'order_code' => $order_code, 'total_cost' => $total_cost,
+                    'name' => session('name'), 'email' => session('email'), 'phone' => session('phone'),
+                    'address' => session('address')]);
+            }
         }
         else {
             return Response('Mã OTP không chính xác!', 404);

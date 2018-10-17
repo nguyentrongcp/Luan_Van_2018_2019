@@ -183,11 +183,46 @@
                         }
                     },
                     success: function (data) {
-                        window.location.href = '/home';
+                        if (data.type === 'payment') {
+                            // SetExpressCheckout(data.order_code,data.total_code,data.name,data.email,data.phone,data.address);
+                            window.location.href = '/home';
+                        }
+                        else {
+                            window.location.href = '/home';
+                        }
                     }
                 })
             }
 
+        }
+
+        function SetExpressCheckout(order_code, total_cost, name, email, phone, address) {
+            $.ajax({
+                type: 'post',
+                url: 'https://sandbox.nganluong.vn:8088/nl30/checkout.api.nganluong.post.php',
+                data: {
+                    merchant_id: 46875,
+                    merchant_password: '20101e04dca1d1570c7cb608aa3084e1',
+                    version: '3.1',
+                    receiver_email: 'nguyentrongcp@gmail.com',
+                    order_code: order_code,
+                    total_amount: total_cost,
+                    payment_method: 'ATM_ONLINE',
+                    bank_code: '101001339544',
+                    order_description: 'Thanh toán',
+                    tax_amount: 0,
+                    discount_amount: 0,
+                    fee_shipping: 0,
+                    return_url: '/home',
+                    cancel_url: '/payment',
+                    buyer_fullname: name,
+                    buyer_email: email,
+                    buyer_mobile: phone,
+                    buyer_address: address,
+                    cur_code: 'vnd',
+                    lang_code: 'vi',
+                }
+            });
         }
     </script>
 @endpush

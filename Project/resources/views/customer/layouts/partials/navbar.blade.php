@@ -131,6 +131,8 @@
 
 @include('customer.layouts.components.login')
 
+@include('customer.layouts.components.login-require')
+
 @include('customer.layouts.partials.navbar-mobile')
 
 {{--<div class="container">--}}
