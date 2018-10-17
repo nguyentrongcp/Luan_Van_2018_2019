@@ -14,7 +14,7 @@
             </th>
             <th class="text-center th-prot th-stt">STT</th>
             <th class="th-prot text-center" id="th-name-type">Tên loại</th>
-            {{--<th class="th-prot text-center">Thực đơn</th>--}}
+            <th class="th-prot text-center">Thực đơn</th>
             <th class="text-center th-prot">Thao tác</th>
         </tr>
         </thead>
@@ -33,12 +33,12 @@
                 <td class="td-prot" id="th-name-type">
                     <a class="a-prot" href="{{route('admin.addType',[$fdt->id])}}">{{$fdt->name}}</a>
                 </td>
-                {{--<td class="td-actions text-center td-prot">--}}
-                    {{--<a rel="tooltip" class="btn btn-info btn-sm btn-round btn-icon"--}}
-                            {{--href="{{route('foodies.index')}}?pt={{$fdt->id}}">--}}
-                        {{--<i class="fa fa-eye"></i>--}}
-                    {{--</a>--}}
-                {{--</td>--}}
+                <td class="td-actions text-center td-prot">
+                    <a rel="tooltip" class="btn btn-info btn-sm btn-round btn-icon"
+                       href="{{route('foody_slug_type',[$fdt->slug])}}">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </td>
                 <td class="td-actions text-center td-prot">
 
                     <button type="button" data-toggle="tooltip" data-placement="bottom" title="Sửa" class="btn btn-success btn-sm btn-round btn-icon"

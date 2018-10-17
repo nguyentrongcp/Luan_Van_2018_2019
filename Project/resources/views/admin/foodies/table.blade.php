@@ -17,7 +17,7 @@
             <th class="th-prot text-center">Thuộc loại</th>
             <th class="th-prot text-center">Giá</th>
             <th class="th-prot text-center">Trạng thái</th>
-            <th class="text-center th-prot">Xem chi tiết</th>
+            <th class="text-center th-prot">Xem</th>
         </tr>
         </thead>
         <tbody>

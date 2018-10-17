@@ -61,3 +61,7 @@
 .sidebar-child{
     padding-left: 15px;
 }
+.lb-info-orders{
+    padding-left: 15px!important;
+    font-size: 15px!important;
+}

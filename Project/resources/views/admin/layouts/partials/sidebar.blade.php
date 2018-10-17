@@ -45,7 +45,7 @@
                 <div class="collapse" id="collapseFoody">
                     <ul class="nav">
                         <li class="sidebar-child"><a href="/admin/foodies"><i class="fa fa-info"></i>Thông tin</a></li>
-                        <li class="sidebar-child"><a href="/admin/feedbacks"><i class="fa fa-star"></i>Đánh giá</a></li>
+                        {{--<li class="sidebar-child"><a href="/admin/feedbacks"><i class="fa fa-star"></i>Đánh giá</a></li>--}}
                         <li class="sidebar-child"><a href="/admin/comments"><i class="fa fa-comment"></i>Bình luận</a></li>
                     </ul>
                 </div>
@@ -74,6 +74,12 @@
                     <p>Tin tức</p>
                 </a>
             </li>
+            <li class="{{Request::is('*/employees') ? 'active' : ''}}">
+                <a href="/admin/employees">
+                    <i class="now-ui-icons users_circle-08"></i>
+                    <p>Nhân viên</p>
+                </a>
+            </li>
             <li class="{{Request::is('*/shop_infos') ? 'active' : ''}}">
                 <a href="/admin/shop_infos" data-toggle="collapse" data-target="#collapseShop" aria-expanded="false" aria-controls="collapseShop">
                     <i class="fa fa-shopping-bag"></i>
@@ -88,18 +94,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="{{Request::is('*/employees') ? 'active' : ''}}">
-                <a href="/admin/employees">
-                    <i class="now-ui-icons users_circle-08"></i>
-                    <p>Nhân viên</p>
-                </a>
-            </li>
-            <li class="{{Request::is('*/khach_hang') ? 'active' : ''}}">
-                <a href="/admin/khach_hang">
-                    <i class="now-ui-icons users_single-02"></i>
-                    <p>Khách hàng</p>
-                </a>
-            </li>
+
         </ul>
     </div>
 </div>

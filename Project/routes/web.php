@@ -49,14 +49,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
         ->name('foody_change_cost');
     Route::post('foodies/change_avatar/{id}','admin\FoodyController@changeAvatar')
         ->name('foody_change_avatar');
-//    Route::post('foodies/change_multi_image/{id}','admin\FoodyController@changeMultiImage')
-//        ->name('foody_change_multi_image');
+    Route::get('foodyType/{slug}','admin\FoodyController@showSlugType')
+        ->name('foody_slug_type');
 
     /**      Employee       **/
     Route::resource('employees','admin\EmployeeController');
 
     /**      orders       **/
     Route::resource('orders','admin\OrderController');
+    Route::get('orders/filter/{id}','admin\OrderController@filter')->name('admin_orders_filter');
 
     /**      Goods receipt notes       **/
     Route::resource('goods_receipt_note','admin\GoodsReceiptNotesController');
@@ -88,6 +89,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
     /** Comments **/
     Route::resource('comments', 'admin\CommentController');
+    Route::post('comments/{id}','admin\CommentController@update')->name('admin.approved');
+    Route::get('comments/filter/{id}','admin\CommentController@filter')->name('admin_comment_filter');
 
 
 

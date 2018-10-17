@@ -8,8 +8,7 @@
         </div>
 
         @yield('content')
-        @include('admin.layouts.components.success')
-        @include('admin.layouts.components.error')
+
         @include('admin.layouts.partials.footer')
     </div>
 </div>

@@ -51,11 +51,12 @@ class FoodyController extends Controller
     {
         $validate = $this->validationStore($request);
         if ($validate->fails()) {
-            return back()->withErrors($validate)->withInput($request->only('cost-foody', 'name-foody'));
+            return back()->withErrors($validate)
+                ->withInput($request->only('cost-foody', 'name-foody'));
         }
         $cost_input = str_replace(',', '', $request->get('cost-foody'));
         if ($cost_input < 1000) {
-            return back()->withErrors(['cost-food' => 'Giá tiền không được nhỏ hơn 1,000đ !'])
+            return back()->withErrors(['cost-foody' => 'Giá tiền không được nhỏ hơn 1,000đ !'])
                 ->withInput($request->only('cost-foody', 'name-foody'));
         }
         if ($cost_input > 100000000) {
@@ -63,7 +64,7 @@ class FoodyController extends Controller
                 ->withInput($request->only('cost-foody', 'name-foody'));
         }
         if (!$request->hasFile('avatar-image-upload')) {
-            return back()->withErrors(['Bạn chưa upload hình ảnh!'])
+            return back()->withErrors(['avatar-image-upload'=>'Bạn chưa upload hình ảnh!'])
                 ->withInput($request->only('cost-foody', 'name-foody'));
         }
 
@@ -71,7 +72,10 @@ class FoodyController extends Controller
         $foody_name = $request->get('name-foody');
         $foody->name = $foody_name;
         $foody->slug = str_slug($foody_name);
-
+        if ($foody->matchedName($foody_name)) {
+            return back()->with('error', 'Tên thực đơn đã tồn tại!')
+                ->withInput($request->only('cost-foody', 'name-foody'));
+        }
         $foody->foody_created_at = date('Y-m-d H:i:s');
         $foody->foody_updated_at = date('Y-m-d H:i:s');
         $foody->describe = $request->get('des');
@@ -247,47 +251,15 @@ class FoodyController extends Controller
         }
     }
 
-    public function addImage(Request $request, $id){
+    public function showSlugType($slug){
+        $foodyTypes = FoodyType::where('slug',$slug)->get();
 
-        $time  = time();
-        if ($request->hasFile('foody-image-upload')) {
-            $foody_images = $request->File('foody-image-upload');
-            foreach ($foody_images as $key => $foody_image) {
-                $ext = $foody_image->extension();
-                $image = new Image();
-                $path = $foody_image
-                    ->move('admin\assets\images\img_product', "image-$id-$key-$time.$ext");
-                $image->link = str_replace('\\', '/', $path);
-                $image->save();
-
-                $image_foody = new ImageFoody();
-                $image_foody->image_id = $image->id;
-                $image_foody->foody_id = $id;
-                $image_foody->save();
-            }
+        foreach ($foodyTypes as $foodyType){
+            $nameType = $foodyType->name;
+            $foodies = Foody::where('foody_type_id',$foodyType->id)->paginate(10);
         }
-    }
 
-    public function deleteImage(Request $request, $id)
-    {
-
-        if (!$request->hasFile('foody-image-upload')) {
-            return back()->with('error', 'Bạn chưa upload hình ảnh!');
-        } else {
-
-            foreach (ImageFoody::where('foody_id', $id)->get() as $idImage) {
-                foreach (Image::where('id', $idImage->image_id)->get() as $image) {
-                    $oldPath = $image->link;
-
-                    if (!empty($oldPath)) {
-                        File::delete($oldPath);
-                        $image->delete();
-                    }
-
-                }
-            }
-            return back()->with('success', 'Cập nhật thành công.');
-        }
+        return view('admin.foodies.show.index',compact('foodies','nameType'));
     }
 
     public function validationStore(Request $request)

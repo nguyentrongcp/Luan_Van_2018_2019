@@ -23,13 +23,16 @@ class FoodyTypeController extends Controller
 
     public function addType(Request $request, $id)
     {
+
         $foody_type_id = $id;
         $name_type = $request->get('name-type');
-        $lug = str_slug($name_type);
-
+        $slug = str_slug($name_type);
+        if (FoodyType::exist($slug)){
+            return back()->with('error',"$name_type đã tồn tại");
+        }
         $foodyType = new FoodyType();
         $foodyType->name = $name_type;
-        $foodyType->slug = $lug;
+        $foodyType->slug = $slug;
         $foodyType->foody_type_id = $foody_type_id;
 
         $foodyType->save();
@@ -58,7 +61,9 @@ class FoodyTypeController extends Controller
     {
         $name_type = $request->get('name-type');
         $slug = str_slug($name_type);
-
+        if (FoodyType::exist($slug)){
+            return back()->with('error',"$name_type đã tồn tại");
+        }
         $foodyType = new FoodyType();
         $foodyType->name = $name_type;
         $foodyType->slug = $slug;
@@ -101,6 +106,7 @@ class FoodyTypeController extends Controller
 
         $foodType->name = $request->get('name-type');
         $foodType->slug = str_slug($foodType->name);
+
         $foodType->update();
 
         return back()->with('success','Cập nhât thành công!');
@@ -128,7 +134,7 @@ class FoodyTypeController extends Controller
         {
             foreach ($ids as $id) {
                 $foodyType = FoodyType::find($id);
-                $foodyType->is_deleted = 1;
+                $foodyType->is_deleted = true;
 
                 $foodyType->update();
             }
@@ -143,15 +149,6 @@ class FoodyTypeController extends Controller
 
 
         return back()->with('success', 'Xóa thành công');
-    }
-    public function changeStatus($ids){
-
-        $foodyType = FoodyType::find($ids);
-        $foodyType->is_deleted = 0;
-
-        $foodyType->update();
-
-        return back()->with('success','Khôi phục thành công!');
     }
     private function canDelete($ids){
         $errors = [];

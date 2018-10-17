@@ -21,7 +21,9 @@
                                 <input type="file" id="gallery-avatar-image" name="avatar-image-upload" accept=".jpg, .png, .jpeg">
                             </button>
                         </div>
-                        <div class="gallery-avatar-image"></div>
+                        <div class="gallery-avatar-image">
+                            <img id='avatar' src="{{asset($avatarFoody)}}" alt="{{$nameFoody}}">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>

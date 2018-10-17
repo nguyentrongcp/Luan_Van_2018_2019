@@ -17,6 +17,8 @@ class Comment extends Model
         return $amountOfComment;
     }
 
+<<<<<<< HEAD
+=======
     public function customer() {
         return $this->belongsTo(Customer::class);
     }
@@ -24,4 +26,5 @@ class Comment extends Model
     public function imageComments() {
         return $this->hasMany(ImageComment::class);
     }
+>>>>>>> 4304afe0890ba6fdd4c4ec3901c1d5a7246cc4fe
 }
