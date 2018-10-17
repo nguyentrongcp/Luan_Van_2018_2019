@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\nganluong;
 
 class PaymentController extends Controller
 {
@@ -84,6 +85,7 @@ class PaymentController extends Controller
         $request->session()->forget('otp');
         $request->session()->forget('transport_fee');
         $request->session()->forget('total_of_cost');
+        $request->session()->forget('secure_code');
     }
 
     public function getOTP(Request $request) {
@@ -143,7 +145,7 @@ class PaymentController extends Controller
 
     }
 
-    public function storeOrder($order_code) {
+    public function storeOrder($order_code, $payment_type = 0) {
 
         $order = new Order();
         $order->order_code = $order_code;
@@ -155,7 +157,7 @@ class PaymentController extends Controller
         $order->phone = session('phone');
         $order->address = session('address');
         $order->order_created_at = date('Y-m-d H:i:s');
-        $order->payment_type = session('type');
+        $order->payment_type = $payment_type;
         $order->to = session('to');
         $order->total_of_cost = Cart::getCost() + (double)session('transport_fee');
         $order->transport_fee = session('transport_fee');
@@ -179,6 +181,7 @@ class PaymentController extends Controller
             $order_foody->save();
         }
 
+
     }
 
     public function checkOTP(Request $request) {
@@ -198,13 +201,88 @@ class PaymentController extends Controller
             }
             else {
                 $total_cost = Cart::getCost() + (double)session('transport_fee');
-                return Response(['type' => 'payment', 'order_code' => $order_code, 'total_cost' => $total_cost,
-                    'name' => session('name'), 'email' => session('email'), 'phone' => session('phone'),
-                    'address' => session('address')]);
+                $url = $this->buildCheckoutUrl('http://127.0.0.1:8000/payment/process_payment',
+                    'nguyentrongcp@gmail.com','',$order_code,$total_cost);
+                return Response(['type' => 'payment', 'url' => $url]);
             }
         }
         else {
             return Response('Mã OTP không chính xác!', 404);
         }
+    }
+
+    public function processPayment(Request $request) {
+
+        if ($this->verifyPaymentUrl($request->transaction_info,$request->order_code,$request->price,
+            $request->payment_id,$request->payment_type,$request->error_text,$request->secure_code)) {
+            $this->storeOrder($request->order_code, $request->payment_type);
+            $this->forget($request);
+
+            return redirect('/home');
+        }
+    }
+
+    public function buildCheckoutUrl($return_url, $receiver, $transaction_info, $order_code, $price)
+    {
+
+        $merchant_site_code = 46875;
+        $secure_pass = '20101e04dca1d1570c7cb608aa3084e1';
+        $nganluong_url = 'https://sandbox.nganluong.vn:8088/nl35/checkout.php';
+
+        $arr_param = array(
+            'merchant_site_code'=>	strval($merchant_site_code),
+            'return_url'		=>	strtolower(urlencode($return_url)),
+            'receiver'			=>	strval($receiver),
+            'transaction_info'	=>	strval($transaction_info),
+            'order_code'		=>	strval($order_code),
+            'price'				=>	strval($price)
+        );
+        $secure_code = implode(' ', $arr_param) . ' ' . $secure_pass;
+        $arr_param['secure_code'] = md5($secure_code);
+
+        $redirect_url = $nganluong_url;
+        if (strpos($redirect_url, '?') === false)
+        {
+            $redirect_url .= '?';
+        }
+        else if (substr($redirect_url, strlen($redirect_url)-1, 1) != '?' && strpos($redirect_url, '&') === false)
+        {
+            $redirect_url .= '&';
+        }
+
+        $url = '';
+        foreach ($arr_param as $key => $value)
+        {
+            if ($key != 'return_url') $value = urlencode($value);
+
+            if ($url == '')
+                $url .= $key . '=' . $value;
+            else
+                $url .= '&' . $key . '=' . $value;
+        }
+        session(['secure_code' => $arr_param['secure_code']]);
+        return $redirect_url.$url;
+    }
+
+    public function verifyPaymentUrl($transaction_info, $order_code, $price, $payment_id, $payment_type, $error_text, $secure_code)
+    {
+        $merchant_site_code = 46875;
+        $secure_pass = '20101e04dca1d1570c7cb608aa3084e1';
+
+        $str = '';
+        $str .= ' ' . strval($transaction_info);
+        $str .= ' ' . strval($order_code);
+        $str .= ' ' . strval($price);
+        $str .= ' ' . strval($payment_id);
+        $str .= ' ' . strval($payment_type);
+        $str .= ' ' . strval($error_text);
+        $str .= ' ' . strval($merchant_site_code);
+        $str .= ' ' . strval($secure_pass);
+
+        $verify_secure_code = '';
+        $verify_secure_code = md5($str);
+
+        if ($verify_secure_code === $secure_code) return true;
+        else return false;
     }
 }

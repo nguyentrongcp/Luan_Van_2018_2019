@@ -47,7 +47,7 @@ class Foody extends Model
     }
 
     public function salesOffDetail() {
-        return $this->hasMany(SalesOffsDetails::class);
+        return $this->hasMany(SalesOffDetail::class);
     }
 //
 //    public function quantities() {

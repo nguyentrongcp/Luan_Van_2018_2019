@@ -124,6 +124,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::post('/customer/check_payment_otp', 'Customer\PaymentController@checkOTP');
     Route::post('/customer/get_ward', 'Customer\PaymentController@getWard');
     Route::post('/customer/get_transport_fee', 'Customer\PaymentController@getTransportFee');
+    Route::get('/payment/process_payment', 'Customer\PaymentController@processPayment');
 
     Route::get('/customer/store_order', 'Customer\PaymentController@storeOrder')->name('order.store');
 

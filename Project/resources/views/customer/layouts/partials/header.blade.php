@@ -4,6 +4,11 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
 
+    @php
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Credentials: true');
+    @endphp
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!--Import Google Icon Font-->

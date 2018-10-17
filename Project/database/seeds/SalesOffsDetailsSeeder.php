@@ -16,11 +16,11 @@ class SalesOffsDetailsSeeder extends Seeder
 
         for ($i = 1; $i <= 5; $i++) {
             $rows[] = [
-                'sales_offs_id' => random_int(1, 5),
+                'sales_off_id' => random_int(1, 5),
                 'foody_id' => random_int(1, App\Foody::count())
             ];
         }
 
-        DB::table('sales_offs_details')->insert($rows);
+        DB::table('sales_off_details')->insert($rows);
     }
 }

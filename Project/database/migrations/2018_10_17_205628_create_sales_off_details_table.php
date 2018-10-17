@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSalesOffsDetailsTable extends Migration
+class CreateSalesOffDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateSalesOffsDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales_offs_details', function (Blueprint $table) {
+        Schema::create('sales_off_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sales_offs_id')->unsigned();
+            $table->integer('sales_off_id')->unsigned();
             $table->integer('foody_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('sales_offs_id')->references('id')->on('sales_offs')->onDelete('cascade');
+            $table->foreign('sales_off_id')->references('id')->on('sales_offs')->onDelete('cascade');
             $table->foreign('foody_id')->references('id')->on('foodies')->onDelete('cascade');
         });
     }
@@ -31,6 +31,6 @@ class CreateSalesOffsDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales_offs_details');
+        Schema::dropIfExists('sales_off_details');
     }
 }

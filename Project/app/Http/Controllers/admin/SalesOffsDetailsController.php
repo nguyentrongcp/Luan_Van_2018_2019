@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\SalesOffsDetails;
+use App\SalesOffDetails;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -38,7 +38,7 @@ class SalesOffsDetailsController extends Controller
     {
         $ids = $request->get('foody-id');
         foreach ($ids as $id){
-            $salesOffsDetails = new SalesOffsDetails();
+            $salesOffsDetails = new SalesOffDetails();
             $salesOffsDetails->sales_offs_id = $request->get('sales-offs-id');
             $salesOffsDetails->foody_id = $id;
             $salesOffsDetails->save();
@@ -94,7 +94,7 @@ class SalesOffsDetailsController extends Controller
             return back()->with('error', 'Dữ liệu chưa được chọn');
         }
         foreach ($ids as $id) {
-            $salesOffs = SalesOffsDetails::findOrFail($id);
+            $salesOffs = SalesOffDetails::findOrFail($id);
             $salesOffs->delete();
         }
         return back()->with('success','Xóa thành công!');

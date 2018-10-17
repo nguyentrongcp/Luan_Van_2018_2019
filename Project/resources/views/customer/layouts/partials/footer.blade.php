@@ -28,6 +28,7 @@
     <script src="{{ asset('/customer/js/countdown.min.js') }}"></script>
     <script src="{{ asset('/customer/semantic/dimmer.min.js') }}"></script>
     <script src="{{ asset('/customer/semantic/transition.min.js') }}"></script>
+    <script src="{{ asset('/customer/js/md5.js') }}"></script>
     {{--<script src="/customer/semantic/dropdown.min.js"></script>--}}
 
     <script src="{{ asset('/customer/js/custom.js') }}"></script>
