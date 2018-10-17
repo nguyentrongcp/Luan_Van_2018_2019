@@ -104,15 +104,19 @@
                 <li><a href="#foody-info">Thông tin</a></li>
                 <li><a href="#involve-foody-container">Cùng loại</a></li>
                 <li><a href="#initialization">Đánh giá cao</a></li>
-                <li><a href="#foody-images-container">Hình ảnh</a></li>
-                <li><a href="#comment-container">Bình luận</a></li>
+                @if(count($images) != 0)
+                    <li><a href="#foody-images-container">Hình ảnh</a></li>
+                @endif
+                @if($foody->comments()->count() > 0)
+                    <li><a href="#comment-container">Bình luận</a></li>
+                @endif
             </ul>
             <div class="slider-ads-portrait">
                 <img src="/customer/image/slider-ads2.jpg">
             </div>
         </div>
         <div class="col s12 m12 l10 right foody-content-container">
-            <div class="col s12 slider-ads-landscape">
+            <div id="slider-ads-landscape" class="col s12 slider-ads-landscape">
                 <img src="/customer/image/slider-ads.jpg">
             </div>
             <div id="foody-rating-show" class="col s12 m12 l4 right foody-rating-show">

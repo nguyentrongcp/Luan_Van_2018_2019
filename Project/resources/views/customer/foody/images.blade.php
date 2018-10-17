@@ -1,4 +1,4 @@
-@if (!empty($images))
+@if (count($images) != 0)
 
     <div class="row white section scrollspy" id="foody-images-container">
         <div class="col s12 content">

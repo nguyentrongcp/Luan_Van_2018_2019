@@ -4,6 +4,7 @@
 
 @section('content')
 
+    @php $logged = Auth::guard('customer')->check() ? 'true' : 'false' @endphp
     <div class="row">
         @include('customer.home.navbar')
 
