@@ -18,9 +18,9 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('admin/assets/demo/demo.css')}}" rel="stylesheet" />
     <!-- CSS dropzone-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" />
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" />--}}
     <!-- CSS plugin jtoats -->
-    <link rel="stylesheet" href="{{asset('admin/assets/plugin/jq-toast/jquery.toast.min.css')}}">
+    {{--<link rel="stylesheet" href="{{asset('admin/assets/plugin/jq-toast/jquery.toast.min.css')}}">--}}
     <!-- CSS products -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/product.css')}}">
 
@@ -33,7 +33,7 @@
     <!-- icon-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Semantic-->
-    <link rel="stylesheet" href="{{ asset('/customer/semantic/dropdown.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/customer/semantic/search.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/customer/semantic/icon.min.css') }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>

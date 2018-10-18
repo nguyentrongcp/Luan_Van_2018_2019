@@ -22,6 +22,10 @@
                                     <i class="now-ui-icons ui-1_simple-remove"></i> Xóa nhiều
                                 </button>
                             </div>
+                            <span class="show-message">
+                                @include('admin.layouts.components.success')
+                                @include('admin.layouts.components.error')
+                            </span>
                         </div>
                         <div class="card-body all-icons">
                             <div class="row">

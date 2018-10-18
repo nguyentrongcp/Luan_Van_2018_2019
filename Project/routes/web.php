@@ -49,7 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
         ->name('foody_change_cost');
     Route::post('foodies/change_avatar/{id}','admin\FoodyController@changeAvatar')
         ->name('foody_change_avatar');
-    Route::get('foodyType/{slug}','admin\FoodyController@showSlugType')
+    Route::get('foody_type/{slug}','admin\FoodyController@showSlugType')
         ->name('foody_slug_type');
 
     /**      Employee       **/

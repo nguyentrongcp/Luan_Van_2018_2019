@@ -56,7 +56,7 @@ class EmployeeController extends Controller
         $admins->password = bcrypt($request->get('pass'));
         $admins->save();
 
-        $idDecentralizes = $request->get('decentralization');dd(decentralizes());
+        $idDecentralizes = $request->get('decentralization');
         $admins->decentralizes()->sync($idDecentralizes);
 
         return back()->with('success', 'Thêm nhân viên thành công');

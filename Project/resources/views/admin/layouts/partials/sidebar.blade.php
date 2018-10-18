@@ -28,13 +28,13 @@
                     </ul>
                 </div>
             </li>
-            <li class="{{Request::is('*/foody_type') || Request::is('*/add_foody_type/*')  ? 'active' : ''}}">
+            <li class="{{Request::is('*/foody_type') || Request::is('*/add_foody_type/*')||Request::is('*/foody_type/*')  ? 'active' : ''}}">
                 <a href="/admin/foody_type">
                     <i class="now-ui-icons location_map-big"></i>
                     <p>Loại thực đơn</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/foodies') || Request::is('*/foodies/create') ? 'active' : ''}}">
+            <li class="{{Request::is('*/foodies') || Request::is('*/foodies/create')|| Request::is('*/comments')|| Request::is('*/comments/*') ? 'active' : ''}}">
 
                 <a href="/admin/foodies" data-toggle="collapse" data-target="#collapseFoody" aria-expanded="false" aria-controls="collapseFoody">
                     <i class="fa fa-align-justify"></i>
@@ -50,19 +50,19 @@
                     </ul>
                 </div>
             </li>
-            <li class="{{Request::is('*/orders') ? 'active' : ''}}">
+            <li class="{{Request::is('*/orders')||Request::is('*/orders/*') ? 'active' : ''}}">
                 <a href="/admin/orders">
                     <i class="now-ui-icons design_app"></i>
                     <p>Đơn hàng</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/goods_receipt_note')||Request::is('*/goods_receipt_note_detail') ? 'active' : ''}}">
+            <li class="{{Request::is('*/goods_receipt_note')||Request::is('*/goods_receipt_note_detail/*') ? 'active' : ''}}">
                 <a href="/admin/goods_receipt_note">
                     <i class="now-ui-icons shopping_cart-simple"></i>
                     <p>Nhập hàng</p>
                 </a>
             </li>
-            <li class="{{Request::is('*/sales_offs')||Request::is('*/sales_offs/*') ? 'active' : ''}}">
+            <li class="{{Request::is('*/sales_offs')||Request::is('*/create_sales_offs/*')||Request::is('*/sales_offs/*') ? 'active' : ''}}">
                 <a href="/admin/sales_offs">
                     <i class="now-ui-icons business_bulb-63"></i>
                     <p>Khuyến mãi</p>

@@ -14,7 +14,7 @@
                     <input type="hidden" name="sales-offs-id" value="{{$id}}">
                     <div class="form-group">
                         <label class="title">Chọn thực đơn khuyến mãi</label>
-                        <select name="foody-id[]" multiple id="foody-id" class="ui dropdown">
+                        <select name="foody-id[]" multiple id="foody-id" class="form-control">
                             @foreach($foodies as $foodie)
                                 <option value="{{ $foodie->id }}">{{ $foodie->name }}</option>
                             @endforeach

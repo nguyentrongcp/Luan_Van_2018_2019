@@ -16,7 +16,7 @@
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{asset('admin/assets/demo/demo.js')}}"></script>
 <!-- JS plugin itoast -->
-<script src="{{asset('admin/assets/plugin/jq-toast/jquery.toast.min.js')}}" type="text/javascript"></script>
+{{--<script src="{{asset('admin/assets/plugin/jq-toast/jquery.toast.min.js')}}" type="text/javascript"></script>--}}
 
 <script>
     CKEDITOR.replace('des');
@@ -79,19 +79,41 @@
     });
 </script>
 <!-- JS Datatables-->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+{{--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">--}}
 
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{asset('admin/assets/js/datatables.js')}}"></script>
+{{--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.js"></script>--}}
+{{--<script type="text/javascript" charset="utf8"--}}
+        {{--src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>--}}
+{{--<script src="{{asset('admin/assets/js/datatables.js')}}"></script>--}}
 
 <!-- JS dropzone -->
-<script type="text/javascript" charset="utf8"
-        src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+{{--<script type="text/javascript" charset="utf8"--}}
+        {{--src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>--}}
 
 <!--Semantic JS -->
-<script type="text/javascript" src="{{ asset('/customer/semantic/dropdown.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/customer/semantic/search.min.js') }}"></script>
 
-
+<script>
+    var categoryContent = [
+        { category: 'South America', title: 'Brazil' },
+        { category: 'South America', title: 'Peru' },
+        { category: 'North America', title: 'Canada' },
+        { category: 'Asia', title: 'South Korea' },
+        { category: 'Asia', title: 'Japan' },
+        { category: 'Asia', title: 'China' },
+        { category: 'Europe', title: 'Denmark' },
+        { category: 'Europe', title: 'England' },
+        { category: 'Europe', title: 'France' },
+        { category: 'Europe', title: 'Germany' },
+        { category: 'Africa', title: 'Ethiopia' },
+        { category: 'Africa', title: 'Nigeria' },
+        { category: 'Africa', title: 'Zimbabwe' },
+    ];
+    $('.ui.search')
+        .search({
+            type: 'category',
+            source: categoryContent
+        })
+    ;
+</script>
 

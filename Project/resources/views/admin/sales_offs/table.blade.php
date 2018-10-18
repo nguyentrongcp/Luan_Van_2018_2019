@@ -36,7 +36,7 @@
                     <a class="text-info" href="{{route('admin.createSales',[$sales->id])}}">
                         {{$sales->name}}</a>
                 </td>
-                <td class="text-center td-prot">{{App\SalesOffDetails::where('sales_offs_id',$sales->id)->count()}}</td>
+                <td class="text-center td-prot">{{App\SalesOffDetail::where('sales_off_id',$sales->id)->count()}}</td>
                 <td class="text-center td-prot">{{$sales->start_date}}</td>
                 <td class="text-center td-prot">{{$sales->end_date}}</td>
 

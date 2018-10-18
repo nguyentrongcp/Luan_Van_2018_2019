@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\SalesOffDetails;
+use App\SalesOffDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 
 class SalesOffsDetailsController extends Controller
 {
@@ -37,12 +38,17 @@ class SalesOffsDetailsController extends Controller
     public function store(Request $request)
     {
         $ids = $request->get('foody-id');
+        if (!$request->get('foody-id')){
+            return back()->with('error','Bạn chưa chọn dữ liệu thêm vào!');
+        }
         foreach ($ids as $id){
-            $salesOffsDetails = new SalesOffDetails();
-            $salesOffsDetails->sales_offs_id = $request->get('sales-offs-id');
-            $salesOffsDetails->foody_id = $id;
-            $salesOffsDetails->save();
-//            }
+            $salesOffId = $request->get('sales-offs-id');
+            if (SalesOffDetail::where('sales_off_id',$salesOffId)->where('foody_id',$id)->count() <= 0){
+                $salesOffsDetails = new SalesOffDetail();
+                $salesOffsDetails->sales_off_id = $salesOffId;
+                $salesOffsDetails->foody_id = $id;
+                $salesOffsDetails->save();
+            }
         }
         return back()->with('success','Thêm thành công!');
     }
@@ -94,7 +100,7 @@ class SalesOffsDetailsController extends Controller
             return back()->with('error', 'Dữ liệu chưa được chọn');
         }
         foreach ($ids as $id) {
-            $salesOffs = SalesOffDetails::findOrFail($id);
+            $salesOffs = SalesOffDetail::findOrFail($id);
             $salesOffs->delete();
         }
         return back()->with('success','Xóa thành công!');

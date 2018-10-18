@@ -19,7 +19,7 @@
                                   </span>
                                 </div>
                                 <input name="username" type="text" class="form-control" placeholder="Tài khoản..."
-                                        value="blabla">
+                                        value="ltgiang">
                             </div>
 
                             <div class="input-group no-border input-lg">

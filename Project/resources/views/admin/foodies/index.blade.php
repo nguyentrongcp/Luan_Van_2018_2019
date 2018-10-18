@@ -15,10 +15,13 @@
                             <hr>
                             <div class="col-md-12 row">
                                 <div class="col-md-8">
-                                    <a class="btn btn-info btn-round dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="btn btn-info btn-round dropdown-toggle" href=""
+                                       id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                       aria-expanded="false">
                                         Bộ lọc <i class="fa fa-filter"></i>
                                     </a>
-                                    <select class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                                    <select class="dropdown-menu dropdown-menu-left"
+                                            aria-labelledby="navbarDropdownMenuLink">
                                         <label for="">Loại thực đơn</label>
                                         {{--<select class="dropdown-item" name="foody-type" id="foody-type">--}}
                                         @foreach($foodyTypes as $fdt)
@@ -26,7 +29,7 @@
                                         @endforeach
                                         {{--</select>--}}
                                     </select>
-                                    <a href="{{route('foodies.create')}}" class="btn btn-info btn-round" >
+                                    <a href="{{route('foodies.create')}}" class="btn btn-info btn-round">
                                         <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
                                     </a>
                                     <button type="submit" class="btn btn-danger btn-round"
@@ -35,16 +38,14 @@
                                     </button>
                                 </div>
                                 <div class="col-md-4">
-                                    <form>
-                                        <div class="input-group no-border">
-                                            <input type="text" value="" class="form-control" placeholder="Tìm kiếm...">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                                                </div>
+                                        <div class="ui search">
+                                            <div class="ui icon input input-group">
+                                                <input class="prompt form-control" type="text"
+                                                       placeholder="Tìm kiếm...">
+                                                {{--<i class="search icon"></i>--}}
                                             </div>
+                                            <div class="results"></div>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>

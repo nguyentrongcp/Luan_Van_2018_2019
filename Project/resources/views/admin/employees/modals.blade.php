@@ -45,10 +45,9 @@
                     </div>
                     <div class="form-group">
                         <label class="bmd-label-floating">Cấp quyền</label>
-                        <select multiple name="decentralization" class="form-control">
-                            @foreach(App\Decentralization::all() as $decentralization)
-                                <option value="{{$decentralization->id}}">{{$decentralization->name}}</option>
-                            @endforeach
+                        <select name="decentralization" class="form-control">
+                            <option value="0">Admin</option>
+                            <option value="1">Nhân viên</option>
                         </select>
                     </div>
                     <div class="modal-footer">

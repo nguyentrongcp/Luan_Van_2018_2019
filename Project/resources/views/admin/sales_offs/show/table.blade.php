@@ -41,7 +41,7 @@
                     }
                 @endphp
                 <td class="text-center td-prot">{{$nametype}}</td>
-                <td class="text-center td-prot">{{App\SalesOff::find($salesOffsDetail->sales_offs_id)->percent}}</td>
+                <td class="text-center td-prot">{{App\SalesOff::find($salesOffsDetail->sales_off_id)->percent}}</td>
 
             </tr>
         @endforeach
