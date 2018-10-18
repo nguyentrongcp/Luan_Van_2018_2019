@@ -1,71 +1,55 @@
-
-<div class="tables">
-    <table class="table table-bordered">
+<div class="ui basic segment no-padding no-margin table-responsive">
+    <table class="ui table very compact striped celled selectable unstackable" id="bang-loai-sp">
         <thead>
         <tr>
-            <th class="text-left th-prot th-stt" >
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" id="check-all" type="checkbox"
-                               onclick="eventCheckBox()">
-                        <span class="form-check-sign"></span>
-                    </label>
+            <th class="collapsing">
+                <div class="ui checkbox" id="check-all">
+                    <input type="checkbox">
                 </div>
             </th>
-            <th class="text-center th-prot th-stt">STT</th>
-            <th class="th-prot text-center" id="th-name-type">Tên loại</th>
-            <th class="th-prot text-center">Thực đơn</th>
-            <th class="text-center th-prot">Thao tác</th>
+            <th class="collapsing">STT</th>
+            <th>Tên loại thực đơn</th>
+            <th class="collapsing">Thực đơn</th>
+            <th class="collapsing">Sửa</th>
+            <th class="collapsing">Xóa</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($foodyTypes as $stt => $fdt)
+        @foreach($foodyTypes as $stt => $foodyType)
             <tr>
-                <td class="text-left td-prot th-stt">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" name="foody-type-id[]" value="{{$fdt->id}}" type="checkbox">
-                            <span class="form-check-sign"></span>
-                        </label>
+                <td>
+                    <div class="ui child checkbox">
+                        <input type="checkbox" name="foody-type-id[]" value="{{$foodyType->id}}">
                     </div>
                 </td>
-                <td class="text-center td-prot th-stt">{{$stt + 1}}</td>
-                <td class="td-prot" id="th-name-type">
-                    <a class="a-prot" href="{{route('admin.addType',[$fdt->id])}}">{{$fdt->name}}</a>
+                <td>{{$stt + 1}}</td>
+                <td>
+                    {{$foodyType->name}}
                 </td>
-                <td class="td-actions text-center td-prot">
-                    <a rel="tooltip" class="btn btn-info btn-sm btn-round btn-icon"
-                       href="{{route('foody_slug_type',[$fdt->slug])}}">
+                <td class="center aligned">
+                    <a href="{{route('foody_slug_type',[$foodyType->slug])}}" class="ui tiny blue label">
                         <i class="fa fa-eye"></i>
                     </a>
                 </td>
-                <td class="td-actions text-center td-prot">
-
-                    <button type="button" data-toggle="tooltip" data-placement="bottom" title="Sửa" class="btn btn-success btn-sm btn-round btn-icon"
-                            onclick="$('#modal-update-fdt-{{$fdt->id}}').modal('show')">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                    </button>
-                    <button type="button" data-toggle="tooltip" data-placement="bottom" title="Xóa" class="btn btn-danger btn-sm btn-round btn-icon"
-                            onclick="$('#modal-del-fdt-{{$fdt->id}}').modal('show')">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                    </button>
+                <td class="center aligned">
+                    <a href="#" class="ui tiny green icon label"
+                       onclick="$('{{ "#edit-foody-type-modal-" . $foodyType->id }}').modal('show')">
+                        <i class="pencil fitted icon"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" class="ui tiny red icon label"
+                       onclick="$('{{ "#delete-foody-type-modal-" . $foodyType->id }}').modal('show')">
+                        <i class="remove icon fitted"></i>
+                    </a>
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-    <div class="div-pagination">
-        {{$foodyTypes->links()}}
-    </div>
-
+    @if (method_exists($foodyTypes, 'render'))
+        <div class="ui basic segment center aligned no-padding">
+            {{ $foodyTypes->render('admin.layouts.components.pagination.smui')}}
+        </div>
+    @endif
 </div>
-
-<script>
-    function eventCheckBox() {
-        let checkboxs = document.getElementsByName('foody-type-id[]');
-        let checkAll = document.getElementById('check-all');
-        for (let i = 0; i < checkboxs.length; i++) {
-            checkboxs[i].checked = checkAll.checked;
-        }
-    }
-</script>

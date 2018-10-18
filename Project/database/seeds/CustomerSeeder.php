@@ -20,6 +20,15 @@ class CustomerSeeder extends Seeder
                 'phone' => '01628446973',
                 'address' => 'Trên mặt đất / kế nhà tui',
                 'subscribed' => true
+            ],
+            [
+                'name' => 'Lý Trường Giang',
+                'email' => 'ltgiang@gmail.com',
+                'username' => 'ltgiang',
+                'password' => bcrypt('1'),
+                'phone' => '01628446973',
+                'address' => 'Trên mặt đất / kế nhà tui',
+                'subscribed' => true
             ]
         ]);
     }

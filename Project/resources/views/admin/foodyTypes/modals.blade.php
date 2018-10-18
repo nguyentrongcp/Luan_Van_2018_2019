@@ -1,96 +1,66 @@
-<!-- Modal create foodies type-->
-<div class="modal fade" id="modal-create-fdt" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title title text-black-50 text-center" id="exampleModalCenterTitle">THÊM LOẠI MỚI</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<div class="ui mini vertical flip modal" id="create-foody-type-modal">
+    <i class="close icon"></i>
+    <div class="blue header">Thêm mới loại thực đơn</div>
+    <div class="content">
+        <form action="{{ route('foody_type.store') }}" class="ui form" method="post">
+
+            {{ csrf_field() }}
+
+            <div class="field">
+                <label for="ten-loai">Tên loại thực đơn</label>
+                <input type="text" id="type-name" name="type-name" required>
             </div>
-            <div class="modal-body">
-                <form action="{{route('foody_type.store')}}" method="post">
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <label class="bmd-label-floating">Tên loại sản phẩm</label>
-                        <input type="text" class="form-control" name="name-type" id="name-type"
-                               placeholder="Nhập tên loại..." minlength="5" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>
-                        <span></span>
-                        <button class="btn btn-info btn-round">
-                            LƯU LẠI
-                        </button>
-                    </div>
-                </form>
+            <div class="field">
+                <button class="ui blue fluid button"><strong>Lưu</strong></button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
-<!--End modal-->
 
-<!-- Modal edit foodies type-->
-@foreach($foodyTypes as $fdt)
-    <div class="modal fade" id="modal-update-fdt-{{$fdt->id}}" tabindex="-1" role="dialog"
-         aria-labelledby="list-edit-prot" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h3 class="modal-title title text-black-50 text-center" id="list-edit-prot"
-                        style="font-size: 16px">CẬP NHẬT LOẠI THỰC ĐƠN</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+@foreach($foodyTypes as $foodyType)
+    <div class="ui mini vertical flip modal" id="{{ "edit-foody-type-modal-" . $foodyType->id }}">
+        <i class="close icon"></i>
+        <div class="blue header">Sửa tên loại thực đơn</div>
+        <div class="content">
+            <form action="{{ route('foody_type.update', [$foodyType->id]) }}" class="ui form" method="post">
+
+                {{ csrf_field() }}
+
+                {{ method_field('PUT') }}
+
+                <div class="field">
+                    <label for="">Tên loại thực đơn</label>
+                    <input type="text" value="{{ $foodyType->name }}" name="type-name" required>
                 </div>
-                <div class="modal-body">
-                    <form action="{{route('foody_type.update',[$fdt->id])}}" method="post">
-                        {{ csrf_field() }}
-                        {{ method_field('PUT') }}
-                        <div class="form-group">
-                            <label class="bmd-label-floating">Tên loại thực đơn</label>
-                            <input type="text" class="form-control" name="name-type" id="name-type"
-                                   value="{{$fdt->name}}" minlength="5" required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>
-                            <span></span>
-                            <button class="btn btn-info btn-round">LƯU LẠI
-                            </button>
-                        </div>
-                    </form>
+
+                <div class="field">
+                    <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 @endforeach
-<!--  End Modal -->
 
 <!--  Modal delete -->
-@foreach($foodyTypes as $fdt)
-    <div class="modal fade" id="modal-del-fdt-{{$fdt->id}}" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title title " id="delete">Bạn chắc chắn muốn xóa phải không?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="text-black-50">Các dữ liệu liên quan đến <strong> {{$fdt->name}} </strong>sẽ bị xóa hoàn toàn. Bạn cần suy nghĩ trước khi xóa?</p>
-                </div>
-                <div class="modal-footer">
-                    <form action="{{route('foody_type.destroy',[0])}}" method="post">
-                        {{ method_field('DELETE') }}
-                        {{ csrf_field() }}
-                        <input type="hidden" name="foody-type-id" value="{{ $fdt->id }}">
-                        <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>
-                        <button type="submit" class="btn btn-info btn-round">OK</button>
-                    </form>
+@foreach($foodyTypes as $foodyType)
+    <div class="ui mini vertical flip modal" id="{{ "delete-foody-type-modal-" . $foodyType->id }}">
+        <i class="close icon"></i>
+        <div class="blue header">Bạn chắc chắn muốn xóa?</div>
+        <div class="content">
+            <form action="{{route('foody_type.destroy',[0])}}" class="ui form" method="post">
+
+                {{ method_field('DELETE') }}
+                {{ csrf_field() }}
+
+                <div class="field">
+                    <label class="">Các dữ liệu liên quan đến <strong> {{$foodyType->name}} </strong>sẽ bị xóa hoàn toàn. Bạn cần suy nghĩ trước khi xóa?</label>
 
                 </div>
-            </div>
+                <div class="field">
+                    <input type="hidden" value="{{$foodyType->id}}" name="foody-type-id">
+                    <button class="ui blue fluid button"><strong>OK</strong></button>
+                </div>
+            </form>
         </div>
     </div>
 @endforeach

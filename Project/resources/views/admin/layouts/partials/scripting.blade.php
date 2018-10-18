@@ -1,119 +1,95 @@
-<!--   Core JS Files   -->
-<script src="{{asset('admin/assets/js/core/jquery.min.js')}}"></script>
-<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
-<script src="{{asset('admin/assets/js/core/popper.min.js')}}"></script>
-<script src="{{asset('admin/assets/js/core/bootstrap.min.js')}}"></script>
-<script src="{{asset('admin/assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('admin/assets/js/core/jquery.min.js') }}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/sidebar.min.js"></script>
+<script type="text/javascript" src="{{asset('/customer/semantic/dropdown.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('/customer/semantic/checkbox.min.js')}}"></script>
+<script src="{{ asset('admin/assets/plugin/jq-toast/jquery.toast.min.js') }}"></script>
 
-<!--  Google Maps Plugin    -->
-{{--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>--}}
-<!-- Chart JS -->
-{{--<script src="{{asset('admin/assets/js/plugins/chartjs.min.js')}}"></script>--}}
-<!--  Notifications Plugin    -->
-<script src="{{asset('admin/assets/js/plugins/bootstrap-notify.js')}}"></script>
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="{{asset('admin/assets/js/now-ui-dashboard.min.js?v=1.1.0')}}" type="text/javascript"></script>
-<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-<script src="{{asset('admin/assets/demo/demo.js')}}"></script>
-<!-- JS plugin itoast -->
-{{--<script src="{{asset('admin/assets/plugin/jq-toast/jquery.toast.min.js')}}" type="text/javascript"></script>--}}
+{{--<script>--}}
+    {{--// script đặc biệt cần sử dụng blade--}}
+    {{--function toggleSidebar() {--}}
+        {{--let wide = '{{ $wideMenu }}';--}}
+        {{--let collapsed = wide != '1';--}}
+        {{--let sidebarWide = $('#sidebar-wide');--}}
+        {{--let sidebarThin = $('#sidebar-thin');--}}
+        {{--let mainContainer = $('#main-container');--}}
+        {{--let logo = $('#logo');--}}
+        {{--return function () {--}}
+            {{--if (collapsed) {--}}
+                {{--loadWideSidebar(sidebarWide, sidebarThin, mainContainer, logo);--}}
+                {{--axios.get('/admin/menu_state/1');--}}
+                {{--collapsed = false;--}}
+                {{--return;--}}
+            {{--}--}}
+            {{--loadThinSidebar(sidebarWide, sidebarThin, mainContainer, logo);--}}
+            {{--axios.get('/admin/menu_state/0');--}}
+            {{--collapsed = true;--}}
+        {{--};--}}
+    {{--}--}}
 
-<script>
-    CKEDITOR.replace('des');
-</script>
-<script>
-    // $(function() {
-    //     var imagesPreview = function(input, placeToInsertImagePreview) {
-    //         if (input.files && input.files[0]) {
-    //             var filesAmount = input.files.length;
-    //             for (i = 0; i < filesAmount; i++) {
-    //                 var reader = new FileReader();
-    //                 reader.onload = function(event) {
-    //                     $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-    //                 }
-    //                 reader.readAsDataURL(input.files[i]);
-    //             }
-    //         }
-    //     };
-    //     $('#gallery-avatar-image').on('change', function() {
-    //         imagesPreview(this, 'div.gallery-avatar-image');
-    //     });
-    // });
+    {{--function loadWideSidebar(sidebarWide, sidebarThin, mainContainer, logo) {--}}
+        {{--let width = 220;--}}
+        {{--let margin = 220;--}}
+        {{--let duration = 350;--}}
+        {{--$(logo).animate({width: width}, duration);--}}
+        {{--$(mainContainer).animate({marginLeft: margin}, duration);--}}
+        {{--$('#btn-toggle-menu').find('i').removeClass('right').addClass('left');--}}
+        {{--$(sidebarWide).transition('slide right', duration);--}}
+        {{--$(sidebarThin).transition('slide right', duration);--}}
+    {{--}--}}
 
-    function readURL(input) {
+    {{--function loadThinSidebar(sidebarWide, sidebarThin, mainContainer, logo) {--}}
+        {{--let width = 50;--}}
+        {{--let margin = 50;--}}
+        {{--let duration = 350;--}}
+        {{--$(logo).animate({width: width}, duration);--}}
+        {{--$(mainContainer).animate({marginLeft: margin}, duration);--}}
+        {{--$('#btn-toggle-menu').find('i').removeClass('left').addClass('right');--}}
+        {{--$(sidebarWide).transition('slide right', duration);--}}
+        {{--$(sidebarThin).transition('slide right', duration);--}}
+    {{--}--}}
 
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+    {{--$('#btn-toggle-menu').click(toggleSidebar());--}}
 
-            reader.onload = function(e) {
-                $('#avatar').attr('src', e.target.result);
-            }
+    {{--// (function(e) {--}}
+    {{--//     let timeout;--}}
+    {{--//     window.addEventListener('resize', function(e) {--}}
+    {{--//         clearTimeout(timeout);--}}
+    {{--//         timeout = setTimeout(function() {--}}
+    {{--//             console.log(e);--}}
+    {{--//         }, 300);--}}
+    {{--//     });--}}
+    {{--// })();--}}
 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+    {{--function buildChart(id, type, dataSource, name, customColors = null) {--}}
+        {{--let ctx = document.getElementById(id).getContext('2d');--}}
+        {{--let colors = customColors || ['#36A2EB', '#4BC0C0', '#FFCD56', '#FF9F40', '#FF6384','#f57f17','#1565c0', '#004d40', '#827717'];--}}
+        {{--// let colors = customColors || ['#56E289', '#E2CF56', '#E256AE', '#56AEE2', '#E28956','#f57f17','#1565c0', '#004d40', '#827717'];--}}
+        {{--let dataVals = [], labels = [], bgColors = [];--}}
 
-    $("#gallery-avatar-image").change(function() {
-        readURL(this);
-    });
-</script>
+        {{--dataSource.forEach(function(datum, idx) {--}}
+            {{--bgColors.push(colors[idx]);--}}
+            {{--dataVals.push(datum.total);--}}
+            {{--labels.push(datum[name]);--}}
+        {{--});--}}
+        {{--let data = {--}}
+                {{--datasets: [{--}}
+                    {{--data: dataVals,--}}
+                    {{--backgroundColor: bgColors--}}
+                {{--}],--}}
+                {{--labels: labels--}}
+            {{--};--}}
+        {{--new Chart(ctx, {--}}
+            {{--type: type,--}}
+            {{--data: data,--}}
+            {{--options: {--}}
+                {{--pieceLabel: {--}}
+                    {{--render: 'percentage',--}}
+                    {{--frontColor: ['black'],--}}
+                    {{--precision: 2--}}
+                {{--}--}}
+            {{--}--}}
+        {{--});--}}
+    {{--}--}}
 
-<!-- javascript for init -->
-<script>
-    $('.date-picker').each(function () {
-        $(this).datepicker({
-            templates: {
-                leftArrow: '<i class="now-ui-icons arrows-1_minimal-left"></i>',
-                rightArrow: '<i class="now-ui-icons arrows-1_minimal-right"></i>'
-            }
-        }).on('show', function () {
-            $('.datepicker').addClass('open');
-
-            datepicker_color = $(this).data('datepicker-color');
-            if (datepicker_color.length != 0) {
-                $('.datepicker').addClass('datepicker-' + datepicker_color + '');
-            }
-        }).on('hide', function () {
-            $('.datepicker').removeClass('open');
-        });
-    });
-</script>
-<!-- JS Datatables-->
-{{--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">--}}
-
-{{--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.js"></script>--}}
-{{--<script type="text/javascript" charset="utf8"--}}
-        {{--src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>--}}
-{{--<script src="{{asset('admin/assets/js/datatables.js')}}"></script>--}}
-
-<!-- JS dropzone -->
-{{--<script type="text/javascript" charset="utf8"--}}
-        {{--src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>--}}
-
-<!--Semantic JS -->
-<script type="text/javascript" src="{{ asset('/customer/semantic/search.min.js') }}"></script>
-
-<script>
-    var categoryContent = [
-        { category: 'South America', title: 'Brazil' },
-        { category: 'South America', title: 'Peru' },
-        { category: 'North America', title: 'Canada' },
-        { category: 'Asia', title: 'South Korea' },
-        { category: 'Asia', title: 'Japan' },
-        { category: 'Asia', title: 'China' },
-        { category: 'Europe', title: 'Denmark' },
-        { category: 'Europe', title: 'England' },
-        { category: 'Europe', title: 'France' },
-        { category: 'Europe', title: 'Germany' },
-        { category: 'Africa', title: 'Ethiopia' },
-        { category: 'Africa', title: 'Nigeria' },
-        { category: 'Africa', title: 'Zimbabwe' },
-    ];
-    $('.ui.search')
-        .search({
-            type: 'category',
-            source: categoryContent
-        })
-    ;
-</script>
-
+{{--</script>--}}

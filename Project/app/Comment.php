@@ -17,10 +17,7 @@ class Comment extends Model
         return $amountOfComment;
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> ed8aebf5af2c203c11f96f200297e5aec6a77854
     public function customer() {
         return $this->belongsTo(Customer::class);
     }

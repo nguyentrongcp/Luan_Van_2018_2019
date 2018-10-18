@@ -25,7 +25,7 @@ class FoodyTypeController extends Controller
     {
 
         $foody_type_id = $id;
-        $name_type = $request->get('name-type');
+        $name_type = $request->get('type-name');
         $slug = str_slug($name_type);
         if (FoodyType::exist($slug)){
             return back()->with('error',"$name_type đã tồn tại");
@@ -37,7 +37,7 @@ class FoodyTypeController extends Controller
 
         $foodyType->save();
 
-        return view('admin.foodyTypes.create.index',compact('tile_name_type','foodyType'))
+        return view('admin.foodyTypes.create.index',compact('foodyType'))
             ->with('success',"Thêm $name_type thành công!");
     }
 
@@ -59,16 +59,16 @@ class FoodyTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $name_type = $request->get('name-type');
-        $slug = str_slug($name_type);
+        $type_name = $request->get('type-name');
+        $slug = str_slug($type_name);
         if (FoodyType::exist($slug)){
-            return back()->with('error',"$name_type đã tồn tại");
+            return back()->with('error',"$type_name đã tồn tại");
         }
         $foodyType = new FoodyType();
-        $foodyType->name = $name_type;
+        $foodyType->name = $type_name;
         $foodyType->slug = $slug;
         $foodyType->save();
-        return back()->with('success',"Thêm $name_type thành công!");
+        return back()->with('success',"Thêm $type_name thành công!");
     }
 
     /**
@@ -104,7 +104,7 @@ class FoodyTypeController extends Controller
     {
         $foodType = FoodyType::findOrFail($id);
 
-        $foodType->name = $request->get('name-type');
+        $foodType->name = $request->get('type-name');
         $foodType->slug = str_slug($foodType->name);
 
         $foodType->update();

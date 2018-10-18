@@ -1,47 +1,33 @@
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-wrapper">
-            <div class="navbar-toggle">
-                <button type="button" class="navbar-toggler">
-                    <span class="navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </button>
-            </div>
-            <a class="btn btn-info btn-round text-white" href="#pablo">
-                <i class="	fa fa-angle-double-left"></i>TRANG KHÁCH HÀNG</a>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="now-ui-icons ui-1_bell-53"></i>
-                        <p>
-                            <span class="d-lg-none d-md-block">Some Actions</span>
-                        </p>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#pablo">
-                        <i class="now-ui-icons users_single-02"></i>
-                        <p>
-                            <span class="d-lg-none d-md-block">Account</span>
-                        </p>
-                    </a>
-                </li>
-            </ul>
-        </div>
+<div class="ui fixed borderless menu" style="height: 50px;">
+    {{--@if($wideMenu)--}}
+        {{--<a class="item header" id="logo" href='/admin'>--}}
+            {{-- <img class="ui small image" src="{{ asset('assets/images/logo.png') }}" alt="Logo"> --}}
+        {{--</a>--}}
+    {{--@else--}}
+        {{--<a class="item header" id="logo" href="/admin" style="width: 50px">--}}
+            {{-- <img class="ui small image" src="{{ asset('assets/images/logo.png') }}" alt="Logo"> --}}
+        {{--</a>--}}
+    {{--@endif--}}
+
+        <a class="icon item" id="btn-toggle-menu">
+            <i class="sidebar icon"></i>
+        </a>
+
+        <a class="icon item need-popup" id="btn-back" data-content="Quay lại" href="{{ URL::previous() }}">
+            <i class="angle left icon"></i>
+        </a>
+
+    <a href="/" class="icon item need-popup" target="_blank">
+        Trang khách hàng</a>
+
+    <div class="right menu">
+
+        {{--@include('admin.layouts.components.navbar_comment')--}}
+
+        {{--@include('admin.layouts.components.navbar_notification')--}}
+
+        {{--@include('admin.layouts.components.navbar_admin')--}}
+
+
     </div>
-</nav>
-<!-- End Navbar -->
+</div>

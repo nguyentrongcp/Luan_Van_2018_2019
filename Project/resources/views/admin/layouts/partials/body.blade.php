@@ -1,17 +1,12 @@
-<body class="">
-<div class="wrapper ">
-    @include('admin.layouts.partials.sidebar')
-    <div class="main-panel">
-        @include('admin.layouts.partials.navbar')
-        <div class="panel-header panel-header-sm">
-            <canvas id="bigDashboardChart"></canvas>
-        </div>
+<body>
+@include ('admin.layouts.partials.navbar')
+@include('admin.layouts.partials.sidebar')
 
-        @yield('content')
+<div class="ui basic segment" id="main-container" style="margin-left: 220px">
 
-        @include('admin.layouts.partials.footer')
-    </div>
+    @yield('content')
+
 </div>
 
-@include('admin.layouts.partials.scripting')
+@include('admin.layouts.components.scrolltop_button')
 </body>
