@@ -28,32 +28,35 @@
         }
 
         function favorite(favorite, id) {
-            $.ajax({
-                type: "post",
-                url: "/customer/favorite",
-                data: {
-                    foody_id: id
-                },
-                error: function() {
-                    $('#login-modal').modal('open');
-                },
-                success: function (data) {
-                    $('#favorite-' + id).toggleClass('outline');
-                    M.Toast.dismissAll();
-                    if (data === 'favorited') {
-                        M.toast({
-                            html: "<i class='material-icons teal-text left'>check</i>Đã lưu",
-                            displayLength: 2000
-                        });
+            let logged = '{!! $logged !!}';
+            if (logged === 'true') {
+                $.ajax({
+                    type: "post",
+                    url: "/customer/favorite",
+                    data: {
+                        foody_id: id
+                    },
+                    success: function (data) {
+                        $('#favorite-' + id).toggleClass('outline');
+                        M.Toast.dismissAll();
+                        if (data === 'favorited') {
+                            M.toast({
+                                html: "<i class='material-icons teal-text left'>check</i>Đã lưu",
+                                displayLength: 2000
+                            });
+                        }
+                        else {
+                            M.toast({
+                                html: "<i class='material-icons teal-text left'>check</i>Đã hủy lưu",
+                                displayLength: 2000
+                            });
+                        }
                     }
-                    else {
-                        M.toast({
-                            html: "<i class='material-icons teal-text left'>check</i>Đã hủy lưu",
-                            displayLength: 2000
-                        });
-                    }
-                }
-            })
+                })
+            }
+            else {
+                $('#login-require').modal('open');
+            }
         }
 
         function addCart(foody) {

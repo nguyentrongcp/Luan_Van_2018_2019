@@ -36,11 +36,21 @@ $(document).ready(function(){
     });
 });
 
-$(window).bind("pageshow", function(event) {
-    if (event.originalEvent.persisted) {
-        window.location.reload();
-    }
-});
+if(!!window.performance && window.performance.navigation.type === 2)
+{
+    console.log('Reloading');
+    window.location.reload();
+}
+
+// $(window).on('pageshow', function () {
+//     location.reload();
+// });
+
+// $(window).bind("pageshow", function(event) {
+//     if (event.originalEvent.persisted) {
+//         window.location.reload();
+//     }
+// });
 
 // $('#dropdown-cart').on('click', function () {
 //     $('#dropdown-cart').animate( { width: '452px'}, 500)

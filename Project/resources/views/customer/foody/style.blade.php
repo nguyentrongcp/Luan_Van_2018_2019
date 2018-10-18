@@ -180,7 +180,6 @@
         margin-bottom: 20px;
     }
     .foody-rating-show.pinned {
-        top: 64px !important;
         right: 5% !important;
         float: right !important;
         width: calc((90% - 180px) * 1 / 3) !important;
@@ -414,8 +413,10 @@
     .foody-scrollspy-container {
         width: 180px !important;
     }
+    .foody-scrollspy-container.pin-top {
+        /*top: */
+    }
     .foody-scrollspy-container.pinned {
-        top: 64px !important;
         max-height: calc(100vh - 64px) !important;
         overflow: auto;
     }

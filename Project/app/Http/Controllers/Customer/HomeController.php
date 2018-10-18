@@ -165,8 +165,5 @@ class HomeController extends Controller
                 return Response('favorited');
             }
         }
-        else {
-            return Response('Hãy đăng nhập để lưu món ăn.', 404);
-        }
     }
 }
