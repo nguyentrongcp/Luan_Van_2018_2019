@@ -1,58 +1,54 @@
-<div class="tables">
-    <table class="table table-bordered">
+<div class="ui basic segment no-padding no-margin table-responsive">
+    <table class="ui table very compact striped celled selectable unstackable">
         <thead>
         <tr>
-            <th class="text-center th-prot th-stt">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" id="check-all" type="checkbox"
-                               onclick="eventCheckBox()">
-                        <span class="form-check-sign"></span>
-                    </label>
+            <th class="collapsing">
+                <div class="ui checkbox" id="check-all">
+                    <input type="checkbox">
                 </div>
             </th>
-            <th class="text-center th-prot th-stt">STT</th>
-            <th class="text-center th-prot">Ảnh đại diện</th>
-            <th class="th-prot text-center">Tên thực đơn</th>
-            <th class="th-prot text-center">Thuộc loại</th>
-            <th class="th-prot text-center">Giá</th>
-            <th class="th-prot text-center">Trạng thái</th>
-            <th class="text-center th-prot">Xem</th>
-        </tr>
+            <th class="collapsing">STT</th>
+            <th class="collapsing">Ảnh đại diện</th>
+            <th>Tên thực đơn</th>
+            <th class="collapsing">Loại thực đơn</th>
+            <th class="collapsing">Đơn giá</th>
+            <th class="collapsing">Tình trạng</th>
+            <th class="collapsing">Xem</th>
+        </tr>.
         </thead>
         <tbody>
-        @foreach($foodies as $stt => $fd)
+        @foreach($foodies as $stt => $foody)
             <tr>
-                <td class="text-center th-prot th-stt">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" name="foody-id[]" value="{{$fd->id}}" type="checkbox">
-                            <span class="form-check-sign"></span>
-                        </label>
+                <td>
+                    <div class="ui child checkbox">
+                        <input type="checkbox" name="foody-id[]" value="{{$foody->id}}">
+                    </div>
+
+                </td>
+                <td>{{$stt + 1}}</td>
+                <td class="collapsing">
+                    <div class="gallery">
+                        <img class="img-tb" src="{{$foody->avatar}}" alt="{{$foody->name}}">
                     </div>
                 </td>
-                <td class="text-center td-prot th-stt">{{$stt + 1}}</td>
-                <td class="text-center td-prot">
-                    <img class="img-tb" src="{{asset($fd->avatar)}}" alt="{{$fd->name}}">
+                <td>
+                    {{$foody->name}}
                 </td>
-                <td class="td-prot" id="th-name-type">{{$fd->name}}</td>
-
-                @foreach(App\FoodyType::where('id',$fd->foody_type_id)->get() as $nameType)
-                    <td class="td-prot text-center">{{$nameType->name}}</td>
-                @endforeach
-
-                <td class="td-prot text-center">{{number_format($fd->currentCost()).' đ'}}</td>
-                @foreach(App\FoodyStatus::where('foody_id',$fd->id)->get() as $foodyStatus)
-                    @if($foodyStatus->status == 0)
-                        <td class="td-prot text-center text-danger title"><i class="fa fa-close"></i>Tạm hết</td>
+                <td class="collapsing">
+                    {{$foody->getNameType()}}
+                </td>
+                <td class="collapsing">
+                    {{number_format($foody->currentCost()).' đ'}}
+                </td>
+                <td class="collapsing">
+                    @if($foody->getStatus()== 0)
+                        <label class="ui red label" for="">Tạm hết</label>
                     @else
-                        <td class="td-prot text-center text-success title"><i class="fa fa-check"></i>Đang bán</td>
+                        <label class="ui green label" for="">Đang bán</label>
                     @endif
-                @endforeach
-                <td class="text-center td-prot">
-                    <a rel="tooltip" title="Xem chi tiết" data-placement="bottom"
-                       class="btn btn-info btn-sm btn-round btn-icon text-white"
-                       href="{{route('foodies.show',[$fd->id])}}">
+                </td>
+                <td class="center aligned">
+                    <a href="{{route('foodies.show',[$foody->id])}}" class="ui tiny blue icon label">
                         <i class="fa fa-eye"></i>
                     </a>
                 </td>
@@ -60,17 +56,9 @@
         @endforeach
         </tbody>
     </table>
-    <div class="div-pagination">
-        {{$foodies->links()}}
-    </div>
+    @if (method_exists($foodies, 'render'))
+        <div class="ui basic segment center aligned no-padding">
+            {{ $foodies->render('admin.layouts.components.pagination.smui')}}
+        </div>
+    @endif
 </div>
-
-<script>
-    function eventCheckBox() {
-        let checkboxs = document.getElementsByName('foody-id[]');
-        let checkAll = document.getElementById('check-all');
-        for (let i = 0; i < checkboxs.length; i++) {
-            checkboxs[i].checked = checkAll.checked;
-        }
-    }
-</script>

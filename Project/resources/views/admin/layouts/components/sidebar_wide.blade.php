@@ -29,20 +29,20 @@
 
                     <a href=""
                        class="title item {{ Request::is('*thong_ke/san_pham') ? 'active' : '' }}">
-                        <i class="warehouse icon icon-left"></i>Sản phẩm</a>
+                        <i class="warehouse icon icon-left"></i>Thực đơn</a>
                 </div>
             </div>
         </div>
     {{--@endif--}}
 
     {{--@if($nhanVien->checkQuyen(3))--}}
-        <a class="item {{ Request::is('*/loai_sp') ? 'active-bar': '' }}" href="/admin/loai_sp">
-            <i class="sitemap icon icon-left"></i>Loại sản phẩm</a>
+        <a class="item {{ Request::is('*/foody_type') ? 'active-bar': '' }}" href="/admin/foody_type">
+            <i class="sitemap icon icon-left"></i>Loại thực đơn</a>
     {{--@endif--}}
 
     {{--@if($nhanVien->checkQuyen(4))--}}
-        <a class="item {{ Request::is('*admin/san_pham*') ? 'active-bar': '' }}" href="">
-            <i class="box icon icon-left"></i>Sản phẩm</a>
+        <a class="item {{ Request::is('*admin/foodies*') ? 'active-bar': '' }}" href="/admin/foodies">
+            <i class="box icon icon-left"></i>Thực đơn</a>
     {{--@endif--}}
 
     {{--@if($nhanVien->checkQuyen(6))--}}

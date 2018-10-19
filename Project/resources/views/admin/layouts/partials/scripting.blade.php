@@ -1,9 +1,43 @@
 <script type="text/javascript" src="{{ asset('admin/assets/js/core/jquery.min.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/sidebar.min.js"></script>
-<script type="text/javascript" src="{{asset('/customer/semantic/dropdown.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('/customer/semantic/search.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('/customer/semantic/checkbox.min.js')}}"></script>
 <script src="{{ asset('admin/assets/plugin/jq-toast/jquery.toast.min.js') }}"></script>
+<script src="{{ asset('admin/assets/plugin/ckeditor/ckeditor.js') }}"></script>
+<script>
+    var categoryContent = [
+        { category: 'South America', title: 'Brazil' },
+        { category: 'South America', title: 'Peru' },
+        { category: 'North America', title: 'Canada' },
+        { category: 'Asia', title: 'South Korea' },
+        { category: 'Asia', title: 'Japan' },
+        { category: 'Asia', title: 'China' },
+        { category: 'Europe', title: 'Denmark' },
+        { category: 'Europe', title: 'England' },
+        { category: 'Europe', title: 'France' },
+        { category: 'Europe', title: 'Germany' },
+        { category: 'Africa', title: 'Ethiopia' },
+        { category: 'Africa', title: 'Nigeria' },
+        { category: 'Africa', title: 'Zimbabwe' },
+    ];
+    $('.ui.search')
+        .search({
+            type: 'category',
+            source: categoryContent
+        })
+    ;
+</script>
+<script>
+    let prefix = 'fm';
+    let options = {
+        filebrowserImageBrowseUrl: `/${prefix}?type=Images`,
+        filebrowserImageUploadUrl: `/${prefix}/upload?type=Images&_token=`,
+        filebrowserBrowseUrl: `/${prefix}?type=Files`,
+        filebrowserUploadUrl: `/${prefix}/upload?type=Files&_token=`
+    };
+    CKEDITOR.config.height = 400;
+    CKEDITOR.replace('ckeditor', options);
+</script>
 
 {{--<script>--}}
     {{--// script đặc biệt cần sử dụng blade--}}

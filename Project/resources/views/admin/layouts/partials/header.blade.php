@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     {{--Semantic--}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/sidebar.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
-    {{--<link rel="stylesheet" href="{{asset('/admin/assets/css/semantic-override.css')}}">--}}
-    <link rel="stylesheet" href="{{asset('/admin/assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('/customer/semantic/dropdown.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/customer/semantic/checkbox.min.css')}}">
+    {{--<link rel="stylesheet" href="{{asset('/admin/assets/css/semanticoff.min.css')}}">--}}
+
+    <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('customer/semantic/search.min.css')}}">
+    <link rel="stylesheet" href="{{asset('customer/semantic/checkbox.min.css')}}">
 
     <link rel="stylesheet" href="{{ asset('admin/assets/plugin/jq-toast/jquery.toast.min.css') }}">
 

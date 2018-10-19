@@ -21,6 +21,7 @@
                     <div class="ui child checkbox">
                         <input type="checkbox" name="foody-type-id[]" value="{{$foodyType->id}}">
                     </div>
+
                 </td>
                 <td>{{$stt + 1}}</td>
                 <td>

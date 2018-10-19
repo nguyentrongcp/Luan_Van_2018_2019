@@ -49,6 +49,19 @@ class Foody extends Model
     public function salesOffDetail() {
         return $this->hasMany(SalesOffDetail::class);
     }
+    public function foodyType(){
+        return $this->belongsTo(FoodyType::class);
+    }
+    public function foodyStatuses(){
+        return $this->hasOne(FoodyStatus::class,'foody_id','id');
+    }
+    public function getStatus(){
+        return $this->foodyStatuses->status;
+    }
+
+    public function getNameType(){
+        return $this->foodyType->name;
+    }
 //
 //    public function quantities() {
 //        return $this->hasMany(Quantity::class);

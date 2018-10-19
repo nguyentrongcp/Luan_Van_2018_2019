@@ -254,3 +254,29 @@
 .statistic .label, .statistic .value {
     text-transform: none !important;
 }
+.gallery-avatar-image img{
+    object-fit: contain;
+    width: 195px;
+    height: 130px;
+    margin-right: 10px;
+    border: 1px solid darkgrey;
+    box-shadow: 2px 2px 5px 0px darkgrey;
+    margin-bottom: 10px;
+
+}
+.gallery {
+    padding-top: 15px;
+    display: inline-block;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+}
+.img-tb{
+    /*object-fit: contain;*/
+    width: 120px;
+    height: 60px;
+    margin-right: 10px;
+    border: 1px solid darkgrey;
+    box-shadow: 2px 2px 5px 0px darkgrey;
+    margin-bottom: 10px;
+}
