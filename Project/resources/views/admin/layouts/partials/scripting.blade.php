@@ -26,6 +26,10 @@
             source: categoryContent
         })
     ;
+    $(document).ready(
+        function () {
+            $('.ui.checkbox').checkbox();
+        });
 </script>
 <script>
     let prefix = 'fm';
