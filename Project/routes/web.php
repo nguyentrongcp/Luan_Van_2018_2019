@@ -51,7 +51,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
         ->name('foody_change_avatar');
     Route::get('foody_type/{slug}','admin\FoodyController@showSlugType')
         ->name('foody_slug_type');
-
+    Route::get('foodies/filter','admin\FoodyController@filter')
+        ->name('foody_filter');
     /**      Employee       **/
     Route::resource('employees','admin\EmployeeController');
 

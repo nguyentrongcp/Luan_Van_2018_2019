@@ -280,3 +280,19 @@
     box-shadow: 2px 2px 5px 0px darkgrey;
     margin-bottom: 10px;
 }
+.rating-component{
+    color: orange;
+    font-size: 18px;
+}
+.a-decoration{
+    text-decoration: none!important;
+}
+.ui.mini.modal{
+    height: 35%;
+    margin: auto;
+}
+.ui.mini-40.modal{
+    width: 30%;
+    height: 60%;
+    margin: auto;
+}

@@ -13,11 +13,14 @@
 
     {{--Semantic--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
-    {{--<link rel="stylesheet" href="{{asset('/admin/assets/css/semanticoff.min.css')}}">--}}
+    <link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap.min.css')}}">
+{{--    <link rel="stylesheet" href="{{asset('admin/assets/css/semanticoff.min.css')}}">--}}
 
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('customer/semantic/search.min.css')}}">
     <link rel="stylesheet" href="{{asset('customer/semantic/checkbox.min.css')}}">
+    <link rel="stylesheet" href="{{asset('customer/semantic/tab.min.css')}}">
+    {{--<link rel="stylesheet" href="{{asset('customer/semantic/modal.min.css')}}">--}}
 
     <link rel="stylesheet" href="{{ asset('admin/assets/plugin/jq-toast/jquery.toast.min.css') }}">
 

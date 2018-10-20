@@ -63,9 +63,9 @@ class Foody extends Model
         return $this->foodyType->name;
     }
 //
-//    public function quantities() {
-//        return $this->hasMany(Quantity::class);
-//    }
+    public function votes() {
+        return $this->hasMany(Vote::class);
+    }
 //
 //    public function productTypeTrademark() {
 //        return $this->belongsTo(ProductTypeTrademark::class);
@@ -83,21 +83,22 @@ class Foody extends Model
         return $this->hasMany(ShoppingCart::class);
     }
 
-//    public function status() {
-//        if ($this->is_deleted) {
-//            return 'Ngừng kinh doanh';
-//        }
-//        return ($this->is_activated) ? 'Đang bán' : 'Tạm hết hàng';
-//    }
-//
     public function currentCost() {
         return $this->costs->max()->cost;
     }
 //
-//    public function getQuantity() {
-//        return $this->quantities->first()->quantity;
-//    }
-//
+    public function getCostVotes() {
+        return $this->votes->avg('cost');
+    }
+
+    public function getQualityVotes() {
+        return $this->votes->avg('quality');
+    }
+
+    public function getAttitudeVotes() {
+        return $this->votes->avg('attitude');
+    }
+
     public function isSalesOff() {
         return $this->salesOffDetail()->count() > 0;
     }

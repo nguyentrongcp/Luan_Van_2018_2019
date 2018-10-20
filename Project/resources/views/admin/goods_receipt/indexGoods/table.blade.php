@@ -1,70 +1,64 @@
-<div class="tables">
-    <table class="table table-bordered">
-        <thead>
+<table class="ui table very compact striped celled selectable" id="form-goods-receipt-notes">
+    <thead>
+    <tr>
+        <th class="collapsing">
+            <div class="ui checkbox" id="check-all">
+                <input type="checkbox" class="hidden">
+            </div>
+        </th>
+        <th class="collapsing">STT</th>
+        <th>Người nhập hàng</th>
+        <th class="text-center">Ngày nhập</th>
+        <th class="text-center">Số hàng nhập</th>
+        <th class="text-center">Tình trạng</th>
+        <th class="collapsing">Xem</th>
+        <th class="collapsing">Sửa</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($goodsReceipts as $stt => $goods)
         <tr>
-            <th class="text-left th-prot th-stt" >
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" id="check-all" type="checkbox"
-                               onclick="eventCheckBox()">
-                        <span class="form-check-sign"></span>
-                    </label>
+            <td class="collapsing">
+                <div class="ui child checkbox">
+                    <input type="checkbox" class="hidden" name="goods-receipt-id[]" value="{{ $goods->id }}">
                 </div>
-            </th>
-            <th class="text-center th-prot th-stt">STT</th>
-            <th class="text-center th-prot">Người nhập hàng</th>
-            <th class="th-prot text-center">Ngày nhập</th>
-            <th class="th-prot text-center">Số hàng nhập</th>
-            <th class="th-prot text-center">Tình trạng</th>
-            <th class="text-center th-prot">Thao tác</th>
+            </td>
+
+            <td>{{ $stt + 1 }}</td>
+            <td>{{ $goods->name }}</td>
+            <td class="text-center">{{ $goods->date }}</td>
+            <td class="text-center">
+                {{ $goods->soMaterial() }}
+            </td>
+            <td class="text-center">
+                <i class="check fitted green icon"></i>
+                <span style="color: green"> Đã cập nhật vào kho</span>
+            </td>
+            <td>
+                <a href="{{ route('admin.move_detail',[$goods->id]) }}"
+                   class="ui small blue label">
+                    <i class="eye open fitted icon"></i>
+                </a>
+            </td>
+            <td>
+                <a href="#" onclick="$( '{{ '#update-modal-'.$goods->id }}' ).modal('show')"
+                   class="ui small green label">
+                    <i class="edit fitted icon"></i>
+                </a>
+            </td>
         </tr>
-        </thead>
-        <tbody>
-        @foreach($goodsReceipts as $stt => $goods)
-            <tr>
-                <td class="text-left th-prot th-stt">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" name="goods-id[]" value="{{$goods->id}}" type="checkbox">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
-                </td>
-                <td class="text-center td-prot">{{$stt + 1}}</td>
-                <td class="text-left td-prot">{{$goods->name}}</td>
-                <td class="text-center td-prot">{{$goods->date}}</td>
+    @endforeach
+    </tbody>
+</table>
 
-                <td class="text-center td-prot">{{$goods->soMaterial()}}</td>
-                <td class="text-center td-prot">
-                    <label class="title text-success">
-                        <i class="fa fa-calendar-check-o"></i> Đã cập nhật vào kho</label>
-                </td>
-
-                <td class="td-actions text-center td-prot">
-                    <a rel="tooltip" title="Xem chi tiết phiếu nhập" data-placement="bottom" class="btn btn-info btn-sm btn-round btn-icon text-white"
-                       href="{{route('admin.move_detail',[$goods->id])}}">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <button type="button" rel="tooltip" title="Sửa" data-placement="bottom" class="btn btn-success btn-sm btn-round btn-icon"
-                            onclick="$('#modal-update-goods-{{$goods->id}}').modal('show')">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                    </button>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-    <div class="div-pagination">
-        {{$goodsReceipts->links()}}
+@if (method_exists($goodsReceipts, 'render'))
+    <div class="ui basic segment center aligned no-padding">
+        {{ $goodsReceipts->render('admin.layouts.components.pagination.smui')}}
     </div>
-</div>
+@endif
 
-<script>
-    function eventCheckBox() {
-        let checkboxs = document.getElementsByName('goods-id[]');
-        let checkAll = document.getElementById('check-all');
-        for (let i = 0; i < checkboxs.length; i++) {
-            checkboxs[i].checked = checkAll.checked;
-        }
-    }
-</script>
+@push('script')
+    <script>
+        // bindDataTable('bang-nhap-hang');
+    </script>
+@endpush

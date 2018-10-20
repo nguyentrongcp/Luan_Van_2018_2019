@@ -14,6 +14,8 @@
             <th class="collapsing">Đơn giá</th>
             <th class="collapsing">Tình trạng</th>
             <th class="collapsing">Xem</th>
+            <th class="collapsing">Sửa</th>
+
         </tr>.
         </thead>
         <tbody>
@@ -50,6 +52,11 @@
                 <td class="center aligned">
                     <a href="{{route('foodies.show',[$foody->id])}}" class="ui tiny blue icon label">
                         <i class="fa fa-eye"></i>
+                    </a>
+                </td>
+                <td class="center aligned">
+                    <a href="{{route('foodies.edit',[$foody->id])}}" class="ui tiny blue icon label">
+                        <i class="pencil fitted icon"></i>
                     </a>
                 </td>
             </tr>

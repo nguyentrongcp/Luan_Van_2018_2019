@@ -1,9 +1,31 @@
 <script type="text/javascript" src="{{ asset('admin/assets/js/core/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/assets/js/core/bootstrap.min.js') }}"></script>
+
+{{--Semantic JS--}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
 <script type="text/javascript" src="{{asset('/customer/semantic/search.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('/customer/semantic/checkbox.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('/customer/semantic/tab.min.js')}}"></script>
+{{--<script type="text/javascript" src="{{asset('/customer/semantic/modal.min.js')}}"></script>--}}
+
 <script src="{{ asset('admin/assets/plugin/jq-toast/jquery.toast.min.js') }}"></script>
 <script src="{{ asset('admin/assets/plugin/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('admin/assets/js/admin-script.js') }}"></script>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+                reader.onload = function(e) {
+                $('#avatar').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#gallery-avatar-image").change(function() {
+        readURL(this);
+    });
+</script>
 <script>
     var categoryContent = [
         { category: 'South America', title: 'Brazil' },
@@ -29,6 +51,9 @@
     $(document).ready(
         function () {
             $('.ui.checkbox').checkbox();
+            $('.tabular.menu .item').tab();
+            $('.ui.dropdown.button').dropdown();
+
         });
 </script>
 <script>
