@@ -23,13 +23,15 @@ class OrderFoodiesSeeder extends Seeder
                     'foody_id'=> $foody_id,
                     'amount'=> $amount,
                     'cost' => $cost,
+                    'sales_off_percent' => 0,
                     'total_of_cost' => $amount*$cost,
-                    'sales_off_percent' => 0
                 ]);
             }
             DB::table('order_statuses')->insert([
                'order_id'=>$i,
-                'status'=> random_int(0,1)
+                'status'=> random_int(0,3),
+                'admin_id'=>random_int(1,App\Admin::count()),
+                'approved_date'=>date('Y-m-d H:i:s')
             ]);
         }
     }

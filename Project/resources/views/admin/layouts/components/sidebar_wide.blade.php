@@ -51,7 +51,7 @@
     {{--@endif--}}
 
     {{--@if($nhanVien->checkQuyen(7))--}}
-        <a class="item {{Request::is('*admin/don_hang*') ? 'active-bar': '' }}" href="/admin/don_hang">
+        <a class="item {{Request::is('*admin/orders*') ? 'active-bar': '' }}" href="/admin/orders">
             <i class="clipboard icon icon-left"></i>Đơn hàng </a>
     {{--@endif--}}
 

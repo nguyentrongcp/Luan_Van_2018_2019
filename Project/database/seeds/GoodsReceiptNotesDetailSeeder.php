@@ -14,7 +14,8 @@ class GoodsReceiptNotesDetailSeeder extends Seeder
     public function run()
     {
         $rows = [];
-        $materials = ['Bột mì', 'Đường', 'Bột gạo', 'Thịt gà', 'Khoai tây', 'Bánh mì', 'Sũa tươi', 'Nước ngọt', 'Dầu ăn', 'Rau sạch'];
+        $materials = ['Bột mì', 'Đường', 'Bột gạo', 'Thịt gà', 'Khoai tây', 'Bánh mì', 'Sũa tươi',
+            'Nước ngọt', 'Dầu ăn', 'Rau sạch','Phô mai','Thịt bò','Cá'];
         for ($i = 1; $i <= 50; $i++) {
                 $value = random_int(5, 10);
                 $cost = random_int(10000, 100000);

@@ -1,106 +1,118 @@
-<div class="card-body">
-    <form action="" method="post">
-        {{csrf_field()}}
-        <div class="card">
-            <div class="card-header">
-                <label class="title text-info" style="font-size: 18px" for="">Thông tin</label>
+<h4 class="ui dividing header">Thông tin</h4>
+<form action="" class="ui form static">
+    <div class="ui two column padded divided grid">
+        <div class="column">
+            <div class="inline field">
+                <label class="label-fixed">Mã đơn hàng:</label>
+                <div class="static-input">{{$orders->order_code}}</div>
             </div>
-            <div class="card-body">
-                {{--@foreach($orders as $order)--}}
-                <div class="col-md-12 row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="title text-black-40 lb-info form-group" for="name">Mã đơn hàng: </label>
-                            <label class="lb-info-orders" for="">{{$orders->order_code}}</label>
-                        </div>
-                        <div class="form-group">
-                            <label class="title text-black-40 lb-info" for="type">Họ và tên: </label>
-                            <label class="lb-info-orders" for="">{{$orders->receiver}}</label>
 
-                        </div>
-                        <div class="form-group">
-                            <label class="title text-black-40 lb-info" for="type">Số điện thoại: </label>
-                            <label class="lb-info-orders" for="">{{$orders->phone}}</label>
+            <div class="inline field">
+                <label class="label-fixed">Họ và tên:</label>
+                <div class="static-input">{{ $orders->receiver }}</div>
+            </div>
 
-                        </div>
-                        <div class="form-group">
-                            <label class="title text-black-40 lb-info" for="type">Email: </label>
-                            <label class="lb-info-orders" for="">{{$orders->email}}</label>
+            <div class="inline field">
+                <label class="label-fixed">Số điện thoại:</label>
+                <div class="static-input">{{ $orders->phone }}</div>
+            </div>
 
-                        </div>
-                        <div class="form-group">
-                            <label class="title text-black-40 lb-info" for="type">Địa chỉ nhận hàng: </label>
-                            <label class="lb-info-orders" for="">{{$orders->address}}</label>
+            <div class="inline field">
+                <label class="label-fixed">Email:</label>
+                <div class="static-input">{{ $orders->email }}</div>
+            </div>
 
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="title text-black-40 lb-info" for="type">Ngày đặt hàng: </label>
-                            <label class="lb-info-orders" for="">{{$orders->order_created_at}}</label>
+            <div class="inline field">
+                <label class="label-fixed">Địa chỉ nhận hàng:</label>
+                <div class="static-input">{{ $orders->address }}</div>
+            </div>
 
-                        </div>
-                        <div class="form-group">
-                            <label class="title text-black-40 lb-info" for="type">Hình thức thanh toán: </label>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="title text-black-40 lb-info" for="type">Tổng tiền: </label>
-                            <label class="lb-info-orders" for="">{{$orders->total_of_cost}}</label>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="title text-black-40 lb-info" for="type">Tình trạng đơn hàng: </label>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="title text-black-40 lb-info" for="type">Phí vận chuyển: </label>
-                            <label class="lb-info-orders" for="">{{$orders->transport_fee}}</label>
-
-                        </div>
-                    </div>
-                </div>
-                {{--@endforeach--}}
+            <div class="inline field">
+                <label class="label-fixed">Ngày đặt hàng:</label>
+                <div class="static-input">{{ $orders->order_created_at }}</div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                <label class="title text-info" style="font-size: 18px" for="">Thực đơn</label>
-            </div>
-            <div class="card-body">
-                <div class="tables">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th class="text-center th-prot th-stt">STT</th>
-                            <th class="text-center th-prot">Tên thực đơn</th>
-                            <th class="th-prot text-center">Số lượng</th>
-                            <th class="th-prot text-center">Đơn giá</th>
-                            <th class="th-prot text-center">Tổng tiền</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($orderFoodys as $stt => $orderFoody)
-
-                            <tr>
-                                <td class="text-center td-prot th-stt">{{$stt + 1}}</td>
-                                <td class="td-prot">
-                                    <a class="text-info" href="{{route('foodies.show',[$orderFoody->foody_id])}}">{{App\Foody::find($orderFoody->foody_id)->name}}</a>
-                                </td>
-                                <td class="td-prot text-center">{{$orderFoody->amount}}</td>
-                                <td class="td-prot text-center">{{number_format($orderFoody->cost).' đ'}}</td>
-                                <td class="td-prot text-center">{{number_format($orderFoody->total_of_cost).' đ'}}</td>
-
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+        <div class=" column">
+            <div class="inline field">
+                <label class="label-fixed">Hình thức thanh toán:</label>
+                <div class="static-input">
+                    {{ $orders->paymentType() }}
                 </div>
-                <a class="btn btn-success btn-round" href=""><i class="fa fa-check-circle"></i>Duyệt</a>
-                <a class="btn btn-danger btn-round" href=""><i class="fa fa-close"></i>Hủy</a>
-
             </div>
+
+            <div class="inline field">
+                <label class="label-fixed">Tổng tiền:</label>
+                <div class="static-input">{{ number_format($orders->total_of_cost) }} đ</div>
+            </div>
+
+            <div class="inline field">
+                <label class="label-fixed">Phí vận chuyển:</label>
+                <div class="static-input">{{ $orders->transport_fee }}</div>
+            </div>
+
+            @if($orders->approved())
+                <div class="inline field">
+                    <label class="label-fixed">Tình trạng giao hàng:</label>
+                    <div class="static-input">
+                        @if($orders->getStatus() == 1)
+                            <i class="wait teal open fitted icon"></i>
+                            <span style="color: teal">
+                                <b>Đang vận chuyển</b>
+                            </span>
+                        @else
+                            <i class="check green open fitted icon"></i>
+                            <span style="color: green">
+                                <b>Đã giao hàng</b>
+                            </span>
+                        @endif
+                        <a class="ui small blue label need-popup a-decoration" href="{{ route('orders.edit', [$orders->id]) }}"
+                        data-content="Thay đổi trạng thái giao hàng"
+                        onclick="return confirm('Xác nhận cập nhật trạng thái giao hàng?')">
+                        Cập nhật
+                        </a>
+                    </div>
+                </div>
+            @endif
+
+            @if($orders->approved())
+            <div class="inline field">
+            <label class="label-fixed">Người duyệt đơn:</label>
+            <div class="static-input">{{ \App\Admin::find($orders->getIdAdmin())->name }}</div>
+            </div>
+            @endif
         </div>
-    </form>
-</div>
+    </div>
+</form>
+<h4 class="ui dividing header">Thực đơn</h4>
+<table class="ui table striped celled">
+    <thead>
+    <tr>
+        <th class="collapsing">STT</th>
+        <th>Tên thực đơn</th>
+        <th>Số lượng</th>
+        <th>Đơn giá</th>
+        <th>Tổng giá</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($orderFoodys as $stt => $orderFoody)
+
+        <tr>
+            <td>{{ $stt + 1 }}</td>
+            <td><a class="a-decoration" href="{{route('foodies.show',[$orderFoody->foody_id])}}">
+                    {{App\Foody::find($orderFoody->foody_id)->name}}</a>
+            </td>
+            <td>{{$orderFoody->amount}}</td>
+            <td>{{ number_format($orderFoody->cost).' đ'}}</td>
+            <td>{{ number_format($orderFoody->total_of_cost).' đ' }}</td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
+
+@if (method_exists($orderFoodys, 'render'))
+    <div class="ui basic segment center aligned no-padding">
+        {{ $orderFoodys->render('vendor.pagination.smui')}}
+    </div>
+@endif

@@ -58,6 +58,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
     /**      orders       **/
     Route::resource('orders','admin\OrderController');
+    Route::get('order_approved/{id}','admin\OrderController@orderApproved')
+        ->name('order_approved');
+    Route::get('order_cancelled/{id}','admin\OrderController@orderCancelled')
+        ->name('order_cancelled');
+
     Route::get('orders/filter/{id}','admin\OrderController@filter')->name('admin_orders_filter');
 
     /**      Goods receipt notes       **/

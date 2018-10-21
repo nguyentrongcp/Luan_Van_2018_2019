@@ -21,6 +21,7 @@ class CreateOrderFoodiesTable extends Migration
             $table->double('cost');
             $table->double('total_of_cost');
             $table->integer('sales_off_percent');
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

@@ -37,7 +37,7 @@ class OrdersSeeder extends Seeder
             'address' => $receiver['address'],
             'order_created_at' => $date,
             'payment_type' => rand(1, 2),
-            'total_of_cost' => random_int(20000, 1000000),
+            'total_of_cost' => random_int(20000, 100000),
             'transport_fee' => 10,
         ];
     }
