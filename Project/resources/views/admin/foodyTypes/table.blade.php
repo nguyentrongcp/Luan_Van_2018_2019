@@ -33,7 +33,7 @@
                     </a>
                 </td>
                 <td class="center aligned">
-                    <a href="#" class="ui tiny green icon label"
+                    <a href="#" class="ui tiny green icon label a-decoration"
                        onclick="$('{{ "#edit-foody-type-modal-" . $foodyType->id }}').modal('show')">
                         <i class="pencil fitted icon"></i>
                     </a>

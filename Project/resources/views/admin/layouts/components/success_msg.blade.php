@@ -1,9 +1,10 @@
-@if(Session::has('success'))
+@if(session()->get('success') != '')
     @push('script')
         <script>
+            alert('dadad');
             $.toast({
                 heading: 'Thông báo',
-                text: '{{ Session::get('success') }}',
+                text: '{{ session()->get('success') }}',
                 icon: 'success',
                 position: 'bottom-right',
                 loader: false

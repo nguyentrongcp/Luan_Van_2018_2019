@@ -46,7 +46,7 @@
     {{--@endif--}}
 
     {{--@if($nhanVien->checkQuyen(6))--}}
-        <a class="item {{Request::is('*/nhap_hang') ? 'active-bar': '' }}" href="/admin/nhap_hang">
+        <a class="item {{Request::is('*/goods_receipt_note') ? 'active-bar': '' }}" href="/admin/goods_receipt_note">
             <i class="dolly icon icon-left"></i>Nhập hàng </a>
     {{--@endif--}}
 

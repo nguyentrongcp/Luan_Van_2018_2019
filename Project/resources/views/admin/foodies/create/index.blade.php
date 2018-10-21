@@ -8,19 +8,19 @@
 
     <div class="ui blue raised segment">
         <h3 class="ui dividing header">
-            <a href="{{ route('foodies.index') }}" class="need-popup" data-content="Danh sách thực đơn">
+            <a href="{{ route('foodies.index') }}" class="need-popup a-decoration" data-content="Danh sách thực đơn">
                 <i class="small angle double left circular fitted icon"></i></a>
             Thêm mới
         </h3>
 
         <form action="{{ route('foodies.store') }}" method="post" enctype="multipart/form-data"
-              class="ui form static">
+              class="ui form static" id="create-foody-form">
 
             <div class="ui top attached tabular menu">
                 <a class="item active" data-tab="first">Thông tin</a>
                 <a class="item" data-tab="second">Mô tả sản phẩm</a>
             </div>
-            @include('admin.foodies.create.tab_infomation')
+            @include('admin.foodies.create.tab_information')
             @include('admin.foodies.create.tab_describe')
 
 

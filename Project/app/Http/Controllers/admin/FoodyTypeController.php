@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Foody;
 use App\FoodyType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -166,8 +167,6 @@ class FoodyTypeController extends Controller
                     . " còn sản phẩm liên kết";
             }
         }
-
-
         return $errors;
     }
 

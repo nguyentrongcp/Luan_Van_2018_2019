@@ -13,9 +13,7 @@
             <th class="collapsing">Loại thực đơn</th>
             <th class="collapsing">Đơn giá</th>
             <th class="collapsing">Tình trạng</th>
-            <th class="collapsing">Cập nhật</th>
             <th class="collapsing">Xem</th>
-
         </tr>.
         </thead>
         <tbody>
@@ -30,7 +28,7 @@
                 <td>{{$stt + 1}}</td>
                 <td class="collapsing">
                     <div class="gallery">
-                        <img class="img-tb" src="{{asset($foody->avatar)}}" alt="{{$foody->name}}">
+                        <img class="img-tb" src="{{$foody->avatar}}" alt="{{$foody->name}}">
                     </div>
                 </td>
                 <td>
@@ -50,12 +48,7 @@
                     @endif
                 </td>
                 <td class="center aligned">
-                    <a href="{{route('foodies.edit',[$foody->id])}}" class="ui tiny green icon label a-decoration">
-                        <i class="pencil fitted icon"></i>
-                    </a>
-                </td>
-                <td class="center aligned">
-                    <a href="{{route('foodies.show',[$foody->id])}}" class="ui tiny blue icon label">
+                    <a href="{{route('filter',[$foody->id])}}" class="ui tiny blue icon label">
                         <i class="fa fa-eye"></i>
                     </a>
                 </td>
