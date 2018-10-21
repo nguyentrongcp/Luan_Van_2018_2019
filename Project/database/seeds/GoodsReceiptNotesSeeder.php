@@ -9,8 +9,67 @@ class GoodsReceiptNotesSeeder extends Seeder
      *
      * @return void
      */
+
+//    public $materials = [
+//        [
+//            'name' => 'Thịt gà',
+//            'cost' => 100000,
+//            'calculation_unit_id' => 1
+//        ],
+//        [
+//            'name' => 'Mì ý',
+//            'cost' => 250000,
+//            'calculation_unit_id' => 7
+//        ],
+//        [
+//            'name' => 'Cà chua',
+//            'cost' => 14000,
+//            'calculation_unit_id' => 1
+//        ],
+//        [
+//            'name' => 'Thịt bò',
+//            'cost' => 110000,
+//            'calculation_unit_id' => 1
+//        ],
+//        [
+//            'name' => 'Bột mì',
+//            'cost' => 23000,
+//            'calculation_unit_id' => 1
+//        ],
+//        [
+//            'name' => 'Phô mai',
+//            'cost' => 200000,
+//            'calculation_unit_id' => 1
+//        ],
+//        [
+//            'name' => 'Thịt heo',
+//            'cost' => 50000,
+//            'calculation_unit_id' => 1
+//        ],
+//        [
+//            'name' => 'Mì ramen',
+//            'cost' => 250000,
+//            'calculation_unit_id' => 7
+//        ],
+////        [
+////            'name' => '',
+////            'cost' =>
+////                ],
+////        [
+////            'name' => '',
+////            'cost' =>
+////                ],
+////        [
+////            'name' => '',
+////            'cost' =>
+////                ],
+//
+//    ];
+
     public function run()
     {
+
+
         $rows = [];
         for ($i = 1; $i <= 10; $i++){
             $rows[] = $this->getRow();
@@ -25,7 +84,7 @@ class GoodsReceiptNotesSeeder extends Seeder
 
     public function getRow(){
         $date = $this->getValidDate();
-        $id = random_int(1, 10);
+        $id = rand(1, 10);
         return [
             'date' => $date,
             'admin_id' => $id,

@@ -15,8 +15,9 @@ class CreateCalculationUnitsTable extends Migration
     {
         Schema::create('calculation_units', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('symbol', 10);
-            $table->string('calculation_unit', 20);
+            $table->string('name', 20);
+            $table->string('unit', 10);
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

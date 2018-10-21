@@ -24,7 +24,7 @@ class CreateOrderFoodiesTable extends Migration
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('foody_id')->references('id')->on('foodies');
+            $table->foreign('foody_id')->references('id')->on('foodies')->onDelete('cascade');
         });
     }
 

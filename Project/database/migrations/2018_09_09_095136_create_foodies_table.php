@@ -19,7 +19,7 @@ class CreateFoodiesTable extends Migration
             $table->dateTime('foody_created_at');
             $table->dateTime('foody_updated_at');
             $table->string('avatar', 100);
-            $table->string('describe', 255)->nullable();
+            $table->string('describe', 1000)->nullable();
             $table->integer('foody_type_id')->unsigned();
             $table->string('slug', 100);
             $table->boolean('is_extra')->default(false);

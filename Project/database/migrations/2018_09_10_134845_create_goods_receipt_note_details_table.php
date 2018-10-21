@@ -16,9 +16,11 @@ class CreateGoodsReceiptNoteDetailsTable extends Migration
         Schema::create('goods_receipt_note_details', function (Blueprint $table) {
             $table->increments('id');
             $table->string('material', 100);
+            $table->integer('material_id')->unsigned()->nullable();
             $table->string('value', 20);
 //            $table->integer('amount');
             $table->double('cost');
+            $table->double('total_cost');
 //            $table->double('total_of_cost');
             $table->integer('goods_receipt_note_id')->unsigned();
             $table->timestamps();

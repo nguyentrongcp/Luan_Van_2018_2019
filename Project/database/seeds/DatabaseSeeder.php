@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
              NewsSeeder::class,
              ShoppingCartSeeder::class,
              SalesOffSeeder::class,
-             GoodsReceiptNotesSeeder::class,
-             GoodsReceiptNotesDetailSeeder::class,
-             GoodsReceiptNotesCostSeeder::class,
+//             GoodsReceiptNotesSeeder::class,
+//             GoodsReceiptNotesDetailSeeder::class,
+//             GoodsReceiptNotesCostSeeder::class,
              CommentsSeeder::class,
              ShopInfosSeeder::class,
              SalesOffsDetailsSeeder::class,
@@ -32,7 +32,10 @@ class DatabaseSeeder extends Seeder
              DistrictSeeder::class,
              TransportFeeSeeder::class,
              OrdersSeeder::class,
-             OrderFoodiesSeeder::class
+             OrderFoodiesSeeder::class,
+             CalculationUnitSeeder::class,
+             MaterialSeeder::class,
+             MaterialFoodySeeder::class
          ]);
     }
 }

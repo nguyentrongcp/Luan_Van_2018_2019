@@ -30,7 +30,14 @@ class FoodySeeder extends Seeder
                 'foody_created_at' => date('Y-m-d H:i:s'),
                 'foody_updated_at' => date('Y-m-d H:i:s'),
                 'avatar' => '/customer/image/Italian&Pizza/bolognaise.png',
-                'describe' => 'Mỳ Ý với thịt bò xay và xốt cà chua',
+                'describe' => 'Mỳ Ý với thịt bò xay và xốt cà chua<br>
+                Nguyên liệu:<br>
+                – 100g thịt bò băm<br>
+                – 5 quả cà chua<br>
+                – 1/3 củ hành tây<br>
+                – 1-2 củ tỏi – 1 quả dưa chuột<br>
+                – 1 gói mì ý<br>
+                – Dầu ăn – Muối – Hạt tiêu xay',
                 'foody_type_id' => 1,
                 'slug' => str_slug( 'Bolognaise spaghetti'),
             ],
@@ -52,7 +59,16 @@ class FoodySeeder extends Seeder
                 'foody_created_at' => date('Y-m-d H:i:s'),
                 'foody_updated_at' => date('Y-m-d H:i:s'),
                 'avatar' => '/customer/image/Italian&Pizza/pizza-margherita.png',
-                'describe' => 'Sốt cà chua, fomai Mozzarella',
+                'describe' => 'Sốt cà chua, fomai Mozzarella<br>
+                Nguyên liệu:<br>
+                – 200 gram bột mì đa dụng<br>
+                – Nước<br>
+                – 2 gram men làm pizza<br>
+                – Nước Sốt cà chua<br>
+                – 100 gram phô mai thường<br>
+                – 3 thìa gia vị Pizza<br>
+                – 1 Nhúm muối nhỏ<br>
+                – Dầu ô liu, rau chân vịt, bột phô mai, …',
                 'foody_type_id' => 1,
                 'slug' => str_slug( 'Pizza Margherita'),
             ],
@@ -162,7 +178,22 @@ class FoodySeeder extends Seeder
                 'foody_created_at' => date('Y-m-d H:i:s'),
                 'foody_updated_at' => date('Y-m-d H:i:s'),
                 'avatar' => '/customer/image/Sushi/my-miso-ramen.png',
-                'describe' => '',
+                'describe' => 'Thịt heo băm nhuyễn, nước luộc gà, mì ramen,...<br>
+                Nguyên liệu:<br>
+                – 2 tép tỏi<br>
+                – 1 khúc gừng dài 2,5 cm<br>
+                – 1 củ hành<br>
+                – 1 muỗng cà phê hạt mè<br>
+                – 1 muỗng cà phê dầu mè<br>
+                – 120 gam thịt heo băm nhuyễn<br>
+                – 1 muỗng cà phê tương ớt<br>
+                – 3 muỗng cà phê miso<br>
+                – 1 muỗng cà phê đường<br>
+                – 1 muỗng cà phê rượu sake<br>
+                – 1 lít nước luộc gà<br>
+                – 1 muỗng cà phê muối<br>
+                – ¼ muỗng cà phê tiêu trắng<br>
+                – 2 phần mì ramen<br>',
                 'foody_type_id' => 2,
                 'slug' => str_slug( 'Mỳ Miso Ramen'),
             ],
