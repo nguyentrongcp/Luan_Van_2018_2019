@@ -62,6 +62,13 @@ $.ajaxSetup({
     }
 });
 
+function getWidth() {
+    $('body').append("<div id='test-width' style='width: 100vw'></div>");
+    let width = $('#test-width').width();
+    $('body').remove("#test-width");
+    return width;
+}
+
 function setTimer(time) {
     var timer = setInterval(function () {
         if (time === -1) {

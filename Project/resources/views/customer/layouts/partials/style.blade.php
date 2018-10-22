@@ -14,6 +14,20 @@
         }
     }
 
+    .navbar-container {
+        height: 300px;
+        position: relative !important;
+        background: url("{{ asset('/customer/image/background.png') }}") no-repeat center center;
+        -webkit-background-size: cover;
+    }
+    .navbar-first-button {
+        text-transform: unset;
+        background-color: rgba(0,0,0,0.6);
+    }
+    .navbar .nav-wrapper .brand-logo img {
+        height: 64px;
+    }
+
     .navbar-mobile {
         padding: 0 32px !important;
         font-weight: 500;
@@ -38,15 +52,15 @@
 
     /*Navbar second*/
 
-    #navbar-second.pin-top {
+    #navbar.pin-top {
         position: absolute;
         top: unset !important;
     }
-    #navbar-second.pinned {
+    #navbar.pinned {
         background: rgba(68,68,68,0.8) !important;
         z-index: 1000;
     }
-    .navbar-second-col {
+    .navbar-col {
         width: calc((100% - 90px) / 3);
     }
     #nav-mobile {
@@ -57,7 +71,7 @@
         margin: 2px 0 0 -10px;
         vertical-align: top;
     }
-    #navbar-second {
+    #navbar {
         position: absolute;
         bottom: 0;
     }

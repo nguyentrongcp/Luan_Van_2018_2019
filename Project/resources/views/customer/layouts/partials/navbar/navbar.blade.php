@@ -12,9 +12,9 @@
                     </a>
                     <ul class="right hide-on-small-only">
                         @if(!Auth::guard('customer')->check())
-                            <li><a href="#" class="waves-effect waves-light btn navbar-first-button">
+                            <li><a href="#" class="waves-effect waves-light btn nav-btn">
                                     <b>Tạo tài khoản</b></a></li>
-                            <li><a href="#login-modal" class="waves-effect waves-light btn modal-trigger navbar-first-button">
+                            <li><a href="#login-modal" class="waves-effect waves-light btn modal-trigger nav-btn">
                                     <b>Đăng nhập</b></a></li>
                         @else
                             <li><a style="height: 64px;" class="dropdown-trigger waves-effect waves-teal" id="dropdown-profile" data-target="customer-profile">
@@ -23,21 +23,13 @@
                                     <b style="position: relative; vertical-align: top">{{ Auth::guard('customer')->user()->name }}</b>
                                 </a></li>
                         @endif
-                        {{--<li><a id="dropdown-cart" data-target="cart" style="height: 64px">--}}
-                                {{--<i class="cart icon" style="font-size: 18px"></i>--}}
-                                {{--<span id="cart-count" class="ui red mini floating label" style="top: 0;">--}}
-                                {{--{{ Cart::count() }}--}}
-                            {{--</span>--}}
-                            {{--</a></li>--}}
                     </ul>
-                    {{--<a href="#" data-target="nav-mobile" class="navbar-fixed sidenav-trigger hide-on-large-only right-align">--}}
-                        {{--<i class="material-icons" style="font-size: 30px">menu</i></a>--}}
                 </div>
             </div>
         </nav>
     </div>
 
-    @include('customer.layouts.partials.second-navbar')
+    @include('customer.layouts.partials.navbar.second-navbar')
     @include('customer.layouts.components.search-result')
 </div>
 
@@ -54,7 +46,7 @@
         </a></li>
 </ul>
 
-@include('customer.layouts.partials.cart')
+@include('customer.layouts.partials.navbar.cart.cart')
 
 @include('customer.layouts.components.login')
 
@@ -66,6 +58,6 @@
     {{--@include('customer.layouts.partials.second-navbar')--}}
 {{--</div>--}}
 
-@include('customer.layouts.partials.style')
+@include('customer.layouts.partials.navbar.style')
 
-@include('customer.layouts.partials.js')
+@include('customer.layouts.partials.navbar.js')

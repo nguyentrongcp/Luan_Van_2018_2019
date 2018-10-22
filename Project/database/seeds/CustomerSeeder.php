@@ -31,5 +31,28 @@ class CustomerSeeder extends Seeder
                 'subscribed' => true
             ]
         ]);
+
+        $data = json_decode(Info::INFO, true);
+        $ran = ['03', '05', '07', '09'];
+        $rows = [];
+        for($i=1; $i<399; $i++) {
+            $phone = $ran[$i%4] + rand(10000000, 99999999);
+            $username = substr($data[$i]['email'], 0, strpos($data[$i]['email'], '@'));
+            if (strlen($username) > 16) {
+                $username = substr($username, 0, 15);
+            }
+            $row = [
+                'name' => $data[$i]['name'],
+                'email' => $data[$i]['email'],
+                'username' => $username,
+                'password' => bcrypt('635982359'),
+                'phone' => $phone,
+                'address' => $data[$i]['address'],
+                'subscribed' => true
+            ];
+            array_push($rows, $row);
+        }
+
+        DB::table('customers')->insert($rows);
     }
 }

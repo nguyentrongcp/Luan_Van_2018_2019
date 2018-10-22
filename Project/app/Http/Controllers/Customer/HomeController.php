@@ -18,6 +18,7 @@ class HomeController extends Controller
     public function index() {
         $foody_types = FoodyType::all();
         $foodies = Foody::all();
+        Cart::add('1','Honey chicken thigh & rice',1,0);
 
         return view('customer.home.index', compact(['foody_types', 'foodies']));
     }

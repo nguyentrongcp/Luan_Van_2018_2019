@@ -3,9 +3,9 @@
         width: 90% !important;
     }
 
-    .col.news {
-        padding-left: 10px !important;
-    }
+    /*.col.news {*/
+        /*padding-left: 10px !important;*/
+    /*}*/
 
     .message {
         top: 64px !important;
@@ -19,10 +19,6 @@
     .container {
         width: 98% !important;
     }
-
-    .mini-modal {
-        width: 40% !important;
-    }
 }
 
 @media only screen and (min-width: 601px) {
@@ -33,17 +29,17 @@
 
 @media only screen and (max-width: 600px) {
 
-    .slider-mobile .slider-mobile {
-        height: 175px !important;
-    }
+    /*.slider-mobile .slider-mobile {*/
+        /*height: 175px !important;*/
+    /*}*/
 
-    a.sidenav-trigger.navbar-fixed {
-        width: 56px !important;
-    }
+    /*a.sidenav-trigger.navbar-fixed {*/
+        /*width: 56px !important;*/
+    /*}*/
 
-    .mini-modal {
-        width: 90% !important;
-    }
+    /*.mini-modal {*/
+        /*width: 90% !important;*/
+    /*}*/
 }
 
 
@@ -110,7 +106,7 @@ body {
 }
 
 .row {
-    margin-bottom: 10px;
+    margin: 0;
 }
 
 .row .col {
@@ -130,13 +126,13 @@ body {
     margin-bottom: 20px;
 }
 
-.mini-modal {
-    width: 30%;
-}
+/*.mini-modal {*/
+    /*width: 30%;*/
+/*}*/
 
-.ui.card, .ui.cards>.card {
-    width: 100% !important;
-}
+/*.ui.card, .ui.cards>.card {*/
+    /*width: 100% !important;*/
+/*}*/
 
 .btn {
     text-transform: unset;
@@ -149,41 +145,19 @@ body {
 
     /*Navbar custom*/
 
-    .navbar-header {
-        height: 300px;
-        position: relative !important;
-        background: url("../../customer/image/background.png") no-repeat center center;
-        -webkit-background-size: cover;
-        /*-moz-background-size: cover;*/
-        /*-o-background-size: cover;*/
-        /*background-size: cover;*/
-    }
-    .navbar-header nav {
-        /*bottom: 0;*/
-        /*position: absolute;*/
-        /*width: 100%;*/
-        background-color: rgba(0,0,0,0) !important;
-    }
-    .navbar-first-button {
-        text-transform: unset;
-        background-color: rgba(0,0,0,0.6);
-    }
-    .navbar .nav-wrapper .brand-logo img {
-        height: 64px;
-    }
 
 
-    a.sidenav-trigger.navbar-fixed {
-        position: fixed;
-        text-align: right;
-        width: 64px;
-        top: 0;
-        float: none;
-        /*margin-left: 1.5rem;*/
-        color: white;
-        z-index: 2;
-        right: 0;
-    }
+    /*a.sidenav-trigger.navbar-fixed {*/
+        /*position: fixed;*/
+        /*text-align: right;*/
+        /*width: 64px;*/
+        /*top: 0;*/
+        /*float: none;*/
+        /*!*margin-left: 1.5rem;*!*/
+        /*color: white;*/
+        /*z-index: 2;*/
+        /*right: 0;*/
+    /*}*/
 
     /*Slider & News custom*/
 

@@ -18,19 +18,19 @@
         {{--</div>--}}
     {{--</div>--}}
 {{--</footer>--}}
-<footer>
-    <div id="footer-container" class="row blue-grey lighten-3" style="height: 300px">
-        <div class="container">
+{{--<footer>--}}
+    {{--<div id="footer-container" class="row blue-grey lighten-3" style="height: 300px">--}}
+        {{--<div class="container">--}}
 
-        </div>
-    </div>
-</footer>
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</footer>--}}
 
-<style>
-    #footer-container {
-        margin: 0;
-    }
-</style>
+{{--<style>--}}
+    {{--#footer-container {--}}
+        {{--margin: 0;--}}
+    {{--}--}}
+{{--</style>--}}
 
     <script src="{{ asset('/customer/js/jquery-3.3.1.min.js') }}"></script>
 
