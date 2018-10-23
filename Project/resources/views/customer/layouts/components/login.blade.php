@@ -2,13 +2,13 @@
     <div class="modal-content">
         <h5 class="modal-header">Đăng nhập</h5>
         <div class="input-field col s12">
-            <input id="username-login" type="text" name="username">
+            <input id="username-login" type="text" name="username" value="nguyennguyencp">
             <label for="username-login" class="active">Tài khoản</label>
             <span id="username-login-error"></span>
         </div>
 
         <div class="input-field col s12">
-            <input id="password-login" type="password" name="password">
+            <input id="password-login" type="password" name="password" value="635982359">
             <label for="password-login" class="active">Mật khẩu</label>
             <span id="password-login-error"></span>
         </div>
@@ -20,6 +20,10 @@
 <style>
     .input-field {
         margin-top: 0;
+    }
+    #login-modal {
+        max-width: 400px;
+        width: 98%;
     }
 </style>
 

@@ -9,7 +9,7 @@
         .m-nav-col {
             width: calc(25%) !important;
         }
-        #cart-quantity {
+        #cart-qty {
             margin: 0 !important;
             position: absolute;
             top: 2px;
@@ -69,6 +69,12 @@
         background: rgba(68,68,68,0.8) !important;
         z-index: 1000;
     }
+    #navbar.pin {
+        background: rgba(68,68,68,0.8) !important;
+        top: 0;
+        bottom: auto;
+
+    }
     .nav-col {
         width: calc((100% - 90px) / 3);
     }
@@ -76,7 +82,7 @@
     /*#nav-mobile {*/
         /*z-index: 1000;*/
     /*}*/
-    #cart-quantity {
+    #cart-qty {
         min-width: 0;
         margin: 2px 0 0 -10px;
         vertical-align: top;
@@ -84,6 +90,10 @@
     #navbar {
         position: absolute;
         bottom: 0;
+    }
+    #navbar-ul {
+        position: relative;
+        display: flex;
     }
     #search {
         height: 64px;

@@ -97,7 +97,7 @@
         cursor: unset;
     }
 
-    @media only screen and (max-width: 475px) {
+    @media only screen and (max-width: 477px) {
         .col.cart-name {
             width: calc(100% - 80px);
         }

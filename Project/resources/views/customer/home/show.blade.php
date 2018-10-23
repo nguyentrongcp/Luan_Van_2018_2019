@@ -11,7 +11,7 @@
                 <div class="show-foody-cost"><span class="cost">
                         {{ number_format($foody->getSaleCost()) }}<sup>đ</sup>
                     </span></div>
-                <div class="show-foody-describe">{{ $foody->describe }}</div>
+                <div class="show-foody-describe">{!! $foody->describe !!}</div>
                 <div class="show-foody-rating">
                     <span class="rating-icon">
                         <i class="material-icons">star</i>
@@ -25,7 +25,8 @@
                     </span>
                     <span class="rating-spacing">|</span>
                     <span>
-                        <i class="like icon" style="font-size: 12px"></i> 13
+                        <i class="like icon" style="font-size: 12px"></i>
+                        {{ $foody->likes()->count() }}
                     </span>
                     <span class="rating-spacing">|</span>
                     <span>

@@ -79,3 +79,7 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
   text-transform: unset;
   font-weight: bolder;
 }
+.pin {
+  z-index: 1000;
+  position: fixed;
+}

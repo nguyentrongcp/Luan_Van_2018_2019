@@ -1,6 +1,20 @@
 @push('script')
     <script>
 
+        $(document).ready(function () {
+            $('#home-nav-container').pushpin({
+                top: 300 - $('#navbar').height(),
+                onPositionChange: function (status) {
+                    if (status === 'pinned') {
+                        $('#show-foody').addClass('special');
+                    }
+                    else {
+                        $('#show-foody').removeClass('special');
+                    }
+                }
+            });
+        });
+
         function like(like) {
             var id = like.id;
             var foody_id = $('#' + id).attr('data-target');

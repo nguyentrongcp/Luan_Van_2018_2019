@@ -2,20 +2,16 @@
 
 <style>
 
-    .navbar-home {
+    .home-nav {
         padding: 5px 5px 0 10px !important;
     }
 
-    .navbar-home .btn {
+    .home-nav .btn {
         text-transform: unset;
         color: #666 !important;
         text-align: left;
     }
-    .foody-navbar {
-        padding-right: 10px !important;
-        padding-top: 10px !important;
-    }
-    .foody-navbar .row {
+    #home-nav-container .row {
         margin: 0 0 20px 0;
     }
     .divider {
@@ -32,35 +28,40 @@
     }
 
 
-    .foody-navbar-overflow {
-        overflow: hidden;
+    /*.foody-navbar-overflow {*/
+        /*overflow: hidden;*/
+        /*width: 250px !important;*/
+        /*max-height: calc(100vh - 74px);*/
+    /*}*/
+    #home-nav-container {
+        padding-right: 10px !important;
+        padding-top: 10px !important;
         width: 250px !important;
-        max-height: calc(100vh - 74px);
     }
-    .foody-navbar {
-        width: 250px !important;
+    #home-nav-container::-webkit-scrollbar {
+        width: 0;
     }
-    .foody-navbar:hover {
+    #home-nav-container:hover {
         overflow: auto;
     }
-    .foody-navbar .divider {
+    #home-nav-container .divider {
         margin-bottom: 5px !important;
     }
     .show-foody {
         width: calc(100% - 250px) !important;
         margin-top: 20px;
     }
-    #foody-navbar.pin-top {
+    #home-nav-container.pin-top {
         top: unset !important;
     }
-    #foody-navbar.pinned {
+    #home-nav-container.pinned {
         top: 64px !important;
-        overflow: hidden;
+        overflow-y: auto;
         max-height: calc(100vh - 74px);
     }
-    #foody-navbar.pinned:hover {
-        overflow: auto;
-    }
+    /*#home-nav-container.pinned:hover {*/
+        /*overflow: auto;*/
+    /*}*/
 
     @media only screen and (min-width: 601px) {
         .show-foody.special {

@@ -42,7 +42,7 @@ class CustomerLoginController extends Controller
         // Attempt to log the user in
         if (Auth::guard('customer')->attempt(['username' => $request->username, 'password' => $request->password])) {
             // if successful, then redirect to their intended location
-            Cart::syncToDB();
+            CartFunction::syncToDB();
 
             return Response(['status' => 'success']);
         }

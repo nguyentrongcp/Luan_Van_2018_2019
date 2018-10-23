@@ -1,8 +1,8 @@
-<div class="navbar">
+<div class="navbar" id="nav-2">
     <nav id="navbar" class="transparent z-depth-0">
         <div class="container">
             <div class="nav-wrapper">
-                <ul id="">
+                <ul id="navbar-ul">
                     <li class="nav-col m-nav-col">
                         <a>
                             <i class="material-icons left hide-on-small-only">arrow_back</i>
@@ -38,11 +38,11 @@
                             <span class="hide-on-small-only">Phân loại</span></a>
                     </li>
 
-                    <li style="width: 90px" class="nav-col m-nav-col">
+                    <li style="width: 90px" id="navbar-cart" class="nav-col m-nav-col">
                         <a id="dropdown-cart" data-target="dro-cart" class="truncate dropdown-trigger">
                             <i class="material-icons left hide-on-small-only">shopping_cart</i>
                             <i class="material-icons center hide-on-med-and-up">shopping_cart</i>
-                            <span id="cart-quantity" class="new badge" data-badge-caption="">{{ Cart::count() }}</span>
+                            <span id="cart-qty" class="new badge" data-badge-caption="">{{ Cart::count() }}</span>
                         </a>
                     </li>
                 </ul>

@@ -94,7 +94,8 @@
     }
 
 body {
-    background-color: #f2f2f2;
+    /*background-color: #f2f2f2;*/
+    background-color: #F2F3F3;
 }
 
 .container {
@@ -238,6 +239,21 @@ body {
     .waves-effect.red.lighten-2:hover {
         background-color: #EF9A9A !important;
     }
+
+    .pin {
+        z-index: 1000;
+        position: fixed !important;
+    }
+
+
+
+
+    .dimmer {
+        z-index: 1001 !important;
+    }
+    /*.modal-overlay {*/
+        /*opacity: 0.8 !important;*/
+    /*}*/
 
     /*Stars rating custom*/
 

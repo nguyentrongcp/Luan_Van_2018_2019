@@ -15,25 +15,11 @@ $(document).ready(function(){
     $('.collapsible').collapsible();
 
     $('select').formSelect();
-    $('.cards.hoverable .image').dimmer({
-        on: 'hover'
-    });
+    // $('.cards.hoverable .image').dimmer({
+    //     on: 'hover'
+    // });
     $('.pushpin').pushpin();
     $('.carousel').carousel();
-    $('#navbar-second').pushpin({
-        top: 300 - $('#navbar-second').height(),
-    });
-    $('#foody-navbar').pushpin({
-        top: 236,
-        onPositionChange: function (status) {
-            if (status === 'pinned') {
-                $('#show-foody').addClass('special');
-            }
-            else {
-                $('#show-foody').removeClass('special');
-            }
-        }
-    });
 });
 
 if(!!window.performance && window.performance.navigation.type === 2)
@@ -65,7 +51,7 @@ $.ajaxSetup({
 function getWidth() {
     $('body').append("<div id='test-width' style='width: 100vw'></div>");
     let width = $('#test-width').width();
-    $('body').remove("#test-width");
+    $('#test-width').remove();
     return width;
 }
 
@@ -83,7 +69,22 @@ function setTimer(time) {
     }, 1000);
 }
 
+function setDimmer(element1, element2 = null) {
+    $('body').append("<div id='dimmer-container' style='background-color: rgba(0,0,0,0.8);" +
+        "position: fixed; top: 0; height: 100vh; width: 100vw; z-index: 999'></div>");
+    $(element1).addClass('dimmer');
 
+    if (element2 !== null) {
+        $(element2).addClass('dimmer');
+    }
+}
+function closeDimmer(element1, element2 = null) {
+    $('#dimmer-container').remove();
+    $(element1).removeClass('dimmer');
 
+    if (element2 !== null) {
+        $(element2).removeClass('dimmer');
+    }
+}
 
 // upload image preview

@@ -1,19 +1,5 @@
-<div href="#" class="row white" id="search-result">
-    {{--<div class="row white search-result-row">--}}
-        {{--<img src="/customer/image/Italian&Pizza/honey-chicken-thigh-rice.png">--}}
-        {{--<span class="search-result-content">--}}
-            {{--<div class="col s11 search-result-title">Ten mon an</div>--}}
-            {{--<div class="col s11 search-result-cost">249,000<sup>đ</sup></div>--}}
-            {{--<div class="col s11 search-result-rate">--}}
-                {{--<i class="material-icons">star</i>--}}
-                {{--<i class="material-icons">star</i>--}}
-                {{--<i class="material-icons">star</i>--}}
-                {{--<i class="material-icons">star_half</i>--}}
-                {{--<i class="material-icons">star_half</i>--}}
-            {{--</div>--}}
-        {{--</span>--}}
-    {{--</div>--}}
-    {{--<div class="divider"></div>--}}
+<div class="row white" id="search-result">
+
 </div>
 
 <style>
@@ -22,12 +8,11 @@
         z-index: 1000;
         display: none;
         /*top: 236px;*/
-        /*overflow: auto;*/
         margin-bottom: 0 !important;
     }
     @media only screen and (min-width: 601px) {
         #search-result {
-            /*max-height: calc(100vh - 64px);*/
+            /*max-height: calc(100vh - 64px) !important;*/
         }
         #search-result.pinned {
             top: 64px !important;
@@ -36,9 +21,22 @@
             top: 300px !important;
         }
     }
+    @media only screen and (min-width: 993px) {
+        #search-result {
+            width: calc((90% - 90px) / 3);
+        }
+
+    }
+    @media only screen and (max-width: 992px) {
+        #search-result {
+            width: calc((98% - 90px) * 2 / 3);
+        }
+
+    }
     @media only screen and (max-width: 600px) {
         #search-result {
-            /*max-height: calc(100vh - 56px);*/
+            /*max-height: calc(100vh - 56px) !important;*/
+            width: 98%;
         }
         #search-result.pinned {
             top: 56px !important;

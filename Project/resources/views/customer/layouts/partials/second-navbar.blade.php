@@ -1,5 +1,5 @@
 <div class="navbar">
-    <nav id="navbar" class="transparent z-depth-0">
+    <nav id="navbar-second" class="transparent z-depth-0">
         <div class="container">
             <div class="nav-wrapper">
                 <ul id="">

@@ -39,7 +39,7 @@
 
     <script src="{{ asset('/customer/js/rating.min.js') }}"></script>
     <script src="{{ asset('/customer/js/countdown.min.js') }}"></script>
-    <script src="{{ asset('/customer/semantic/dimmer.min.js') }}"></script>
+    {{--<script src="{{ asset('/customer/semantic/dimmer.min.js') }}"></script>--}}
     <script src="{{ asset('/customer/semantic/transition.min.js') }}"></script>
     <script src="{{ asset('/customer/js/md5.js') }}"></script>
     <script src="{{ asset('/customer/js/jquery.backDetect.min.js') }}"></script>

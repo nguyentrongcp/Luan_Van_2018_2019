@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="{{ asset('/customer/css/custom.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('/customer/semantic/dimmer.min.css') }}">
+    {{--<link rel="stylesheet" href="{{ asset('/customer/semantic/dimmer.min.css') }}">--}}
     <link rel="stylesheet" href="{{ asset('/customer/semantic/card.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/customer/semantic/button.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/customer/semantic/icon.min.css') }}">

@@ -34,11 +34,11 @@ class ShoppingCartController extends Controller
 
         $role = Cart::count() == 0 ? 'new' : 'old';
 
-        Cart::addCart($request->foody_id, $request->count);
+        CartFunction::updateCart($request->foody_id, $request->count);
 
-        $cart = Cart::matchedFoody($request->foody_id);
+        $cart = CartFunction::matchedInCart($request->foody_id);
 
-        $cost = Cart::getCost($request->id);
+        $cost = CartFunction::getCost();
 
 
         $data = ['total_count' => Cart::count(),
@@ -48,9 +48,13 @@ class ShoppingCartController extends Controller
             $data += ['status' => 'deleted'];
         }
         elseif ($cart->qty != $request->count) {
-            $data += ['status' => 'updated', 'count' => $cart->qty, 'cost_simple' => number_format($foody->getSaleCost()),
+            $data += [
+                'status' => 'updated',
+                'count' => $cart->qty,
+                'cost_simple' => number_format($foody->getSaleCost()),
                 'cost' => number_format($cart->qty * $foody->getSaleCost()),
-                'sale' => $foody->getSalePercent()];
+                'sale' => $foody->getSalePercent()
+            ];
 
         }
         else {
@@ -70,8 +74,8 @@ class ShoppingCartController extends Controller
                         <i class='plus icon'></i>
                     </a>
 
-                    <a class='ui button' onclick='updateCart(this,$cart->id)'
-                       id='cart-minus-$cart->id'><i class='minus icon'></i>
+                    <a class='ui button' data-qty=\"minus-{{ $cart->id }}\" onclick='updateCart(this,$cart->id)'
+                       id='minus-$cart->id'><i class='minus icon'></i>
                     </a>
                 </div>
                 <div class='col right-align' style='width: 70px' id='cart-cost-$cart->id'>
@@ -91,8 +95,8 @@ class ShoppingCartController extends Controller
     public function removeCart(Request $request) {
         $foody = Foody::find($request->foody_id);
 
-        Cart::removeCart($request->foody_id);
-        $cost = Cart::getCost($request->id);
+        CartFunction::removeCart($request->foody_id);
+        $cost = CartFunction::getCost($request->id);
 
         $data = ['total_count' => Cart::count(),
             'total_cost' => number_format($cost)];
