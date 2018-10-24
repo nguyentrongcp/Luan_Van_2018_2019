@@ -3,11 +3,13 @@
         <div class="container">
             <div class="nav-wrapper">
                 <ul id="navbar-ul">
-                    <li class="nav-col m-nav-col">
-                        <a>
-                            <i class="material-icons left hide-on-small-only">arrow_back</i>
+                    <li class="nav-col m-nav-col" id="navbar-filter">
+                        <a class="hide-on-small-only">
+                            <i class="material-icons left">arrow_back</i>
                             <span class="hide-on-small-only">Trở về</span>
-                            <i class="material-icons center hide-on-med-and-up">arrow_back</i>
+                        </a>
+                        <a id="home-nav-dropdown" class="hide-on-med-and-up dropdown-trigger" data-target="m-home-nav-container">
+                            <i class="material-icons center hide-on-med-and-up">filter_list</i>
                         </a>
                     </li>
 
@@ -70,3 +72,5 @@
             <i class="material-icons">event</i>Tin tức và khuyến mãi
         </a></li>
 </ul>
+
+@include('customer.home.navbar-mobile')

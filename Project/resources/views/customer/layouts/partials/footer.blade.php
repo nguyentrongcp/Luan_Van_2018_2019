@@ -18,13 +18,69 @@
         {{--</div>--}}
     {{--</div>--}}
 {{--</footer>--}}
-{{--<footer>--}}
-    {{--<div id="footer-container" class="row blue-grey lighten-3" style="height: 300px">--}}
-        {{--<div class="container">--}}
+<footer>
+    <div id="footer-container" class="row blue-grey lighten-3">
+        <div class="container">
+            <div class="col s12 m12 l4">
+                <div class="col s10 footer-col">
+                    <div class="col s12 footer-title">
+                        <b>Thông tin cửa hàng</b>
+                    </div>
+                    @foreach(\App\ShopInfo::all() as $info)
+                        <div><b>Tên cửa hàng:</b> {{ $info->name }}</div>
+                        <div><b>Địa chỉ:</b> {{ $info->address }}</div>
+                        <div><b>Số điện thoại:</b> {{ $info->phone }}</div>
+                        <div><b>Email:</b> {{ $info->email }}</div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="col s12 m12 l4">
+                <div class="col s12 center-align footer-col">
+                    <img class="responsive-img teal circle" src="{{ asset('/customer/image/logo-white.png') }}">
+                </div>
+                <div class="center-align">
+                    © 2018 FastFoody - A Foody Corporation
+                </div>
+                <div style="margin-top: 10px" class="center-align">
+                    Tham gia fanpage của chúng tôi:
+                    <a style="color: unset" target="_blank" href="https://www.facebook.com/Fastfoody-%E1%BA%A8m-th%E1%BB%B1c-ngon-nhanh-gi%C3%A1-r%E1%BA%BB-2010538875677074/?modal=admin_todo_tour">
+                        <i class="facebook large icon" style="vertical-align: sub"></i></a>
+                </div>
+            </div>
+            <div class="col s12 m12 l4">
+                <div class="col s10 right right-align footer-col">
+                    <div class="col s12 footer-title">
+                        <b>Chúng tôi cam kết</b>
+                    </div>
+                    <div>Thức ăn ngon, nhanh, giá rẻ...</div>
+                    <div>Giao hàng tận nơi</div>
+                    <div>Miễn phí với các đơn hàng trên 400k</div>
+                    <div>Một món cũng giao hàng</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</footer>--}}
+<style>
+    #footer-container {
+        margin-top: 30px;
+        padding-bottom: 30px;
+        font-size: 14px;
+    }
+    .footer-col div {
+        margin-bottom: 15px;
+    }
+    .footer-title {
+        margin-top: 30px;
+        font-size: 18px;
+    }
+    .footer-col img {
+        height: 100px !important;
+        width: 100px !important;
+        margin: 30px 0 20px 0 !important;
+    }
+</style>
 
 {{--<style>--}}
     {{--#footer-container {--}}
@@ -39,7 +95,7 @@
 
     <script src="{{ asset('/customer/js/rating.min.js') }}"></script>
     <script src="{{ asset('/customer/js/countdown.min.js') }}"></script>
-    {{--<script src="{{ asset('/customer/semantic/dimmer.min.js') }}"></script>--}}
+    <script src="{{ asset('/customer/semantic/dimmer.min.js') }}"></script>
     <script src="{{ asset('/customer/semantic/transition.min.js') }}"></script>
     <script src="{{ asset('/customer/js/md5.js') }}"></script>
     <script src="{{ asset('/customer/js/jquery.backDetect.min.js') }}"></script>

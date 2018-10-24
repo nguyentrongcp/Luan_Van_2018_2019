@@ -6,6 +6,20 @@
                 top: 300 - $('#navbar').height(),
                 onPositionChange: function (status) {
                     if (status === 'pinned') {
+                        $(document).scroll(function () {
+                            let nav = $('#home-nav-container');
+                            if ($(window).scrollTop() + $(window).height() >= $('#footer-container').offset().top - 30) {
+                                // let bottom = $('#footer-container').offset().top - $(nav).height() - 30 - $(window).scrollTop();
+                                let bottom = $(window).height() + $(window).scrollTop() - $('#footer-container').offset().top + 30;
+                                // $(nav).removeClass('pinned');
+                                $(nav).css({
+                                    'bottom': bottom,
+                                });
+                            }
+                            else {
+                                $(nav).css('bottom','');
+                            }
+                        });
                         $('#show-foody').addClass('special');
                     }
                     else {
@@ -97,44 +111,48 @@
                 }
             })
         }
-        
-        function showFoodyByType(foody_type) {
-            var foody_sort_id = $('.foody-sort.active').id;
+
+        $('.foody-sort').on('click', function () {
+            let sort = this;
+            let type_id = $($('.foody-type.active')[0]).attr('data-filter');
             $.ajax({
-                type: "post",
-                url: "/customer/show_foody",
+                type: 'post',
+                url: '/customer/show_foody',
                 data: {
-                    foody_type_id: foody_type.id,
-                    foody_sort_id: foody_sort_id,
-                    type: 'type'
-                },
-                success: function (data) {
-                    $('#show-foody').empty();
-                    $('#show-foody').html(data);
-                    $('.foody-type').removeClass('active');
-                    $(foody_type).addClass('active');
-                }
-            })
-        }
-        
-        function showFoodyBySort(foody_sort) {
-            var foody_type_id = $('.foody-type.active')[0].id;
-            $.ajax({
-                type: "post",
-                url: "/customer/show_foody",
-                data: {
-                    foody_sort_id: foody_sort.id,
-                    foody_type_id: foody_type_id,
+                    foody_type_id: type_id,
+                    foody_sort_id: $(sort).attr('data-filter'),
                     type: 'sort'
                 },
                 success: function (data) {
                     $('#show-foody').empty();
                     $('#show-foody').html(data);
                     $('.foody-sort').removeClass('active');
-                    $(foody_sort).addClass('active');
+                    $(sort).addClass('active');
+                    $("html, body").animate({ scrollTop: 300 - $('#navbar').height() }, 'slow');
                 }
             })
-        }
+        });
+
+        $('.foody-type').on('click', function () {
+            let type = this;
+            let sort_id = $($('.foody-sort.active')[0]).attr('data-filter');
+            $.ajax({
+                type: 'post',
+                url: '/customer/show_foody',
+                data: {
+                    foody_type_id: $(type).attr('data-filter'),
+                    foody_sort_id: sort_id,
+                    type: 'type'
+                },
+                success: function (data) {
+                    $('#show-foody').empty();
+                    $('#show-foody').html(data);
+                    $('.foody-type').removeClass('active');
+                    $(type).addClass('active');
+                    $("html, body").animate({ scrollTop: 300 - $('#navbar').height() }, 'slow');
+                }
+            })
+        });
 
     </script>
 @endpush

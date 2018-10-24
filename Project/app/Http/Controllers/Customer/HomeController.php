@@ -40,22 +40,22 @@ class HomeController extends Controller
         }
 
         if ($request->foody_sort_id == 'desc') {
-            $foody_sorteds = array_reverse(array_sort($foody_sorts, function($foody_sorts) {
+            $foody_sorts = array_reverse(array_sort($foody_sorts, function($foody_sorts) {
                 return $foody_sorts['cost'];
             }));
         }
         else if($request->foody_sort_id == 'asc') {
-            $foody_sorteds = array_sort($foody_sorts, function($foody_sorts) {
+            $foody_sorts = array_sort($foody_sorts, function($foody_sorts) {
                 return $foody_sorts['cost'];
             });
         }
         else {
-            $foody_sorteds = $foodies;
+            $foody_sorts = $foodies;
         }
 
-//        return Response($foody_sorteds);
+//        return Response($foody_sorts);
         $data = '';
-        foreach ($foody_sorteds as $foody) {
+        foreach ($foody_sorts as $foody) {
             $id = $foody['id'];
             $avatar = asset($foody['avatar']);
             $name = $foody['name'];

@@ -4,9 +4,9 @@
     }
     #dro-cart {
         color: #666;
-        overflow: hidden;
-        max-height: calc(100vh - 64px);
+        overflow: auto;
         height: auto !important;
+        max-height: calc(100vh - 64px);
     }
 
     .responsive-img.circle {
@@ -25,7 +25,6 @@
     #cart-body {
         padding: 15px 0 !important;
         min-height: 1px;
-
     }
 
     #cart-body .cart-row {
@@ -97,12 +96,21 @@
         cursor: unset;
     }
 
+    @media only screen and (max-width: 600px) {
+        #dro-cart {
+            max-height: calc(100vh - 56px);
+        }
+        #dro-cart::-webkit-scrollbar {
+            width: 0 !important;
+        }
+    }
+
     @media only screen and (max-width: 477px) {
         .col.cart-name {
             width: calc(100% - 80px);
         }
         .col.cart-action {
-            width: 42px;
+            width: 45px;
             margin-left: calc(100% - 189px);
         }
         #dro-cart {

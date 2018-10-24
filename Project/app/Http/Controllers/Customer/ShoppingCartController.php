@@ -11,25 +11,28 @@ use Illuminate\Support\Facades\Auth;
 
 class ShoppingCartController extends Controller
 {
-    public function addCart(Request $request) {
-        $foody = Foody::find($request->foody_id);
-
-        if (Cart::getCountByID($foody->id) == 10) {
-            return Response(['status' => 404]);
-        }
-        else {
-            Cart::addCart($foody->id, 1);
-            $count = Cart::getCountByID($foody->id);
-
-            return Response(['count' => Cart::count(), 'status' => 200,
-                'added_text' => "
-                    (<span class='red-text'>$count</span>)
-                "]);
-        }
-
-    }
+//    public function addCart(Request $request) {
+//        $foody = Foody::find($request->foody_id);
+//
+//        if (Cart::getCountByID($foody->id) == 10) {
+//            return Response(['status' => 404]);
+//        }
+//        else {
+//            Cart::addCart($foody->id, 1);
+//            $count = Cart::getCountByID($foody->id);
+//
+//            return Response(['count' => Cart::count(), 'status' => 200,
+//                'added_text' => "
+//                    (<span class='red-text'>$count</span>)
+//                "]);
+//        }
+//
+//    }
 
     public function updateCart(Request $request) {
+        if (CartFunction::matchedInCart($request->foody_id) == null && $request->count == -1) {
+            return Response(['status' => 'error']);
+        }
         $foody = Foody::find($request->foody_id);
 
         $role = Cart::count() == 0 ? 'new' : 'old';
@@ -61,7 +64,7 @@ class ShoppingCartController extends Controller
             $cart_cost = number_format($foody->getSaleCost() * $cart->qty);
             $cart_body =
                 "<div class='cart-row row' id='$cart->id'>
-                <div class='col cart-count' id='cart-count-$cart->id'
+                <div class='col cart-count' id='cart-qty-$cart->id'
                      style='width: 30px; margin-left: 15px'>
                     $cart->qty
                 </div>

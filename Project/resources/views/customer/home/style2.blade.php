@@ -18,7 +18,7 @@
         /*margin-bottom: 5px;*/
     }
 
-    .btn.active {
+    .foody-type.active, .foody-sort.active {
         color: white !important;
         background-color: #26a69a !important;
     }
@@ -37,6 +37,8 @@
         padding-right: 10px !important;
         padding-top: 10px !important;
         width: 250px !important;
+        height: auto;
+        bottom: 0;
     }
     #home-nav-container::-webkit-scrollbar {
         width: 0;
@@ -57,7 +59,7 @@
     #home-nav-container.pinned {
         top: 64px !important;
         overflow-y: auto;
-        max-height: calc(100vh - 74px);
+        /*max-height: calc(100vh - 64px);*/
     }
     /*#home-nav-container.pinned:hover {*/
         /*overflow: auto;*/
@@ -148,5 +150,27 @@
     }
     .show-foody-favorite i {
         cursor: pointer;
+    }
+
+
+
+    /*nav-mobile*/
+    #m-home-nav-container {
+        width: 100%;
+        height: auto !important;
+        max-height: calc(100vh - 56px);
+    }
+    #m-home-nav-container a, #m-home-nav-container li, #m-home-nav-container span {
+        color: #666;
+    }
+    .m-home-nav-title {
+        font-size: 20px !important;
+        font-weight: bolder;
+    }
+    #m-home-nav-container::-webkit-scrollbar {
+        width: 0;
+    }
+    .m-home-nav-title:hover {
+        background-color: unset;
     }
 </style>

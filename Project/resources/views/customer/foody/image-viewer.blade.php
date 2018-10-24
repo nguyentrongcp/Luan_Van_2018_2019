@@ -255,8 +255,6 @@
             $('body').css('overflow', 'hidden');
             initImageViewer(list_image, image_selected);
 
-            console.log($(list_image[0]));
-
             $('#image-viewer').removeClass('hide');
             setMiddle($('#image-viewer-main'));
             $(window).resize(function () {

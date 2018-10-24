@@ -87,4 +87,5 @@ function closeDimmer(element1, element2 = null) {
     }
 }
 
+
 // upload image preview
