@@ -1,5 +1,4 @@
-<div class="ui basic segment no-padding no-margin table-responsive">
-    <table class="ui table very compact striped celled selectable unstackable" id="form-orders">
+<table class="ui table very compact striped celled selectable unstackable" id="form-orders">
         <thead>
         <tr>
             <th class="collapsing">STT</th>
@@ -78,4 +77,3 @@
             {{ $orders->render('admin.layouts.components.pagination.smui')}}
         </div>
     @endif
-</div>

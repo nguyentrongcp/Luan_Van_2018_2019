@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call([
+             RoleSeeder::class,
              AdminSeeder::class,
              CustomerSeeder::class,
              FoodyTypeSeeder::class,
@@ -27,8 +28,8 @@ class DatabaseSeeder extends Seeder
              CommentsSeeder::class,
              ShopInfosSeeder::class,
              SalesOffsDetailsSeeder::class,
-             DecentralizationSeeder::class,
-             DecentralizeEmployeesSeeder::class,
+             FunctionSeeder::class,
+             EmployeeRoleSeeder::class,
              DistrictSeeder::class,
              TransportFeeSeeder::class,
              OrdersSeeder::class,
@@ -36,7 +37,8 @@ class DatabaseSeeder extends Seeder
              CalculationUnitSeeder::class,
              MaterialSeeder::class,
              MaterialFoodySeeder::class,
-             LikeSeeder::class
+             LikeSeeder::class,
+             SliderSeeder::class
          ]);
     }
 }

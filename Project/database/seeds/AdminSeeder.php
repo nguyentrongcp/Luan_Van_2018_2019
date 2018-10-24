@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
                 'phone' => '01639883047',
                 'username' => 'blabla',
                 'password' => bcrypt('111111'),
-                'role' => 0
+                'role_id' => 1
             ],
             [
                 'name' => 'Nguyễn Đình Trọng',
@@ -28,7 +28,7 @@ class AdminSeeder extends Seeder
                 'phone' => '01639883047',
                 'username' => 'nguyentrong',
                 'password' => bcrypt('111111'),
-                'role' => 1
+                'role_id' => 1
             ],
             [
                 'name' => 'Lý Trường Giang',
@@ -37,7 +37,7 @@ class AdminSeeder extends Seeder
                 'phone' => '01639883047',
                 'username' => 'ltgiang',
                 'password' => bcrypt('111111'),
-                'role' => 1
+                'role_id' => 1
             ],
             [
                 'name' => 'Nguyễn Văn Lộc',
@@ -46,7 +46,7 @@ class AdminSeeder extends Seeder
                 'phone' => '01639883047',
                 'username' => 'nvloc',
                 'password' => bcrypt('111111'),
-                'role' => 1
+                'role_id' => 2
             ],
             [
                 'name' => 'Phạm Hoài An',
@@ -55,7 +55,7 @@ class AdminSeeder extends Seeder
                 'phone' => '01639883047',
                 'username' => 'phoaian',
                 'password' => bcrypt('111111'),
-                'role' => 1
+                'role_id' => 3
             ],
             [
                 'name' => 'Phan Văn Thành',
@@ -64,7 +64,7 @@ class AdminSeeder extends Seeder
                 'phone' => '01639883047',
                 'username' => 'pvthanh',
                 'password' => bcrypt('111111'),
-                'role' => 1
+                'role_id' => 4
             ],
             [
                 'name' => 'Nguyễn Văn Tài',
@@ -73,7 +73,7 @@ class AdminSeeder extends Seeder
                 'phone' => '01639883047',
                 'username' => 'nvantai',
                 'password' => bcrypt('111111'),
-                'role' => 1
+                'role_id' => 5
             ],
             [
                 'name' => 'La Thị Kiều Oanh',
@@ -82,7 +82,7 @@ class AdminSeeder extends Seeder
                 'phone' => '01639883047',
                 'username' => 'ltkoanh',
                 'password' => bcrypt('111111'),
-                'role' => 1
+                'role_id' => 3
             ],
             [
                 'name' => 'Phan Thị Kiều Loan',
@@ -91,7 +91,7 @@ class AdminSeeder extends Seeder
                 'phone' => '01639883047',
                 'username' => 'ptkloan',
                 'password' => bcrypt('111111'),
-                'role' => 1
+                'role_id' => 3
             ],
             [
                 'name' => 'Đỗ Việt Hùng',
@@ -100,7 +100,7 @@ class AdminSeeder extends Seeder
                 'phone' => '01639883047',
                 'username' => 'dvhung',
                 'password' => bcrypt('111111'),
-                'role' => 1
+                'role_id' => 3
             ]
         ]);
     }

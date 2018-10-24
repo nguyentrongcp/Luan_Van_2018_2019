@@ -140,7 +140,7 @@
 }
 
 .menu-item-padding {
-    padding: 13px 16px !important;
+    padding: 5px 16px !important;
 }
 
 .old-price {
@@ -294,5 +294,10 @@
 .ui.mini-40.modal{
     width: 30%;
     height: 60%;
+    margin: auto;
+}
+.ui.mini-50.modal{
+    width: 30%;
+    height: 70%;
     margin: auto;
 }

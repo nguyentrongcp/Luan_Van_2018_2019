@@ -34,7 +34,5 @@
 @push('script')
     <script>
         bindSelectAll('check-all');
-
-        // bindDataTable('bang-loai-sp');
     </script>
 @endpush

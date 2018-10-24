@@ -1,35 +1,38 @@
 @extends('admin.layouts.master')
-@section('title','Nhân viên | Fast Foody Shop')
+
+@section('title', 'Quản lý nhân viên')
 
 @section('content')
-
-    <div class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="title text-center">DANH SÁCH NHÂN VIÊN CỦA CỬA HÀNG</h5>
-                        <hr>
-                        <div class="add-product">
-                            <button class="btn btn-info btn-round" onclick="$('#modal-create-employee').modal('show')">
-                                <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
-                            </button>
-                            <button class="btn btn-danger btn-round">
-                                <i class="now-ui-icons ui-1_simple-remove"></i> Xóa nhiều
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body all-icons">
-                        <div class="row">
-                            <div class="wrapper-prot">
-
-                            @include('admin.employees.table')
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="ui blue raised segment">
+        <h3 class="ui dividing header center aligned">QUẢN LÝ NHÂN VIÊN</h3>
+        @include('admin.layouts.components.success_msg')
+        @include('admin.layouts.components.error_msg')
+        <form action="{{route('employees.destroy',[0])}}" method="post" class="ui form">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <div class="field">
+                <button class="ui small red delete button need-popup"
+                        data-content="Xóa các mục vừa chọn"
+                        onclick="return confirmDelete()">
+                    <i class="delete fitted icon"></i>
+                    <strong>Xóa </strong>
+                </button>
+                <a class="ui small blue button" href="{{route('employees.create')}}">
+                    <i class="add fitted icon"></i>
+                    <strong>Thêm mới </strong>
+                </a>
             </div>
-        </div>
+
+            @include('admin.employees.table')
+
+        </form>
+
+        @include('admin.employees.modals')
     </div>
-    @include('admin.employees.modals')
 @endsection
+
+@push('script')
+    <script>
+        bindSelectAll('check-all');
+    </script>
+@endpush

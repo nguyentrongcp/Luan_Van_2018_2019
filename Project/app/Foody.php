@@ -67,13 +67,12 @@ class Foody extends Model
         return $this->hasMany(Vote::class);
     }
 //
-//    public function productTypeTrademark() {
-//        return $this->belongsTo(ProductTypeTrademark::class);
-//    }
-//
-//    public function goodsReceiptNote() {
-//        return $this->hasMany(GoodsReceiptNote::class);
-//    }
+    public function backendComments() {
+        return $this->hasMany(Comment::class)
+            ->where('parent_id', null)
+            ->orderBy('created_at', 'desc');
+    }
+
 
     public function orderFoodies() {
         return $this->hasMany(OrderFoody::class);

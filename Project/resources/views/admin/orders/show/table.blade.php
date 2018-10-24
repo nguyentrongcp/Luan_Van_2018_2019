@@ -1,4 +1,4 @@
-<h4 class="ui dividing header">Thông tin</h4>
+<h4 class="ui dividing blue header">Thông tin</h4>
 <form action="" class="ui form static">
     <div class="ui two column padded divided grid">
         <div class="column">
@@ -84,7 +84,7 @@
         </div>
     </div>
 </form>
-<h4 class="ui dividing header">Thực đơn</h4>
+<h4 class="ui dividing blue header">Thực đơn</h4>
 <table class="ui table striped celled">
     <thead>
     <tr>

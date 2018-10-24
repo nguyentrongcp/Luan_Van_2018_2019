@@ -1,68 +1,57 @@
 @extends('admin.layouts.master')
-@section('title','ADMIN | Tin tức')
+
+@section('title', 'Sửa bài viết')
 
 @section('content')
-    <div class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <a class="btn btn-round btn-info text-white" href="{{route('news.index')}}">
-                            <i class="fa fa-arrow-circle-left" style="font-size: 18px"></i>TRỞ VỀ</a>
-                        <h5 class="title text-center">CẬP NHẬT LẠI BÀI VIẾT</h5>
-                        <hr>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="wrapper-prot">
-                                <form action="{{route('news.update',[$news->id])}}" method="post"
-                                      enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    {{ method_field('PUT') }}
-                                    <div class="col-md-12 row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="title">Tên tiêu đề</label>
-                                                <input type="text" class="form-control" name="name-news" id="name-news"
-                                                       placeholder="Nhập tiêu đề..." value="{{$news->title}}"
-                                                       minlength="5" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="title" for="">Preview hình ảnh</label>
+    <div class="ui blue segment">
+        <h3 class="ui header dividing">
+            <a href="{{ route('news.index') }}" class="a-decoration"><i class="double angle left circular fitted small icon"></i></a>
+            Cập nhật bài viết</h3>
 
-                                            <div class="card-header" style="padding-bottom: 30px">
-                                                @foreach (App\ImageNews::where('news_id', $news->id)->get() as $idImage)
-                                                    @foreach (App\Image::where('id', $idImage->image_id)->get() as $image)
-                                                    <img class="img-list" src="{{asset($image->link)}}" alt="{{$news->title}}">
-                                                    @endforeach
-                                                @endforeach
-                                            </div>
-                                            <button type="button" class="btn btn-info btn-round " onclick="$('#modal-change-image').modal('show')">
-                                                Thay đổi
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="card-header bg-info">
-                                            <label class="title text-white lb-info" for="des">Nội dung</label>
-                                        </div>
-                                        <textarea rows="5" class="form-control"
-                                                  name="des">{{$news->content}}</textarea>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="{{route('news.index')}}" class="btn btn-round">QUAY LẠI</a>
-                                        <button type="submit" class="btn btn-info btn-round">LƯU THAY ĐỔI
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+        @include('admin.layouts.components.error_msg')
+
+        @include('admin.layouts.components.success_msg')
+
+        <form action="{{ route('news.update', [$news->id]) }}" method="post" class="ui form">
+            {{ method_field('PUT') }}
+            {{ csrf_field() }}
+
+            <div class="ui stackable grid">
+                <div class="eleven wide column">
+                    <div class="field">
+                        <label>Tiêu đề</label>
+                        <input type="text" required name="title" placeholder="Tiêu đề" value="{{ $news->title }}">
+                    </div>
+
+                    {{--@include('sharing.lfm_field', [--}}
+                        {{--'label' => 'Ảnh hiển thị',--}}
+                        {{--'thumb' => $news->thumb,--}}
+                        {{--'needThumb' => 0--}}
+                    {{--])--}}
+                </div>
+
+                <div class="five wide column">
+                    <div class="field">
+                        <label>Preview</label>
+                        @foreach (App\ImageNews::where('news_id', $news->id)->get() as $idImage)
+                            @foreach (App\Image::where('id', $idImage->image_id)->get() as $image)
+                                <img src="{{asset($image->link)}}" alt="{{$news->title}}" id="holder" style="margin-top:5px;max-height:100px;" class="ui border image">
+                            @endforeach
+                        @endforeach
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="field">
+                <label>Nội dung</label>
+                <textarea name="content" id="ckeditor" cols="30" rows="10">
+                {!! $news->content !!}
+                </textarea>
+            </div>
+            <div class="field">
+                <button class="ui blue button"><i class="save icon"></i>Lưu bài</button>
+            </div>
+        </form>
     </div>
-    @include('admin.news.modal')
 @endsection
 

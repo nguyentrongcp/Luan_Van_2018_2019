@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DecentralizationSeeder extends Seeder
+class FunctionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,13 +11,13 @@ class DecentralizationSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['Thống kê', 'Loại thực đơn', 'Thực đơn', 'Nhập hàng', 'Đơn hàng', 'Khuyến mãi', 'Tin tức'];
+        $types = ['Thống kê', 'Loại thực đơn', 'Thực đơn', 'Nhập hàng', 'Đơn hàng', 'Khuyến mãi', 'Nội dung website','Bình luận'];
         $rows = [];
         foreach ($types as $type) {
             $rows[] = [
                 'name' => $type
             ];
         }
-        DB::table('decentralizations')->insert($rows);
+        DB::table('functions')->insert($rows);
     }
 }

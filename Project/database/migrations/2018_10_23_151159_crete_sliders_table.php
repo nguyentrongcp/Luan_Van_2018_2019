@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDecentralizationTable extends Migration
+class CreteSlidersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateDecentralizationTable extends Migration
      */
     public function up()
     {
-        Schema::create('decentralizations', function (Blueprint $table) {
+        Schema::create('sliders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',100)->nullable();
+            $table->string('image');
+            $table->string('describes','300');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateDecentralizationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('decentralizations');
+        Schema::dropIfExists('sliders');
     }
 }

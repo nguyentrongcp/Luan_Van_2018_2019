@@ -1,37 +1,20 @@
-<!-- Modal edit products type-->
-<div class="modal fade" id="modal-change-logo" tabindex="-1" role="dialog"
-     aria-labelledby="list-edit-prot" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h3 class="modal-title title text-black-50"
-                    style="font-size: 16px">CẬP NHẬT LOGO CỬA HÀNG</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<div class="ui mini vertical flip modal" id="change-logo-modal">
+    <i class="close icon"></i>
+    <div class="blue header">Cập nhật logo</div>
+    <div class="content">
+        <form action="{{ route('shop_change_logo',[1])}}" class="ui form" method="post" enctype="multipart/form-data">
+
+            {{ csrf_field() }}
+
+            {{ method_field('PUT') }}
+
+            <div class="field">
+                <label for="sales-offs-name">Logo</label>
+                <input type="file" class="hidden" id="logo" name="logo-upload" accept=".jpg, .png, .jpeg">
             </div>
-            <div class="modal-body">
-                <form action="{{route('shop_change_logo',[1])}}" method="post" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <label for="images">Preview Logo: </label>
-                        <div class="">
-                            <button class="btn btn-info btn-fab btn-icon btn-round" style="cursor: pointer">
-                                <i class="now-ui-icons ui-1_simple-add"></i>
-                                <input type="file" id="gallery-avatar-image" name="logo-upload" accept=".jpg, .png, .jpeg">
-                            </button>
-                        </div>
-                        <div class="gallery-avatar-image"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">ĐÓNG</button>
-                        <span></span>
-                        <button type="submit" class="btn btn-info btn-round">LƯU LẠI
-                        </button>
-                    </div>
-                </form>
+            <div class="field">
+                <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
-<!--  End Modal -->

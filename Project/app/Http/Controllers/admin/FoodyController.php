@@ -21,12 +21,20 @@ class FoodyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {        
-        $foodies = Foody::paginate(10);
-        $foodyTypes = FoodyType::all();
-        $costs = Cost::all();
-        return view('admin.foodies.index', compact('costs', 'foodies', 'foodyTypes'));
+    public function index(Request $request)
+    {
+
+        $foodies = Foody::where('is_deleted',false)->paginate(10);
+        $key_search = '';
+        $key_filter = '';
+
+        if (!empty($request->get('key-search'))) {
+
+            $key_search = $request->get('key-search');
+            $foodies = Foody::where('is_deleted', false)
+                ->where('name', 'like', "%$key_search%")->paginate(10);
+        }
+        return view('admin.foodies.index', compact( 'foodies'));
     }
 
     /**
@@ -106,7 +114,7 @@ class FoodyController extends Controller
         $vote->foody_id = $foody->id;
         $vote->save();
 
-        return back()->with('success', "Thêm $foody_name thành công!");
+        return redirect()->route('foodies.show', [$foody->id])->with('success', "Thêm $foody_name thành công!");
     }
 
     /**
@@ -118,15 +126,11 @@ class FoodyController extends Controller
     public function show($id)
     {
         $foodyTypes = FoodyType::all();
-        $foodies = Foody::find($id);
-        $nameFoody = $foodies->name;
-        $avatarFoody = $foodies->avatar;
-        $describe = $foodies->describe;
+        $foodies = Foody::findOrFail($id);
         $typeFoody = FoodyType::find($foodies->foody_type_id)->name;
-
-        $costFoodys = Cost::where('foody_id', $id)->get();
+        $costFoodys = Cost::where('foody_id',$id)->get();
         return view('admin.foodies.show.index',
-            compact('id', 'foodies', 'nameFoody','typeFoody','foodyTypes', 'avatarFoodys', 'describe', 'costFoodys'));
+            compact('id', 'foodies','typeFoody','costFoodys'));
     }
 
     /**
@@ -291,41 +295,73 @@ class FoodyController extends Controller
     }
 
     public function showSlugType($slug){
-        $foodyTypes = FoodyType::where('slug',$slug)->get();
-        foreach ($foodyTypes as $foodyType){
-            $nameType = $foodyType->name;
-            $foodies = Foody::where('foody_type_id',$foodyType->id)->paginate(10);
+        $foodyType_filter = FoodyType::where('slug',$slug)
+                        ->where('is_deleted',false)->get();
+        foreach ($foodyType_filter as $foodyType){
+            $nameType_filter = $foodyType->name;
+            $foody_filter = Foody::where('foody_type_id',$foodyType->id)
+                    ->where('is_deleted',false)->paginate(10);
         }
-        return view('admin.foodyTypes.filter.index',compact('foodies','nameType'));
+        return view('admin.foodyTypes.filter.index',compact('foodyType_filter','nameType_filter','foody_filter'));
     }
 
     public function filter(Request $request){
-        dd('adad');
-        dd($request->get('name-type-filter'));
-        $slug = $request->get('name-type-filter');
-        $id = $request->get('status-id');
+        dd($request);
+//        $key_filter = '';
+//        $key_search = '';
+//        $idType = $request->get('type-id');
+//        $nameType = FoodyType::find($idType)->name;
+//        $idStatus = $request->get('status-id');
+//        if (!empty($idType)){
+//            if (!empty($idStatus)){
+//                $foody_filter = DB::table('foodies')
+//                    ->join('foody_statuses','foodies.id','=','foody_statuses.foody_id')
+//                    ->where('foodies.type_id',$idType)
+//                    ->where('foody_status.status',$idStatus)
+//                    ->where('foodies.is_delete',false)
+//                    ->paginate(10);
+//                return view('admin.foodies.filter.index',compact('foody_filter'));
+//            }
+//            $foody_filter = DB::table('foodies')
+//                ->join('foody_statuses','foodies.id','=','foody_statuses.foody_id')
+//                ->where('foodies.type_id',$idType)
+//                ->where('foodies.is_delete',false)
+//                ->paginate(10);
+//            return view('admin.foodies.filter.index',compact('foody_filter'));
+//        }
+        return view('admin.foodies.filter.index',compact('foody_filter'));
+    }
 
-        if ($id == 'all'){
-            $foodyTypes = FoodyType::where('slug',$slug)->get();
-
-            foreach ($foodyTypes as $foodyType){
-                $nameType = $foodyType->name;
-                $foodies = Foody::where('foody_type_id',$foodyType->id)->paginate(10);
+    public function search(Request $request) {
+        $key_search = $request->get('key-search');
+        $foodies = Foody::where('name','like', "%$key_search%")->get();
+        $data = '';
+        foreach($foodies as $key => $foody) {
+            if ($key == 0) {
+                $divider = '';
             }
-
-        }
-        else{
-            $foodyTypes = FoodyType::where('slug',$slug)->get();
-            foreach ($foodyTypes as $foodyType){
-                $nameType = $foodyType->name;
-                $foodies =DB::table('foodies')
-                    ->join('foody_statuses','foodies.id','=','foody_statuses.foody_id')
-                    ->where('foody_statuses.status',$id)->paginate(10);
+            else {
+                $divider = "<div class=\"divider\"></div>";
             }
-
+            $data .= "$divider
+                <div class=\"row search-result-row\">
+        <img src='$foody->avatar'>
+        <a href='#' class=\"search-result-content\">
+            <div class=\"col s12 search-result-title truncate\">$foody->name</div>
+            <div class=\"col s12 search-result-cost\">$cost<sup>đ</sup>$sales_off</div>
+            <div class=\"col s12 search-result-rate\">
+                <i class=\"material-icons\">star</i>
+                <i class=\"material-icons\">star</i>
+                <i class=\"material-icons\">star</i>
+                <i class=\"material-icons\">star_half</i>
+                <i class=\"material-icons\">star_half</i>
+            </div>
+        </a>
+    </div>
+            ";
         }
-        return view('admin.foodies.filter.index',
-            compact('foodies','nameType','slug'));
+
+        return Response($data);
     }
     public function validationStore(Request $request)
     {

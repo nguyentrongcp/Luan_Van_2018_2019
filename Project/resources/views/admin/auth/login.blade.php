@@ -2,15 +2,14 @@
 
 <body class="login-page sidebar-collapse">
     <div class="ui middle aligned center aligned grid">
-        <div class="container" style="padding-top: 100px;">
-            {{--<div class="col-lg-10">--}}
+        <div class="container" style="padding-top: 100px;width: 35%">
                 <div class="panel-default">
                     <div class="panel-header">
-                        <h2 class="ui teal image header">
+                        <h2 class="ui teal centered header">
                             {{--<img src="assets/images/logo.png" class="image">--}}
-                            <div class="content">
-                                Đăng nhập Admin
-                            </div>
+                            {{--<div class="content">--}}
+                                ĐĂNG NHẬP ADMIN
+                            {{--</div>--}}
                         </h2>
                     </div>
                     <div class="panel-body">
@@ -29,16 +28,11 @@
                                         <input type="password" name="password" placeholder="Password" value="111111">
                                     </div>
                                 </div>
-                                <button type="submit" class="ui fluid large teal submit button">Login</button>
+                                <button type="submit" class="ui fluid large teal submit button">Đăng nhập</button>
                             </div>
 
                             <div class="ui error message"></div>
-
                         </form>
-
-                        <div class="ui message">
-                            New to us? <a href="#">Sign Up</a>
-                        </div>
                     </div>
                 {{--</div>--}}
             </div>

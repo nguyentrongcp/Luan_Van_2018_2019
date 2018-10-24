@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
@@ -16,12 +17,6 @@ class CommentController extends Controller
      */
     public function index()
     {
-//        $comments = DB::table('comments')
-//            ->select('foody_id')
-//            ->groupBy('foody_id')->paginate(10);
-        $comments = Comment::orderBy('is_approved', 'ASC')->paginate(10);
-
-        return view('admin.comment.index',compact('comments'));
     }
 
     /**
@@ -42,7 +37,15 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = new Comment();
+        $comment->admin_id = Auth::guard('admin')->id();
+        $comment->foody_id = $request->get('foody-id');
+        $comment->parent_id = (int)$request->get('parent');
+        $comment->content = $request->get('content');
+        $comment->title = $request->get('title');
+        $comment->save();
+
+        return back();
     }
 
     /**
@@ -53,9 +56,7 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $comments = Comment::where('foody_id',$id)->orderBy('is_approved', 'ASC')->get();
 
-        return view('admin.comment.show',compact('comments','id'));
     }
 
     /**
@@ -78,11 +79,11 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $comments = Comment::findOrFail($id);
-        $comments->is_approved = true;
-        $comments->update();
+        $comment = Comment::findOrFail($id);
+        $comment->approved = (int)$request->get('approve') % 2;
+        $comment->save();
 
-        return back()->with('success','Đã duyệt!');
+        return back();
     }
 
     /**

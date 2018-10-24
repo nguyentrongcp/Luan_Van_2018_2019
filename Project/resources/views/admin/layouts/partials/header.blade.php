@@ -23,6 +23,7 @@
     {{--<link rel="stylesheet" href="{{asset('customer/semantic/modal.min.css')}}">--}}
 
     <link rel="stylesheet" href="{{ asset('admin/assets/plugin/jq-toast/jquery.toast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/plugin/fotorama/fotorama.css') }}">
 
     <style type="text/css">
         *:not(i) {

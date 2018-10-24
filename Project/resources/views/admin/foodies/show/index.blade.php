@@ -7,7 +7,7 @@
         <h3 class="ui dividing header">
             <a href="{{ route('foodies.index') }}" class="need-popup a-decoration" data-content="Danh sách thực đơn">
                 <i class="blue small angle double left circular fitted icon"></i></a>
-            {{ $nameFoody }}
+            {{ $foodies->name }}
             <a href="{{ route('foodies.edit', [$foodies->id]) }}" class="ui blue label a-decoration">
                 <i class="edit fitted icon"></i> Cập nhật
             </a>
@@ -24,7 +24,7 @@
 
         @include('admin.foodies.show.tab_describe')
 
-{{--        @include('admin.san_pham.show.tab_comments')--}}
+        @include('admin.foodies.show.tab_comments')
 
 
     </div>

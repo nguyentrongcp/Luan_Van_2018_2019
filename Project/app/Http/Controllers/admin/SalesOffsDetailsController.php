@@ -41,13 +41,15 @@ class SalesOffsDetailsController extends Controller
         if (!$request->get('foody-id')){
             return back()->with('error','Bạn chưa chọn dữ liệu thêm vào!');
         }
-        foreach ($ids as $id){
-            $salesOffId = $request->get('sales-offs-id');
-            if (SalesOffDetail::where('sales_off_id',$salesOffId)->where('foody_id',$id)->count() <= 0){
-                $salesOffsDetails = new SalesOffDetail();
-                $salesOffsDetails->sales_off_id = $salesOffId;
-                $salesOffsDetails->foody_id = $id;
-                $salesOffsDetails->save();
+        if (is_array($ids) || is_object($ids)){
+            foreach ($ids as $id) {
+                $salesOffId = $request->get('sales-offs-id');
+                if (SalesOffDetail::where('sales_off_id', $salesOffId)->where('foody_id', $id)->count() <= 0) {
+                    $salesOffsDetails = new SalesOffDetail();
+                    $salesOffsDetails->sales_off_id = $salesOffId;
+                    $salesOffsDetails->foody_id = $id;
+                    $salesOffsDetails->save();
+                }
             }
         }
         return back()->with('success','Thêm thành công!');

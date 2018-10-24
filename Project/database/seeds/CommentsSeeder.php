@@ -12,13 +12,14 @@ class CommentsSeeder extends Seeder
     public function run()
     {
         $rows = [];
-        for ($i = 1; $i <= 10; $i++){
+        for ($i = 1; $i <= 20; $i++){
             $rows[] = [
-                'title'=>'Thúc ăn ngon lắm'.$i,
                 'content'=>'Ngon lắm nha!',
-                'date'=>date('Y-m-d H-i-s'),
+                'date'=>date('Y-m-d H:i:s'),
+                'title'=>'Thúc ăn ngon lắm'.$i,
                 'foody_id'=> random_int(1,5),
-                'customer_id'=> 1
+                'parent_id'=> null,
+                'customer_id'=> random_int(1,\App\Customer::count())
             ];
         }
 

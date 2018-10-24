@@ -10,7 +10,8 @@
         <form action="{{route('foodies.destroy',[0])}}" method="post" class="ui form">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
-                <div class="fields">
+            <div class="ui padded grid">
+                <div class="ten wide column">
                     <button class="ui small red delete button need-popup"
                             data-content="Xóa các mục vừa chọn"
                             onclick="return confirmDelete()">
@@ -23,20 +24,21 @@
                         <strong>Thêm mới </strong>
                     </a>
                     @include('admin.foodies.btn_filer')
-
+                </div>
+                <div class="six wide column">
                     <div class="field force-right no-clear">
                         <div class="ui search ">
-                            <div class="ui icon input right">
-                                <input class="prompt" type="text" placeholder="Tìm kiếm...">
+                            <div class="ui icon input">
+                                <input class="prompt" type="text" name="key-search" placeholder="Tìm kiếm...">
                                 <i class="search icon"></i>
                             </div>
                             <div class="results"></div>
                         </div>
-                        {{--@include('admin.foodies.name_searching')--}}
+                        {{--                    @include('admin.foodies.name_searching')--}}
 
                     </div>
+                </div>
             </div>
-
             @include('admin.foodies.table')
 
         </form>
@@ -46,5 +48,12 @@
 @push('script')
     <script>
         bindSelectAll('check-all');
+
+        $('.ui.search')
+            .search({
+                url:'foody_search',
+                source: data.value
+            })
+        ;
     </script>
 @endpush

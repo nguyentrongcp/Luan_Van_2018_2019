@@ -20,11 +20,14 @@ class CreateCommentsTable extends Migration
             $table->string('title', 255);
             $table->integer('customer_id')->unsigned()->nullable();
             $table->integer('foody_id')->unsigned();
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->boolean('is_approved')->default(false);
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('foody_id')->references('id')->on('foodies')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
+
         });
     }
 
