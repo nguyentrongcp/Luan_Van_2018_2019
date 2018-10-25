@@ -36,7 +36,9 @@ class DatabaseSeeder extends Seeder
              CalculationUnitSeeder::class,
              MaterialSeeder::class,
              MaterialFoodySeeder::class,
-             LikeSeeder::class
+             LikeSeeder::class,
+             VoteDetailSeeder::class,
+             VoteSeeder::class,
          ]);
     }
 }

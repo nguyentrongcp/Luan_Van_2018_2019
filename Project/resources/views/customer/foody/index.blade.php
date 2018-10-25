@@ -35,34 +35,66 @@
                 {{ $foody->describe }}
             </div>
             <div class="foody-rating">
-                <i class="material-icons left">star</i>
-                <i class="material-icons left">star</i>
-                <i class="material-icons left">star</i>
-                <i class="material-icons left">star_half</i>
-                <i class="material-icons left">star_border</i>
-                <span class="rate-number">3.5</span> / 5
-                <span class="space">|</span>
-                3.5 phục vụ
-                <span class="space">|</span>
-                3.5 giá cả
-                <span class="space">|</span>
-                3.5 ngon
+                @if($votes != null)
+                    @for($i=1; $i<=5; $i++)
+                        @if($i <= $votes->average)
+                            <i class="material-icons left">star</i>
+                        @elseif(number_format($votes->average) == $i)
+                            <i class="material-icons left">star_half</i>
+                        @else
+                            <i class="material-icons left">star_border</i>
+                        @endif
+                    @endfor
+                    <span class="rate-number">{{ $votes->average }}</span> / 5
+                    <span class="space">|</span>
+                    {{ $votes->attitude }} phục vụ
+                    <span class="space">|</span>
+                    {{ $votes->cost }} giá cả
+                    <span class="space">|</span>
+                    {{ $votes->quality }} ngon
+                @else
+                    <i class="material-icons left">star_border</i>
+                    <i class="material-icons left">star_border</i>
+                    <i class="material-icons left">star_border</i>
+                    <i class="material-icons left">star_border</i>
+                    <i class="material-icons left">star_border</i>
+                    <span class="rate-number">Chưa có đánh giá nào</span>
+                @endif
             </div>
             <div class="foody-like">
-                <a href="#" class="ui small label">
-                    <i class="like active icon"></i>Bo Thích <span class="count">(281)</span>
+                <a class="ui small label" id="foody-like">
+                    @if(!Auth::guard('customer')->check())
+                        <i class="heart outline icon"></i>Thích
+                    @else
+                        @if($foody->checkLiked(Auth::guard('customer')->user()->id))
+                            <i class="heart icon" data-like="active"></i>
+                            Bỏ thích
+                        @else
+                            <i class="heart outline icon"></i>
+                            Thích
+                        @endif
+                    @endif
+                        <span class="count">({{ $foody->getLiked() }})</span>
                 </a>
-                <a href="#" class="ui small label">
-                    <i class="star active icon"></i>Bo Thích <span class="count">(281)</span>
+                <a id="foody-favorite" class="ui small label">
+                    @if(!Auth::guard('customer')->check())
+                        <i class="bookmark outline icon"></i>Lưu
+                    @else
+                        @if($foody->checkFavorited(Auth::guard('customer')->user()->id))
+                            <i class="bookmark icon"></i>Bỏ lưu
+                        @else
+                            <i class="bookmark outline icon"></i>Lưu
+                        @endif
+                    @endif
                 </a>
             </div>
             <div class="foody-cart">
-                <button data-amount="cart-add-{{ $foody->id }}" onclick="updateCart(this, {{ $foody->id }})"
+                <button data-qty="add" data-id="{{ $foody->id }}" onclick="updateCart(this)"
                         class="waves-effect waves-light btn col s3" style="width: 170px">
                     <i class="shopping cart plus icon"></i>
                     Thêm vào giỏ
                 </button>
-                <input id="cart-amount-{{ $foody->id }}" class="input-field col s2 cart-number" type="number" value="1">
+                <input id="add-cart-qty" class="input-field col s2 cart-number" type="number" value="1">
                 <span class="cost cart-number">{{ number_format($foody->currentCost()) }}<sup>đ</sup></span>
             </div>
             <div class="foody-action navbar col s12">
@@ -143,15 +175,5 @@
     @include('customer.foody.style')
 
     @include('customer.foody.js')
-
-    @push('script')
-        <script>(function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-    @endpush
 
 @endsection

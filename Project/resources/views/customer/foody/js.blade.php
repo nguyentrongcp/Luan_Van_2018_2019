@@ -151,6 +151,52 @@
         //         "            <i class='material-icons'>navigate_next</i>\n" +
         //         "        </div>");
         // }
+
+        $('#foody-like').on('click', function () {
+            let logged = '{{ $logged }}';
+            if (logged === 'true') {
+                let id = '{{ $foody->id }}';
+                $.ajax({
+                    type: 'post',
+                    url: '/customer/like',
+                    data: {
+                        foody_id: id
+                    },
+                    success: function (data) {
+                        let icon = data.text === 'Thích' ? 'heart outline' : 'heart';
+                        $('#foody-like').empty();
+                        $('#foody-like').html("<i class='" + icon + " icon'></i>" + data.text + ' ' +
+                            "<span class='count'>(" + data.number_of_liked + ")</span>");
+                    }
+                });
+            }
+            else {
+                $('#login-require').modal('open');
+            }
+        });
+
+        $('#foody-favorite').on('click', function () {
+            let logged = '{{ $logged }}';
+            if (logged === 'true') {
+                let id = '{{ $foody->id }}';
+                $.ajax({
+                    type: 'post',
+                    url: '/customer/favorite',
+                    data: {
+                        foody_id: id
+                    },
+                    success: function (data) {
+                        let icon = data === 'favorited' ? 'bookmark' : 'bookmark outline';
+                        let text = data === 'favorited' ? 'Bỏ lưu' : 'Lưu';
+                        $('#foody-favorite').empty();
+                        $('#foody-favorite').html("<i class='" + icon + " icon'></i>" + text + "</span>");
+                    }
+                });
+            }
+            else {
+                $('#login-require').modal('open');
+            }
+        });
         
         function nextImage() {
             $.each($('.comment-modal-image'), function (key, value) {

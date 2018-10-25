@@ -27,6 +27,23 @@
                     }
                 }
             });
+
+            $('#home-nav-dropdown').dropdown({
+                constrainWidth: false,
+                coverTrigger: false,
+                inDuration: 500,
+                outDuration: 500,
+                // closeOnClick: false,
+                onOpenStart: function () {
+                    $('body').css('overflow', 'hidden');
+                    $('#navbar-filter').addClass('teal');
+                    $('html, body').animate({scrollTop: $('#navbar').offset().top}, time);
+                },
+                onCloseStart: function () {
+                    $('body').css('overflow', 'auto');
+                    $('#navbar-filter').removeClass('teal');
+                }
+            });
         });
 
         function like(like) {

@@ -36,6 +36,7 @@
     }
     #foody-info {
         margin-top: 15px;
+        margin-bottom: 20px;
     }
     .col .row {
         margin: 0;
@@ -120,6 +121,12 @@
         top: 200px !important;
         /*margin: ;*/
 
+    }
+    .foody-like .heart {
+        color: red;
+    }
+    .foody-like .bookmark {
+        color: #039be5;
     }
     .foody-cart {
         margin-top: 12px;

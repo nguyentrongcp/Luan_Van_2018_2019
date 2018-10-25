@@ -13,17 +13,23 @@
                     </span></div>
                 <div class="show-foody-describe">{!! $foody->describe !!}</div>
                 <div class="show-foody-rating">
-                    <span class="rating-icon">
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star_half</i>
-                        <i class="material-icons">star_border</i>
-                    </span>
-                    <span class="rating-number">
-                        3.5 / 5
-                    </span>
-                    <span class="rating-spacing">|</span>
+                    @if($foody->getVoted() != null)
+                        <span class="rating-icon">
+                            @for($i=1; $i<=5; $i++)
+                                @if($i <= $foody->getVoted()->average)
+                                    <i class="material-icons">star</i>
+                                @elseif(number_format($foody->getVoted()->average) == $i)
+                                    <i class="material-icons">star_half</i>
+                                @else
+                                    <i class="material-icons">star_border</i>
+                                @endif
+                            @endfor
+                        </span>
+                        <span class="rating-number">
+                            <b>{{ $foody->getVoted()->average }}</b> / 5
+                        </span>
+                        <span class="rating-spacing">|</span>
+                    @endif
                     <span>
                         <i class="like icon" style="font-size: 12px"></i>
                         {{ $foody->likes()->count() }}
@@ -54,7 +60,7 @@
                     </span>
                 </div>
                 <div class="show-foody-action">
-                    <a class="waves-effect waves-light btn" onclick="updateCart(this, {{ $foody->id }})">
+                    <a class="waves-effect waves-light btn" data-id="{{ $foody->id }}" onclick="updateCart(this)">
                         <i class="cart plus icon"></i>
                         Thêm vào giỏ
                     </a>

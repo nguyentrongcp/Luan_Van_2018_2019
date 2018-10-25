@@ -63,6 +63,7 @@ class HomeController extends Controller
             $cost = number_format(Foody::find($foody['id'])->getSaleCost());
             $favorite = 'bookmark outline';
             $slug = $foody['slug'];
+            $liked = $foody->getLiked();
             if (Auth::guard('customer')->check()) {
                 if (Favorite::where('foody_id', $foody['id'])
                         ->where('customer_id', Auth::guard('customer')->user()->id)->count() > 0) {
@@ -82,20 +83,30 @@ class HomeController extends Controller
                         $cost<sup>đ</sup>
                     </span></div>
                 <div class=\"show-foody-describe\">$describe</div>
-                <div class=\"show-foody-rating\">
-                    <span class=\"rating-icon\">
-                        <i class=\"material-icons\">star</i>
-                        <i class=\"material-icons\">star</i>
-                        <i class=\"material-icons\">star</i>
-                        <i class=\"material-icons\">star_half</i>
-                        <i class=\"material-icons\">star_border</i>
-                    </span>
-                    <span class=\"rating-number\">
-                        3.5 / 5
-                    </span>
-                    <span class=\"rating-spacing\">|</span>
+                <div class=\"show-foody-rating\">";
+            if ($foody->getVoted() != null) {
+                $voted = $foody->getVoted()->average;
+                $data .= "<span class=\"rating-icon\">";
+                for($i=1; $i<=5; $i++) {
+                    if ($i <= $voted) {
+                        $data .= "<i class='material-icons'>star</i>";
+                    }
+                    elseif(number_format($voted) == $i) {
+                        $data .= "<i class='material-icons'>star_half</i>";
+                    }
+                    else {
+                        $data .= "<i class='material-icons'>star_border</i>";
+                    }
+                }
+                $data .= "</span>
+                        <span class=\"rating-number\">
+                            <b>$voted</b> / 5
+                        </span>
+                        <span class=\"rating-spacing\">|</span>";
+            }
+            $data .= "
                     <span>
-                        <i class=\"like icon\" style=\"font-size: 12px\"></i> 13
+                        <i class=\"like icon\" style=\"font-size: 12px\"></i> $liked
                     </span>
                     <span class=\"rating-spacing\">|</span>
                     <span>
@@ -109,7 +120,7 @@ class HomeController extends Controller
                     </span>
                 </div>
                 <div class=\"show-foody-action\">
-                    <a class=\"waves-effect waves-light btn\" onclick=\"updateCart(this,$id)\">
+                    <a class=\"waves-effect waves-light btn\" data-id='$id' onclick='updateCart(this)'>
                         <i class=\"cart plus icon\"></i>
                         Thêm vào giỏ
                     </a>
@@ -119,51 +130,5 @@ class HomeController extends Controller
             ";
         }
         return Response($data);
-    }
-
-    public function like(Request $request) {
-        if (Auth::guard('customer')->check()) {
-            $foody_id = $request->get('foody_id');
-            $customer_id = Auth::guard('customer')->user()->id;
-            $number_of_liked = Foody::find($foody_id)->getLiked();
-
-            $liked = Like::where('customer_id', $customer_id)->where('foody_id', $foody_id)->first();
-
-            if (!empty($liked)) {
-                $liked->delete();
-
-                return Response(['text' => 'Thích', 'number_of_liked' => $number_of_liked - 1]);
-            }
-            else {
-                $like = new Like();
-                $like->customer_id = $customer_id;
-                $like->foody_id = $foody_id;
-                $like->save();
-
-                return Response(['text' => 'Bỏ thích', 'number_of_liked' => $number_of_liked + 1]);
-            }
-        }
-    }
-
-    public function favorite(Request $request) {
-        if (Auth::guard('customer')->check()) {
-            $customer_id = Auth::guard('customer')->user()->id;
-
-            $favorited = Favorite::where('customer_id', $customer_id)->where('foody_id', $request->foody_id)->first();
-
-            if (!empty($favorited)) {
-                $favorited->delete();
-
-                return Response('unfavorited');
-            }
-            else {
-                $favorite = new Favorite();
-                $favorite->customer_id = $customer_id;
-                $favorite->foody_id = $request->foody_id;
-                $favorite->save();
-
-                return Response('favorited');
-            }
-        }
     }
 }

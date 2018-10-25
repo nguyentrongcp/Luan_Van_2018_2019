@@ -52,6 +52,7 @@
     .show-foody {
         width: calc(100% - 250px) !important;
         margin-top: 20px;
+        min-height: calc(100vh - 56px) !important;
     }
     #home-nav-container.pin-top {
         top: unset !important;
@@ -68,6 +69,9 @@
     @media only screen and (min-width: 601px) {
         .show-foody.special {
             margin-left: 250px !important;
+        }
+        .show-foody {
+            min-height: calc(100vh - 64px) !important;
         }
 
     }
@@ -92,9 +96,6 @@
         }
     }
 
-    .show-foody {
-        margin-top: 20px;
-    }
     .show-foody-image img {
         padding: 20px 10% 10% 10%;
     }
