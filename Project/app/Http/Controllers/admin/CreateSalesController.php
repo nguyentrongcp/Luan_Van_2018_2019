@@ -37,7 +37,7 @@ class CreateSalesController extends Controller
     public function store(Request $request)
     {
         $salesOff = new SalesOff();
-        $salesOff->name = $request->get('name-sales');
+        $salesOff->name = $request->get('sales-offs-name');
         $salesOff->percent = $request->get('percent');
         $salesOff->parent_id = $request->get('id-sales');
         $salesOff->start_date = $request->get('start-date');

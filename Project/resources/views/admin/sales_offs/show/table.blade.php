@@ -1,38 +1,31 @@
-
-<div class="tables">
-    <table class="table table-bordered">
+<div class="ui basic segment no-padding no-margin table-responsive">
+    <table class="ui table very compact striped celled selectable unstackable">
         <thead>
         <tr>
-            <th class="text-left th-prot th-stt" >
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" id="check-all" type="checkbox"
-                               onclick="eventCheckBox()">
-                        <span class="form-check-sign"></span>
-                    </label>
+            <th class="collapsing">
+                <div class="ui checkbox" id="check-all">
+                    <input type="checkbox">
                 </div>
             </th>
-            <th class="text-center th-prot th-stt">STT</th>
-            <th class="th-prot text-center" id="th-name-type">Tên thực đơn</th>
-            <th class="th-prot text-center">Loại thực đơn</th>
-            <th class="th-prot text-center">Ưu đãi (%)</th>
+            <th class="collapsing">STT</th>
+            <th>Tên thực đơn</th>
+            <th>Loại thực đơn</th>
+            <th class="text-center">Ưu đãi (%)</th>
         </tr>
         </thead>
         <tbody>
         @foreach($salesOffsDetails as $stt => $salesOffsDetail)
-
             <tr>
-                <td class="text-left td-prot th-stt">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" name="sales-offs-details-id[]" value="{{$salesOffsDetail->id}}" type="checkbox">
-                            <span class="form-check-sign"></span>
-                        </label>
+                <td>
+                    <div class="ui child checkbox">
+                        <input type="checkbox" name="sales-offs-id[]" value="{{$salesOffsDetail->id}}">
                     </div>
+
                 </td>
-                <td class="text-center td-prot th-stt">{{$stt+1}}</td>
-                <td class="td-prot">
-                        {{App\Foody::find($salesOffsDetail->foody_id)->name}}
+                <td>{{$stt + 1}}</td>
+                <td>
+                    <a class="a-decoration" href="{{route('foodies.show',[$salesOffsDetail->foody_id])}}">
+                        {{App\Foody::find($salesOffsDetail->foody_id)->name}}</a>
                 </td>
                 @php
                     $idtypes = App\Foody::where('id',$salesOffsDetail->foody_id)->get();
@@ -40,19 +33,18 @@
                         $nametype = App\FoodyType::find($idtype->foody_type_id)->name;
                     }
                 @endphp
-                <td class="text-center td-prot">{{$nametype}}</td>
-                <td class="text-center td-prot">{{App\SalesOff::find($salesOffsDetail->sales_off_id)->percent}}</td>
-
+                <td>{{$nametype}}</td>
+                <td class="text-center">{{App\SalesOff::find($salesOffsDetail->sales_off_id)->percent}}</td>
             </tr>
         @endforeach
         </tbody>
     </table>
-    <div class="div-pagination">
-        {{$salesOffsDetails->links()}}
-    </div>
-
+    @if (method_exists($salesOffsDetails, 'render'))
+        <div class="ui basic segment center aligned no-padding">
+            {{ $salesOffsDetails->render('admin.layouts.components.pagination.smui')}}
+        </div>
+    @endif
 </div>
-
 <script>
     function eventCheckBox() {
         let checkboxs = document.getElementsByName('sales-offs-details-id[]');

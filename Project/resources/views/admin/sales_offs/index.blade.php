@@ -1,44 +1,40 @@
 @extends('admin.layouts.master')
-@section('title','Khuyến mãi | Fast Foody Shop')
+
+@section('title', 'Quản lý khuyến mãi')
 
 @section('content')
-    <div class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <form action="{{route('sales_offs.destroy',[0])}}" method="post">
-                        {{ method_field('DELETE') }}
-                        {{ csrf_field() }}
-                        <div class="card-header">
-                            <h5 class="title text-center">QUẢN LÝ KHUYẾN MÃI</h5>
-                            <hr>
-                            <div class="add-productType">
-                                <button type="button" class="btn btn-info btn-round" onclick="$('#modal-create-sales').modal('show')">
-                                    <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
-                                </button>
-                                <button type="submit" class="btn btn-danger btn-round"
-                                        onclick="return confirm('Bạn chắc chắn muốn xóa chứ?')">
-                                    <i class="now-ui-icons ui-1_simple-remove"></i> Xóa nhiều
-                                </button>
-                            </div>
-                            <span class="show-message">
-                                @include('admin.layouts.components.success')
-                                @include('admin.layouts.components.error')
-                            </span>
-                        </div>
-                        <div class="card-body all-icons">
-                            <div class="row">
-                                <div class="wrapper-prot">
-                                    @include('admin.sales_offs.table')
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-
+    <div class="ui blue raised segment">
+        <h3 class="ui dividing header center aligned">QUẢN LÝ KHUYẾN MÃI</h3>
+        @include('admin.layouts.components.success_msg')
+        @include('admin.layouts.components.error_msg')
+        <form action="{{route('sales_offs.destroy',[0])}}" method="post" class="ui form">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <div class="field">
+                <button class="ui small red delete button need-popup"
+                        data-content="Xóa các mục vừa chọn"
+                        onclick="return confirmDelete()">
+                    <i class="delete fitted icon"></i>
+                    <strong>Xóa </strong>
+                </button>
+                <button type="button" class="ui small blue button" onclick="$('#create-sales-offs-modal').modal('show')">
+                    <i class="add fitted icon"></i>
+                    <strong>Thêm mới </strong>
+                </button>
             </div>
-        </div>
+
+            @include('admin.sales_offs.table')
+
+        </form>
+
+        @include('admin.sales_offs.modals')
     </div>
-    @include('admin.sales_offs.modals')
 @endsection
+
+@push('script')
+    <script>
+        bindSelectAll('check-all');
+
+        // bindDataTable('bang-loai-sp');
+    </script>
+@endpush

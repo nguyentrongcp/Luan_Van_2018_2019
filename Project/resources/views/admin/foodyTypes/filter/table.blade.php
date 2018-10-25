@@ -14,12 +14,10 @@
             <th class="collapsing">Đơn giá</th>
             <th class="collapsing">Tình trạng</th>
             <th class="collapsing">Xem</th>
-            <th class="collapsing">Sửa</th>
-
         </tr>.
         </thead>
         <tbody>
-        @foreach($foodies as $stt => $foody)
+        @foreach($foody_filter as $stt => $foody)
             <tr>
                 <td>
                     <div class="ui child checkbox">
@@ -54,18 +52,13 @@
                         <i class="fa fa-eye"></i>
                     </a>
                 </td>
-                <td class="center aligned">
-                    <a href="{{route('foodies.edit',[$foody->id])}}" class="ui tiny blue icon label">
-                        <i class="pencil fitted icon"></i>
-                    </a>
-                </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-    @if (method_exists($foodies, 'render'))
+    @if (method_exists($foody_filter, 'render'))
         <div class="ui basic segment center aligned no-padding">
-            {{ $foodies->render('admin.layouts.components.pagination.smui')}}
+            {{ $foody_filter->render('admin.layouts.components.pagination.smui')}}
         </div>
     @endif
 </div>

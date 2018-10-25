@@ -16,8 +16,8 @@ class ShopInfoController extends Controller
      */
     public function index()
     {
-        $shopInfos = ShopInfo::all();
-        return view('admin.shop_infos.index',compact('shopInfos'));
+        $shopInfo = ShopInfo::find(1);
+        return view('admin.shop_infos.index',compact('shopInfo'));
     }
 
     /**
@@ -73,7 +73,7 @@ class ShopInfoController extends Controller
     public function update(Request $request,$id)
     {
         $shopInfos = ShopInfo::find($id);
-        $shopInfos->name = $request->get('name-shop');
+        $shopInfos->name = $request->get('shop-name');
         $shopInfos->address = $request->get('shop-address');
         $shopInfos->phone = $request->get('shop-phone');
         $shopInfos->email = $request->get('shop-email');

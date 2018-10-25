@@ -50,9 +50,3 @@
         @endif
     </div>
 @endsection
-
-@push('script')
-    <script>
-        $('.ui.tabular.menu .item').tab();
-    </script>
-@endpush

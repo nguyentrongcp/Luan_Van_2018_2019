@@ -33,6 +33,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
         return view('admin.foodies.index');
     })->name('admin.dashboard');
 
+
+    /** Statistic */
+
+    Route::get('statistis/revenue','admin\StatisticController@revenue')->name('revenue');
+    Route::get('statistis/order','admin\StatisticController@revenue')->name('order');
+    Route::get('statistis/foody','admin\StatisticController@revenue')->name('foody');
+
     /** Foody type */
 
     Route::resource('foody_type','admin\FoodyTypeController',["except" => ["create","show", "edit"]]);
@@ -51,10 +58,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
         ->name('foody_change_avatar');
     Route::get('foody_type/{slug}','admin\FoodyController@showSlugType')
         ->name('foody_slug_type');
-    Route::get('foodies/filter','admin\FoodyController@filter')
+    Route::get('foodies_filter','admin\FoodyController@filter')
         ->name('foody_filter');
+    Route::get('foodies_search','admin\FoodyController@search')
+        ->name('foody_search');
+
     /**      Employee       **/
+
     Route::resource('employees','admin\EmployeeController');
+    Route::post('employees/reset_password/{id}','admin\EmployeeController@resetPass')
+        ->name('reset_pass');
 
     /**      orders       **/
     Route::resource('orders','admin\OrderController');
@@ -63,7 +76,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::get('order_cancelled/{id}','admin\OrderController@orderCancelled')
         ->name('order_cancelled');
 
-    Route::get('orders/filter/{id}','admin\OrderController@filter')->name('admin_orders_filter');
+    Route::get('orders/filter/{id}','admin\OrderController@filter')->name('orders_filter');
 
     /**      Goods receipt notes       **/
     Route::resource('goods_receipt_note','admin\GoodsReceiptNotesController');
@@ -98,8 +111,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::post('comments/{id}','admin\CommentController@update')->name('admin.approved');
     Route::get('comments/filter/{id}','admin\CommentController@filter')->name('admin_comment_filter');
 
-
-
+    /** Sliders **/
+    Route::resource('sliders','admin\SliderController');
 
 });
 

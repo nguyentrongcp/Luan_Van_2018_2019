@@ -17,10 +17,7 @@
                     <i class="delete fitted icon"></i>
                     <strong>Xóa </strong>
                 </button>
-                <button type="button" class="ui small blue button" onclick="$('#create-foody-type-modal').modal('show')">
-                    <i class="add fitted icon"></i>
-                    <strong>Thêm mới </strong>
-                </button>
+                @include('admin.orders.btn_filer')
             </div>
 
             @include('admin.orders.table')

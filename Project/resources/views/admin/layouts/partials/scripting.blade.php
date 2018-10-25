@@ -9,6 +9,7 @@
 {{--<script type="text/javascript" src="{{asset('/customer/semantic/modal.min.js')}}"></script>--}}
 
 <script src="{{ asset('admin/assets/plugin/jq-toast/jquery.toast.min.js') }}"></script>
+<script src="{{ asset('admin/assets/plugin/fotorama/fotorama.js') }}"></script>
 <script src="{{ asset('admin/assets/plugin/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('admin/assets/js/admin-script.js') }}"></script>
 
@@ -53,7 +54,8 @@
             $('.ui.checkbox').checkbox();
             $('.tabular.menu .item').tab();
             $('.ui.dropdown.button').dropdown();
-
+            $('#multi-select').dropdown();
+            $('.ui.accordion').accordion();
         });
 </script>
 <script>

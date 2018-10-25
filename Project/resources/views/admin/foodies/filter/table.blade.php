@@ -17,7 +17,7 @@
         </tr>.
         </thead>
         <tbody>
-        @foreach($foodies as $stt => $foody)
+        @foreach($foody_filter as $stt => $foody)
             <tr>
                 <td>
                     <div class="ui child checkbox">
@@ -48,7 +48,7 @@
                     @endif
                 </td>
                 <td class="center aligned">
-                    <a href="{{route('filter',[$foody->id])}}" class="ui tiny blue icon label">
+                    <a href="{{route('foodies.show',[$foody->id])}}" class="ui tiny blue icon label">
                         <i class="fa fa-eye"></i>
                     </a>
                 </td>
@@ -56,9 +56,9 @@
         @endforeach
         </tbody>
     </table>
-    @if (method_exists($foodies, 'render'))
+    @if (method_exists($foody_filter, 'render'))
         <div class="ui basic segment center aligned no-padding">
-            {{ $foodies->render('admin.layouts.components.pagination.smui')}}
+            {{ $foody_filter->render('admin.layouts.components.pagination.smui')}}
         </div>
     @endif
 </div>

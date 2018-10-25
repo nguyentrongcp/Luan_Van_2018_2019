@@ -1,39 +1,78 @@
 @extends('admin.layouts.master')
-@section('title','Tin tức | Fast Foody Shop')
+
+@section('title', 'Tin tức')
 
 @section('content')
-    <div class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <form action="{{route('news.destroy',[0])}}" method="post">
-                        {{ method_field('DELETE') }}
-                        {{ csrf_field() }}
-                        <div class="card-header">
-                            <h5 class="title text-center">QUẢN LÝ TIN TỨC</h5>
-                            <hr>
-                            <div class="add-productType">
-                                <a class="btn btn-info btn-round" href="{{route('news.create')}}">
-                                    <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
-                                </a>
-                                <button type="submit" class="btn btn-danger btn-round"
-                                        onclick="return confirm('Bạn chắc chắn muốn xóa chứ?')">
-                                    <i class="now-ui-icons ui-1_simple-remove"></i> Xóa nhiều
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body all-icons">
-                            <div class="row">
-                                <div class="wrapper-prot">
-                                    @include('admin.news.table')
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+    <div class="ui blue segment">
+        <h3 class="ui header dividing center aligned">Quản lý tin tức</h3>
 
-                </div>
+        @include('admin.layouts.components.success_msg')
 
-            </div>
-        </div>
+        @include('admin.layouts.components.error_msg')
+
+        <form action="{{ route('news.destroy', [0]) }}" method="post">
+
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+
+            <button type="submit" class="ui small red delete button need-popup"
+                    data-content="Xóa các mục vừa chọn"
+                    onclick="return confirmDelete()"
+            >
+                <i class="delete fitted icon"></i>
+                <strong>Xóa </strong>
+            </button>
+            <a href="{{ route('news.create') }}" class="ui small blue button">
+                <i class="plus icon"></i>Thêm mới
+            </a>
+
+            <div class="ui divider small-td-margin hidden"></div>
+
+            <table class="ui table celled compact center aligned">
+                <thead>
+                <tr>
+                    <th class="collapsing">
+                        <div class="ui checkbox" id="select-all-news">
+                            <input type="checkbox">
+                        </div>
+                    </th>
+                    <th class="collapsing">STT</th>
+                    <th>Tiêu đề</th>
+                    <th>Ngày đăng</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($news as $stt => $new)
+
+                    <tr>
+                        <td>
+                            <div class="ui child checkbox">
+                                <input type="checkbox" name="news-id[]" value="{{ $new->id }}">
+                            </div>
+                        </td>
+                        <td>{{ $stt + 1 }}</td>
+                        <td class="left aligned">{{ $new->title }}</td>
+                        <td class="collapsing">{{$new->date }}</td>
+                        <td>
+                            <a href="{{ route('news.show', [$new->id]) }}" class="ui small blue label a-decoration">
+                                <i class="eye open fitted icon"></i>
+                            </a>
+                            <a href="{{ route('news.edit', [$new->id]) }}" class="ui small green label a-decoration">
+                                <i class="edit open fitted icon"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </form>
+
     </div>
 @endsection
+
+@push('script')
+    <script>
+        bindSelectAll('select-all-news');
+    </script>
+@endpush

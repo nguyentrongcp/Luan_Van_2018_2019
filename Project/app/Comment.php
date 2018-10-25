@@ -25,4 +25,10 @@ class Comment extends Model
     public function imageComments() {
         return $this->hasMany(ImageComment::class);
     }
+    public function children() {
+        return $this->hasMany(Comment::class, 'parent_id', 'id');
+    }
+    public function approved(){
+        return $this->is_approved == 1;
+    }
 }

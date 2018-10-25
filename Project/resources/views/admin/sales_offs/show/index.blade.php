@@ -1,46 +1,34 @@
 @extends('admin.layouts.master')
-@section('title','Chi tiết khuyến mãi | Fast Foody Shop')
+
+@section('title', 'Chi tiết đơn hàng')
 
 @section('content')
-    <div class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <form action="{{route('sales_offs_details.destroy',[0])}}" method="post">
-                        {{ method_field('DELETE') }}
-                        {{ csrf_field() }}
-                        <div class="card-header">
-                            <h5 class="title"><a href="{{route('sales_offs.index')}} " rel="tooltip" title="Quay lại" data-placement="bottom">
-                                    {{App\SalesOff::find($id)->name}}</a>
-                                <i class="fa fa-angle-double-right"></i> Thực đơn ưu đãi </h5>
-                            <hr>
-                            <div class="add-productType">
-                                <button type="button" class="btn btn-info btn-round" onclick="$('#modal-add-foody-sales').modal('show')">
-                                    <i class="now-ui-icons ui-1_simple-add"></i> Thêm mới
-                                </button>
-                                <button type="submit" class="btn btn-danger btn-round"
-                                        onclick="return confirm('Bạn chắc chắn muốn xóa chứ?')">
-                                    <i class="now-ui-icons ui-1_simple-remove"></i> Xóa nhiều
-                                </button>
-                            </div>
-                            <span class="show-message">
-                                @include('admin.layouts.components.success')
-                                @include('admin.layouts.components.error')
-                            </span>
-                        </div>
-                        <div class="card-body all-icons">
-                            <div class="row">
-                                <div class="wrapper-prot">
-                                    @include('admin.sales_offs.show.table')
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-
+    <div class="ui blue raised segment">
+        <h3 class="ui dividing header">
+            <a href="{{ route('sales_offs.index') }}" class="need-popup a-decoration" data-content="Danh sách khuyến mãi">
+                <i class="blue small angle double left circular fitted icon"></i></a>
+            {{ \App\SalesOff::find($id)->name }}
+        </h3>
+        <form action="{{route('sales_offs.destroy',[0])}}" method="post" class="ui form">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <div class="field">
+                <button class="ui small red delete button need-popup"
+                        data-content="Xóa các mục vừa chọn"
+                        onclick="return confirmDelete()">
+                    <i class="delete fitted icon"></i>
+                    <strong>Xóa </strong>
+                </button>
+                <button type="button" class="ui small blue button" onclick="$('#create-foodies-sales-offs-modal').modal('show')">
+                    <i class="add fitted icon"></i>
+                    <strong>Thêm mới </strong>
+                </button>
             </div>
-        </div>
+
+            @include('admin.sales_offs.show.table')
+        </form>
+        @include('admin.layouts.components.success_msg')
+        @include('admin.layouts.components.error_msg')
+        @include('admin.sales_offs.show.modals')
     </div>
-    @include('admin.sales_offs.show.modals')
 @endsection

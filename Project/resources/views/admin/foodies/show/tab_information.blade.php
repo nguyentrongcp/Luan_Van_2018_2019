@@ -2,10 +2,9 @@
     <form action="" class="ui form static">
         <div class="ui padded grid">
             <div class="ten wide column">
-
                 <div class="inline field">
                     <label class="label-fixed">Tên thực đơn</label>
-                    <div class="static-input">{{ $nameFoody }}</div>
+                    <div class="static-input">{{ $foodies->name }}</div>
                 </div>
 
                 <div class="inline field">
@@ -15,13 +14,11 @@
                 <div class="inline field">
                     <label class="label-fixed">Giá</label>
                     <div class="static-input"><strong>{{ number_format($foodies->currentCost()) }} đ</strong>
+                        <a href="#" class="ui label a-decoration"
+                           onclick="$('#cost-history-modal').modal('show')">Lịch sử</a>
 
-                        {{--ăn gian code --}}
-                        <a class="ui label"
-                           onclick="$('#cost-history').modal('show')">Lịch sử</a>
-
-                        <a class="ui blue label"
-                           onclick="$('#cost-update').modal('show')">Cập nhật</a>
+                        <a href="#" class="ui blue label a-decoration"
+                           onclick="$('#cost-update-modal').modal('show')">Cập nhật</a>
                     </div>
                 </div>
                 <div class="inline field">
@@ -70,5 +67,5 @@
         </div>
     </form>
 </div>
-
 @include('admin.foodies.show.modals')
+

@@ -11,6 +11,9 @@ class SalesOffDetail extends Model
     }
 
     public function foody() {
-        return $this->belongsTo(Foody::class);
+        return $this->hasMany(Foody::class);
+    }
+    public function amountFoody(){
+
     }
 }

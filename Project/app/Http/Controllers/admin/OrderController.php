@@ -102,9 +102,15 @@ class OrderController extends Controller
     }
 
     public function filter($id){
-        $orderFilters = DB::table('orders')->join('order_statuses','orders.id','=','order_statuses.order_id')
+        $orderFilters = DB::table('orders')
+            ->join('order_statuses','orders.id','=','order_statuses.order_id')
+            ->join('order_foodies','orders.id','=','order_foodies.order_id')
             ->where('order_statuses.status','=',$id)->paginate(10);
-
+        $amountFoody = DB::table('orders')
+            ->join('order_statuses','orders.id','=','order_statuses.order_id')
+            ->join('order_foodies','orders.id','=','order_foodies.order_id')
+            ->where('order_statuses.status','=',$id)
+            ->count('order_foodies.foody_id');
         return view('admin.orders.filter.index',compact('orderFilters'));
     }
 
