@@ -12,12 +12,17 @@
                 closeOnClick: false,
                 inDuration: 500,
                 outDuration: 500,
-                onOpenStart: function (e) {
+                onOpenStart: function () {
                     $('body').css('overflow', 'hidden');
                     $('#dropdown-cart').addClass('teal');
                     $('#cart-quantity').addClass('white black-text');
                     $("html, body").animate({ scrollTop: $('#navbar').offset().top }, time);
                     setDimmer($('#navbar-cart'));
+                },
+                onOpenEnd: function() {
+                    if ($('body').css('overflow') === 'auto') {
+                        $('body').css('overflow', 'hidden');
+                    }
                 },
                 onCloseStart: function() {
                     closeDimmer($('#navbar-cart'));

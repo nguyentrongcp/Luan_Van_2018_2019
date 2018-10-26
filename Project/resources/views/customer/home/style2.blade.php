@@ -157,7 +157,7 @@
 
     /*nav-mobile*/
     #m-home-nav-container {
-        width: 100%;
+        width: 100% !important;
         height: auto !important;
         max-height: calc(100vh - 56px);
     }
@@ -173,5 +173,12 @@
     }
     .m-home-nav-title:hover {
         background-color: unset;
+    }
+
+
+    .slider-ads-landscape img {
+        width: 100%;
+        max-height: 120px;
+        margin-bottom: 10px;
     }
 </style>

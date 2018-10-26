@@ -2,19 +2,29 @@
 
 @section('title', 'fastfoody.vn - '.$foody->name)
 
-@section('content')
+@php $logged = Auth::guard('customer')->check() ? 'true' : 'false'; @endphp
 
-    @php $logged = Auth::guard('customer')->check() ? 'true' : 'false'; @endphp
+{{--@section('meta')--}}
+    {{--<meta property="og:url"           content="{{ Request::url() }}" />--}}
+    {{--<meta property="og:type"          content="website" />--}}
+    {{--<meta property="og:title"         content="fastfoody.vn - {{ $foody->name }}" />--}}
+    {{--<meta property="og:description"   content="{{ $foody->describe }}" />--}}
+    {{--<meta property="og:image:url"     content="{{ asset($foody->avatar) }}"/>--}}
+    {{--<meta property="og:image:width" content="400" />--}}
+    {{--<meta property="og:image:height" content="300" />--}}
+{{--@endsection--}}
+
+@section('content')
 
     <div class="row section scrollspy" id="foody-info">
 
         <div class="col s12 m12 l5 z-depth-1" style="line-height: 0; margin-bottom: 15px">
-            <img class="responsive-img foody-image" src="{{ $foody->avatar }}"></img>
+            <img class="responsive-img foody-image" src="{{ asset($foody->avatar) }}">
         </div>
 
         <div class="col s12 m12 l7 foody-info" style="padding-left: 0">
             <div class="navigation truncate">
-                <a href="#">Trang chủ</a>
+                <a href="/">Trang chủ</a>
                 <i class="angle double right small icon"></i>
                 <a href="#">Gà</a>
                 <i class="angle double right small icon"></i>
@@ -38,31 +48,32 @@
                 @if($votes != null)
                     @for($i=1; $i<=5; $i++)
                         @if($i <= $votes->average)
-                            <i class="material-icons left">star</i>
+                            {{--<i class="material-icons left">star</i>--}}
+                            <i class="fas fa-star"></i>
                         @elseif(number_format($votes->average) == $i)
-                            <i class="material-icons left">star_half</i>
+                            <i class="fas fa-star-half-alt"></i>
                         @else
-                            <i class="material-icons left">star_border</i>
+                            <i class="far fa-star"></i>
                         @endif
                     @endfor
-                    <span class="rate-number">{{ $votes->average }}</span> / 5
+                    <span class="rate-number-avg">{{ $votes->average }}</span> / 5
                     <span class="space">|</span>
-                    {{ $votes->attitude }} phục vụ
+                    <span class="rate-number">{{ $votes->attitude }}</span> phục vụ
                     <span class="space">|</span>
-                    {{ $votes->cost }} giá cả
+                    <span class="rate-number">{{ $votes->cost }}</span> giá cả
                     <span class="space">|</span>
-                    {{ $votes->quality }} ngon
+                    <span class="rate-number">{{ $votes->quality }}</span> ngon
                 @else
-                    <i class="material-icons left">star_border</i>
-                    <i class="material-icons left">star_border</i>
-                    <i class="material-icons left">star_border</i>
-                    <i class="material-icons left">star_border</i>
-                    <i class="material-icons left">star_border</i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
                     <span class="rate-number">Chưa có đánh giá nào</span>
                 @endif
             </div>
             <div class="foody-like">
-                <a class="ui small label" id="foody-like">
+                <a class="ui label" id="foody-like">
                     @if(!Auth::guard('customer')->check())
                         <i class="heart outline icon"></i>Thích
                     @else
@@ -76,7 +87,7 @@
                     @endif
                         <span class="count">({{ $foody->getLiked() }})</span>
                 </a>
-                <a id="foody-favorite" class="ui small label">
+                <a id="foody-favorite" class="ui label">
                     @if(!Auth::guard('customer')->check())
                         <i class="bookmark outline icon"></i>Lưu
                     @else
@@ -87,6 +98,10 @@
                         @endif
                     @endif
                 </a>
+                <iframe src="https://www.facebook.com/plugins/share_button.php?href={{ urlencode(Request::url()) }}&layout=button_count&size=large&mobile_iframe=true&height=28&appId"
+                         height="28" style="border:none;overflow:hidden;vertical-align: bottom;margin-left: 30px;" scrolling="no"
+                        frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
             </div>
             <div class="foody-cart">
                 <button data-qty="add" data-id="{{ $foody->id }}" onclick="updateCart(this)"
@@ -95,7 +110,7 @@
                     Thêm vào giỏ
                 </button>
                 <input id="add-cart-qty" class="input-field col s2 cart-number" type="number" value="1">
-                <span class="cost cart-number">{{ number_format($foody->currentCost()) }}<sup>đ</sup></span>
+                <span id="add-cart-cost" class="cost cart-number">{{ number_format($foody->currentCost()) }}<sup>đ</sup></span>
             </div>
             <div class="foody-action navbar col s12">
                 <nav class="grey darken-2">
@@ -123,10 +138,6 @@
                     </div>
                 </nav>
             </div>
-
-            <!-- Your share button code -->
-            <div id="foody-share" class="fb-share-button hide" data-mobile_iframe="true">
-            </div>
         </div>
     </div>
 
@@ -148,7 +159,7 @@
             </div>
         </div>
         <div class="col s12 m12 l10 right foody-content-container">
-            <div id="slider-ads-landscape" class="col s12 slider-ads-landscape">
+            <div class="col s12 slider-ads-landscape">
                 <img src="/customer/image/slider-ads.jpg">
             </div>
             <div id="foody-rating-show" class="col s12 m12 l4 right foody-rating-show">

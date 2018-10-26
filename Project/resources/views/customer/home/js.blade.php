@@ -37,9 +37,16 @@
                 onOpenStart: function () {
                     $('body').css('overflow', 'hidden');
                     $('#navbar-filter').addClass('teal');
-                    $('html, body').animate({scrollTop: $('#navbar').offset().top}, time);
+                    $('html, body').animate({scrollTop: $('#navbar').offset().top}, 0);
+                    setDimmer($('#navbar-cart'));
+                },
+                onOpenEnd: function() {
+                    if ($('body').css('overflow') === 'auto') {
+                        $('body').css('overflow', 'hidden');
+                    }
                 },
                 onCloseStart: function () {
+                    closeDimmer($('#navbar-cart'));
                     $('body').css('overflow', 'auto');
                     $('#navbar-filter').removeClass('teal');
                 }
@@ -141,8 +148,8 @@
                     type: 'sort'
                 },
                 success: function (data) {
-                    $('#show-foody').empty();
-                    $('#show-foody').html(data);
+                    $('#home-foody-container').empty();
+                    $('#home-foody-container').html(data);
                     $('.foody-sort').removeClass('active');
                     $(sort).addClass('active');
                     $("html, body").animate({ scrollTop: 300 - $('#navbar').height() }, 'slow');
@@ -162,8 +169,8 @@
                     type: 'type'
                 },
                 success: function (data) {
-                    $('#show-foody').empty();
-                    $('#show-foody').html(data);
+                    $('#home-foody-container').empty();
+                    $('#home-foody-container').html(data);
                     $('.foody-type').removeClass('active');
                     $(type).addClass('active');
                     $("html, body").animate({ scrollTop: 300 - $('#navbar').height() }, 'slow');

@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 //             GoodsReceiptNotesSeeder::class,
 //             GoodsReceiptNotesDetailSeeder::class,
 //             GoodsReceiptNotesCostSeeder::class,
-             CommentsSeeder::class,
+             CommentSeeder::class,
              ShopInfosSeeder::class,
              SalesOffsDetailsSeeder::class,
              FunctionSeeder::class,

@@ -28,6 +28,7 @@
             $('#comment-modal-content').on('input', function () {
                 $('#comment-modal-content-error').empty();
             });
+
             $(window).resize(function () {
                 $.each($('.comment-image img'), function (key, value) {
                     $(value).css('height', $(value).width());
@@ -71,6 +72,12 @@
                     }
                 }
             });
+        });
+
+        $('#add-cart-qty').on('input', function () {
+            let cost = $(this).val() * parseFloat('{{ $foody->getSaleCost() }}');
+            cost = numeral(cost).format('0,0');
+            $('#add-cart-cost').html(cost + "<sup>đ</sup>");
         });
 
         $('#foody-comment-show').on('click', function () {

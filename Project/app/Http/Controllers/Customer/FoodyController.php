@@ -20,7 +20,7 @@ class FoodyController extends Controller
 {
     public function index($slug) {
         $foody = Foody::where('slug', $slug)->first();
-        $foody_type = FoodyType::find($foody->id);
+        $foody_type = $foody->foodyType;
         $votes = $foody->getVoted();
         $images = DB::table('foodies')->join('comments', 'foodies.id', 'foody_id')
             ->join('image_comments', 'comments.id', 'comment_id')->join('images', 'image_id', 'images.id')

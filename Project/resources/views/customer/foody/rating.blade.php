@@ -29,40 +29,40 @@
                 <span class="rate-title">Ngon</span>
                 @for($i=1; $i<=5; $i++)
                     @if($i <= $votes->quality)
-                        <i class="material-icons">star</i>
+                        <i class="fas fa-star"></i>
                     @elseif(number_format($votes->quality) == $i)
-                        <i class="material-icons">star_half</i>
+                        <i class="fas star-half-alt"></i>
                     @else
-                        <i class="material-icons">star_border</i>
+                        <i class="far fa-star"></i>
                     @endif
                 @endfor
-                <span class="rate-number">{{ $votes->quality }}</span>
+                <span class="rate-number-avg">{{ $votes->quality }}</span>
             </div>
             <div class="col s12 foody-rating center-align foody-rating-detail">
                 <span class="rate-title">Giá cả</span>
                 @for($i=1; $i<=5; $i++)
                     @if($i <= $votes->cost)
-                        <i class="material-icons">star</i>
+                        <i class="fas fa-star"></i>
                     @elseif(number_format($votes->cost) == $i)
-                        <i class="material-icons">star_half</i>
+                        <i class="fas star-half-alt"></i>
                     @else
-                        <i class="material-icons">star_border</i>
+                        <i class="far fa-star"></i>
                     @endif
                 @endfor
-                <span class="rate-number">{{ $votes->cost }}</span>
+                <span class="rate-number-avg">{{ $votes->cost }}</span>
             </div>
             <div class="col s12 foody-rating center-align foody-rating-detail">
                 <span class="rate-title">Phục vụ</span>
                 @for($i=1; $i<=5; $i++)
                     @if($i <= $votes->attitude)
-                        <i class="material-icons">star</i>
+                        <i class="fas fa-star"></i>
                     @elseif(number_format($votes->attitude) == $i)
-                        <i class="material-icons">star_half</i>
+                        <i class="fas star-half-alt"></i>
                     @else
-                        <i class="material-icons">star_border</i>
+                        <i class="far fa-star"></i>
                     @endif
                 @endfor
-                <span class="rate-number">{{ $votes->attitude }}</span>
+                <span class="rate-number-avg">{{ $votes->attitude }}</span>
             </div>
         @else
             <div class="col s12 foody-rating center-align foody-rating-detail">
@@ -73,9 +73,9 @@
     </div>
     <div class="col s12 rating-footer center-align">
         <span class="rate-avg">{{ $votes->average }}</span>
-        <i class="material-icons">star</i>
+        <i class="fas fa-star"></i>
         <span style="margin: 0 4px"> - </span>
-        <span>
+        <span style="font-weight: 500">
             @if($votes->average >= 4.5)
                 Tuyệt vời
             @elseif($votes->average > 3.5)
