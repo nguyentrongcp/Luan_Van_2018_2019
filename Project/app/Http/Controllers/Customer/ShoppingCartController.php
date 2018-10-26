@@ -73,12 +73,12 @@ class ShoppingCartController extends Controller
                     $cart->name
                 </div>
                 <div class='col cart-action'>
-                    <a class='ui button' onclick='updateCart(this,$cart->id)'>
+                    <a class='ui button' onclick='updateCart(this)' data-id='$cart->id'>
                         <i class='plus icon'></i>
                     </a>
 
-                    <a class='ui button' data-qty=\"minus-{{ $cart->id }}\" onclick='updateCart(this,$cart->id)'
-                       id='minus-$cart->id'><i class='minus icon'></i>
+                    <a class='ui button' data-qty=\"minus-$cart->id\" data-id='$cart->id' onclick='updateCart(this)'>
+                        <i class='minus icon'></i>
                     </a>
                 </div>
                 <div class='col right-align' style='width: 70px' id='cart-cost-$cart->id'>

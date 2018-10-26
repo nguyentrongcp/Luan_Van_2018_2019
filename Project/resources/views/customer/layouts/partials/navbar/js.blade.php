@@ -12,12 +12,17 @@
                 closeOnClick: false,
                 inDuration: 500,
                 outDuration: 500,
-                onOpenStart: function (e) {
+                onOpenStart: function () {
                     $('body').css('overflow', 'hidden');
                     $('#dropdown-cart').addClass('teal');
                     $('#cart-quantity').addClass('white black-text');
                     $("html, body").animate({ scrollTop: $('#navbar').offset().top }, time);
                     setDimmer($('#navbar-cart'));
+                },
+                onOpenEnd: function() {
+                    if ($('body').css('overflow') === 'auto') {
+                        $('body').css('overflow', 'hidden');
+                    }
                 },
                 onCloseStart: function() {
                     closeDimmer($('#navbar-cart'));
@@ -25,31 +30,41 @@
                     $('#dropdown-cart').removeClass('teal');
                     $('#cart-quantity').removeClass('white black-text');
                 },
-                onCloseEnd: function () {
-
-                }
             });
 
-            $('#home-nav-dropdown').dropdown({
+            $('#dropdown-profile').dropdown({
+                constrainWidth: false,
+                coverTrigger: false,
+                inDuration: 500,
+                outDuration: 500,
+                // closeOnClick: false,
+                // onOpenStart: function () {
+                //     $('#navbar-category').addClass('teal');
+                //     $('html, body').animate({scrollTop: $('#navbar').offset().top}, time);
+                // },
+                // onCloseStart: function () {
+                //     $('#navbar-category').removeClass('teal');
+                // }
+            });
+
+            $('#dropdown-category').dropdown({
                 constrainWidth: false,
                 coverTrigger: false,
                 inDuration: 500,
                 outDuration: 500,
                 // closeOnClick: false,
                 onOpenStart: function () {
-                    $('body').css('overflow', 'hidden');
-                    $('#navbar-filter').addClass('teal');
+                    $('#navbar-category').addClass('teal');
                     $('html, body').animate({scrollTop: $('#navbar').offset().top}, time);
                 },
                 onCloseStart: function () {
-                    $('body').css('overflow', 'auto');
-                    $('#navbar-filter').removeClass('teal');
+                    $('#navbar-category').removeClass('teal');
                 }
             });
 
             $('#navbar').pushpin({
                 top: 300 - $('#navbar').height()
-            })
+            });
 
             $('.nav-search').on('click', function () {
                 $('#navbar-search').removeClass('hide');
@@ -74,6 +89,7 @@
                     $('#search').focus();
                 }
             });
+
             $('#search').focusout(function () {
                 $('body').css('overflow', 'auto');
                 $('#search-result').removeClass('search-result');
@@ -85,6 +101,7 @@
                 });
                 closeDimmer($('#navbar-search'),$('#search-result'));
             });
+
             $('#search').focus(function () {
                 $('body').css('overflow', 'hidden');
                 $("html, body").animate({ scrollTop: $('#navbar').offset().top }, time);
@@ -135,6 +152,73 @@
             });
         });
 
+        function updateCart(element) {
+            let count = '1';
+            let id = $(element).attr('data-id');
+            if ($(element).attr('data-qty') === 'minus-' + id) {
+                count = '-1';
+            }
+            if ($(element).attr('data-qty') === 'add') {
+                count = $('#add-cart-qty').val();
+                if (count < 1) {
+                    count = 0;
+                }
+            }
+            if (count === '0') {
+                $('#add-cart-qty-' + id).val('1');
+                M.toast({
+                    html: "<i class='material-icons red-text left'>error_outline</i>Số lượng không hợp lệ!",
+                    displayLength: 2000
+                });
+            }
+            else {
+                $.ajax({
+                    type: "post",
+                    url: "/customer/update_shopping_cart",
+                    data: {
+                        foody_id: id,
+                        count: count
+                    },
+                    success: function (data) {
+                        if (data.status !== 'error') {
+                            $('#cart-qty').text(data.total_count);
+                            $('#cart-total-cost').html(data.total_cost + '<sup>đ</sup>');
+                            if (data.status === 'updated') {
+                                $('#cart-qty-' + id).text(data.count);
+                                $('#cart-cost-' + id).html(data.cost + '<sup>đ</sup>');
+                                $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
+                                    "</span>)");
+                                updatePayment(data.total_cost,data.count,data.cost,data.cost_simple);
+                            }
+                            else if (data.status === 'deleted') {
+                                $('#' + id).remove();
+                                $('#cart-added-home-' + id).text('');
+                                if (data.total_count === 0) {
+                                    $('#cart-body').append("<div id=\"cart-empty\" class=\"row center-align\">\n" +
+                                        "                Giỏ hàng trống\n" +
+                                        "            </div>");
+                                    $('#cart-payment').addClass('disabled');
+                                }
+                                removePayment(data.total_cost,id,data.cost);
+                            }
+                            else {
+                                if (data.role === 'new') {
+                                    $('#cart-body').empty();
+                                }
+                                $('#cart-body').append(data.cart_body);
+                                $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
+                                    "</span>)");
+                                $('#cart-payment').removeClass('disabled');
+                            }
+                            if ($('#add-cart-qty').val() !== 'undefined') {
+                                $('#add-cart-qty').val('1');
+                            }
+                        }
+                    }
+                })
+            }
+        }
+
         function removeCart(id) {
             $.ajax({
                 type: "post",
@@ -143,7 +227,7 @@
                     foody_id: id
                 },
                 success: function (data) {
-                    $('#cart-count').text(data.total_count);
+                    $('#cart-qty').text(data.total_count);
                     $('#cart-total-cost').html(data.total_cost + '<sup>đ</sup>');
                     $('#' + id).remove();
                     $('#cart-added-home-' + id).text('');
@@ -158,7 +242,7 @@
             })
         }
 
-        function updateCart(type, id) {
+        function cartUpdate(type, id) {
             var count = '1';
             if ($(type).attr('data-qty') === 'minus-' + id) {
                 count = '-1';

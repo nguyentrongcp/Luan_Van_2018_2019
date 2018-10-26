@@ -36,6 +36,7 @@
     }
     #foody-info {
         margin-top: 15px;
+        margin-bottom: 20px;
     }
     .col .row {
         margin: 0;
@@ -65,7 +66,7 @@
     }
     .foody-rating i {
         color: #fc0 !important;
-        font-size: 21px;
+        font-size: 18px;
         margin: 0;
     }
     .foody-rating .space {
@@ -74,12 +75,16 @@
     .foody-rating span {
         vertical-align: top;
     }
-    .foody-rating .rate-number {
+    .foody-rating .rate-number-avg {
         margin-left: 15px;
         font-weight: bolder;
     }
+    .foody-rating .rate-number {
+        font-weight: 600;
+    }
     .foody-rating .rate-title {
         text-align: left;
+        font-weight: 500;
         width: 80px;
         display: inline-block;
     }
@@ -105,6 +110,9 @@
     .foody-like {
         margin-top: 10px;
     }
+    .foody-like .ui.label {
+        height: 28px !important;
+    }
     .foody-like i.like.active {
         color: #ff2733 !important;
     }
@@ -120,6 +128,12 @@
         top: 200px !important;
         /*margin: ;*/
 
+    }
+    .foody-like .heart {
+        color: red;
+    }
+    .foody-like .bookmark {
+        color: #039be5;
     }
     .foody-cart {
         margin-top: 12px;
@@ -192,8 +206,9 @@
         margin-top: 10px;
     }
     .rating-content .row span {
-        width: 90px !important;
+        width: 115px !important;
         position: relative;
+        font-weight: 500;
         left: calc((100% - 90px) / 2) !important;
         margin-bottom: 10px;
     }
@@ -202,7 +217,7 @@
         margin-top: 0 !important;
     }
     .rating-footer i {
-        font-size: 12px;
+        font-size: 9px;
         color: #fc0 !important;
         vertical-align: middle;
     }

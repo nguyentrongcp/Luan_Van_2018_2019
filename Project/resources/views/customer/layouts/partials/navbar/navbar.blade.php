@@ -1,5 +1,6 @@
 @php
     $carts = \Gloudemans\Shoppingcart\Facades\Cart::content();
+    $logged = Auth::guard('customer')->check() ? 'true' : 'false';
 @endphp
 
 <div class="navbar-container">

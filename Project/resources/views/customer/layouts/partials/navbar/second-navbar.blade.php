@@ -3,12 +3,15 @@
         <div class="container">
             <div class="nav-wrapper">
                 <ul id="navbar-ul">
-                    <li class="nav-col m-nav-col" id="navbar-filter">
-                        <a class="hide-on-small-only">
-                            <i class="material-icons left">arrow_back</i>
+                    <li class="nav-col m-nav-col {{ Request::is('home') ? 'hide-on-small-only' : '' }}" id="navbar-back">
+                        <a>
+                            <i class="material-icons left hide-on-small-only">arrow_back</i>
                             <span class="hide-on-small-only">Trở về</span>
+                            <i class="material-icons center hide-on-med-and-up">arrow_back</i>
                         </a>
-                        <a id="home-nav-dropdown" class="hide-on-med-and-up dropdown-trigger" data-target="m-home-nav-container">
+                    </li>
+                    <li class="nav-col m-nav-col hide-on-med-and-up {{ Request::is('home') ? '' : 'hide' }}" id="navbar-filter">
+                        <a id="home-nav-dropdown" class="dropdown-trigger" data-target="m-home-nav-container">
                             <i class="material-icons center hide-on-med-and-up">filter_list</i>
                         </a>
                     </li>
@@ -34,14 +37,14 @@
                     </li>
 
                     <li class="nav-col m-nav-col" id="navbar-category">
-                        <a id="dropdown-category" class='dropdown-trigger' data-target='dropdown-category-content'>
+                        <a id="dropdown-category" data-target='dropdown-category-content'>
                             <i class="material-icons left hide-on-small-only">menu</i>
                             <i class="material-icons center hide-on-med-and-up">menu</i>
                             <span class="hide-on-small-only">Phân loại</span></a>
                     </li>
 
                     <li style="width: 90px" id="navbar-cart" class="nav-col m-nav-col">
-                        <a id="dropdown-cart" data-target="dro-cart" class="truncate dropdown-trigger">
+                        <a id="dropdown-cart" data-target="dro-cart" class="truncate">
                             <i class="material-icons left hide-on-small-only">shopping_cart</i>
                             <i class="material-icons center hide-on-med-and-up">shopping_cart</i>
                             <span id="cart-qty" class="new badge" data-badge-caption="">{{ Cart::count() }}</span>

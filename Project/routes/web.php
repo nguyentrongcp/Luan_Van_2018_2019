@@ -128,8 +128,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     // Home
     Route::get('/home', 'Customer\HomeController@index')->name('customer.home');
     Route::post('/customer/show_foody', 'Customer\HomeController@showFoody');
-    Route::post('/customer/like', 'Customer\HomeController@like');
-    Route::post('/customer/favorite', 'Customer\HomeController@favorite');
 
     // Shopping cart
     Route::get('/testcart', 'Customer\ShoppingCartController@test')->name('cart.test');
@@ -151,6 +149,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::get('/foody/{slug}', 'Customer\FoodyController@index')->name('customer.foody.show');
     Route::get('/customer/search', 'Customer\FoodyController@search');
     Route::post('/customer/foody/comment', 'Customer\FoodyController@comment');
+    Route::post('/customer/like', 'Customer\FoodyController@like');
+    Route::post('/customer/favorite', 'Customer\FoodyController@favorite');
 
     // Login & logout
     Route::post('/customer/login', 'Customer\CustomerLoginController@login');

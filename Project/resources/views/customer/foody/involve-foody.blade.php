@@ -1,21 +1,24 @@
-@if(!empty($foody_type->foodies))
+@if($foody_type->foodies()->count() > 1)
     <div id="involve-foody-container" class="row white section scrollspy">
         <div class="col s12 content">
             <span class="content-header">Cùng loại</span>
             <div class="divider" style="margin-bottom: 10px"></div>
-            @foreach($foody_type->foodies as $key => $foody)
+            @foreach($foody_type->foodies as $key => $foody_involve)
+                @if($foody->id == $foody_involve->id)
+                    @continue
+                @endif
                 @if($key > 0)
                     <div class="divider" style="margin-bottom: 5px !important;"></div>
                 @endif
                 <div class="row">
                     <div class="row">
                         <div class="col s4 m3 l3">
-                            <img class="responsive-img" src="{{ $foody->avatar }}">
+                            <img class="responsive-img" src="{{ $foody_involve->avatar }}">
                         </div>
                         <div class="col s8 involve-foody-name">
-                            <a href="#" class="truncate">{{ $foody->name }}</a>
-                            <span class="cost">{{ number_format($foody->currentCost()) }}<sup>đ</sup></span>
-                            <span class="describe truncate">{{ $foody->describe }}</span>
+                            <a href="#" class="truncate">{{ $foody_involve->name }}</a>
+                            <span class="cost">{{ number_format($foody_involve->currentCost()) }}<sup>đ</sup></span>
+                            <span class="describe truncate">{{ $foody_involve->describe }}</span>
                         </div>
                         <div class="col s1 hide-on-small-only involve-foody-action right-align">
                             <a href="#" class="ui small label"><i class="ui plus icon"></i></a>

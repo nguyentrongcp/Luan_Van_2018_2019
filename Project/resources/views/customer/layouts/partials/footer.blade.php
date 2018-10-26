@@ -100,6 +100,7 @@
     <script src="{{ asset('/customer/js/md5.js') }}"></script>
     <script src="{{ asset('/customer/js/jquery.backDetect.min.js') }}"></script>
     {{--<script src="/customer/semantic/dropdown.min.js"></script>--}}
+    <script src="{{ asset('/customer/js/numeral.js') }}"></script>
 
     <script src="{{ asset('/customer/js/custom.js') }}"></script>
 

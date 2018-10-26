@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Comment;
+use App\Favorite;
 use App\Foody;
 use App\FoodyType;
 use App\Image;
 use App\ImageComment;
+use App\Like;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,12 +20,13 @@ class FoodyController extends Controller
 {
     public function index($slug) {
         $foody = Foody::where('slug', $slug)->first();
-        $foody_type = FoodyType::find($foody->id);
+        $foody_type = $foody->foodyType;
+        $votes = $foody->getVoted();
         $images = DB::table('foodies')->join('comments', 'foodies.id', 'foody_id')
             ->join('image_comments', 'comments.id', 'comment_id')->join('images', 'image_id', 'images.id')
             ->select('images.link')->get();
 
-        return view('customer.foody.index', compact(['foody', 'foody_type', 'images']));
+        return view('customer.foody.index', compact(['foody', 'foody_type', 'images', 'votes']));
     }
 
     public function testsms() {
@@ -68,12 +71,21 @@ class FoodyController extends Controller
         <a href='#' class=\"search-result-content\">
             <div class=\"col s12 search-result-title truncate\">$foody->name</div>
             <div class=\"col s12 search-result-cost\">$cost<sup>đ</sup>$sales_off</div>
-            <div class=\"col s12 search-result-rate\">
-                <i class=\"material-icons\">star</i>
-                <i class=\"material-icons\">star</i>
-                <i class=\"material-icons\">star</i>
-                <i class=\"material-icons\">star_half</i>
-                <i class=\"material-icons\">star_half</i>
+            <div class=\"col s12 search-result-rate\">";
+            if ($foody->getVoted() != null) {
+                for($i=1; $i<=5; $i++) {
+                    if ($i <= $foody->getVoted()->average) {
+                        $data .= "<i class='material-icons'>star</i>";
+                    }
+                    elseif(number_format($foody->getVoted()->average) == $i) {
+                        $data .= "<i class='material-icons'>star_half</i>";
+                    }
+                    else {
+                        $data .= "<i class='material-icons'>star_border</i>";
+                    }
+                }
+            }
+            $data .= "    
             </div>
         </a>
     </div>
@@ -141,5 +153,58 @@ class FoodyController extends Controller
 //        if ($request->hasFile('files')) {
 //            return Response('fdsfsd');
 //        }
+    }
+
+    public function like(Request $request) {
+        if (Auth::guard('customer')->check()) {
+            $foody_id = $request->foody_id;
+            $customer_id = Auth::guard('customer')->user()->id;
+            $number_of_liked = Foody::find($foody_id)->getLiked();
+
+            $liked = null;
+            if (Foody::find($foody_id)->checkLiked($customer_id)) {
+                $liked = Foody::find($foody_id)->likes()->where('customer_id', $customer_id)->first();
+            }
+
+            if ($liked != null) {
+                $liked->delete();
+
+                return Response(['text' => 'Thích', 'number_of_liked' => $number_of_liked - 1]);
+            }
+            else {
+                $like = new Like();
+                $like->customer_id = $customer_id;
+                $like->foody_id = $foody_id;
+                $like->save();
+
+                return Response(['text' => 'Bỏ thích', 'number_of_liked' => $number_of_liked + 1]);
+            }
+        }
+    }
+
+    public function favorite(Request $request) {
+        if (Auth::guard('customer')->check()) {
+            $customer_id = Auth::guard('customer')->user()->id;
+
+            $favorited = null;
+            if (Foody::find($request->foody_id)->checkFavorited($customer_id)) {
+                Foody::find($request->foody_id)->favorites()->where('customer_id', $customer_id)->first();
+            }
+            $favorited = Favorite::where('customer_id', $customer_id)->where('foody_id', $request->foody_id)->first();
+
+            if ($favorited != null) {
+                $favorited->delete();
+
+                return Response('unfavorited');
+            }
+            else {
+                $favorite = new Favorite();
+                $favorite->customer_id = $customer_id;
+                $favorite->foody_id = $request->foody_id;
+                $favorite->save();
+
+                return Response('favorited');
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 //             GoodsReceiptNotesSeeder::class,
 //             GoodsReceiptNotesDetailSeeder::class,
 //             GoodsReceiptNotesCostSeeder::class,
-             CommentsSeeder::class,
+             CommentSeeder::class,
              ShopInfosSeeder::class,
              SalesOffsDetailsSeeder::class,
              FunctionSeeder::class,
@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder
              MaterialSeeder::class,
              MaterialFoodySeeder::class,
              LikeSeeder::class,
+             VoteDetailSeeder::class,
+             VoteSeeder::class,
              SliderSeeder::class
          ]);
     }

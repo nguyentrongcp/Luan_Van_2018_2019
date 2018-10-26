@@ -38,12 +38,20 @@ class Foody extends Model
         return $this->likes()->count();
     }
 
+    public function checkLiked($customer_id) {
+        return $this->likes()->where('customer_id', $customer_id)->count() > 0;
+    }
+
     public function favorites() {
         return $this->hasMany(Favorite::class);
     }
 
     public function getFavorited() {
         return $this->favorites()->count();
+    }
+
+    public function checkFavorited($customer_id) {
+        return $this->favorites()->where('customer_id', $customer_id)->count() > 0;
     }
 
     public function salesOffDetail() {
@@ -65,6 +73,12 @@ class Foody extends Model
 //
     public function votes() {
         return $this->hasMany(Vote::class);
+    }
+    public function voteDetails() {
+        return $this->hasMany(VoteDetail::class);
+    }
+    public function getVoted() {
+        return $this->votes()->first();
     }
 //
     public function backendComments() {

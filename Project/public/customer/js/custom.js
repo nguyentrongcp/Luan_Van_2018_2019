@@ -2,15 +2,13 @@ $(document).ready(function(){
     $('.tabs').tabs();
     $('.modal').modal();
     $('.slider').slider();
-    // $('.materialboxed').materialbox();
     $('.tooltipped').tooltip();
-    $('.materialboxed').materialbox();
     $('.scrollspy').scrollSpy();
 
     $('.sidenav').sidenav({
         edge: 'right',
     });
-    $('.dropdown-trigger').dropdown();
+    // $('.dropdown-trigger').dropdown();
 
     $('.collapsible').collapsible();
 

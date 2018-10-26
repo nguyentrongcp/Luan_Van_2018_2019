@@ -21,7 +21,7 @@ class CreateAdminsTable extends Migration
             $table->string('phone', 20);
             $table->string('username', 16);
             $table->string('password', 100);
-            $table->integer('role')->unsigned();
+            $table->integer('role_id')->unsigned();
             $table->boolean('is_deleted')->default(false);
             $table->rememberToken();
             $table->timestamps();
