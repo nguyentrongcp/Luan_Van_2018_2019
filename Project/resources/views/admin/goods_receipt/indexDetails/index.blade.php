@@ -7,7 +7,7 @@
     <div class="ui blue raised segment">
         <h3 class="ui dividing header">
             <div class="fields">
-                <a href="{{ route('goods_receipt_note.index') }}" class="need-popup" data-content="Danh sách phiếu nhập">
+                <a href="{{ route('goods_receipt_note.index') }}" class="need-popup a-decoration" data-content="Danh sách phiếu nhập">
                     <i class="blue small angle double left circular fitted icon"></i></a>
                 Phiếu nhập ngày {{$date}} - {{$name}}
                 <label class="ui text-success float-right" for="total">Tổng tiền: {{number_format($totalCost).' đ'}} </label>

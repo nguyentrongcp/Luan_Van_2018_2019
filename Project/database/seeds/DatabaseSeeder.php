@@ -22,10 +22,6 @@ class DatabaseSeeder extends Seeder
              NewsSeeder::class,
              ShoppingCartSeeder::class,
              SalesOffSeeder::class,
-//             GoodsReceiptNotesSeeder::class,
-//             GoodsReceiptNotesDetailSeeder::class,
-//             GoodsReceiptNotesCostSeeder::class,
-             CommentSeeder::class,
              ShopInfosSeeder::class,
              SalesOffsDetailsSeeder::class,
              FunctionSeeder::class,
@@ -40,7 +36,11 @@ class DatabaseSeeder extends Seeder
              LikeSeeder::class,
              VoteDetailSeeder::class,
              VoteSeeder::class,
-             SliderSeeder::class
+             SliderSeeder::class,
+             CommentSeeder::class,
+             GoodsReceiptNotesSeeder::class,
+             GoodsReceiptNotesDetailSeeder::class,
+             GoodsReceiptNotesCostSeeder::class,
          ]);
     }
 }

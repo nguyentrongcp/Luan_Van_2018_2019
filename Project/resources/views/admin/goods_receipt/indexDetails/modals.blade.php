@@ -1,4 +1,4 @@
-<!-- Modal create products type-->
+<!-- Modal create goods receipt note detail-->
 <div class="ui mini-40 modal" id="create-goods-receipt-note-detail-modal">
     <div class="blue header">Thêm mới phiếu nhập</div>
     <div class="content">
@@ -7,34 +7,34 @@
             <input type="hidden" name="goods-id" value="{{$id}}">
             <div class="field">
                 <label for="material-name">Tên nguyên liệu</label>
-                <input type="text" name="material" value="Bột mỳ" placeholder="Tên nguyên liệu">
-                {{--<select name="material-name[]" multiple id="material-name" class="ui dropdown" required>--}}
-                    {{--@foreach($nhaCungCaps as $nhaCungCap)--}}
-                        {{--@if($phieuNhapParent->matchedNCC($nhaCungCap->id))--}}
-                            {{--@continue--}}
-                        {{--@endif--}}
-                        {{--<option value="{{ $nhaCungCap->id }}">{{ $nhaCungCap->ten_ncc }}</option>--}}
-                    {{--@endforeach--}}
-                {{--</select>--}}
-
+                <div class="ui right labeled input">
+                    <input type="text" name="material" id="material" placeholder="Tên nguyên liệu">
+                    <div class="ui dropdown label">
+                        <div class="text" >Chọn nguyên liệu có sẵn</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            @foreach(\App\Material::all() as $material)
+                                <input type="hidden" name="available-material" value="{{$material->id}}">
+                                <div class="item">{{$material->name}}</div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="fields">
-                <div class="field">
-                    <label for="amount">Số lượng</label>
-                    <input type="text" name="amount" value="10" placeholder="Số lượng">
-                </div>
-                <div class="field">
-                    <label for="unit">Đơn vị tính</label>
-                    <select name="unit" id="unit">
-                        <option value="kg" selected>Kg</option>
-                        <option value="Thùng">Thùng</option>
-                        <option value="Gói">Gói</option>
-                        <option value="Lít">Lít</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label for="unit">&nbsp;</label>
-                    <button class="ui blue tiny fluid button"><i class="sync loading icon"></i></button>
+            <div class="field">
+                <label for="amount">Số lượng</label>
+                <div class="ui right labeled input">
+                    <input type="text" name="amount" id="amount" placeholder="Số lượng">
+                    <div class="ui dropdown label">
+                        <div class="text" >Chọn đơn vị tính</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            @foreach(\App\CalculationUnit::all() as $unit)
+                                <input type="hidden" name="unit" value="{{$unit->id}}">
+                            <div class="item">{{$unit->name}}</div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="field">

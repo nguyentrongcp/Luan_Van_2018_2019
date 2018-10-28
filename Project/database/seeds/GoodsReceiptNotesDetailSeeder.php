@@ -14,17 +14,17 @@ class GoodsReceiptNotesDetailSeeder extends Seeder
     public function run()
     {
         $rows = [];
-        $materials = ['Bột mì', 'Đường', 'Bột gạo', 'Thịt gà', 'Khoai tây', 'Bánh mì', 'Sũa tươi',
-            'Nước ngọt', 'Dầu ăn', 'Rau sạch','Phô mai','Thịt bò','Cá'];
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 150; $i++) {
                 $value = random_int(5, 10);
                 $cost = random_int(10000, 100000);
-                $material = array_random($materials);
+                $material_id = random_int(1,\App\Material::count());
                 $rows[] = [
-                    'material' => $material,
+                    'material_id'=>$material_id,
+                    'material' => \App\Material::find($material_id)->name,
                     'value' => $value.' '.'kg',
                     'cost' => $cost,
-                    'goods_receipt_note_id' => random_int(1, 10)
+                    'total_cost'=> $cost*$value,
+                    'goods_receipt_note_id' => random_int(1, \App\GoodsReceiptNote::count())
                 ];
         }
 

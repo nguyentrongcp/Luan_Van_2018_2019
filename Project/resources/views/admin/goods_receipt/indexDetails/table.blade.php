@@ -9,6 +9,7 @@
         <th class="collapsing">STT</th>
         <th>Tên nguyên liệu</th>
         <th class="text-center">Số lượng</th>
+        <th class="text-center">Đơn giá</th>
         <th class="text-center">Tổng tiền</th>
         <th class="collapsing">Sửa</th>
     </tr>
@@ -25,12 +26,13 @@
             <td>{{ $stt + 1 }}</td>
             <td>{{$goodsReceiptDetail->material}}</td>
             <td class="text-center">{{$goodsReceiptDetail->value}}</td>
+            <td class="text-center">{{number_format($goodsReceiptDetail->cost).' đ'}}</td>
             <td class="text-center">
-                {{number_format($goodsReceiptDetail->cost).' đ'}}
+                {{number_format($goodsReceiptDetail->total_cost).' đ'}}
             </td>
             <td>
                 <a href="#" onclick="$( '{{ '#update-goods-receipt-note-detail-modal-'.$goodsReceiptDetail->id }}' ).modal('show')"
-                   class="ui small green label">
+                   class="ui small green label a-decoration">
                     <i class="edit fitted icon"></i>
                 </a>
             </td>

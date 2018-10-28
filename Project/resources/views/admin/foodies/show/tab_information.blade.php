@@ -13,7 +13,13 @@
                 </div>
                 <div class="inline field">
                     <label class="label-fixed">Giá</label>
-                    <div class="static-input"><strong>{{ number_format($foodies->currentCost()) }} đ</strong>
+                    <div class="static-input">
+                        @if($foodies->isSalesOff())
+                            <strike><strong>{{ number_format($foodies->currentCost()) }} đ</strong></strike>-
+                            <span style="color: red"><strong>{{ number_format(($foodies->currentCost())*(1-($foodies->getSalePercent())/100)) }} đ</strong></span>
+                        @else
+                            <strong>{{ number_format($foodies->currentCost()) }} đ</strong>
+                        @endif
                         <a href="#" class="ui label a-decoration"
                            onclick="$('#cost-history-modal').modal('show')">Lịch sử</a>
 
@@ -28,6 +34,14 @@
                         <strong class="ui green label {{$foodies->getStatus() > 0 ? '': 'hidden'}}">Đang bán</strong>
                     </div>
                 </div>
+                @if($foodies->isSalesOff())
+                    <div class="inline field">
+                        <label class="label-fixed">Khuyến mãi</label>
+                        <div class="static-input">
+                                {{$foodies->getSalePercent() .' %'}}
+                        </div>
+                    </div>
+                @endif
             </div>
 
 

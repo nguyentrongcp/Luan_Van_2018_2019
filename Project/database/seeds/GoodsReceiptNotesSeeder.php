@@ -71,7 +71,7 @@ class GoodsReceiptNotesSeeder extends Seeder
 
 
         $rows = [];
-        for ($i = 1; $i <= 10; $i++){
+        for ($i = 1; $i <= 100; $i++){
             $rows[] = $this->getRow();
         }
 
@@ -84,7 +84,7 @@ class GoodsReceiptNotesSeeder extends Seeder
 
     public function getRow(){
         $date = $this->getValidDate();
-        $id = rand(1, 10);
+        $id = rand(1, \App\Admin::count());
         return [
             'date' => $date,
             'admin_id' => $id,

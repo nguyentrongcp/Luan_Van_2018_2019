@@ -39,7 +39,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::get('statistis/revenue','admin\StatisticController@revenue')->name('revenue');
     Route::get('statistis/order','admin\StatisticController@revenue')->name('order');
     Route::get('statistis/foody','admin\StatisticController@revenue')->name('foody');
-
+    Route::post('statistic/getdate','admin\StatisticController@getDate');
     /** Foody type */
 
     Route::resource('foody_type','admin\FoodyTypeController',["except" => ["create","show", "edit"]]);

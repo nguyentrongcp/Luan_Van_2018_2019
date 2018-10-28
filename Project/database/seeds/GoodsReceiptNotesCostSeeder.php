@@ -12,8 +12,9 @@ class GoodsReceiptNotesCostSeeder extends Seeder
     public function run()
     {
         $rows = [];
-        for ($i = 1; $i <= 10; $i++){
-            $cost = App\GoodsReceiptNoteDetail::where('goods_receipt_note_id',$i)->sum('cost');
+        $total = \App\GoodsReceiptNote::count();
+        for ($i = 1; $i <= $total; $i++){
+            $cost = App\GoodsReceiptNoteDetail::where('goods_receipt_note_id',$i)->sum('total_cost');
             $rows[] = [
                 'cost'=>$cost,
                 'goods_receipt_note_id' => $i

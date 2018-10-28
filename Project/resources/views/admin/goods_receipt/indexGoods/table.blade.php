@@ -36,13 +36,13 @@
             </td>
             <td>
                 <a href="{{ route('admin.move_detail',[$goods->id]) }}"
-                   class="ui small blue label">
+                   class="ui small blue label a-decoration">
                     <i class="eye open fitted icon"></i>
                 </a>
             </td>
             <td>
                 <a href="#" onclick="$( '{{ '#update-modal-'.$goods->id }}' ).modal('show')"
-                   class="ui small green label">
+                   class="ui small green label a-decoration">
                     <i class="edit fitted icon"></i>
                 </a>
             </td>

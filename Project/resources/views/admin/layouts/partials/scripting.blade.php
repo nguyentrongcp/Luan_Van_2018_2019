@@ -40,6 +40,7 @@
             $('.ui.dropdown.button').dropdown();
             $('#multi-select').dropdown();
             $('.ui.accordion').accordion();
+            $('.ui.dropdown').dropdown();
         });
 </script>
 <script>
