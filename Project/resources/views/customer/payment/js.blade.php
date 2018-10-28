@@ -179,10 +179,16 @@
                     // },
                     success: function (data) {
                         if(data.status === 'error_cost') {
+                            $('#notify-modal-text').html("<i class='exclamation icon'></i>" + data.error_text);
+                            $('#notify-modal-button').text('Cập nhật ngay');
+                            $('#notify-modal-button').attr('href', '{{ route('payment.index') }}');
+                            $('#notify-modal').css('max-width', 665);
                             $('#payment-otp-modal').modal('close');
-                            $('#error-modal-text').text(data.responseText);
-                            $('#error-modal-button').text('Cập nhật ngay');
-                            $('#error-modal').modal('open');
+                            $('#notify-modal').modal('open');
+
+                            // $('#error-modal-text').text(data.responseText);
+                            // $('#error-modal-button').text('Cập nhật ngay');
+                            // $('#error-modal').modal('open');
                         }
                         else if (data.status === 'error_otp') {
                             $('#error-payment-otp').text(data.responseText);

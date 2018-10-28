@@ -28,7 +28,7 @@ class StatisticController extends Controller
     }
 
     public function getDate(Request $request){
-        return Response('');
+        return Response('fewfw');
         $data= '';
         if (!empty($request->revenue_date)){
             $data = DB::table('goods_receipt_notes')

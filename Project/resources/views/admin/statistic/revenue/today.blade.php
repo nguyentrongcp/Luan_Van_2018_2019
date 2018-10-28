@@ -42,10 +42,10 @@
 @push('script')
     <script>
         $('.ui.input').change(function () {
-            var get_date = $('#specific-day').val();
+            let get_date = $('#specific-day').val();
             $.ajax({
-                type: 'post',
-                url: '/statistic/getdate',
+                type: 'get',
+                url: '{{ route('statistic.get_date') }}',
                 data: {
                     revenue_date: get_date
                 },
