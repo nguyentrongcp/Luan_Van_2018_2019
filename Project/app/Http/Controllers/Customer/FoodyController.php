@@ -9,6 +9,7 @@ use App\FoodyType;
 use App\Image;
 use App\ImageComment;
 use App\Like;
+use App\Order;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,6 +50,23 @@ class FoodyController extends Controller
     }
 
     public function search(Request $request) {
+        if (Order::where('order_code', $request->value)->count() > 0) {
+            $order_code = strtoupper($request->value);
+            $date = date_format(date_create(Order::where('order_code', $order_code)->first()->order_created_at), 'd-m-Y H:i');
+            return Response("
+                <div class='row search-result-row'>
+                    <a href='#' class='search-result-content' style='width: 100%'>
+                        <i class='material-icons left center-align'>assignment</i>
+                        <span class='col' style='line-height: 35px;width: calc(100% - 64px);font-size: 18px'>
+                            Đ.hàng: <b>$order_code</b>
+                        </span>
+                        <span class='col' style='font-size: 12px'>
+                            Ngày $date
+                        </span>
+                    </a>
+                </div>
+            ");
+        }
         $slug = str_slug($request->value);
         $foodies = Foody::where('slug','like', "%$slug%")->get();
         $data = '';

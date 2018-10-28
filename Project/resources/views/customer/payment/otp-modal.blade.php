@@ -16,8 +16,7 @@
                 <span id="otp-timer"></span>
             </div>
         </div>
-
-        <div class="col s12 right-align">
+        <div class="modal-action">
             <a class="modal-close red lighten-2 waves-effect waves-light btn">Hủy bỏ</a>
             <a onclick="checkOTP()" class="waves-effect waves-light btn">Xác nhận</a>
         </div>

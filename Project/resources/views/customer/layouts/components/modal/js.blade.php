@@ -1,38 +1,25 @@
-<div id="login-modal" class="modal mini-modal">
-    <div class="modal-content">
-        <h5 class="modal-header">Đăng nhập</h5>
-        <div class="input-field col s12">
-            <input id="username-login" type="text" name="username" value="nguyennguyencp">
-            <label for="username-login" class="active">Tài khoản</label>
-            <span id="username-login-error"></span>
-        </div>
-
-        <div class="input-field col s12">
-            <input id="password-login" type="password" name="password" value="635982359">
-            <label for="password-login" class="active">Mật khẩu</label>
-            <span id="password-login-error"></span>
-        </div>
-
-        <button class="waves-effect waves-light btn" id="customer-login-submit">Đăng nhập</button>
-    </div>
-</div>
-
-<style>
-    .input-field {
-        margin-top: 0;
-    }
-    #login-modal {
-        max-width: 400px;
-        width: 98%;
-    }
-</style>
-
 @push('script')
     <script>
         $(document).ready(function(){
-            // M.updateTextFields();
+            $('#login-modal').modal({
+                dismissible: false,
+                opacity: 0.8
+            });
+            $('#confirm-modal').modal({
+                dismissible: false,
+                opacity: 0.8
+            });
+            $('#notify-modal').modal({
+                dismissible: false,
+                opacity: 0.8
+            });
+            $('#require-modal').modal({
+                opacity: 0.8
+            });
         });
-        $('#customer-login-submit').on('click', function () {
+
+        // login modal
+        $('#login-modal-button').on('click', function () {
             $('#username-login-error').empty();
             $('#password-login-error').empty();
             if ($('#username-login').val() === '') {
@@ -67,6 +54,23 @@
                     }
                 });
             }
+        });
+        $('#username-login').on('keyup', function (e) {
+            if (e.keyCode == 13) {
+                $('#password-login').focus();
+            }
+        });
+        $('#password-login').on('keyup', function (e) {
+            if (e.keyCode == 13) {
+                $('#login-modal-button').click();
+            }
+        });
+
+        // login require
+
+        $('#require-modal-button').on('click', function () {
+            $('#require-modal').modal('close');
+            $('#login-modal').modal('open');
         });
     </script>
 @endpush

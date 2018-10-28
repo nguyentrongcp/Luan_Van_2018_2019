@@ -18,6 +18,16 @@ $(document).ready(function(){
     // });
     $('.pushpin').pushpin();
     $('.carousel').carousel();
+
+    $(".number-only").on("keypress keyup blur",function (event) {
+        $(this).val($(this).val().replace(/[^\d].+/, ""));
+        if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+    $('.phone-format').each(function () {
+        $(this).text(phoneFormat($(this).text()));
+    });
 });
 
 if(!!window.performance && window.performance.navigation.type === 2)
@@ -83,6 +93,11 @@ function closeDimmer(element1, element2 = null) {
     if (element2 !== null) {
         $(element2).removeClass('dimmer');
     }
+}
+
+function phoneFormat(phone) {
+    return phone.substring(0, phone.length - 6) + ' ' + phone.substr(phone.length - 6, 3) + ' ' +
+        phone.substr(phone.length - 3, 3);
 }
 
 

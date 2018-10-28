@@ -21,6 +21,24 @@ class OrdersSeeder extends Seeder
         });
 
         DB::table('orders')->insert($rows);
+
+//        for($i=1; $i<=100; $i++) {
+//            DB::table('orders')->insert([
+//                [
+//                    'order_code' => strtoupper(str_random(12)),
+//                    'receiver' => 'Nguyễn Nguyễn',
+//                    'to' => 'Trên sao Hỏa',
+//                    'email' => 'nguyennguyencp@gmail.com',
+//                    'phone' => '0332334552',
+//                    'customer_id' => 1,
+//                    'address' => 'Trên sao Thủy',
+//                    'order_created_at' => date('Y-m-d H:i:s'),
+//                    'payment_type' => rand(1, 2),
+//                    'total_of_cost' => random_int(20000, 100000),
+//                    'transport_fee' => 10000,
+//                ]
+//            ]);
+//        }
     }
 
     public function getRow($i, $data)

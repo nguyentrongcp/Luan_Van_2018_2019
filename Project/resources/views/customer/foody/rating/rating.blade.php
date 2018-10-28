@@ -90,3 +90,6 @@
         </span>
     </div>
 </div>
+
+@include('customer.foody.rating.style')
+@include('customer.foody.rating.js')

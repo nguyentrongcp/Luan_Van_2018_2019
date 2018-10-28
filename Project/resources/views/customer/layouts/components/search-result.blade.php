@@ -69,6 +69,15 @@
         display: inline-block;
         width: calc(100% - 97px);
     }
+    .search-result-content span {
+        color: black;
+    }
+    .search-result-content i {
+        font-size: 40px;
+        line-height: 64px;
+        width: 64px;
+        margin-right: 0;
+    }
     .search-result-title {
         font-weight: bolder;
         color: black !important;

@@ -20,6 +20,9 @@ class Order extends Model
     public function amountOrderFoody(){
         return OrderFoody::where('order_id',$this->id)->count();
     }
+    public function orderDetails() {
+        return $this->hasMany(OrderFoody::class);
+    }
     public function getStatus(){
         return $this->orderStatus->status;
     }
@@ -30,6 +33,14 @@ class Order extends Model
             2 => 'Thẻ tín dụng / ATM'
         ];
         return $payment[$this->payment_type];
+    }
+    public function getStatusText() {
+        $status = [
+            0 => 'Chưa duyệt',
+            1 => 'Đang vận chuyển',
+            2 => 'Đã giao hàng'
+        ];
+        return $status[$this->orderStatus->status];
     }
     public function unapproved(){
         return $this->orderStatus->status == 0;

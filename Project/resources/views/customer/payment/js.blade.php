@@ -4,10 +4,8 @@
 
         $(document).ready(function(){
             $('#payment-otp-modal').modal({
-                dismissible: false
-            });
-            $('#error-modal').modal({
-                dismissible: false
+                dismissible: false,
+                opacity: 0.8
             });
             getFee();
         });
@@ -20,7 +18,7 @@
             });
             $.ajax({
                 type: "post",
-                url: "/customer/get_ward",
+                url: "/payment/get_ward",
                 data: {
                     district_id: $(this).val()
                 },
@@ -44,14 +42,9 @@
         }
 
         function getFee() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
             $.ajax({
                 type: "post",
-                url: "/customer/get_transport_fee",
+                url: "/payment/get_transport_fee",
                 data: {
                     transport_id: $("#ward").val()
                 },
@@ -94,12 +87,13 @@
         }
 
         function getOTP() {
-            var type = $('input[name=payment-type]:checked', '#form-payment').val();
-            if ($('#foody-cost').attr('data-cost') === '0') {
-                $('#error-modal-text').text('Giỏ hàng trống. Vui lòng thêm thức ăn vào giỏ hàng của bạn.');
-                $('#error-modal-button').text('Chuyển hướng');
-                $('#error-modal-button').attr('href', "/home");
-                $('#error-payment-modal').modal('open');
+            let type = $('input[name=payment-type]:checked', '#form-payment').val();
+            if ($('#cart-qty').text() === '0') {
+                $('#notify-modal-text').html("<i class='exclamation icon'></i>Giỏ hàng trống. Vui lòng thêm thức ăn vào giỏ hàng của bạn.");
+                $('#notify-modal-button').text('Về trang chủ');
+                $('#notify-modal-button').attr('href', '{{ route('customer.home') }}');
+                $('#notify-modal').css('max-width', 611);
+                $('#notify-modal').modal('open');
             }
             else {
                 if (!checkEmpty()) {
@@ -109,7 +103,7 @@
                     });
                     $.ajax({
                         type: "post",
-                        url: "/customer/get_payment_otp",
+                        url: "/payment/get_payment_otp",
                         data: {
                             address: $('#address').val(),
                             to: $('#to').val(),
@@ -166,29 +160,42 @@
             else {
                 $.ajax({
                     type: "post",
-                    url: "/customer/check_payment_otp",
+                    url: "/payment/check_payment_otp",
                     data: {
                         otp: $('#payment-otp').val()
                     },
-                    error: function(data) {
-                        if (data.status === 404) {
+                    // error: function(data) {
+                    //     if (data.status === 404) {
+                    //         $('#error-payment-otp').text(data.responseText);
+                    //         $('#error-payment-otp').removeClass('hide');
+                    //     }
+                    //     else {
+                    //         $('#payment-otp-modal').modal('close');
+                    //         $('#error-modal-text').text(data.responseText);
+                    //         $('#error-modal-button').text('Cập nhật ngay');
+                    //         $('#error-modal').modal('open');
+                    //
+                    //     }
+                    // },
+                    success: function (data) {
+                        if(data.status === 'error_cost') {
+                            $('#payment-otp-modal').modal('close');
+                            $('#error-modal-text').text(data.responseText);
+                            $('#error-modal-button').text('Cập nhật ngay');
+                            $('#error-modal').modal('open');
+                        }
+                        else if (data.status === 'error_otp') {
                             $('#error-payment-otp').text(data.responseText);
                             $('#error-payment-otp').removeClass('hide');
                         }
                         else {
-                            $('#payment-otp-modal').modal('close');
-                            $('#error-modal-text').text(data.responseText);
-                            $('#error-payment-modal').modal('open');
-
-                        }
-                    },
-                    success: function (data) {
-                        if (data.type === 'payment') {
-                            // SetExpressCheckout(data.order_code,data.total_code,data.name,data.email,data.phone,data.address);
-                            window.location.href = data.url;
-                        }
-                        else {
-                            window.location.href = '/home';
+                            if (data.type === 'payment') {
+                                // SetExpressCheckout(data.order_code,data.total_code,data.name,data.email,data.phone,data.address);
+                                window.location.href = data.url;
+                            }
+                            else {
+                                window.location.href = '{{ route('customer.home') }}';
+                            }
                         }
                     }
                 })

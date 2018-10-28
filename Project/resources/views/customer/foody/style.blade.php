@@ -24,16 +24,6 @@
 
     }
 
-    .table-of-contents a.active {
-        border-left: 2px solid #26a69a;
-    }
-    .table-of-contents a:hover {
-        border-left: 1px solid #26a69a;
-    }
-
-    .section {
-        padding: 0;
-    }
     #foody-info {
         margin-top: 15px;
         margin-bottom: 20px;
@@ -190,46 +180,6 @@
     .content-col > .row {
         margin-bottom: 20px;
     }
-    .foody-rating-show {
-        margin-bottom: 20px;
-    }
-    .foody-rating-show.pinned {
-        right: 5% !important;
-        float: right !important;
-        width: calc((90% - 180px) * 1 / 3) !important;
-    }
-    .rating-header {
-        height: 50px;
-        text-align: center;
-    }
-    .rating-content {
-        margin-top: 10px;
-    }
-    .rating-content .row span {
-        width: 115px !important;
-        position: relative;
-        font-weight: 500;
-        left: calc((100% - 90px) / 2) !important;
-        margin-bottom: 10px;
-    }
-    .foody-rating-detail {
-        margin-bottom: 5px !important;
-        margin-top: 0 !important;
-    }
-    .rating-footer i {
-        font-size: 9px;
-        color: #fc0 !important;
-        vertical-align: middle;
-    }
-    .rating-footer .rate-avg {
-        font-size: 20px;
-        font-weight: bolder;
-    }
-    .rating-footer {
-        margin: 15px 0;
-    }
-
-
 
     #foody-comment-modal {
         width: 608px !important;
@@ -415,25 +365,6 @@
         max-height: 120px;
         margin-bottom: 10px;
     }
-    .slider-ads-portrait img {
-        width: 160px;
-        max-height: 320px;
-        /*max-height: 120px;*/
-        /*margin-bottom: 10px;*/
-    }
-    .foody-scrollspy {
-        /*width: 120px;*/
-        /*margin: auto;*/
-    }
-    .foody-scrollspy-container {
-        width: 180px !important;
-    }
-    .foody-scrollspy-container.pin-top {
-        /*top: */
-    }
-    .foody-scrollspy-container.pinned {
-        max-height: calc(100vh - 64px) !important;
-        overflow: auto;
-    }
+
 
 </style>

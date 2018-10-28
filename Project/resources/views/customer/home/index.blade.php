@@ -14,5 +14,6 @@
     </div>
 
     @include('customer.home.js')
+    @include('customer.layouts.components.modal.require-modal')
 
 @endsection

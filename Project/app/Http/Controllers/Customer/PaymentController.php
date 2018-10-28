@@ -32,7 +32,7 @@ class PaymentController extends Controller
     public function getTransportFee(Request $request) {
         $transport_fee = TransportFee::find($request->transport_id);
 
-        if (Cart::getCost() >= 300000) {
+        if (CartFunction::getCost() >= 300000) {
             $fee_text = 'Miễn phí';
             $fee_number = 0;
         }
@@ -40,7 +40,7 @@ class PaymentController extends Controller
             $fee_text = number_format($transport_fee->cost)."<sup>đ</sup>";
             $fee_number = $transport_fee->cost;
         }
-        $cost = number_format(Cart::getCost() + $fee_number);
+        $cost = number_format(CartFunction::getCost() + $fee_number);
         session(['transport_fee' => $fee_number]);
 
 
@@ -159,7 +159,7 @@ class PaymentController extends Controller
         $order->order_created_at = date('Y-m-d H:i:s');
         $order->payment_type = $payment_type;
         $order->to = session('to');
-        $order->total_of_cost = Cart::getCost() + (double)session('transport_fee');
+        $order->total_of_cost = CartFunction::getCost() + (double)session('transport_fee');
         $order->transport_fee = session('transport_fee');
         $order->save();
 
@@ -187,12 +187,15 @@ class PaymentController extends Controller
     public function checkOTP(Request $request) {
         foreach(Cart::content() as $cart) {
             if (Foody::find($cart->id)->getSaleCost() != session("$cart->id")) {
-                return Response('Giá sản phẩm có thay đổi. Hãy cập nhật lại trước khi gửi đơn hàng.', 500);
+                $data = [
+                    'status' => 'error_cost',
+                    'error_text' => 'Giá sản phẩm có thay đổi. Hãy cập nhật lại trước khi gửi đơn hàng.'
+                ];
             }
         }
         if ($request->otp == session('otp')) {
             do {
-                $order_code = str_random(12);
+                $order_code = 'DH-'.strtoupper(str_random(12));
             }
             while (Order::where('order_code', $order_code)->count() > 0);
             if (session('type') == 0) {
@@ -200,15 +203,24 @@ class PaymentController extends Controller
                 $this->forget($request);
             }
             else {
-                $total_cost = Cart::getCost() + (double)session('transport_fee');
-                $url = $this->buildCheckoutUrl('http://127.0.0.1:8000/payment/process_payment',
+                $total_cost = CartFunction::getCost() + (double)session('transport_fee');
+                $url = $this->buildCheckoutUrl('fastfoody.vn/payment/process_payment',
                     'nguyentrongcp@gmail.com','',$order_code,$total_cost);
-                return Response(['type' => 'payment', 'url' => $url]);
+                $data = [
+                    'status' => 'success',
+                    'type' => 'payment',
+                    'url' => $url
+                ];
             }
         }
         else {
-            return Response('Mã OTP không chính xác!', 404);
+            $data = [
+                'status' => 'error_otp',
+                'error_text' => 'Mã OTP không chính xác!'
+            ];
         }
+
+        return Response($data);
     }
 
     public function processPayment(Request $request) {
@@ -284,5 +296,9 @@ class PaymentController extends Controller
 
         if ($verify_secure_code === $secure_code) return true;
         else return false;
+    }
+
+    public function successPayment() {
+        return view('customer.payment.success');
     }
 }
