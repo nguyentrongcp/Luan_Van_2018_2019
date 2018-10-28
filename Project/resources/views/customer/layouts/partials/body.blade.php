@@ -12,4 +12,8 @@
         @yield('content')
     </div>
 
+    @include('customer.layouts.components.modal.login-modal')
+    @include('customer.layouts.components.modal.style')
+    @include('customer.layouts.components.modal.js')
+
 </body>

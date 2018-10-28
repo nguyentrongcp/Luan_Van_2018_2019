@@ -43,7 +43,6 @@ class ShoppingCartController extends Controller
 
         $cost = CartFunction::getCost();
 
-
         $data = ['total_count' => Cart::count(),
             'total_cost' => number_format($cost)];
 

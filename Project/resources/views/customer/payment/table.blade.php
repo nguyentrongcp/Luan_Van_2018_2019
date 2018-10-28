@@ -35,7 +35,7 @@
     <tfoot>
     <th colspan="5" class="right-align">Tổng cộng</th>
     <th colspan="2" class="right-align" id="payment-table-total-cost">
-        {{ number_format(Cart::getCost()) }}<sup>đ</sup>
+        {{ number_format(\App\Http\Controllers\Customer\CartFunction::getCost()) }}<sup>đ</sup>
     </th>
     </tfoot>
 

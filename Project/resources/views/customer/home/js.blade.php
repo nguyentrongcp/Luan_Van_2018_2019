@@ -9,9 +9,7 @@
                         $(document).scroll(function () {
                             let nav = $('#home-nav-container');
                             if ($(window).scrollTop() + $(window).height() >= $('#footer-container').offset().top - 30) {
-                                // let bottom = $('#footer-container').offset().top - $(nav).height() - 30 - $(window).scrollTop();
                                 let bottom = $(window).height() + $(window).scrollTop() - $('#footer-container').offset().top + 30;
-                                // $(nav).removeClass('pinned');
                                 $(nav).css({
                                     'bottom': bottom,
                                 });
@@ -107,7 +105,7 @@
                 })
             }
             else {
-                $('#login-require').modal('open');
+                $('#require-modal').modal('open');
             }
         }
 

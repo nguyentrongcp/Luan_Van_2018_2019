@@ -37,41 +37,6 @@
                     $(value).css('height', $(value).width());
                 });
             });
-
-            let navbar = $('#foody-scrollspy-container');
-            let rating = $('#foody-rating-show');
-            let second_navbar = $('#navbar-second');
-            let container = $('#foody-content-container');
-            $(navbar).pushpin({
-                top: $(container).offset().top - $(second_navbar).height(),
-                bottom: $(container).offset().top + $(container).height() - $(navbar).height()
-                    - $(second_navbar).height() -50,
-                onPositionChange: function (status) {
-                    if (status === 'pin-bottom') {
-                        let top = $(container).height() - $(navbar).height() - 50;
-                        $(navbar).css('top', top);
-                    }
-                    if (status === 'pinned') {
-                        $(navbar).css('top', $(second_navbar).height());
-                    }
-                }
-            });
-            $(rating).pushpin({
-                top: $(rating).offset().top - $(second_navbar).height(),
-                bottom: $(container).offset().top + $(container).height() - $(rating).height()
-                    - $(second_navbar).height() - 50,
-                onPositionChange: function (status) {
-                    if (status === 'pin-bottom') {
-                        let top = $(container).height() - $('#slider-ads-landscape').height() - $(rating).height()
-                            - $(second_navbar).height();
-                        $(rating).css('top', top);
-                    }
-                    if (status === 'pinned') {
-                        console.log('fsd');
-                        $(rating).css('top', $(second_navbar).height());
-                    }
-                }
-            });
         });
 
         $('#add-cart-qty').on('input', function () {

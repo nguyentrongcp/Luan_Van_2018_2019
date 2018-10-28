@@ -83,19 +83,5 @@ class CommentSeeder extends Seeder
         }
 
         DB::table('comments')->insert($rows);
-
-//        DB::table('comments')->insert([
-//            [
-//                'customer_id' => 3,
-//                'foody_id' => 2,
-//                'date' => date('Y-m-d H:i:s', rand(1514739600, time())),
-//                'title' => "Sapasa - Lẩu Nướng & Vườn Bia",
-//                'content' => "Trà Alisan Kem Sữa là món trà mình thích nhất ở Gong Cha😚Lúc nào đến quán chỉ nghĩ ngay đến Alisan hoi<br>
-//                              Kem mặn đặc quánh, vị mặn mặn, ngọt ngọt hoà quyện lại với nhau gọi là siêu phẩmmm😍Trà Alisan có chút vị đắng, vị ngọt ở trong, thanh thanh nhẹ mình rất thích😆Uống kèm với trân châu đen dai dai, mềm mềm ở Gong Cha phải gọi là quá ngon👍🏼👍🏼<br>
-//                              View ở đây cực đẹp luôn, mà rất rộng nữa chứ😘Nhưng quán Gong Cha hầu như lúc nào cũng đông nên khó để mà ngồi học bài tại đây được nhá<br>
-//                              Trà sữa GongCha có đắt so với mặt bằng chung nhưng giá này đáng cho sản phẩm nhé 47k<br>
-//                              Đến đây các bạn có thể gọi thêm bánh ngọt, đồ ăn tráng miệng từ quán bánh bên cạnh nha😘Bánh khá ngon, vừa miệng",
-//            ]
-//        ]);
     }
 }

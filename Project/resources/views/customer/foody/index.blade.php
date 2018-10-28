@@ -99,7 +99,7 @@
                     @endif
                 </a>
                 <iframe src="https://www.facebook.com/plugins/share_button.php?href={{ urlencode(Request::url()) }}&layout=button_count&size=large&mobile_iframe=true&height=28&appId"
-                         height="28" style="border:none;overflow:hidden;vertical-align: bottom;margin-left: 30px;" scrolling="no"
+                         height="28" width="170" style="border:none;overflow:hidden;vertical-align: bottom;margin-left: 30px;" scrolling="no"
                         frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 
             </div>
@@ -142,35 +142,21 @@
     </div>
 
     <div class="row" id="foody-content-container">
-        <div id="foody-scrollspy-container" class="col s2 hide-on-small-only foody-scrollspy-container">
-            <ul class="section table-of-contents foody-scrollspy">
-                <li><a href="#foody-info">Thông tin</a></li>
-                <li><a href="#involve-foody-container">Cùng loại</a></li>
-                <li><a href="#initialization">Đánh giá cao</a></li>
-                @if(count($images) != 0)
-                    <li><a href="#foody-images-container">Hình ảnh</a></li>
-                @endif
-                @if($foody->comments()->count() > 0)
-                    <li><a href="#comment-container">Bình luận</a></li>
-                @endif
-            </ul>
-            <div class="slider-ads-portrait">
-                <img src="/customer/image/slider-ads2.jpg">
-            </div>
-        </div>
+        @include('customer.foody.navbar.navbar')
+
         <div class="col s12 m12 l10 right foody-content-container">
             <div class="col s12 slider-ads-landscape">
                 <img src="/customer/image/slider-ads.jpg">
             </div>
             <div id="foody-rating-show" class="col s12 m12 l4 right foody-rating-show">
-                @include('customer.foody.rating')
+                @include('customer.foody.rating.rating')
             </div>
             <div class="col s12 m12 l8 content-col left">
-                @include('customer.foody.involve-foody')
-
                 @include('customer.foody.images')
 
                 @include('customer.foody.comment')
+
+                @include('customer.foody.involve-foody')
 
                 {{--@include('customer.foody.image')--}}
             </div>

@@ -4,15 +4,17 @@
 
 @section('content')
 
+    @php use \App\Http\Controllers\Customer\CartFunction; @endphp
+
     <div class="row white payment">
         <form id="form-payment">
             @csrf
             <span class="col s12 payment-header">
-            Bạn đã sẵn sàng để thanh toán?
-        </span>
+                Bạn đã sẵn sàng để thanh toán?
+            </span>
             <span class="col s12 payment-title">
-            Thông tin giao hàng
-        </span>
+                Thông tin giao hàng
+            </span>
             <div class="col s12 divider"></div>
             <div class="col s12 payment-form">
                 <div class="row">
@@ -153,8 +155,8 @@
                     </div>
                     <div class="col s12 payment-total">
                         <span class="col s9 right-align">Giá sản phẩm</span>
-                        <span id="foody-cost" class="col s3 right-align" data-cost="{{ Cart::getCost() }}">
-                            {{ number_format(Cart::getCost()) }}<sup>đ</sup></span>
+                        <span id="foody-cost" class="col s3 right-align" data-cost="{{ CartFunction::getCost() }}">
+                            {{ number_format(CartFunction::getCost()) }}<sup>đ</sup></span>
                     </div>
                     <div class="col s12 payment-total">
                         <span class="col s9 right-align">Phí vận chuyển</span>
@@ -182,8 +184,8 @@
     </div>
 
     @include('customer.payment.otp-modal')
-    @include('customer.payment.error-modal')
-    @include('customer.payment.confirm-modal')
+
+    @include('customer.layouts.components.modal.notify-modal')
 
     @include('customer.payment.style')
 

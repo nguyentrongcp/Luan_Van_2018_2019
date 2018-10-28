@@ -17,8 +17,8 @@ class CreateOrderStatusesTable extends Migration
             $table->increments('id');
             $table->integer('order_id')->unsigned();
             $table->tinyInteger('status')->default(1);
-            $table->integer('admin_id')->unsigned();
-            $table->date('approved_date');
+            $table->integer('admin_id')->unsigned()->nullable();
+            $table->datetime('approved_date')->nullable();
             $table->timestamps();
 
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
