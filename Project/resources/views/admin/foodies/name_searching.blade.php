@@ -1,25 +1,59 @@
-<div class="ui small input right labeled">
-
-    @if (Request::has('name'))
-        <i class="remove-input remove red icon pointer"
-           onclick="redirectTo('{{ route('foodies.index') }}')"></i>
-    @endif
-
-    <input type="text" class="need-remove" id="search-product" placeholder="Tìm kiếm"
-           onkeyup="pressEnter(event, searchProduct)" value="{{ Request::get('name') }}">
-
-    <a href="#" class="ui blue label"
-       onclick="searchProduct()">
-        <i class="search fitted icon"></i></a>
+<div class="ui small input right icon">
+    {{--@if (!empty())--}}
+        {{--<i class="remove-input remove red icon pointer"--}}
+           {{--onclick="{{ route('foodies.index') }}"></i>--}}
+    {{--@endif--}}
+    <input type="text" class="need-remove" name="key-search" id="search_foody" placeholder="Tìm kiếm"
+           value="">
+    <i class="search icon"></i>
+</div>
+<div class="results" id="search-result">
 
 </div>
 
 @push('script')
     <script>
-        let productUrl = '{{ route('foodies.index') }}';
 
-        function searchProduct() {
-            finding(productUrl, 'search-product', 'name');
-        }
+        $('.ui.input').on('input', function () {
+            var key_search = $('#search_foody').val();
+            if (key_search == '') {
+                $('#search-result').removeClass('.results');
+                $('#search-result').empty();
+            }
+            else {
+                $.ajax({
+                    url: 'search',
+                    type: 'get',
+                    data: {
+                        key: key_search
+                    },
+                    success: function (data) {
+                        $('#search-result').addClass('.results');
+                        $('.results').html(data);
+                    }
+                })
+            }
+
+        });
+
     </script>
 @endpush
+<style>
+    .results {
+        position: absolute;
+        z-index: 1000;
+        display: block;
+        /*top: 236px;*/
+        height: auto;
+        margin-bottom: 0 !important;
+        background-color: white;
+    }
+
+    .result-content {
+        padding-top: 15px !important;
+    }
+
+    .result-img {
+        width: 40px;
+    }
+</style>

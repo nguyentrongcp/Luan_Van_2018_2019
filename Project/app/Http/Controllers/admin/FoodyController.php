@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Validator;
 class FoodyController extends Controller
 {
@@ -333,36 +334,27 @@ class FoodyController extends Controller
     }
 
     public function search(Request $request) {
-        $key_search = $request->get('key-search');
-        $foodies = Foody::where('name','like', "%$key_search%")->get();
+        $key_search = $request->key;
+        $foodies = Foody::where('name','like', "%$key_search%")->paginate(10);
         $data = '';
         foreach($foodies as $key => $foody) {
-            if ($key == 0) {
-                $divider = '';
-            }
-            else {
-                $divider = "<div class=\"divider\"></div>";
-            }
-            $data .= "$divider
-                <div class=\"row search-result-row\">
-        <img src='$foody->avatar'>
-        <a href='#' class=\"search-result-content\">
-            <div class=\"col s12 search-result-title truncate\">$foody->name</div>
-            <div class=\"col s12 search-result-cost\">$cost<sup>đ</sup>$sales_off</div>
-            <div class=\"col s12 search-result-rate\">
-                <i class=\"material-icons\">star</i>
-                <i class=\"material-icons\">star</i>
-                <i class=\"material-icons\">star</i>
-                <i class=\"material-icons\">star_half</i>
-                <i class=\"material-icons\">star_half</i>
-            </div>
-        </a>
-    </div>
-            ";
-        }
 
+            $data .= "<div class=\"divider\"></div>
+        <div class=\"result-content\">
+            <div class=\"col twelve medium row\">
+                <div class=\"col five medium\">
+                    <img class=\"img-tb\"src=\"$foody->avatar\" alt=\"$foody->name\">
+                </div>
+                <div class=\"col seven medium header\">
+                    <a href =\"foodies/$foody->id\">$foody->name</a>
+                </div>
+            </div>
+        </div>";
+        }
         return Response($data);
     }
+
+
     public function validationStore(Request $request)
     {
         $validate = Validator::make(
@@ -404,4 +396,5 @@ class FoodyController extends Controller
 
         return $validate;
     }
+
 }

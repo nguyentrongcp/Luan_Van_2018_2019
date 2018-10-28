@@ -11,7 +11,7 @@
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
             <div class="ui padded grid">
-                <div class="ten wide column">
+                <div class="eleven wide column">
                     <button class="ui small red delete button need-popup"
                             data-content="Xóa các mục vừa chọn"
                             onclick="return confirmDelete()">
@@ -25,18 +25,10 @@
                     </a>
                     @include('admin.foodies.btn_filer')
                 </div>
-                <div class="six wide column">
-                    <div class="field force-right no-clear">
-                        <div class="ui search ">
-                            <div class="ui icon input">
-                                <input class="prompt" type="text" name="key-search" placeholder="Tìm kiếm...">
-                                <i class="search icon"></i>
-                            </div>
-                            <div class="results"></div>
-                        </div>
-                        {{--                    @include('admin.foodies.name_searching')--}}
+                <div class="five wide column">
 
-                    </div>
+                    @include('admin.foodies.name_searching')
+
                 </div>
             </div>
             @include('admin.foodies.table')
@@ -48,12 +40,5 @@
 @push('script')
     <script>
         bindSelectAll('check-all');
-
-        $('.ui.search')
-            .search({
-                url:'foody_search',
-                source: data.value
-            })
-        ;
     </script>
 @endpush

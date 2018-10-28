@@ -60,9 +60,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
         ->name('foody_slug_type');
     Route::get('foodies_filter','admin\FoodyController@filter')
         ->name('foody_filter');
-    Route::get('foodies_search','admin\FoodyController@search')
-        ->name('foody_search');
-
+    Route::get('search','admin\FoodyController@search');
+//
+//    Route::get('test','admin\FoodyController@test');
     /**      Employee       **/
 
     Route::resource('employees','admin\EmployeeController');

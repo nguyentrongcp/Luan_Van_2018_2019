@@ -85,10 +85,26 @@
                     </span>
                 </h5>
 
-{{--                @include('admin.dashboard.account.table')--}}
+                @include('admin.statistic.revenue.table')
 
             </div>
         </div>
 {{--        @include('admin.dashboard.account.export')--}}
     </div>
 @endsection
+
+<script>
+    let needShow = {
+        year: [],
+        quarter: ['year'],
+        month: ['year'],
+        day: ['year', 'month', 'day-start', 'day-end']
+    };
+    function show() {
+        let type = $('#type').val();
+        if (type === 'all')
+            return $('.will-hide').hide();
+        $('.will-hide').hide();
+        needShow[type].forEach((e) => $('#select-' + e).show());
+    }
+</script>

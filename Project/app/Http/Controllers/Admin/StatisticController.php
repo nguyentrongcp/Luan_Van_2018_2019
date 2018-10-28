@@ -16,4 +16,8 @@ class StatisticController extends Controller
     public function foody(){
         return view('admin.statistic.foody.index');
     }
+
+    public function getTable(){
+
+    }
 }
