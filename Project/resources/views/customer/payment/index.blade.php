@@ -87,7 +87,7 @@
                     <div class="col s12 m6 l6 payment-col-right">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">local_phone</i>
-                            <input id="phone" type="text" value="0339883047" maxlength="10">
+                            <input id="phone" class="number-only" type="text" value="0339883047" maxlength="10">
                             <label for="phone">
                                 Số điện thoại <span class="red-text">*</span>
                             </label>

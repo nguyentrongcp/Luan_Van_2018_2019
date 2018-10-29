@@ -56,7 +56,8 @@ class FoodyController extends Controller
             return Response("
                 <div class='row search-result-row'>
                     <a href='#' class='search-result-content' style='width: 100%'>
-                        <i class='material-icons left center-align'>assignment</i>
+                        <i class='material-icons left center-align' style='font-size: 40px;line-height: 64px;width: 64px;margin-right: 0;'
+                        >assignment</i>
                         <span class='col' style='line-height: 35px;width: calc(100% - 64px);font-size: 18px'>
                             Đ.hàng: <b>$order_code</b>
                         </span>
@@ -93,13 +94,13 @@ class FoodyController extends Controller
             if ($foody->getVoted() != null) {
                 for($i=1; $i<=5; $i++) {
                     if ($i <= $foody->getVoted()->average) {
-                        $data .= "<i class='material-icons'>star</i>";
+                        $data .= "<i class='fas fa-star'></i>";
                     }
                     elseif(number_format($foody->getVoted()->average) == $i) {
-                        $data .= "<i class='material-icons'>star_half</i>";
+                        $data .= "<i class='fas fa-star-half-alt'></i>";
                     }
                     else {
-                        $data .= "<i class='material-icons'>star_border</i>";
+                        $data .= "<i class='far fa-star'></i>";
                     }
                 }
             }

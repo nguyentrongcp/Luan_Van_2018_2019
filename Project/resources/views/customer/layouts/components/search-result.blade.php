@@ -13,7 +13,7 @@
     }
     @media only screen and (min-width: 601px) {
         #search-result {
-            max-height: calc(100vh - 64px) !important;
+            max-height: calc(100vh - 64px);
         }
         #search-result.pinned {
             top: 64px !important;
@@ -36,7 +36,7 @@
     }
     @media only screen and (max-width: 600px) {
         #search-result {
-            max-height: calc(100vh - 56px) !important;
+            max-height: calc(100vh - 56px);
             width: 98vw;
         }
         #search-result.pinned {
@@ -72,12 +72,6 @@
     .search-result-content span {
         color: black;
     }
-    .search-result-content i {
-        font-size: 40px;
-        line-height: 64px;
-        width: 64px;
-        margin-right: 0;
-    }
     .search-result-title {
         font-weight: bolder;
         color: black !important;
@@ -88,7 +82,7 @@
         margin: -2px 0 3px 0;
     }
     .search-result-rate i {
-        font-size: 15px;
+        font-size: 14px;
         color: #fc0;
     }
 </style>

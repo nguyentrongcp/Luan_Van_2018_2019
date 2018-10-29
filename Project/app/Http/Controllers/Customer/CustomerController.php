@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Foody;
+use App\FoodyType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Jenssegers\Agent\Facades\Agent;
 
 class CustomerController extends Controller
 {
 
     public function index()
     {
-//        return view('customer.home');
-//        $detect = new \Mobile_Detect();
-        if (Agent::isTablet()) {
-            dd('tablet');
-        }
-        if (Agent::isMobile()) {
-            dd('mobile');
-        }
-        dd('Desktop');
+        $foodies = Foody::all();
+        $foody_types = FoodyType::all();
+
+        return view('customer.index.index', compact(['foodies', 'foody_types']));
     }
 
 }
