@@ -8,7 +8,7 @@
         <nav class="transparent z-depth-0">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a href="{{ route('customer.home') }}" class="brand-logo left">
+                    <a href="{{ route('customer.index') }}" class="brand-logo left">
                         <img class="responsive-img" src="{{ asset("customer/image/logo-white.png") }}">
                     </a>
                     <ul class="right hide-on-small-only">

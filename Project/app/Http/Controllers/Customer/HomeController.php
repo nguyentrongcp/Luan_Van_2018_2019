@@ -15,11 +15,23 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         $foody_types = FoodyType::all();
         $foodies = Foody::all();
+        $type = '';
+        if ($request->session()->has('foody_type_id')) {
+            $type = session('foody_type_id');
+            $request->session()->forget('foody_type_id');
+        }
 
-        return view('customer.home.index', compact(['foody_types', 'foodies']));
+        return view('customer.home.index', compact(['foody_types', 'foodies', 'type']));
+    }
+
+    public function getFoody(Request $request) {
+        session(['foody_type_id' => $request->type_id]);
+
+        return Response(route('customer.home'));
+//        return Response(session('foody_type_id'));
     }
 
     public function showFoody(Request $request) {
@@ -35,8 +47,8 @@ class HomeController extends Controller
 
         $foody_sorts = [];
         foreach($foodies as $foody) {
-            $foody_sorts[] = ['id' => $foody->id, 'cost' => $foody->getSaleCost(), 'name' => $foody->name,
-                'avatar' => $foody->avatar, 'describe' => $foody->describe, 'slug' => $foody->slug];
+            $foody_sorts[] = ['id' => $foody->id, 'cost' => $foody->getSaleCost(),
+                'vote' => $foody->getVoted()->average, 'like' => $foody->getLiked()];
         }
 
         if ($request->foody_sort_id == 'desc') {
@@ -44,28 +56,40 @@ class HomeController extends Controller
                 return $foody_sorts['cost'];
             }));
         }
-        else if($request->foody_sort_id == 'asc') {
+        elseif($request->foody_sort_id == 'asc') {
             $foody_sorts = array_sort($foody_sorts, function($foody_sorts) {
                 return $foody_sorts['cost'];
             });
+        }
+        elseif($request->foody_sort_id == 'vote') {
+            $foody_sorts = array_reverse(array_sort($foody_sorts, function($foody_sorts) {
+                return $foody_sorts['vote'];
+            }));
+        }
+        elseif($request->foody_sort_id == 'like') {
+            $foody_sorts = array_reverse(array_sort($foody_sorts, function($foody_sorts) {
+                return $foody_sorts['like'];
+            }));
         }
         else {
             $foody_sorts = $foodies;
         }
 
+
 //        return Response($foody_sorts);
         $data = '';
         foreach ($foody_sorts as $foody) {
-            $id = $foody['id'];
-            $avatar = asset($foody['avatar']);
-            $name = $foody['name'];
-            $describe = $foody['describe'];
-            $cost = number_format(Foody::find($foody['id'])->getSaleCost());
+            $foody = Foody::find($foody['id']);
+            $id = $foody->id;
+            $avatar = asset($foody->avatar);
+            $name = $foody->name;
+            $describe = $foody->describe;
+            $cost = number_format($foody->getSaleCost());
             $favorite = 'bookmark outline';
-            $slug = $foody['slug'];
+            $slug = $foody->slug;
             $liked = $foody->getLiked();
             if (Auth::guard('customer')->check()) {
-                if (Favorite::where('foody_id', $foody['id'])
+                if (Favorite::where('foody_id', $id)
                         ->where('customer_id', Auth::guard('customer')->user()->id)->count() > 0) {
                     $favorite = 'bookmark';
                 }
@@ -89,13 +113,13 @@ class HomeController extends Controller
                 $data .= "<span class=\"rating-icon\">";
                 for($i=1; $i<=5; $i++) {
                     if ($i <= $voted) {
-                        $data .= "<i class='material-icons'>star</i>";
+                        $data .= "<i class='fas fa-star'></i>";
                     }
                     elseif(number_format($voted) == $i) {
-                        $data .= "<i class='material-icons'>star_half</i>";
+                        $data .= "<i class='fas fa-star-half-alt'></i>";
                     }
                     else {
-                        $data .= "<i class='material-icons'>star_border</i>";
+                        $data .= "<i class='far fa-star'></i>";
                     }
                 }
                 $data .= "</span>

@@ -23,11 +23,11 @@
                             <span class="rating-icon">
                             @for($i=1; $i<=5; $i++)
                                     @if($i <= $foody->getVoted()->average)
-                                        <i class="material-icons">star</i>
+                                        <i class="fas fa-star"></i>
                                     @elseif(number_format($foody->getVoted()->average) == $i)
-                                        <i class="material-icons">star_half</i>
+                                        <i class="fas fa-star-half-alt"></i>
                                     @else
-                                        <i class="material-icons">star_border</i>
+                                        <i class="far fa-star"></i>
                                     @endif
                                 @endfor
                         </span>

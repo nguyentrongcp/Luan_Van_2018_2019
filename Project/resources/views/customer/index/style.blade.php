@@ -11,15 +11,33 @@
     @media only screen and (min-width: 993px) {
         .type-container {
             position: fixed;
-            padding: 10% 0 0 5% !important;
+            padding: 5% 0 0 5% !important;
             height: 100vh;
         }
 
     }
+
+    .page-title {
+        margin-bottom: 20px;
+    }
+    .page-describe {
+        font-size: 22px;
+        font-weight: bolder;
+        transform: translateY(-20px);
+    }
+    .page-logo {
+        width: 120px;
+        height: 120px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .page-logo img {
+        width: 120px;
+    }
     
     
     #background-index {
-        background-image: url({{ asset('/customer/image/background_index.jpg') }});
+        background-image: url({{ asset('/customer/image/background-index.jpg') }});
         background-size: cover;
         height: 100vh;
         width: 100%;
@@ -50,10 +68,12 @@
 
     #search-result {
         max-height: 320px;
+        z-index: 1002;
     }
 
     .index-container {
         position: relative;
+        background-color: rgba(0,0,0,0.5);
     }
     .index-info-container {
         padding: 5% 5% 0 5% !important;
@@ -161,5 +181,15 @@
     .guide-text {
         padding-top: 5px !important;
         line-height: 18px;
+    }
+
+    .index-info {
+        padding: 15px !important;
+        font-size: 16px;
+    }
+    .info-text {
+        line-height: 22px;
+        width: calc(100% - 39px);
+        float: right;
     }
 </style>

@@ -26,6 +26,10 @@
                 }
             });
 
+            if ('{{ $type }}' !== '') {
+                showFoodyByType($('#type-{{ $type }}'));
+            }
+
             $('#home-nav-dropdown').dropdown({
                 constrainWidth: false,
                 coverTrigger: false,
@@ -138,8 +142,8 @@
             let sort = this;
             let type_id = $($('.foody-type.active')[0]).attr('data-filter');
             $.ajax({
-                type: 'post',
-                url: '/customer/show_foody',
+                type: 'get',
+                url: '{{ route('home.show_foody') }}',
                 data: {
                     foody_type_id: type_id,
                     foody_sort_id: $(sort).attr('data-filter'),
@@ -156,11 +160,14 @@
         });
 
         $('.foody-type').on('click', function () {
-            let type = this;
+            showFoodyByType(this);
+        });
+
+        function showFoodyByType(type) {
             let sort_id = $($('.foody-sort.active')[0]).attr('data-filter');
             $.ajax({
-                type: 'post',
-                url: '/customer/show_foody',
+                type: 'get',
+                url: '{{ route('home.show_foody') }}',
                 data: {
                     foody_type_id: $(type).attr('data-filter'),
                     foody_sort_id: sort_id,
@@ -174,7 +181,7 @@
                     $("html, body").animate({ scrollTop: 300 - $('#navbar').height() }, 'slow');
                 }
             })
-        });
+        }
 
     </script>
 @endpush

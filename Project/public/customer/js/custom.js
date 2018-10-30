@@ -28,13 +28,8 @@ $(document).ready(function(){
     $('.phone-format').each(function () {
         $(this).text(phoneFormat($(this).text()));
     });
-});
 
-if(!!window.performance && window.performance.navigation.type === 2)
-{
-    console.log('Reloading');
-    window.location.reload();
-}
+});
 
 // $(window).on('pageshow', function () {
 //     location.reload();
@@ -98,6 +93,19 @@ function closeDimmer(element1, element2 = null) {
 function phoneFormat(phone) {
     return phone.substring(0, phone.length - 6) + ' ' + phone.substr(phone.length - 6, 3) + ' ' +
         phone.substr(phone.length - 3, 3);
+}
+
+function getFoodyByType(id, url) {
+    $.ajax({
+        type: 'get',
+        url: url,
+        data: {
+            type_id: id
+        },
+        success: function (data) {
+            window.location.href = data;
+        }
+    });
 }
 
 

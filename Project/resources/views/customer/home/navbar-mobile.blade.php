@@ -12,14 +12,26 @@
         </li>
         <li>
             <a data-filter="asc" class="foody-sort waves-effect waves-teal">
-                Tăng dần
+                Giá tăng dần
                 <i class="material-icons right">arrow_upward</i>
             </a>
         </li>
         <li>
             <a data-filter="desc" class="foody-sort waves-effect waves-teal">
-                Giảm dần
+                Giá giảm dần
                 <i class="material-icons right">arrow_downward</i>
+            </a>
+        </li>
+        <li>
+            <a data-filter="vote" class="foody-sort waves-effect waves-teal">
+                Đánh giá cao
+                <i class="material-icons right">star</i>
+            </a>
+        </li>
+        <li>
+            <a data-filter="like" class="foody-sort waves-effect waves-teal">
+                Yêu thích nhất
+                <i class="material-icons right">favorite</i>
             </a>
         </li>
         <li class="divider"></li>

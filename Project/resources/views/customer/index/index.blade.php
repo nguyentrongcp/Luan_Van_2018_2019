@@ -8,15 +8,24 @@
     <div class="index-container">
         <div class="row">
             <div id="type-container" class="col s12 m12 l5 type-container">
+                <div class="col s12 page-title">
+                    <div class="page-logo">
+                        <img src="{{ asset('/customer/image/logo-white.png') }}">
+                    </div>
+                    <div class="page-describe white-text center-align">
+                        Thế giới ẩm thực dành cho bạn
+                    </div>
+                </div>
                 <div class="col s12">
                     <div class="til white-text">Có {{ count($foodies) }} món ăn và nước uống đang chờ bạn</div>
-                    <div class="input-field col s12" id="search-row">
-                        <input id="search" type="text" placeholder="Tìm kiếm món ăn, nước uống, đơn hàng...">
+                    <div class="input-field col s12" style="margin-top: 0">
+                        <input id="search" type="text" placeholder="Món ăn, nước uống, đơn hàng...">
                         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                     </div>
-                    <a class="waves-effect waves-light ui large label">Tất cả</a>
+                    <a data-type="all" class="foody-type waves-effect waves-light ui large label">Tất cả</a>
                     @foreach($foody_types as $foody_type)
-                        <a class="waves-effect waves-light ui large label">{{ $foody_type->name }}</a>
+                        <a data-type="{{ $foody_type->id }}"
+                           class="foody-type waves-effect waves-light ui large label">{{ $foody_type->name }}</a>
                     @endforeach
                 </div>
             </div>
@@ -154,7 +163,7 @@
                 </div>
 
                 <div class="index-row index-guide">
-                    <div class="til truncate center-align">
+                    <div class="til center-align">
                         <span>
                             Sử dụng <span class="teal-text">Fastfoody.vn</span> rất dễ dàng
                         </span>
@@ -190,6 +199,35 @@
                     </div>
                 </div>
 
+                <div class="index-row index-guide">
+                    <div class="til center-align">
+                        <span>
+                            <span class="teal-text">Fastfoody.vn</span> có những gì?
+                        </span>
+                    </div>
+                    <div class="col s12 index-info">
+                        <div class="col s12">
+                            <i class="material-icons left teal-text">remove</i>
+                            <span class="info-text">{{ count($foodies) }} ẩm thực khác nhau, chất lượng ngon, giá rẻ</span>
+                        </div>
+                        <div class="col s12">
+                            <i class="material-icons left teal-text">remove</i>
+                            <span class="info-text">Bình luận, chia sẻ, giao lưu với các thành viên khác của Fastfoody.vn</span>
+                        </div>
+                        <div class="col s12">
+                            <i class="material-icons left teal-text">remove</i>
+                            <span class="info-text">Giao hàng tận nơi trong nội ô TP.Cần Thơ, <b>một món cũng giao hàng</b></span>
+                        </div>
+                        <div class="col s12">
+                            <i class="material-icons left teal-text">remove</i>
+                            <span class="info-text">Miễn phí giao hàng với các đơn hàng trên 400k</span>
+                        </div>
+                        <div class="col s12">
+                            <i class="material-icons left teal-text">remove</i>
+                            <span class="info-text">Thanh toán trực tuyến thông qua cổng Ngân Lượng</span>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>

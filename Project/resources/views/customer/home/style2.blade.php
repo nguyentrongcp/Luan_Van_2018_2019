@@ -124,9 +124,8 @@
         line-height: 15px;
     }
     .rating-icon i {
-        font-size: 18px;
+        font-size: 16px;
         color: #fc0;
-        vertical-align: sub;
     }
     .rating-number {
         margin-left: 3px;

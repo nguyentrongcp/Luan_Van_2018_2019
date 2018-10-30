@@ -10,12 +10,17 @@
                     changePosition($('#type-container'));
                 }
             });
+
+            $('.foody-type').on('click', function () {
+                let id = $(this).attr('data-type');
+                getFoodyByType(id, '{{ route('home.get_foody') }}');
+            });
         });
 
         $('#search').focus(function () {
             $('#search-result').addClass('search-result');
             setCssSearch();
-            setDimmer($('#search-row'));
+            setDimmer($('#type-container'));
         });
 
         $('#search').on('input', function () {
@@ -51,7 +56,7 @@
 
         $('#search').focusout(function () {
             $('#search-result').removeClass('search-result');
-            closeDimmer($('#search-row'));
+            closeDimmer($('#type-container'));
         });
 
         function setCssSearch() {
