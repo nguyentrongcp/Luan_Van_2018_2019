@@ -26,7 +26,7 @@
 
         {{--@include('admin.layouts.components.navbar_notification')--}}
 
-        {{--@include('admin.layouts.components.navbar_admin')--}}
+        @include('admin.layouts.components.navbar_admin')
 
 
     </div>

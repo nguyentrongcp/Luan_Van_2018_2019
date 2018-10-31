@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\History;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,15 @@ class AdminLoginController extends Controller
         // Attempt to log the user in
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
             // if successful, then redirect to their intended location
-            return redirect()->intended(route('foodies.index'));
+
+            $history = new History();
+            $history->admin_id = Auth::guard('admin')->id();
+            $history->name = Auth::guard('admin')->user()->name;
+            $history->description = 'Đăng nhập hệ thống';
+            $history->time = date('Y-m-d H:i:s');
+            $history->save();
+
+            return redirect()->intended(route('admin.dashboard'));
         }
         // if unsuccessful, then redirect back to the login with the form data
         return redirect()->back()->withInput($request->only('username', 'remember'));
@@ -33,7 +42,8 @@ class AdminLoginController extends Controller
     public function logout()
     {
         Auth::guard('admin')->logout();
-        return redirect('/admin');
+        return redirect('/admin/login');
     }
+
 
 }

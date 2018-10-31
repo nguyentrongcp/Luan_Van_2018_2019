@@ -19,8 +19,9 @@ Route::get('/', function () {
 
 /**      Admin       **/
 Route::get('/admin/login', function (){
-   return view('admin.auth.login');
+    return view('admin.auth.login');
 })->name('admin.login');
+
 Route::post('/admin/login', 'admin\AdminLoginController@login')->name('admin.login.submit');
 
 
@@ -29,9 +30,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 //    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::get('/logout', 'admin\adminLoginController@logout')->name('admin.logout');
 
-    Route::get('dashboard', function () {
-        return view('admin.foodies.index');
-    })->name('admin.dashboard');
+    Route::get('dashboard', 'admin\DasboardController@index')->name('admin.dashboard');
 
 
     /** Statistic */
@@ -39,7 +38,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::get('statistis/revenue','admin\StatisticController@revenue')->name('revenue');
     Route::get('statistis/order','admin\StatisticController@revenue')->name('order');
     Route::get('statistis/foody','admin\StatisticController@revenue')->name('foody');
-    Route::get('statistic/getdate','admin\StatisticController@getDate')->name('statistic.get_date');
+    Route::get('statistic/today','admin\StatisticController@today')->name('statistic.today');
     /** Foody type */
 
     Route::resource('foody_type','admin\FoodyTypeController',["except" => ["create","show", "edit"]]);

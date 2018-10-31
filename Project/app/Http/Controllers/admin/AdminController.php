@@ -12,8 +12,13 @@ class AdminController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index() {
+    public function showFormLogin(){
 
         return view('admin.auth.login');
+    }
+
+    public function index() {
+
+        return view('admin.dashboard.index');
     }
 }

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -25,6 +26,11 @@ class Order extends Model
     }
     public function getStatus(){
         return $this->orderStatus->status;
+    }
+    public static function sortStatus(){
+        $orderSort =DB::table('orders')->join('order_statuses','orders.id','=','order_statuses.order_id')
+            ->orderBy('order_statuses.status','DESC')->get();
+        return $orderSort;
     }
     public function paymentType() {
         $payment = [
