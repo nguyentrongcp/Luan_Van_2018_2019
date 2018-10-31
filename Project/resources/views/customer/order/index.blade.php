@@ -46,16 +46,18 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="paginate center-align">
-            <a class="waves-effect waves-light disabled btn" id="page-previous">
-                <i class="angle double left icon"></i>
-                Quay lại
-            </a>
-            <a class="waves-effect waves-light btn" id="page-next" style="margin-left: 20px">
-                Tiếp theo
-                <i class="angle double right icon"></i>
-            </a>
-        </div>
+        @if($count > 1)
+            <div class="paginate center-align">
+                <a class="waves-effect waves-light disabled btn" id="page-previous">
+                    <i class="angle double left icon"></i>
+                    Quay lại
+                </a>
+                <a class="waves-effect waves-light btn" id="page-next" style="margin-left: 20px">
+                    Tiếp theo
+                    <i class="angle double right icon"></i>
+                </a>
+            </div>
+        @endif
         {{--<div class="paginate center-align">--}}
             {{--<i class="angle left icon paginate-pre"></i>--}}
             {{--@if($count <= 11)--}}

@@ -185,6 +185,7 @@ class PaymentController extends Controller
     }
 
     public function checkOTP(Request $request) {
+        $data = [];
         foreach(Cart::content() as $cart) {
             if (Foody::find($cart->id)->getSaleCost() != session("$cart->id")) {
                 $data = [

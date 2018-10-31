@@ -10,10 +10,10 @@
         float: right;
         margin-bottom: 24px;
     }
-    .notify-modal-text {
+    .modal-text {
         font-size: 18px;
     }
-    .notify-modal-button {
+    .modal-button {
         margin-top: 15px;
     }
 

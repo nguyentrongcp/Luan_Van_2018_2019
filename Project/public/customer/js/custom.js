@@ -28,13 +28,8 @@ $(document).ready(function(){
     $('.phone-format').each(function () {
         $(this).text(phoneFormat($(this).text()));
     });
-});
 
-if(!!window.performance && window.performance.navigation.type === 2)
-{
-    console.log('Reloading');
-    window.location.reload();
-}
+});
 
 // $(window).on('pageshow', function () {
 //     location.reload();
@@ -78,8 +73,8 @@ function setTimer(time) {
 }
 
 function setDimmer(element1, element2 = null) {
-    $('body').append("<div id='dimmer-container' style='background-color: rgba(0,0,0,0.8);" +
-        "position: fixed; top: 0; height: 100vh; width: 100vw; z-index: 999'></div>");
+    $('body').append("<div id='dimmer-container' style='background-color: #000;" +
+        "position: fixed; opacity: 0.8; top: 0; height: 100vh; width: 100vw; z-index: 999'></div>");
     $(element1).addClass('dimmer');
 
     if (element2 !== null) {
@@ -98,6 +93,19 @@ function closeDimmer(element1, element2 = null) {
 function phoneFormat(phone) {
     return phone.substring(0, phone.length - 6) + ' ' + phone.substr(phone.length - 6, 3) + ' ' +
         phone.substr(phone.length - 3, 3);
+}
+
+function getFoodyByType(id, url) {
+    $.ajax({
+        type: 'get',
+        url: url,
+        data: {
+            type_id: id
+        },
+        success: function (data) {
+            window.location.href = data;
+        }
+    });
 }
 
 

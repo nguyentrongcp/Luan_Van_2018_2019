@@ -126,7 +126,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
     // Home
     Route::get('/home', 'Customer\HomeController@index')->name('customer.home');
-    Route::post('/customer/show_foody', 'Customer\HomeController@showFoody');
+    Route::get('/customer/show_foody', 'Customer\HomeController@showFoody')->name('home.show_foody');
+    Route::get('/customer/get_foody', 'Customer\HomeController@getFoody')->name('home.get_foody');
 
     // Shopping cart
     Route::get('/testcart', 'Customer\ShoppingCartController@test')->name('cart.test');

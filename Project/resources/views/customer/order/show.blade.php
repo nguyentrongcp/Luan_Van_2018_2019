@@ -98,6 +98,9 @@
 
     </div>
 
+    @include('customer.layouts.components.modal.confirm-modal')
+    @include('customer.layouts.components.modal.notify-modal')
+
     <style>
         .order-show {
             padding: 0 20px 20px 20px;
@@ -182,9 +185,10 @@
                             }
                             else if (data.status === 'error') {
                                 $('#notify-modal-button').attr('href', '{{ Request::url() }}');
+                                $('#notify-modal').css('max-width', 753);
                             }
                             else {
-                                $('#notify-modal').css('max-width', 380);
+                                $('#notify-modal').css('max-width', 390);
                                 $('#notify-modal-button').attr('href', '{{ route('payment.order.index') }}')
                             }
                             $('#notify-modal').modal('open');

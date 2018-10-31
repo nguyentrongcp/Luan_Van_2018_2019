@@ -191,7 +191,7 @@
                             // $('#error-modal').modal('open');
                         }
                         else if (data.status === 'error_otp') {
-                            $('#error-payment-otp').text(data.responseText);
+                            $('#error-payment-otp').text(data.error_text);
                             $('#error-payment-otp').removeClass('hide');
                         }
                         else {

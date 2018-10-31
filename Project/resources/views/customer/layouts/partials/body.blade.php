@@ -4,6 +4,7 @@
         use Illuminate\Support\Facades\Auth;
         use Illuminate\Support\Facades\Request;
         use Gloudemans\Shoppingcart\Facades\Cart;
+    header("Cache-Control: no-cache, no-store, must-revalidate");
     @endphp
 
     @include('customer.layouts.partials.navbar.navbar')

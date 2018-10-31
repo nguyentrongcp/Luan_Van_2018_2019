@@ -12,6 +12,15 @@ class VoteSeeder extends Seeder
     public function run()
     {
         $rows = [];
+        DB::table('votes')->insert([
+            [
+                'cost' => 0,
+                'quality' => 0,
+                'attitude' => 0,
+                'average' => 0,
+                'foody_id' => 1
+            ]
+        ]);
         for($i=2; $i<=\App\Foody::count(); $i++) {
             $foody = \App\Foody::find($i);
             $cost = $foody->voteDetails()->avg('cost');
