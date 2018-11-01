@@ -105,6 +105,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::resource('news','admin\NewsController');
     Route::post('news/change_image/{id}','admin\NewsController@changeImage')
             ->name('news_change_image');
+    Route::post('image_upload_test', 'admin\NewsController@testImage')->name('image.test');
 
     /** Comments **/
     Route::resource('comments', 'admin\CommentController');
@@ -157,6 +158,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::get('/payment/order/get', 'Customer\OrderController@getOrder');
     Route::get('/payment/order/show/{order_code}', 'Customer\OrderController@showOrder')->name('payment.order.show');
     Route::post('/payment/order/remove', 'Customer\OrderController@removeOrder');
+
+    // News
+    Route::get('/news', 'Customer\NewsController@index')->name('customer.news.index');
+    Route::get('/news/content', 'Customer\NewsController@show')->name('customer.news.show');
 
     // Login & logout
     Route::post('/customer/login', 'Customer\CustomerLoginController@login');
