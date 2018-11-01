@@ -101,11 +101,11 @@ class GoodsReceiptNotesController extends Controller
      */
     public function destroy(Request $request)
     {
-        if (!$request->has('goods-id')){
+        if (!$request->has('goods-receipt-id')){
             return back()->with('error','Dữ liệu chưa được chọn!');
         }
         else{
-            $ids = $request->get('goods-id');
+            $ids = $request->get('goods-receipt-id');
             foreach ($ids as $id){
                 $goodsReceipt = GoodsReceiptNote::findOrFail($id);
                 $goodsReceipt->is_deleted = true;

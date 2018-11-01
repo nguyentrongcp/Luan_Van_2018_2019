@@ -8,20 +8,20 @@
         {{--$nhanVien = \App\NhanVien::find(\App\Helper\AuthHelper::adminId());--}}
     {{--@endphp--}}
 
-    <a href="/admin" class="title item {{ Request::is('admin') ? 'active': '' }}">
+    <a href="/admin/dashboard" class="title item {{ Request::is('*dashboard') ? 'active': '' }}">
         <i class="dashboard icon icon-left"></i>Tổng quan</a>
 
     {{--@if($nhanVien->checkQuyen(1))--}}
         <div class="ui accordion no-padding">
-            <div class="title item menu-item-padding color-white {{ Request::is('*thong_ke*') ? 'active-bar': '' }}">
+            <div class="title item menu-item-padding color-white {{ Request::is('*statistic*') ? 'active-bar': '' }}">
                 <i class="chart bar icon icon-left icon-accordion"></i>
                 Thống kê
                 <i class="dropdown icon"></i>
             </div>
 
-            <div class="content menu-item-padding color-white {{ Request::is('*thong_ke*') ? 'active': '' }}">
+            <div class="content menu-item-padding color-white {{ Request::is('*statistic*') ? 'active': '' }}">
                 <div class="menu"  style="padding-left: 10px">
-                    <a href="{{route('revenue')}}" class="title item {{ Request::is('*thu_chi') ? 'active': '' }}">
+                    <a href="{{route('revenue')}}" class="title item {{ Request::is('*revenue') ? 'active': '' }}">
                         <i class="dollar icon icon-left"></i>Thu chi</a>
 
                     <a href="{{route('order')}}" class="title item {{ Request::is('*thong_ke/don_hang') ? 'active': '' }}">

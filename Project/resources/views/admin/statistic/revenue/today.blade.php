@@ -1,8 +1,7 @@
-
 <h4 class="ui header">
     <label class="label-fixed" for="">Chọn ngày: </label>
     <div class="ui mini input">
-        <input type="date" id="specific-day" name="specific-day" value="">
+        <input type="date" id="specific-day" name="specific-day">
     </div>
 </h4>
 
@@ -11,7 +10,7 @@
         <div class="statistic">
             <div class="value">
                 <i class="dolly yellow circular icon"></i>
-                <span id="total-buying">0</span>đ
+                <span id="total-buying\">0</span>đ
             </div>
             <div class="label">
                 Tổng chi
@@ -29,14 +28,13 @@
         <div class="statistic">
             <div class="value">
                 <i class="bottom right corner blue chart line circular icon"></i>
-                <span id="redundant">0</span>đ
+                <span id="redundant">0 </span>đ
             </div>
             <div class="label">
                 Hiệu số
             </div>
         </div>
     </div>
-
 </div>
 
 @push('script')
@@ -45,12 +43,14 @@
             let get_date = $('#specific-day').val();
             $.ajax({
                 type: 'get',
-                url: '{{ route('statistic.get_date') }}',
+                url: '{{ route('statistic.today') }}',
                 data: {
                     revenue_date: get_date
                 },
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
+                    $('#form-statistics').empty();
+                    $('#form-statistics').html(data);
                 }
             })
         })

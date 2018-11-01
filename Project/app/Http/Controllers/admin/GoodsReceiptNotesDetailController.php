@@ -40,50 +40,39 @@ class GoodsReceiptNotesDetailController extends Controller
     {
         $idGoods = $request->get('goods-id');
 
-        if ($request->get('material') != ''){
+        if ($request->get('material') != '') {
 //            $material = new  Material();
 //            $material->name = $request->get('material');
 //            $material->save();
-
             $goodsReceiptDetail = new GoodsReceiptNoteDetail();
             $goodsReceiptDetail->material = $request->get('material');
-            $goodsReceiptDetail->value = $request->get('amount') . ' ' . $request->get('unit');
-            $goodsReceiptDetail->cost = $request->get('cost');
-            $goodsReceiptDetail->total_cost = $request->get('amount')*$request->get('cost');
-            $goodsReceiptDetail->goods_receipt_note_id = $idGoods;
-            $goodsReceiptDetail->save();
 
         }
-        else{
+        else {
             $goodsReceiptDetail = new GoodsReceiptNoteDetail();
-            $goodsReceiptDetail->material = $request->get('avaiable-material');
-            $goodsReceiptDetail->value = $request->get('amount') . ' ' . $request->get('unit');
-            $goodsReceiptDetail->cost = $request->get('cost');
-            $goodsReceiptDetail->total_cost = $request->get('amount')*$request->get('cost');
-            $goodsReceiptDetail->goods_receipt_note_id = $idGoods;
-            $goodsReceiptDetail->save();
+            $goodsReceiptDetail->material = $request->get('available-material');
         }
+        $goodsReceiptDetail->value = $request->get('amount') . ' ' . $request->get('unit');
+        $goodsReceiptDetail->cost = $request->get('cost');
+        $goodsReceiptDetail->total_cost = $request->get('amount') * $request->get('cost');
+        $goodsReceiptDetail->goods_receipt_note_id = $idGoods;
+        $goodsReceiptDetail->save();
 
-            $goodsReceiptCost = GoodsReceiptNoteCost::where('goods_receipt_note_id', $idGoods)->get();
-            $totalCosts = GoodsReceiptNoteDetail::where('goods_receipt_note_id', $idGoods)->sum('total_cost');
+        $goodsReceiptCost = GoodsReceiptNoteCost::where('goods_receipt_note_id', $idGoods)->get();
+        $totalCosts = GoodsReceiptNoteDetail::where('goods_receipt_note_id', $idGoods)->sum('total_cost');
 
-            if (!empty($goodsReceiptCost)) {
-                foreach ($goodsReceiptCost as $goodsCost) {
-                    $goodsCost->cost = $totalCosts;
-                    $goodsCost->update();
-                    return back()->with('success', 'Thêm thành công!');
-                }
+        if (!empty($goodsReceiptCost)) {
+            foreach ($goodsReceiptCost as $goodsCost) {
+                $goodsCost->cost = $totalCosts;
+                $goodsCost->update();
+                return back()->with('success', 'Thêm thành công!');
             }
-            $goodsReceiptCosts = new GoodsReceiptNoteCost();
+        }
+        $goodsReceiptCosts = new GoodsReceiptNoteCost();
 
-            $goodsReceiptCosts->cost = $request->get('cost')*$request->get('amount');
-            $goodsReceiptCosts->goods_receipt_note_id = $idGoods;
-            $goodsReceiptCosts->save();
-
-
-
-
-
+        $goodsReceiptCosts->cost = $request->get('cost') * $request->get('amount');
+        $goodsReceiptCosts->goods_receipt_note_id = $idGoods;
+        $goodsReceiptCosts->save();
         return back()->with('success', 'Thêm thành công!');
     }
 
@@ -122,10 +111,15 @@ class GoodsReceiptNotesDetailController extends Controller
 
         $goodsReceiptDetails = GoodsReceiptNoteDetail::findOrFail($id);
 
-        $goodsReceiptDetails->material = $request->get('material');
+        if ($request->get('material') != ''){
+            $goodsReceiptDetails->material = $request->get('material');
+        }
+        else{
+            $goodsReceiptDetails->material = $request->get('available-material');
+        }
         $goodsReceiptDetails->value = $request->get('amount') . ' ' . $request->get('unit');
         $goodsReceiptDetails->cost = $request->get('cost');
-        $goodsReceiptDetails->total_cost = $request->get('amount')*$request->get('cost');
+        $goodsReceiptDetails->total_cost = $request->get('amount') * $request->get('cost');
         $goodsReceiptDetails->goods_receipt_note_id = $idGoods;
         $goodsReceiptDetails->update();
 
@@ -151,13 +145,12 @@ class GoodsReceiptNotesDetailController extends Controller
      */
     public function destroy(Request $request)
     {
-        $idGoods = $request->get('goods-id');
-        if (!$request->has('detail-goods-id')){
-            return back()->with('error','Không tìm thấy dữ liệu cần xóa!');
-        }
-        else{
-            $ids = $request->get('detail-goods-id');
-            foreach ($ids as $id){
+        $idGoods = $request->get('goods-receipt-note-detail-id');
+        if (!$request->has('goods-receipt-note-detail-id')) {
+            return back()->with('error', 'Không tìm thấy dữ liệu cần xóa!');
+        } else {
+            $ids = $request->get('goods-receipt-note-detail-id');
+            foreach ($ids as $id) {
                 $goodsReceiptDetails = GoodsReceiptNoteDetail::findOrFail($id);
                 $goodsReceiptDetails->delete();
                 $goodsReceiptCost = GoodsReceiptNoteCost::where('goods_receipt_note_id', $idGoods)->get();
@@ -174,6 +167,6 @@ class GoodsReceiptNotesDetailController extends Controller
         }
 
 
-        return back()->with('success','Xóa thành công!');
+        return back()->with('success', 'Xóa thành công!');
     }
 }

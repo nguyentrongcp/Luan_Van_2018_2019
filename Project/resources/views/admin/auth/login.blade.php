@@ -30,15 +30,11 @@
                                 </div>
                                 <button type="submit" class="ui fluid large teal submit button">Đăng nhập</button>
                             </div>
-
                             <div class="ui error message"></div>
                         </form>
                     </div>
                 {{--</div>--}}
             </div>
         </div>
-
-
     </div>
-
 </body>
