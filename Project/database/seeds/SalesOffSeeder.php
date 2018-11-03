@@ -13,35 +13,51 @@ class SalesOffSeeder extends Seeder
     {
         DB::table('sales_offs')->insert([
             [
-                'name' => 'KM 02-09 Quốc Khánh',
-                'percent' => '0',
+                'name' => 'KM 02-11 Quốc Khánh',
                 'start_date' => date('Y-m-d H:i:s'),
-                'end_date' => date('Y-m-d H:i:s')
+                'end_date' => date_modify(date_create(date('Y-m-d')), '+3 days')
             ],
             [
                 'name' => 'KM 20-10 Phụ nữ Việt Nam',
-                'percent' => '0',
                 'start_date' => date('Y-m-d H:i:s'),
-                'end_date' => date('Y-m-d H:i:s')
+                'end_date' => date_modify(date_create(date('Y-m-d')), '+3 days')
             ],
             [
                 'name' => 'KM 20-11 Nhà Giáo Việt Nam',
-                'percent' => '0',
                 'start_date' => date('Y-m-d H:i:s'),
-                'end_date' => date('Y-m-d H:i:s')
+                'end_date' => date_modify(date_create(date('Y-m-d')), '+3 days')
             ],
             [
                 'name' => 'KM 14-02 Lễ tình nhân ',
-                'percent' => '0',
                 'start_date' => date('Y-m-d H:i:s'),
-                'end_date' => date('Y-m-d H:i:s')
+                'end_date' => date_modify(date_create(date('Y-m-d')), '+3 days')
             ],
             [
                 'name' => 'KM 1-06 Quốc tế thiếu nhi ',
-                'percent' => '0',
                 'start_date' => date('Y-m-d H:i:s'),
-                'end_date' => date('Y-m-d H:i:s')
+                'end_date' => date_modify(date_create(date('Y-m-d')), '+3 days')
             ]
+        ]);
+        DB::table('sales_offs')->insert([
+            [
+                'sales_off_id' => 3,
+                'percent' => 5,
+                'start_date' => date('Y-m-d'),
+                'end_date' => date_modify(date_create(date('Y-m-d')), '+3 days')
+            ],
+            [
+                'sales_off_id' => 3,
+                'percent' => 35,
+                'start_date' => date('Y-m-d'),
+                'end_date' => date_modify(date_create(date('Y-m-d')), '+3 days')
+            ],
+            [
+                'sales_off_id' => 3,
+                'percent' => 50,
+                'start_date' => date('Y-m-d'),
+                'end_date' => date_modify(date_create(date('Y-m-d')), '+3 days')
+            ],
+
         ]);
     }
 }

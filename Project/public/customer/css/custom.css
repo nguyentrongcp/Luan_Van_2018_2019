@@ -213,6 +213,7 @@ body {
     .cost {
         color: red;
         font-weight: bolder;
+        margin-right: 5px;
     }
 
     .sale-foody {
@@ -226,8 +227,10 @@ body {
         padding: 0 5px 0 5px;
     }
 
+    .old-cost-container {
+        margin-right: 5px;
+    }
     .old-cost {
-        color: black;
         text-decoration: line-through;
     }
 

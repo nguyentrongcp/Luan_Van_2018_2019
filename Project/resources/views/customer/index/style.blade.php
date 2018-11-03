@@ -117,6 +117,7 @@
     }
     .news-content > .til {
         font-weight: 500;
+        color: rgba(0,0,0,0.87);
     }
     .news-content > .cont {
         font-size: 13px;
@@ -124,7 +125,7 @@
         margin: 5px 0;
     }
     .news-content > .time {
-        font-weight: 300;
+        color: #666;
         font-size: 13px;
         float: right;
     }

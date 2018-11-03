@@ -74,7 +74,7 @@ function setTimer(time) {
 
 function setDimmer(element1, element2 = null) {
     $('body').append("<div id='dimmer-container' style='background-color: #000;" +
-        "position: fixed; opacity: 0.8; top: 0; height: 100vh; width: 100vw; z-index: 999'></div>");
+        "position: fixed; opacity: 0.8; top: 0; left: 0; height: 100vh; width: 100vw; z-index: 999'></div>");
     $(element1).addClass('dimmer');
 
     if (element2 !== null) {

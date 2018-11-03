@@ -1,4 +1,4 @@
-<div class="news-nav white">
+<div id="news-nav" class="news-nav white">
     <div class="til truncate">
                     <span>
                         Tin hot nhất
@@ -29,3 +29,4 @@
 </div>
 
 @include('customer.news.navbar.style')
+@include('customer.news.navbar.js')

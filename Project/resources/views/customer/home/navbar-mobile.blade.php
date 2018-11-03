@@ -34,6 +34,23 @@
                 <i class="material-icons right">favorite</i>
             </a>
         </li>
+        <li>
+            <a data-filter="buy" class="foody-sort waves-effect waves-teal">
+                Mua nhiều nhất
+                <i class="material-icons right">shopping_cart</i>
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <span class="m-home-nav-title">Khác</span>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a id="type-sale" data-filter="sale" class="foody-type waves-effect waves-light">
+                Đang giảm giá
+                <i class="material-icons right">attach_money</i>
+            </a>
+        </li>
         <li class="divider"></li>
         <li>
             <span class="m-home-nav-title">Ẩm thực</span>
@@ -46,6 +63,9 @@
             </a>
         </li>
         @foreach($foody_types as $foody_type)
+            @if($foody_type->foodies()->count() == 0)
+                @continue
+            @endif
             <li>
                 <a data-filter="{{ $foody_type->id }}" class="foody-type waves-effect waves-teal">
                     {{ $foody_type->name }}

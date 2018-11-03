@@ -160,7 +160,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
     // News
     Route::get('/news', 'Customer\NewsController@index')->name('customer.news.index');
-    Route::get('/news/content', 'Customer\NewsController@show')->name('customer.news.show');
+    Route::get('/news/{slug}', 'Customer\NewsController@show')->name('customer.news.show');
 
     // Login & logout
     Route::post('/customer/login', 'Customer\CustomerLoginController@login');

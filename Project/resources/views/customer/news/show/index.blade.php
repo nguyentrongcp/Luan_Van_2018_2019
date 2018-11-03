@@ -4,18 +4,37 @@
 
 @section('content')
 
-    @php $new = \App\News::find(4); @endphp
-
     <div class="row">
-        <div class="col s12 m12 l8">
+        <div id="news-content" class="col s12 m12 l8">
             <div class="white news-show-container">
                 <div class="news-show-title">
-                    {!! $new->title !!}
+                    <div class="til">{!! $news->title !!}</div>
+                    <img src="{{ asset('/customer/image_news/2_0.jpg') }}">
+                    <div class="share">
+                        <iframe src="https://www.facebook.com/plugins/like.php?href={{ urlencode(Request::url()) }}&layout=button_count&action=like&size=large&show_faces=false&share=false&height=28&appId"
+                                width="100" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                        <iframe src="https://www.facebook.com/plugins/share_button.php?href={{ urlencode(Request::url()) }}&layout=button_count&size=large&mobile_iframe=true&height=28&appId"
+                                width="110" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                    </div>
                 </div>
-                <img class="news-show-image" src="{{ asset('/customer/image_news/1_0.jpg') }}">
+                <div class="news-show-author">
+                    <img class="author-img" src="{{ asset('/customer/image_news/1_0.jpg') }}">
+                    <span class="author-name">
+                         {{ $news->admin->name }}
+                    </span>
+                    <span class="time hide-on-small-only">
+                        Đăng ngày {{ date_format(date_create($news->date), 'd-m-Y H:i') }}
+                    </span>
+                </div>
+                <div class="news-time hide-on-med-and-up">
+                    Đăng ngày {{ date_format(date_create($news->date), 'd-m-Y H:i') }}
+                </div>
+                {{--<div class="news-show-share">--}}
+
+                {{--</div>--}}
                 <div class="news-show-content">
                     <div class="cont">
-                        {!! $new->content !!}
+                        {!! $news->content !!}
                     </div>
                 </div>
             </div>

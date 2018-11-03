@@ -16,12 +16,12 @@ class CreateSalesOffsTable extends Migration
         Schema::create('sales_offs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->integer('percent');
-            $table->integer('parent_id')->unsigned()->nullable()->default(null);
+            $table->integer('percent')->nullable();
+            $table->integer('sales_off_id')->unsigned()->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();
-            $table->foreign('parent_id')->references('id')->on('sales_offs')
+            $table->foreign('sales_off_id')->references('id')->on('sales_offs')
                 ->onDelete('cascade');
         });
     }

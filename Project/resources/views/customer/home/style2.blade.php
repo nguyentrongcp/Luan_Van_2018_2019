@@ -135,6 +135,9 @@
         margin: 0 5px;
         font-weight: 300;
     }
+    .show-foody-rating {
+        margin: 5px 0;
+    }
     .show-foody-rating .icon {
         margin-right: 0;
     }

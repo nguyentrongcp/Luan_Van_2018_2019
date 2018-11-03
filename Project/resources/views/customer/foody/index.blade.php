@@ -32,14 +32,15 @@
             </div>
             <h5 class="foody-name">{{ $foody->name }}</h5>
             <div class="foody-cost">
-                <span class="old-cost">1,000,000<sup>đ</sup></span>
-                <span class="cost">{{ number_format($foody->currentCost()) }}<sup>đ</sup></span>
-                <span>
-                    <span class="ui red label pulse">Giảm giá 50%</span>
-                </span>
-                <span>
-                    <span class="ui red label pulse">Mua 2 tặng 1</span>
-                </span>
+                @if($foody->isSalesOff())
+                    <span class="old-cost-container">
+                        <span class="old-cost">{{ number_format($foody->currentCost()) }}</span><sup>đ</sup>
+                    </span>
+                    <span class="cost">{{ number_format($foody->getSaleCost()) }}<sup>đ</sup></span>
+                    <span class="ui red label pulse">Giảm giá {{ $foody->getSalePercent() }}%</span>
+                @else
+                    <span class="cost">{{ number_format($foody->currentCost()) }}<sup>đ</sup></span>
+                @endif
             </div>
             <div class="foody-describe">
                 {{ $foody->describe }}

@@ -48,7 +48,8 @@ class HomeController extends Controller
         $foody_sorts = [];
         foreach($foodies as $foody) {
             $foody_sorts[] = ['id' => $foody->id, 'cost' => $foody->getSaleCost(),
-                'vote' => $foody->getVoted()->average, 'like' => $foody->getLiked()];
+                'vote' => $foody->getVoted()->average, 'like' => $foody->getLiked(),
+                'buy' => $foody->orderFoodies()->count()];
         }
 
         if ($request->foody_sort_id == 'desc') {
@@ -71,6 +72,11 @@ class HomeController extends Controller
                 return $foody_sorts['like'];
             }));
         }
+        elseif($request->foody_sort_id == 'buy') {
+            $foody_sorts = array_reverse(array_sort($foody_sorts, function($foody_sorts) {
+                return $foody_sorts['buy'];
+            }));
+        }
         else {
             $foody_sorts = $foodies;
         }
@@ -88,6 +94,7 @@ class HomeController extends Controller
             $favorite = 'bookmark outline';
             $slug = $foody->slug;
             $liked = $foody->getLiked();
+            $buy_count = $foody->orderFoodies()->count();
             if (Auth::guard('customer')->check()) {
                 if (Favorite::where('foody_id', $id)
                         ->where('customer_id', Auth::guard('customer')->user()->id)->count() > 0) {
@@ -103,9 +110,28 @@ class HomeController extends Controller
                 <div class=\"show-foody-title truncate\">
                     <a class=\"black-text\" href=\"/foody/$slug\">$name</a>
                 </div>
-                <div class=\"show-foody-cost\"><span class=\"cost\">
-                        $cost<sup>đ</sup>
-                    </span></div>
+                <div class=\"show-foody-cost\">";
+            if ($foody->isSalesOff()) {
+                $old_cost = number_format($foody->currentCost());
+                $sale_percent = $foody->getSalePercent();
+                $data .= "
+                    <span class=\"old-cost-container\">
+                         <span class=\"old-cost\">$old_cost</span><sup>đ</sup>
+                    </span>
+                    <span class=\"cost\">
+                         $cost<sup>đ</sup>
+                    </span>
+                    <span class=\"ui small red label pulse\" style=\"z-index: 10\">- $sale_percent%</span>
+                ";
+            }
+            else {
+                $data .= "
+                    <span class=\"cost\">
+                         $cost<sup>đ</sup>
+                    </span>
+                ";
+            }
+            $data .= "</div>
                 <div class=\"show-foody-describe\">$describe</div>
                 <div class=\"show-foody-rating\">";
             if ($foody->getVoted() != null) {
@@ -142,6 +168,9 @@ class HomeController extends Controller
                                      <i id=\"favorite-$id\" class=\"$favorite icon\"></i>
                                 </a>
                     </span>
+                </div>
+                <div>
+                    Đã được đặt: <b>$buy_count</b> lượt
                 </div>
                 <div class=\"show-foody-action\">
                     <a class=\"waves-effect waves-light btn\" data-id='$id' onclick='updateCart(this)'>
