@@ -37,24 +37,27 @@
                 <i class="material-icons left">favorite</i>
             </a>
         </div>
+
+        <div class="col s12 home-nav">
+            <a data-filter="buy" class="foody-sort waves-effect waves-teal btn white black-text btn-fluid">
+                Mua nhiều nhất
+                <i class="material-icons left">shopping_cart</i>
+            </a>
+        </div>
     </div>
 
-    <div class="row">
-        <h6><b>Khác</b></h6>
-        <div class="divider"></div>
-        <div class="col s12 home-nav">
-            <a data-filter="all" class="waves-effect waves-light btn white black-text btn-fluid">
-                Đang giảm giá
-                <i class="material-icons left">attach_money</i>
-            </a>
+    @if(\App\Functions::isSalesOff())
+        <div class="row">
+            <h6><b>Khác</b></h6>
+            <div class="divider"></div>
+            <div class="col s12 home-nav">
+                <a id="type-sale" data-filter="sale" class="waves-effect waves-light btn white black-text foody-type btn-fluid">
+                    Đang giảm giá
+                    <i class="material-icons left">attach_money</i>
+                </a>
+            </div>
         </div>
-        <div class="col s12 home-nav">
-            <a data-filter="all" class="waves-effect waves-light btn white black-text btn-fluid">
-                Ảm thực mới
-                <i class="material-icons left">access_time</i>
-            </a>
-        </div>
-    </div>
+    @endif
 
 
     <div class="row">
@@ -67,6 +70,9 @@
             </a>
         </div>
         @foreach($foody_types as $foody_type)
+            @if($foody_type->foodies()->count() == 0)
+                @continue
+            @endif
             <div class="col s12 home-nav">
                 <a id="type-{{ $foody_type->id }}" data-filter="{{ $foody_type->id }}"
                    class="waves-effect waves-teal btn white black-text btn-fluid foody-type">

@@ -44,35 +44,67 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $titleNews = $request->get('name-news');
-        $content = $request->get('des');
+        $content = $request->get('content');
+        $title = $request->get('title');
+        $count = 0;
+        while(strpos($content, 'src="data:image') != false &&
+              strpos($content, '" style="') != false) {
+            $start = strpos($content, 'src="data:image');
+            $end = strpos($content, '" style="');
+            $base64 = substr($content, $start + 4, $end - $start - 3);
+            $base64 = trim($base64, '"');
 
-        $new = new News();
-        $new->title = $titleNews;
-        $new->content = $content;
-        $new->date = date('Y-m-d H:i:s');
-        $new->admin_id = Auth::guard('admin')->id();
-        $new->save();
+            $time = time();
+            $img = explode(";base64,", $base64);
+            $img_type_aux = explode("image/", $img[0]);
+            $img_type = $img_type_aux[1];
+            $img_base64 = base64_decode($img[1]);
+            $name = "$time-".$count++.".$img_type";
+            file_put_contents("admin/image_news/$name", $img_base64);
 
-        $time = time();
-        if ($request->hasFile('news-image-upload')) {
-            $news_image = $request->File('news-image-upload');
-            $ext = $news_image->extension();
-
-            $image = new Image();
-            $path = $news_image
-                ->move('admin\assets\images\news', "news-$new->id-$time.$ext");
-            $image->link = str_replace('\\', '/', $path);
-            $image->save();
-
-            $image_news = new ImageNews();
-            $image_news->image_id = $image->id;
-            $image_news->news_id = $new->id;
-            $image_news->save();
-
+            $link = asset('/admin/image_news/'.$name);
+            $content = str_replace('"'.$base64.'"', "'".trim($link, '"')."'", $content);
         }
+        $content = str_replace(' class="fr-fic fr-dib"', '', $content);
 
-        return back()->with('success', 'Thêm thành công!');
+        $news = new News();
+        $news->title = $title;
+        $news->content = $content;
+        $news->admin_id = Auth::guard('admin')->user()->id;
+        $news->date = date('Y-m-d H:i:s');
+        $news->save();
+
+        return Response(['status' => 'success']);
+
+//        $titleNews = $request->get('name-news');
+//        $content = $request->get('des');
+//
+//        $new = new News();
+//        $new->title = $titleNews;
+//        $new->content = $content;
+//        $new->date = date('Y-m-d H:i:s');
+//        $new->admin_id = Auth::guard('admin')->id();
+//        $new->save();
+//
+//        $time = time();
+//        if ($request->hasFile('news-image-upload')) {
+//            $news_image = $request->File('news-image-upload');
+//            $ext = $news_image->extension();
+//
+//            $image = new Image();
+//            $path = $news_image
+//                ->move('admin\assets\images\news', "news-$new->id-$time.$ext");
+//            $image->link = str_replace('\\', '/', $path);
+//            $image->save();
+//
+//            $image_news = new ImageNews();
+//            $image_news->image_id = $image->id;
+//            $image_news->news_id = $new->id;
+//            $image_news->save();
+//
+//        }
+//
+//        return back()->with('success', 'Thêm thành công!');
     }
 
     /**
@@ -168,5 +200,10 @@ class NewsController extends Controller
 
         }
         return back()->with('success','Thay đổi thành công!');
+    }
+
+    public function testImage(Request $request) {
+
+        return Response($request->file('item'));
     }
 }

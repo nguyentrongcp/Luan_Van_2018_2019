@@ -36,6 +36,12 @@
     .navbar .nav-wrapper .brand-logo img {
         height: 64px;
     }
+    .dropdown-title:hover {
+        background-color: unset;
+    }
+    #dropdown-category-content {
+        min-width: 260px !important;
+    }
 
     /*.navbar-mobile {*/
         /*padding: 0 32px !important;*/

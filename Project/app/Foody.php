@@ -113,15 +113,31 @@ class Foody extends Model
     }
 
     public function isSalesOff() {
-        return $this->salesOffDetail()->count() > 0;
+        foreach ($this->salesOffDetail as $sale_detail) {
+            if ($sale_detail->salesOff->isActive()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getSalePercent() {
-        return ($this->isSalesOff()) ? $this->salesOffDetail()->first()->salesOff->percent : 0;
+        foreach ($this->salesOffDetail as $sale_detail) {
+            if ($sale_detail->salesOff->isActive()) {
+                return $sale_detail->salesOff->percent;
+            }
+        }
+
+        return 0;
     }
 
     public function getSaleCost() {
-        return $this->costs->max()->cost;
+        if ($this->isSalesOff()) {
+            return $this->currentCost() - $this->currentCost() * $this->getSalePercent() / 100;
+        }
+        else {
+            return $this->currentCost();
+        }
     }
 //
 //    public function getChangedQuantity($quantity) {

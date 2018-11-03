@@ -9,4 +9,12 @@ class News extends Model
     public function admin() {
         return $this->belongsTo(Admin::class);
     }
+
+    public function newsVisiteds() {
+        return $this->hasMany(NewsVisited::class);
+    }
+
+    public function getVisited() {
+        return $this->newsVisiteds()->sum('count');
+    }
 }

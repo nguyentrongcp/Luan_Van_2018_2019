@@ -36,91 +36,39 @@
                     <span>
                         Tin tức và khuyến mãi
                     </span>
-                        <a href="#">
+                        <a href="{{ route('customer.news.index') }}">
                             Xem tất cả
                         </a>
                     </div>
                     <div class="divider"></div>
                     <div class="index-news-content">
-                        <div class="news-row">
-                            <div class="news-image">
-                                <img src="{{ asset('/customer/image/background_index.jpg') }}">
-                            </div><div class="news-content">
-                                <div class="til truncate">
-                                    Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
-                                </div>
-                                <div class="cont truncate-twolines">
-                                    Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
-                                </div>
-                                <div class="time">
-                                    {{ date('d-m-Y H:i:s') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="news-row">
-                            <div class="news-image">
-                                <img src="{{ asset('/customer/image/background_index.jpg') }}">
-                            </div><div class="news-content">
-                                <div class="til truncate">
-                                    Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
-                                </div>
-                                <div class="cont truncate-twolines">
-                                    Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
-                                </div>
-                                <div class="time">
-                                    {{ date('d-m-Y H:i:s') }}
+                        @foreach($newses as $key => $news)
+                            <div class="news-row">
+                                <div class="news-image">
+                                    <img src="{{ asset($news->avatar) }}">
+                                </div><div class="news-content">
+                                    <a href="{{ route('customer.news.show', $news->slug) }}" class="til truncate">
+                                        {!! $news->title !!}
+                                    </a>
+                                    <div class="cont truncate-twolines">
+                                        @php
+                                            $length = strpos($news->content, '</p>') - strpos($news->content, '<p>') - 3;
+                                            $content = substr($news->content, strpos($news->content, '<p>') + 3, $length);
+                                        @endphp
+                                        {!! $content !!}
+                                    </div>
+                                    <div class="time">
+                                        {{ \App\Functions::getTimeCount(date_create($news->date)->getTimestamp()) }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="news-row">
-                            <div class="news-image">
-                                <img src="{{ asset('/customer/image/background_index.jpg') }}">
-                            </div><div class="news-content">
-                                <div class="til truncate">
-                                    Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
-                                </div>
-                                <div class="cont truncate-twolines">
-                                    Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
-                                </div>
-                                <div class="time">
-                                    {{ date('d-m-Y H:i:s') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="news-row">
-                            <div class="news-image">
-                                <img src="{{ asset('/customer/image/background_index.jpg') }}">
-                            </div><div class="news-content">
-                                <div class="til truncate">
-                                    Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
-                                </div>
-                                <div class="cont truncate-twolines">
-                                    Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
-                                </div>
-                                <div class="time">
-                                    {{ date('d-m-Y H:i:s') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="news-row">
-                            <div class="news-image">
-                                <img src="{{ asset('/customer/image/background_index.jpg') }}">
-                            </div><div class="news-content">
-                                <div class="til truncate">
-                                    Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
-                                </div>
-                                <div class="cont truncate-twolines">
-                                    Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
-                                </div>
-                                <div class="time">
-                                    {{ date('d-m-Y H:i:s') }}
-                                </div>
-                            </div>
-                        </div>
+                            @if ($key == 4)
+                                @break
+                            @endif
+                            @if ($key != count($newses) - 1)
+                                <div class="divider"></div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
 

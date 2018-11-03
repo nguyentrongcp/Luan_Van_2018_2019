@@ -5,6 +5,7 @@
     <title>@yield('title')</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ asset('/img/favicon.png') }}" type="image/png">
     @yield('meta')
 
     <!--Import Google Icon Font-->

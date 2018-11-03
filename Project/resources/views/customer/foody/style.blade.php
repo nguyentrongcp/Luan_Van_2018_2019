@@ -45,12 +45,6 @@
         font-size: 13px;
         margin-top: 4px;
     }
-    .foody-cost span {
-        margin-left: 5px;
-    }
-    .foody-cost .old-cost {
-        margin-left: 0;
-    }
     .foody-rating {
         margin-top: 10px;
     }

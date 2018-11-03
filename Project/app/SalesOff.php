@@ -16,4 +16,8 @@ class SalesOff extends Model
         return $this->hasMany(SalesOff::class);
     }
 
+    public function isActive() {
+        return date('Y-m-d') >= $this->start_date && date('Y-m-d') <= $this->end_date;
+    }
+
 }
