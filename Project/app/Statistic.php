@@ -7,54 +7,25 @@ use Illuminate\Support\Facades\DB;
 
 class Statistic extends Model
 {
-    public static function totalFoody(){
-        return Foody::where('is_deleted',false)->count();
-    }
+    public static function getFoodyAmountOnSale() {
+        $total = DB::table('sales_off_details')
+            ->join('sales_offs', 'sales_offs.id', '=', 'sales_off_details.sales_off_id')
+            ->where('sales_offs.end_date', '>=', date('Y-m-d'))
+            ->count();
 
-    public static function totalCommentNotApproved(){
-        return Comment::where([
-            ['is_approved',false],
-            ['parent_id',null]
-        ])->count();
-    }
-    public static function totalOrders(){
-        return Order::where('is_deleted',false)->count();
-    }
-    public static function totalRevenue(){
-        $total = DB::table('orders')
-            ->join('order_statuses','order_statuses.order_id','=','orders.id')
-            ->where('order_statuses.status','=',2)
-            ->where('orders.is_deleted','=',false)
-            ->sum('orders.total_of_cost');
-
-        return number_format($total);
-    }
-
-    public static function getOrdersStatus() {
-        $status = [
-            0 => 'Chưa duyệt',
-            1 => 'Đang vận chuyển',
-            2 => 'Đã giao hàng',
-            3 => 'Đã hủy'
-        ];
-        $orders = DB::table('orders')
-            ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->selectRaw("order_statuses.status as label, count(*) as total")
-            ->groupBy('order_statuses.status')->get();
-        foreach ($orders as &$order) {
-            $order->label = $status[$order->label];
-        }
-
-        return $orders;
-    }
-    public static function getAmountType(){
-        $total = DB::table('foody_types')->count();
         return $total;
     }
-    public static function getProductAmountByType() {
+    public static function getOutOffStock(){
+        $total = DB::table('foody_statuses')
+            ->where('status',false)
+            ->count();
+
+        return $total;
+    }
+    public static function getFoodyType() {
         $atypefoodies = DB::table('foodies')
             ->leftJoin('foody_types', 'foody_types.id', '=', 'foodies.foody_type_id')
-            ->select(['foody_types.id','foody_types.name', DB::raw('count(*) as total')])
+            ->select(['foody_types.name as label', DB::raw('count(*) as value')])
             ->groupBy('foody_types.id')->get();
 
         return $atypefoodies;

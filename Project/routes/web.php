@@ -36,9 +36,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     /** Statistic */
 
     Route::get('statistis/revenue','admin\StatisticController@revenue')->name('revenue');
-    Route::get('statistis/order','admin\StatisticController@revenue')->name('order');
-    Route::get('statistis/foody','admin\StatisticController@revenue')->name('foody');
     Route::get('statistic/today','admin\StatisticController@today')->name('statistic.today');
+
+    Route::get('statistis/order','admin\StatisticController@order')->name('order');
+
+    Route::get('statistis/foody','admin\StatisticController@foody')->name('foody');
     /** Foody type */
 
     Route::resource('foody_type','admin\FoodyTypeController',["except" => ["create","show", "edit"]]);

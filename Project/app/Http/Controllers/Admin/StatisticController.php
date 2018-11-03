@@ -14,14 +14,7 @@ class StatisticController extends Controller
 {
     public function revenue(Request $request)
     {
-//dd($request->revenue_date);
-        $data = DB::table('goods_receipt_notes')
-            ->join('goods_receipt_note_costs', 'goods_receipt_note_costs.goods_receipt_note_id', '=', 'goods_receipt_notes.id')
-            ->where('goods_receipt_notes.date', '2018-03-18')
-            ->where('is_deleted', false)
-            ->sum('goods_receipt_note_costs.cost');
-//        dd($data/);
-        return view('admin.statistic.revenue.index', compact('data'));
+        return view('admin.statistic.revenue.index');
     }
 
     public function order()

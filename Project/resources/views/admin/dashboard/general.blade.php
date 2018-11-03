@@ -4,7 +4,7 @@
         <div class="statistic">
             <div class="value">
                 <i class="box icon"></i>
-                {{ \App\Statistic::totalFoody() }}
+                {{ \App\Dashboard::totalFoody() }}
             </div>
             <div class="label">
                 Thực đơn
@@ -14,7 +14,7 @@
         <div class="statistic">
             <div class="value">
                 <i class="comments outline icon"></i>
-                {{ \App\Statistic::totalCommentNotApproved() }}
+                {{ \App\Dashboard::totalCommentNotApproved() }}
             </div>
             <div class="label">
                 Bình luận chưa duyệt
@@ -24,7 +24,7 @@
         <div class="statistic">
             <div class="value">
                 <i class="clipboard icon"></i>
-                {{ \App\Statistic::totalOrders() }}
+                {{ \App\Dashboard::totalOrders() }}
             </div>
             <div class="label">
                 Đơn hàng
@@ -34,7 +34,7 @@
         <div class="statistic">
             <div class="value">
                 VNĐ
-                {{ \App\Statistic::totalRevenue() }}
+                {{ \App\Dashboard::totalRevenue() }}
             </div>
             <div class="label">
                 Doanh thu
