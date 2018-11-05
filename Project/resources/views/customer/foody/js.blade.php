@@ -10,6 +10,19 @@
             // $('#foody-image').slider( {
             //     indicators: false,
             // })
+            if ($($('.foody-describe .cont')[0]).height() > 72) {
+                $($('.foody-describe')[0]).append("<a style='cursor: pointer' id='show-more'>Xem thêm</a>");
+                $('#show-more').on('click', function () {
+                    if ($(this).text() === 'Xem thêm') {
+                        $($('.foody-describe .cont')[0]).removeClass('cont');
+                        $(this).text('Thu nhỏ');
+                    }
+                    else {
+                        $($($('.foody-describe')[0]).children().get(0)).addClass('cont');
+                        $(this).text('Xem thêm');
+                    }
+                });
+            }
             $('#dimmer-image').dimmer({
                 on: 'hover'
             });

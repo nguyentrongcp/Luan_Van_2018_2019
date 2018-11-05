@@ -11,7 +11,7 @@
                         </a>
                     </li>
                     <li class="nav-col m-nav-col hide-on-med-and-up {{ Request::is('home') ? '' : 'hide' }}" id="navbar-filter">
-                        <a id="home-nav-dropdown" class="dropdown-trigger" data-target="m-home-nav-container">
+                        <a id="home-nav-dropdown" class="dropdown" data-target="m-home-nav-container">
                             <i class="material-icons center hide-on-med-and-up">filter_list</i>
                         </a>
                     </li>
@@ -19,7 +19,7 @@
                     <li data-search="{{ Request::is('home*') ? 'home' : 'result' }}"
                         class="hide nav-col" id="navbar-search">
                         <div class="input-field">
-                            <input id="search" type="search" placeholder="Tìm kiếm..." required>
+                            <input id="search" type="search" placeholder="Tìm kiếm..." autocomplete="off">
                             <label class="label-icon" for="search"><i class="material-icons center">search</i></label>
                             <i class="material-icons left">close</i>
                         </div>
@@ -37,14 +37,14 @@
                     </li>
 
                     <li class="nav-col m-nav-col" id="navbar-category">
-                        <a id="dropdown-category" data-target='dropdown-category-content'>
+                        <a id="dropdown-category" class="dropdown" data-target='dropdown-category-content'>
                             <i class="material-icons left hide-on-small-only">menu</i>
                             <i class="material-icons center hide-on-med-and-up">menu</i>
                             <span class="hide-on-small-only">Phân loại</span></a>
                     </li>
 
                     <li style="width: 90px" id="navbar-cart" class="nav-col m-nav-col">
-                        <a id="dropdown-cart" data-target="dro-cart" class="truncate">
+                        <a id="dropdown-cart" data-target="dro-cart" class="dropdown truncate">
                             <i class="material-icons left hide-on-small-only">shopping_cart</i>
                             <i class="material-icons center hide-on-med-and-up">shopping_cart</i>
                             <span id="cart-qty" class="new badge" data-badge-caption="">{{ Cart::count() }}</span>

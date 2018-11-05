@@ -2,21 +2,27 @@
     <script>
 
         $(document).ready(function () {
+            $(window).resize(function () {
+                $('#home-nav-dropdown').dropdown('close');
+            });
+
+            $.each($('.foody-type'), function (key, value) {
+                if ($($(value).children().get(0)).width() >= 158) {
+                    $(value).addClass('tooltipped');
+                    $(value).attr('data-tooltip', $($(value).children().get(0)).text());
+                    $(value).attr('data-position', 'top');
+                    $(value).tooltip();
+                }
+            });
+
             $('#home-nav-container').pushpin({
                 top: 300 - $('#navbar').height(),
                 onPositionChange: function (status) {
                     if (status === 'pinned') {
+                        let nav = $('#home-nav-container');
+                        changePositionNav();
                         $(document).scroll(function () {
-                            let nav = $('#home-nav-container');
-                            if ($(window).scrollTop() + $(window).height() >= $('#footer-container').offset().top - 30) {
-                                let bottom = $(window).height() + $(window).scrollTop() - $('#footer-container').offset().top + 30;
-                                $(nav).css({
-                                    'bottom': bottom,
-                                });
-                            }
-                            else {
-                                $(nav).css('bottom','');
-                            }
+                            changePositionNav();
                         });
                         $('#show-foody').addClass('special');
                     }
@@ -28,6 +34,13 @@
 
             if ('{{ $type }}' !== '') {
                 showFoodyByType($('#type-{{ $type }}'));
+            }
+            else {
+                console.log($('.foody-type.active'));
+                if (getWidth() > 600) {
+                    showFoodyByType($('.foody-type.active')[1]);
+                }
+                showFoodyByType($('.foody-type.active')[0]);
             }
 
             $('#home-nav-dropdown').dropdown({
@@ -55,6 +68,26 @@
             });
         });
 
+        function addShowMore() {
+            $.each($('.show-foody-describe'), function (key, value) {
+                if ($(value).height() > 30) {
+                    $(value).append("<a class='show-more' style='cursor: pointer'>Xem thêm</a>");
+                }
+            });
+            $('.show-more').on('click', function () {
+                if ($(this).text() === 'Xem thêm') {
+                    $($($(this).parent().get(0)).children().get(0)).removeClass('truncate-twolines');
+                    $(this).text('Thu nhỏ');
+                    changePositionNav();
+                }
+                else {
+                    $($($(this).parent().get(0)).children().get(0)).addClass('truncate-twolines');
+                    $(this).text('Xem thêm');
+                    changePositionNav();
+                }
+            });
+        }
+
         function like(like) {
             var id = like.id;
             var foody_id = $('#' + id).attr('data-target');
@@ -81,36 +114,44 @@
             })
         }
 
-        function favorite(favorite, id) {
-            let logged = '{!! $logged !!}';
-            if (logged === 'true') {
-                $.ajax({
-                    type: "post",
-                    url: "/customer/favorite",
-                    data: {
-                        foody_id: id
-                    },
-                    success: function (data) {
-                        $('#favorite-' + id).toggleClass('outline');
-                        M.Toast.dismissAll();
-                        if (data === 'favorited') {
-                            M.toast({
-                                html: "<i class='material-icons teal-text left'>check</i>Đã lưu",
-                                displayLength: 2000
-                            });
+        function favorite() {
+            $('.foody-favorite').on('click', function() {
+                let logged = '{!! $logged !!}';
+                let value = this;
+                if (logged === 'true') {
+                    let id = $(value).attr('data-id');
+                    $.ajax({
+                        type: "post",
+                        url: "/customer/favorite",
+                        data: {
+                            foody_id: id
+                        },
+                        success: function (data) {
+                            if (data.status !== 'error') {
+                                M.Toast.dismissAll();
+                                let icon = $(value).children().get(0);
+                                if (data === 'favorited') {
+                                    $(icon).removeClass('outline');
+                                    M.toast({
+                                        html: "<i class='material-icons teal-text left'>check</i>Đã lưu",
+                                        displayLength: 2000
+                                    });
+                                }
+                                else {
+                                    $(icon).addClass('outline');
+                                    M.toast({
+                                        html: "<i class='material-icons teal-text left'>check</i>Đã hủy lưu",
+                                        displayLength: 2000
+                                    });
+                                }
+                            }
                         }
-                        else {
-                            M.toast({
-                                html: "<i class='material-icons teal-text left'>check</i>Đã hủy lưu",
-                                displayLength: 2000
-                            });
-                        }
-                    }
-                })
-            }
-            else {
-                $('#require-modal').modal('open');
-            }
+                    })
+                }
+                else {
+                    $('#require-modal').modal('open');
+                }
+            });
         }
 
         function addCart(foody) {
@@ -147,14 +188,18 @@
                 data: {
                     foody_type_id: type_id,
                     foody_sort_id: $(sort).attr('data-filter'),
-                    type: 'sort'
+                    type: 'sort',
+                    number: 0
                 },
                 success: function (data) {
+                    // console.log(data);
                     $('#home-foody-container').empty();
-                    $('#home-foody-container').html(data);
+                    $('#home-foody-container').html(data.content);
                     $('.foody-sort').removeClass('active');
                     $(sort).addClass('active');
                     $("html, body").animate({ scrollTop: 300 - $('#navbar').height() }, 'slow');
+                    displayLoadMore(data.end, data.number);
+                    detectShowChange();
                 }
             })
         });
@@ -163,25 +208,77 @@
             showFoodyByType(this);
         });
 
-        function showFoodyByType(type) {
+        function showFoodyByType(type, number = 0) {
             let sort_id = $($('.foody-sort.active')[0]).attr('data-filter');
+            let sales_percent = 0;
+            if ($(type).attr('data-sales') !== 'undefined') {
+                sales_percent = $(type).attr('data-sales');
+            }
             $.ajax({
                 type: 'get',
                 url: '{{ route('home.show_foody') }}',
                 data: {
                     foody_type_id: $(type).attr('data-filter'),
                     foody_sort_id: sort_id,
-                    type: 'type'
+                    type: 'type',
+                    sales_percent: sales_percent,
+                    number: number
                 },
                 success: function (data) {
-                    $('#home-foody-container').empty();
-                    $('#home-foody-container').html(data);
-                    $('.foody-type').removeClass('active');
-                    $(type).addClass('active');
-                    $("html, body").animate({ scrollTop: 300 - $('#navbar').height() }, 'slow');
+                    if (number === 0) {
+                        $('#home-foody-container').empty();
+                        $('#home-foody-container').html(data.content);
+                        $('.foody-type').removeClass('active');
+                        $(type).addClass('active');
+                        $("html, body").animate({ scrollTop: 300 - $('#navbar').height() }, 'slow');
+                    }
+                    else {
+                        $('#home-foody-container').append(data.content);
+                        let nav = $('#home-nav-container');
+                    }
+                    displayLoadMore(data.end, data.number);
+                    detectShowChange();
                 }
             })
         }
+
+        function detectShowChange() {
+            favorite();
+            addShowMore();
+            changePositionNav();
+            updateCart();
+        }
+
+        function displayLoadMore(end, number) {
+            if (end === true) {
+                $($('#load-more').parent().get(0)).css('display', 'none');
+            }
+            else {
+                $($('#load-more').parent().get(0)).css('display', 'block');
+            }
+            $('#load-more').attr('data-target', number);
+        }
+
+        function changePositionNav() {
+            if ($(window).scrollTop() + $(window).height() >= $('#footer-container').offset().top - 30) {
+                let bottom = $(window).height() + $(window).scrollTop() - $('#footer-container').offset().top + 30;
+                $('#home-nav-container').css({
+                    'bottom': bottom,
+                });
+            }
+            else {
+                $('#home-nav-container').css({
+                    'bottom': '',
+                });
+            }
+        }
+
+        $('#load-more').on('click', function () {
+            let number = $(this).attr('data-target');
+            $(this).attr('data-target', parseInt(number) + 10);
+            let type = $('.foody-type.active')[0];
+            showFoodyByType(type, number);
+        });
 
     </script>
 @endpush

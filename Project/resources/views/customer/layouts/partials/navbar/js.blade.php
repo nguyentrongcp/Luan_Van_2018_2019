@@ -1,6 +1,12 @@
 @push('script')
     <script>
         $(document).ready(function(){
+            $(window).resize(function () {
+                $('#dropdown-cart').dropdown('close');
+                $('#dropdown-category').dropdown('close');
+                $('#dropdown-profile').dropdown('close');
+            });
+            updateCart();
             let time = 'slow';
             if (getWidth() <= 992) {
                 time = 0;
@@ -65,6 +71,7 @@
                 },
                 onCloseStart: function () {
                     closeDimmer($('#navbar-cart'));
+                    $('body').css('overflow', 'auto');
                     $('#navbar-category').removeClass('teal');
                 }
             });
@@ -159,73 +166,6 @@
             });
         });
 
-        function updateCart(element) {
-            let count = '1';
-            let id = $(element).attr('data-id');
-            if ($(element).attr('data-qty') === 'minus-' + id) {
-                count = '-1';
-            }
-            if ($(element).attr('data-qty') === 'add') {
-                count = $('#add-cart-qty').val();
-                if (count < 1) {
-                    count = 0;
-                }
-            }
-            if (count === '0') {
-                $('#add-cart-qty-' + id).val('1');
-                M.toast({
-                    html: "<i class='material-icons red-text left'>error_outline</i>Số lượng không hợp lệ!",
-                    displayLength: 2000
-                });
-            }
-            else {
-                $.ajax({
-                    type: "post",
-                    url: "/customer/update_shopping_cart",
-                    data: {
-                        foody_id: id,
-                        count: count
-                    },
-                    success: function (data) {
-                        if (data.status !== 'error') {
-                            $('#cart-qty').text(data.total_count);
-                            $('#cart-total-cost').html(data.total_cost + '<sup>đ</sup>');
-                            if (data.status === 'updated') {
-                                $('#cart-qty-' + id).text(data.count);
-                                $('#cart-cost-' + id).html(data.cost + '<sup>đ</sup>');
-                                $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
-                                    "</span>)");
-                                updatePayment(data.total_cost,data.count,data.cost,data.cost_simple);
-                            }
-                            else if (data.status === 'deleted') {
-                                $('#' + id).remove();
-                                $('#cart-added-home-' + id).text('');
-                                if (data.total_count === 0) {
-                                    $('#cart-body').append("<div id=\"cart-empty\" class=\"row center-align\">\n" +
-                                        "                Giỏ hàng trống\n" +
-                                        "            </div>");
-                                    $('#cart-payment').addClass('disabled');
-                                }
-                                removePayment(data.total_cost,id,data.cost);
-                            }
-                            else {
-                                if (data.role === 'new') {
-                                    $('#cart-body').empty();
-                                }
-                                $('#cart-body').append(data.cart_body);
-                                $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
-                                    "</span>)");
-                                $('#cart-payment').removeClass('disabled');
-                            }
-                            if ($('#add-cart-qty').val() !== 'undefined') {
-                                $('#add-cart-qty').val('1');
-                            }
-                        }
-                    }
-                })
-            }
-        }
-
         function removeCart(id) {
             $.ajax({
                 type: "post",
@@ -234,104 +174,84 @@
                     foody_id: id
                 },
                 success: function (data) {
-                    $('#cart-qty').text(data.total_count);
-                    $('#cart-total-cost').html(data.total_cost + '<sup>đ</sup>');
-                    $('#' + id).remove();
-                    $('#cart-added-home-' + id).text('');
-                    if (data.total_count === 0) {
-                        $('#cart-body').append("<div id=\"cart-empty\" class=\"row center-align\">\n" +
-                            "                Giỏ hàng trống\n" +
-                            "            </div>");
-                        $('#cart-payment').addClass('disabled');
+                    if (data.status !== 'error') {
+                        $('#cart-qty').text(data.total_count);
+                        $('#cart-total-cost').html(data.total_cost + '<sup>đ</sup>');
+                        $('#' + id).remove();
+                        $('#cart-added-home-' + id).text('');
+                        if (data.total_count === 0) {
+                            $('#cart-body').append("<div id=\"cart-empty\" class=\"row center-align\">\n" +
+                                "                Giỏ hàng trống\n" +
+                                "            </div>");
+                            $('#cart-payment').addClass('disabled');
+                        }
+                        removePayment(data.total_cost,id);
                     }
-                    removePayment(data.total_cost,id);
                 }
             })
         }
 
-        function cartUpdate(type, id) {
-            var count = '1';
-            if ($(type).attr('data-qty') === 'minus-' + id) {
-                count = '-1';
-            }
-            if ($(type).attr('data-qty') === 'add-' + id) {
-                count = $('#cart-qty-' + id).val();
-                if (count < 1) {
-                    count = 0;
-                }
-            }
-            if (count === 0) {
-                $('#cart-qty-' + id).val('1');
-                M.toast({
-                    html: "<i class='material-icons red-text left'>error_outline</i>Số lượng không hợp lệ!",
-                    displayLength: 2000
-                });
-            }
-            else {
-                $.ajax({
-                    type: "post",
-                    url: "/customer/update_shopping_cart",
-                    data: {
-                        foody_id: id,
-                        count: count
-                    },
-                    success: function (data) {
-                        if (data.status !== 'error') {
-                            $('#cart-qty').text(data.total_count);
-                            $('#cart-total-cost').html(data.total_cost + '<sup>đ</sup>');
-                            if (data.status === 'updated') {
-                                $('#cart-qty-' + id).text(data.count);
-                                $('#cart-cost-' + id).html(data.cost + '<sup>đ</sup>');
-                                $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
-                                    "</span>)");
-                                updatePayment(data.total_cost,data.count,data.cost,data.cost_simple);
-                            }
-                            else if (data.status === 'deleted') {
-                                $('#' + id).remove();
-                                $('#cart-added-home-' + id).text('');
-                                if (data.total_count === 0) {
-                                    $('#cart-body').append("<div id=\"cart-empty\" class=\"row center-align\">\n" +
-                                        "                Giỏ hàng trống\n" +
-                                        "            </div>");
-                                    $('#cart-payment').addClass('disabled');
-                                }
-                                removePayment(data.total_cost,id,data.cost);
-                            }
-                            else {
-                                if (data.role === 'new') {
-                                    $('#cart-body').empty();
-                                }
-                                $('#cart-body').append(data.cart_body);
-                                $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
-                                    "</span>)");
-                                $('#cart-payment').removeClass('disabled');
-                            }
-                        }
-                    }
-                })
-            }
-        }
-
-        function updatePayment(total_cost, count, cost, cost_simple) {
-            $('#payment-table-amount').text(count);
-            $('#payment-table-cost').html(cost_simple + '<sup>đ</sup>');
-            $('#payment-table-total').html(cost + '<sup>đ</sup>');
-            $('#payment-table-total-cost').html(total_cost + '<sup>đ</sup>');
-            $('#foody-cost').html(total_cost + '<sup>đ</sup>');
-            $('#foody-cost').attr('data-cost',total_cost);
-            if (typeof $('#transport-fee').attr('data-cost') !== 'undefined') {
-                getFee();
-            }
-        }
-
-        function removePayment(total_cost, id) {
-            $('#payment-table-row-' + id).remove();
-            $('#payment-table-total-cost').html(total_cost + '<sup>đ</sup>');
-            $('#foody-cost').html(total_cost + '<sup>đ</sup>');
-            $('#foody-cost').attr('data-cost',total_cost);
-            if (typeof $('#transport-fee').attr('data-cost') !== 'undefined') {
-                getFee();
-            }
-        }
+        // function cartUpdate(type, id) {
+        //     var count = '1';
+        //     if ($(type).attr('data-qty') === 'minus-' + id) {
+        //         count = '-1';
+        //     }
+        //     if ($(type).attr('data-qty') === 'add-' + id) {
+        //         count = $('#cart-qty-' + id).val();
+        //         if (count < 1) {
+        //             count = 0;
+        //         }
+        //     }
+        //     if (count === 0) {
+        //         $('#cart-qty-' + id).val('1');
+        //         M.toast({
+        //             html: "<i class='material-icons red-text left'>error_outline</i>Số lượng không hợp lệ!",
+        //             displayLength: 2000
+        //         });
+        //     }
+        //     else {
+        //         $.ajax({
+        //             type: "post",
+        //             url: "/customer/update_shopping_cart",
+        //             data: {
+        //                 foody_id: id,
+        //                 count: count
+        //             },
+        //             success: function (data) {
+        //                 if (data.status !== 'error') {
+        //                     $('#cart-qty').text(data.total_count);
+        //                     $('#cart-total-cost').html(data.total_cost + '<sup>đ</sup>');
+        //                     if (data.status === 'updated') {
+        //                         $('#cart-qty-' + id).text(data.count);
+        //                         $('#cart-cost-' + id).html(data.cost + '<sup>đ</sup>');
+        //                         $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
+        //                             "</span>)");
+        //                         updatePayment(data.total_cost,data.count,data.cost,data.cost_simple);
+        //                     }
+        //                     else if (data.status === 'deleted') {
+        //                         $('#' + id).remove();
+        //                         $('#cart-added-home-' + id).text('');
+        //                         if (data.total_count === 0) {
+        //                             $('#cart-body').append("<div id=\"cart-empty\" class=\"row center-align\">\n" +
+        //                                 "                Giỏ hàng trống\n" +
+        //                                 "            </div>");
+        //                             $('#cart-payment').addClass('disabled');
+        //                         }
+        //                         removePayment(data.total_cost,id,data.cost);
+        //                     }
+        //                     else {
+        //                         if (data.role === 'new') {
+        //                             $('#cart-body').empty();
+        //                         }
+        //                         $('#cart-body').append(data.cart_body);
+        //                         $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
+        //                             "</span>)");
+        //                         $('#cart-payment').removeClass('disabled');
+        //                     }
+        //                 }
+        //             }
+        //         })
+        //     }
+        // }
     </script>
 @endpush

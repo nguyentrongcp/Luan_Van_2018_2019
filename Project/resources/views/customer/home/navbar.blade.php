@@ -4,7 +4,7 @@
         <div class="divider"></div>
 
         <div class="col s12 home-nav">
-            <a data-filter="default" class="foody-sort waves-effect waves-light btn white black-text btn-fluid active">
+            <a data-filter="default" class="foody-sort waves-effect waves-teal btn white black-text btn-fluid active">
                 Mặc định
                 <i class="material-icons left">clear_all</i>
             </a>
@@ -46,16 +46,42 @@
         </div>
     </div>
 
-    @if(\App\Functions::isSalesOff())
+    @if($logged == 'true')
         <div class="row">
             <h6><b>Khác</b></h6>
             <div class="divider"></div>
+
             <div class="col s12 home-nav">
-                <a id="type-sale" data-filter="sale" class="waves-effect waves-light btn white black-text foody-type btn-fluid">
-                    Đang giảm giá
-                    <i class="material-icons left">attach_money</i>
+                <a id="type-favorite" data-filter="favorite" class="foody-type waves-effect waves-teal btn white black-text btn-fluid">
+                    Ẩm thực đã lưu
+                    <i class="material-icons left">bookmark</i>
                 </a>
             </div>
+        </div>
+    @endif
+
+    @if(\App\Functions::isSalesOff())
+        @php $sales = \App\SalesOff::distinct('percent')->get(); @endphp
+        <div class="row">
+            <h6><b>Khuyến mãi</b></h6>
+            <div class="divider"></div>
+            <div class="col s12 home-nav">
+                <a id="type-sale" data-filter="sale" class="waves-effect waves-teal btn white black-text foody-type btn-fluid">
+                    Đang giảm giá
+                    <i class="material-icons right">chevron_right</i>
+                </a>
+            </div>
+            @foreach($sales as $sale)
+                @if($sale->percent != null)
+                    <div class="col s12 home-nav">
+                        <a id="type-sale" data-filter="sale" data-sales="{{ $sale->percent }}"
+                           class="waves-effect waves-teal btn white black-text foody-type btn-fluid">
+                            Giảm giá {{ $sale->percent }}%
+                            <i class="material-icons right">chevron_right</i>
+                        </a>
+                    </div>
+                @endif
+            @endforeach
         </div>
     @endif
 
@@ -64,7 +90,7 @@
         <h6><b>Ẩm thực</b></h6>
         <div class="divider"></div>
         <div class="col s12 home-nav">
-            <a id="type-all" data-filter="all" class="waves-effect waves-light btn white black-text btn-fluid foody-type active">
+            <a id="type-all" data-filter="all" class="waves-effect waves-teal btn white black-text btn-fluid foody-type active">
                 Xem tất cả
                 <i class="material-icons right">chevron_right</i>
             </a>

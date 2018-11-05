@@ -10,6 +10,7 @@
         text-transform: unset;
         color: #666 !important;
         text-align: left;
+        background: unset;
     }
     #home-nav-container .row {
         margin: 0 0 20px 0;
@@ -20,11 +21,12 @@
 
     .foody-type.active, .foody-sort.active {
         color: white !important;
-        background-color: #26a69a !important;
+        /*background-color: #26a69a !important;*/
+        background: linear-gradient(#009688,#26a69a,#4db6ac,#26a69a ,#009688);
     }
 
     .foody-sort.btn, .foody-type.btn {
-        font-weight: unset;
+        font-weight: 500;
     }
 
 
@@ -110,6 +112,9 @@
     /*.show-foody-action i {*/
         /*margin-right: -1px !important;*/
     /*}*/
+    .show-foody-content {
+        padding-right: 20px !important;
+    }
     .show-foody-title {
         padding-top: 20px;
     }
@@ -153,6 +158,17 @@
     }
     .show-foody-favorite i {
         cursor: pointer;
+    }
+
+
+    .home-foody-footer {
+        margin-bottom: 20px;
+    }
+    .home-foody-footer button {
+        height: 44px;
+        width: 150px;
+        position: relative;
+        top: 22px;
     }
 
 

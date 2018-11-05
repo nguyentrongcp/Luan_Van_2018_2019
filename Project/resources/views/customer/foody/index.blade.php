@@ -43,7 +43,9 @@
                 @endif
             </div>
             <div class="foody-describe">
-                {{ $foody->describe }}
+                <div class="cont">
+                    {!! $foody->describe !!}
+                </div>
             </div>
             <div class="foody-rating">
                 @if($votes != null)
@@ -105,12 +107,12 @@
 
             </div>
             <div class="foody-cart">
-                <button data-qty="add" data-id="{{ $foody->id }}" onclick="updateCart(this)"
-                        class="waves-effect waves-light btn col s3" style="width: 170px">
+                <button data-qty="add" data-id="{{ $foody->id }}"
+                        class="cart-update waves-effect waves-light btn col s3" style="width: 170px">
                     <i class="shopping cart plus icon"></i>
                     Thêm vào giỏ
                 </button>
-                <input id="add-cart-qty" class="input-field col s2 cart-number" type="number" value="1">
+                <input id="add-cart-qty" class="input-field col s2 cart-number number-only" type="number" value="1">
                 <span id="add-cart-cost" class="cost cart-number">{{ number_format($foody->currentCost()) }}<sup>đ</sup></span>
             </div>
             <div class="foody-action navbar col s12">

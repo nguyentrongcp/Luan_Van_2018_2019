@@ -45,6 +45,12 @@
         font-size: 13px;
         margin-top: 4px;
     }
+    .foody-describe > .cont {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
     .foody-rating {
         margin-top: 10px;
     }

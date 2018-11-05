@@ -27,11 +27,11 @@
                     {{ $cart->name }}
                 </div>
                 <div class="col cart-action">
-                    <a class="ui button" data-id="{{ $cart->id }}" onclick="updateCart(this)">
+                    <a class="ui button cart-update" data-id="{{ $cart->id }}">
                         <i class="plus icon"></i>
                     </a>
 
-                    <a class="ui button" data-id="{{ $cart->id }}" onclick="updateCart(this)"
+                    <a class="ui button cart-update" data-id="{{ $cart->id }}"
                        data-qty="minus-{{ $cart->id }}"><i class="minus icon"></i>
                     </a>
                 </div>

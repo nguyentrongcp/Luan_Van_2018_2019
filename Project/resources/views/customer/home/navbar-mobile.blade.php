@@ -41,17 +41,44 @@
             </a>
         </li>
         <li class="divider"></li>
-        <li>
-            <span class="m-home-nav-title">Khác</span>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a id="type-sale" data-filter="sale" class="foody-type waves-effect waves-light">
-                Đang giảm giá
-                <i class="material-icons right">attach_money</i>
-            </a>
-        </li>
-        <li class="divider"></li>
+        @if($logged == 'true')
+            <li>
+                <span class="m-home-nav-title">Khác</span>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a id="type-favorite" data-filter="favorite" class="foody-type waves-effect waves-light">
+                    Ẩm thực đã lưu
+                    <i class="material-icons right">bookmark</i>
+                </a>
+            </li>
+            <li class="divider"></li>
+        @endif
+        @if(\App\Functions::isSalesOff())
+            @php $sales = \App\SalesOff::distinct('percent')->get(); @endphp
+            <li>
+                <span class="m-home-nav-title">Khuyến mãi</span>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a id="type-sale" data-filter="sale" class="foody-type waves-effect waves-light">
+                    Đang giảm giá
+                    <i class="material-icons right">chevron_right</i>
+                </a>
+            </li>
+            @foreach($sales as $sale)
+                @if($sale->percent != null)
+                    <li>
+                        <a id="type-sale" data-filter="sale" data-sales="{{ $sale->percent }}"
+                           class="foody-type waves-effect waves-light">
+                            Giảm giá {{ $sale->percent }}%
+                            <i class="material-icons right">chevron_right</i>
+                        </a>
+                    </li>
+                @endif
+            @endforeach
+            <li class="divider"></li>
+        @endif
         <li>
             <span class="m-home-nav-title">Ẩm thực</span>
         </li>

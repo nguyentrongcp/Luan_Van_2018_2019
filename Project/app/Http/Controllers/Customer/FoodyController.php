@@ -206,8 +206,12 @@ class FoodyController extends Controller
             $customer_id = Auth::guard('customer')->user()->id;
 
             $favorited = null;
-            if (Foody::find($request->foody_id)->checkFavorited($customer_id)) {
-                Foody::find($request->foody_id)->favorites()->where('customer_id', $customer_id)->first();
+            $foody = Foody::find($request->foody_id);
+            if ($foody == null) {
+                return Response(['status' => 'error']);
+            }
+            if ($foody->checkFavorited($customer_id)) {
+                $foody->favorites()->where('customer_id', $customer_id)->first();
             }
             $favorited = Favorite::where('customer_id', $customer_id)->where('foody_id', $request->foody_id)->first();
 

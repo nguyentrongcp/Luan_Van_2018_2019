@@ -34,6 +34,9 @@ class ShoppingCartController extends Controller
             return Response(['status' => 'error']);
         }
         $foody = Foody::find($request->foody_id);
+        if ($foody == null) {
+            return Response(['status' => 'error']);
+        }
 
         $role = Cart::count() == 0 ? 'new' : 'old';
 
@@ -72,11 +75,11 @@ class ShoppingCartController extends Controller
                     $cart->name
                 </div>
                 <div class='col cart-action'>
-                    <a class='ui button' onclick='updateCart(this)' data-id='$cart->id'>
+                    <a class='ui button cart-update' data-id='$cart->id'>
                         <i class='plus icon'></i>
                     </a>
 
-                    <a class='ui button' data-qty=\"minus-$cart->id\" data-id='$cart->id' onclick='updateCart(this)'>
+                    <a class='ui button cart-update' data-qty=\"minus-$cart->id\" data-id='$cart->id'>
                         <i class='minus icon'></i>
                     </a>
                 </div>
@@ -96,6 +99,9 @@ class ShoppingCartController extends Controller
 
     public function removeCart(Request $request) {
         $foody = Foody::find($request->foody_id);
+        if ($foody == null) {
+            return Response(['status' => 'error']);
+        }
 
         CartFunction::removeCart($request->foody_id);
         $cost = CartFunction::getCost($request->id);
