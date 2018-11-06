@@ -33,13 +33,9 @@
             });
 
             if ('{{ $type }}' !== '') {
-                showFoodyByType($('#type-{{ $type }}'));
+                showFoodyByType($($('.type-{{ $type }}')[0]));
             }
             else {
-                console.log($('.foody-type.active'));
-                if (getWidth() > 600) {
-                    showFoodyByType($('.foody-type.active')[1]);
-                }
                 showFoodyByType($('.foody-type.active')[0]);
             }
 
@@ -70,7 +66,7 @@
 
         function addShowMore() {
             $.each($('.show-foody-describe'), function (key, value) {
-                if ($(value).height() > 30) {
+                if ($(value).height() > 30 && $(value).children().length < 2) {
                     $(value).append("<a class='show-more' style='cursor: pointer'>Xem thêm</a>");
                 }
             });
@@ -154,40 +150,16 @@
             });
         }
 
-        function addCart(foody) {
-            var foody_id = $('#' + foody.id).attr('data-target');
-            $.ajax({
-                type: "post",
-                url: "/customer/add_shopping_cart",
-                data: {
-                    foody_id: foody_id
-                },
-                success: function (data) {
-                    if (data.status === 200) {
-                        $('#cart-count').text(data.count);
-                        $('#cart-added-home-' + foody_id).html(data.added_text);
-                    }
-                    else {
-                        M.Toast.dismissAll();
-                        M.toast({
-                            html: "<i class='material-icons red-text left'>error_outline</i><span>" +
-                                "Số lượng đã đạt tối đa!</span>",
-                            classes: 'message'
-                        });
-                    }
-                }
-            })
-        }
-
         $('.foody-sort').on('click', function () {
             let sort = this;
+            let sort_filter = $(sort).attr('data-filter');
             let type_id = $($('.foody-type.active')[0]).attr('data-filter');
             $.ajax({
                 type: 'get',
                 url: '{{ route('home.show_foody') }}',
                 data: {
                     foody_type_id: type_id,
-                    foody_sort_id: $(sort).attr('data-filter'),
+                    foody_sort_id: sort_filter,
                     type: 'sort',
                     number: 0
                 },
@@ -196,7 +168,7 @@
                     $('#home-foody-container').empty();
                     $('#home-foody-container').html(data.content);
                     $('.foody-sort').removeClass('active');
-                    $(sort).addClass('active');
+                    $('.sort-' + sort_filter).addClass('active');
                     $("html, body").animate({ scrollTop: 300 - $('#navbar').height() }, 'slow');
                     displayLoadMore(data.end, data.number);
                     detectShowChange();
@@ -210,15 +182,16 @@
 
         function showFoodyByType(type, number = 0) {
             let sort_id = $($('.foody-sort.active')[0]).attr('data-filter');
+            let type_filter = $(type).attr('data-filter');
             let sales_percent = 0;
-            if ($(type).attr('data-sales') !== 'undefined') {
+            if (typeof $(type).attr('data-sales') !== 'undefined') {
                 sales_percent = $(type).attr('data-sales');
             }
             $.ajax({
                 type: 'get',
                 url: '{{ route('home.show_foody') }}',
                 data: {
-                    foody_type_id: $(type).attr('data-filter'),
+                    foody_type_id: type_filter,
                     foody_sort_id: sort_id,
                     type: 'type',
                     sales_percent: sales_percent,
@@ -229,7 +202,12 @@
                         $('#home-foody-container').empty();
                         $('#home-foody-container').html(data.content);
                         $('.foody-type').removeClass('active');
-                        $(type).addClass('active');
+                        if (sales_percent !== 0) {
+                            $('.type-' + type_filter + '-' + sales_percent).addClass('active');
+                        }
+                        else {
+                            $('.type-' + type_filter).addClass('active');
+                        }
                         $("html, body").animate({ scrollTop: 300 - $('#navbar').height() }, 'slow');
                     }
                     else {
@@ -238,6 +216,7 @@
                     }
                     displayLoadMore(data.end, data.number);
                     detectShowChange();
+                    $('#load-more').text('XEM THÊM');
                 }
             })
         }
@@ -274,6 +253,7 @@
         }
 
         $('#load-more').on('click', function () {
+            $(this).text('ĐANG TẢI..');
             let number = $(this).attr('data-target');
             $(this).attr('data-target', parseInt(number) + 10);
             let type = $('.foody-type.active')[0];

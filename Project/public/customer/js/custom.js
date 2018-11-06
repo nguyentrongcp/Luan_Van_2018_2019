@@ -109,12 +109,13 @@ function getFoodyByType(id, url) {
 }
 
 function updateCart() {
+    $('.cart-update').off('click');
     $('.cart-update').on('click', function () {
         let element = this;
-        let count = '1';
+        let count = 1;
         let id = $(element).attr('data-id');
         if ($(element).attr('data-qty') === 'minus-' + id) {
-            count = '-1';
+            count = -1;
         }
         if ($(element).attr('data-qty') === 'add') {
             count = $('#add-cart-qty').val();
@@ -122,8 +123,8 @@ function updateCart() {
                 count = 0;
             }
         }
-        if (count === '0') {
-            $('#add-cart-qty-' + id).val('1');
+        if (count === 0) {
+            $('#add-cart-qty').val('1');
             M.toast({
                 html: "<i class='material-icons red-text left'>error_outline</i>Số lượng không hợp lệ!",
                 displayLength: 2000

@@ -30,11 +30,14 @@ class ShoppingCartController extends Controller
 //    }
 
     public function updateCart(Request $request) {
-        if (CartFunction::matchedInCart($request->foody_id) == null && $request->count == -1) {
-            return Response(['status' => 'error']);
-        }
         $foody = Foody::find($request->foody_id);
         if ($foody == null) {
+            return Response(['status' => 'error']);
+        }
+        elseif ($request->count < -1 || $request->count == 0) {
+            return Response(['status' => 'error']);
+        }
+        elseif (CartFunction::matchedInCart($request->foody_id) == null && $request->count == -1) {
             return Response(['status' => 'error']);
         }
 

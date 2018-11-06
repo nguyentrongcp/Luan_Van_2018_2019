@@ -2,7 +2,7 @@
 
     <div class="row white section scrollspy" id="foody-images-container">
         <div class="col s12 content">
-            <span class="content-header">Hình ảnh</span>
+            <span class="content-header">Hình ảnh chuyên nghiệp</span>
             <div class="divider" style="margin-bottom: 10px"></div>
 
             @foreach($images as $key => $image)

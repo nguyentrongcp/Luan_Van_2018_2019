@@ -164,12 +164,6 @@
     .home-foody-footer {
         margin-bottom: 20px;
     }
-    .home-foody-footer button {
-        height: 44px;
-        width: 150px;
-        position: relative;
-        top: 22px;
-    }
 
 
 

@@ -1,10 +1,14 @@
 @push('script')
     <script>
         $(document).ready(function(){
+            let width_of_window = getWidth();
             $(window).resize(function () {
-                $('#dropdown-cart').dropdown('close');
-                $('#dropdown-category').dropdown('close');
-                $('#dropdown-profile').dropdown('close');
+                if (getWidth() !== width_of_window) {
+                    width_of_window = getWidth();
+                    $('#dropdown-cart').dropdown('close');
+                    $('#dropdown-category').dropdown('close');
+                    $('#dropdown-profile').dropdown('close');
+                }
             });
             updateCart();
             let time = 'slow';

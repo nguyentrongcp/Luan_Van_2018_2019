@@ -13,8 +13,12 @@
             <span id="password-login-error"></span>
         </div>
 
+        <div class="col s12">
+            Bạn chưa có tài khoản? <a href="#">Đăng ký ngay</a>
+        </div>
+
         <div class="modal-action">
-            <a class="waves-effect waves-light btn red lighten-2 modal-close">Hủy bỏ</a>
+            <a  class="waves-effect waves-light btn red lighten-2 modal-close">Hủy bỏ</a>
             <a class="waves-effect waves-light btn" id="login-modal-button">Đăng nhập</a>
         </div>
 

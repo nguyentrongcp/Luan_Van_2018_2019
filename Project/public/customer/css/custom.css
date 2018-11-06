@@ -133,7 +133,17 @@ body {
 .btn {
     text-transform: unset;
     font-weight: bolder;
-    background: linear-gradient(#009688,#26a69a,#4db6ac,#26a69a ,#009688);
+    /*background: linear-gradient(#009688,#26a69a,#4db6ac,#26a69a,#009688);*/
+}
+/*.btn-cancel {*/
+    /*background: linear-gradient(#ef5f5f,#e57373,#ef8c8c,#e57373,#ef5f5f);*/
+/*}*/
+#load-more {
+    height: 44px;
+    width: 150px;
+    position: relative;
+    top: 22px;
+    background: linear-gradient(#263238,#37474f,#263238);
 }
 
 .input-field.col label {

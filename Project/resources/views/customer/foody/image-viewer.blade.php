@@ -29,6 +29,21 @@
 </div>
 
 <style>
+    @media only screen and (min-width: 993px) {
+        .image-view-action i:hover {
+            color: #D7D0D0;
+        }
+        .image-view-next i, .image-view-previous i {
+            cursor: pointer;
+        }
+        .image-view-action:hover {
+            opacity: 1 !important;
+        }
+        .image-view-action {
+            opacity: 0 !important;
+        }
+    }
+
     .image-viewer {
         opacity: 1;
         position: fixed;
@@ -62,16 +77,10 @@
         left: 0;
         height: calc(100vh - 100px);
         width: 100%;
-        opacity: 0;
-    }
-    .image-view-action:hover {
         opacity: 1;
     }
     .image-view-action i {
         color: #666;
-    }
-    .image-view-action i:hover {
-        color: #D7D0D0;
     }
     .image-view-close {
         height: 100px;
@@ -90,16 +99,11 @@
         float: left;
         height: calc(100vh - 200px);
     }
-    .image-view-previous i {
-        cursor: pointer;
-    }
     .image-view-next {
         float: right;
         height: calc(100vh - 200px);
     }
-    .image-view-next i {
-        cursor: pointer;
-    }
+
     #image-viewer-list {
         height: 100%;
         width: 100vw;

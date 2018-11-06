@@ -9,6 +9,7 @@
     .modal-action {
         float: right;
         margin-bottom: 24px;
+        margin-top: 15px;
     }
     .modal-text {
         font-size: 18px;

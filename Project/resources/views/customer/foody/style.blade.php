@@ -20,8 +20,63 @@
             /*padding: 0 !important;*/
         /*}*/
     /*}*/
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 610px) {
+        .input-full-screen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            padding: 20px !important;
+            background-color: white !important;
+            z-index: 2 !important;
+            height: 100vh !important;
+            width: 100vw !important;
+            margin: 0 !important;
+        }
+        #out-full-screen {
+            z-index: 2;
+            position: fixed;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+            opacity: 0.5;
+            font-size: 30px;
+        }
 
+        #foody-comment-modal {
+            top: 0 !important;
+            width: 100vw !important;
+        }
+        #comment-modal-image {
+            height: auto !important;
+        }
+        #foody-comment-modal .modal-content {
+            height: calc(100% - 45px - ((100vw - 48px - 20px) / 6 + 8px)) !important;
+        }
+        .comment-modal-add-image i {
+            font-size: calc((100vw - 48px - 20px) / 18) !important;
+            margin-left: calc((100vw - 48px - 20px) / 18) !important;
+            top: calc((100vw - 48px - 20px) / 18 + 4px) !important;
+        }
+        #comment-modal-title, #comment-modal-content {
+            font-size: 14px !important;
+        }
+        .comment-modal-image {
+            height: calc((100vw - 48px - 20px) / 6 + 8px) !important;
+        }
+        .comment-modal-image i {
+            margin-left: calc((100vw - 48px - 20px) / 6 - 15px) !important;
+        }
+        .comment-modal-image img {
+            width: calc((100vw - 48px - 20px) / 6) !important;
+            height: calc((100vw - 48px - 20px) / 6 + 8px) !important;
+        }
+        .comment-modal-add-image {
+            width: calc((100vw - 48px - 20px) / 6) !important;
+            height: calc((100vw - 48px - 20px) / 6 + 8px) !important;
+        }
+        .comment-modal-next i, .comment-modal-before i {
+            margin-top: calc(((100vw - 48px - 20px) / 6 + 8px) / 2 - 12px) !important;
+        }
     }
 
     #foody-info {
@@ -153,7 +208,7 @@
         font-weight: 500;
     }
     .content {
-        padding: 0 10px !important;
+        padding: 10px 10px 0 10px !important;
     }
     .involve-foody-name {
         padding-left: 10px !important;
@@ -182,9 +237,9 @@
     }
 
     #foody-comment-modal {
-        width: 608px !important;
-        max-height: 80%;
-        height: 80%;
+        width: 608px;
+        max-height: unset;
+        height: 90%;
         overflow: hidden;
     }
     #foody-comment-modal .modal-content {

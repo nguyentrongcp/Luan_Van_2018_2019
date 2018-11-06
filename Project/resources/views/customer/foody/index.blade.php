@@ -157,7 +157,9 @@
             <div class="col s12 m12 l8 content-col left">
                 @include('customer.foody.images')
 
-                @include('customer.foody.comment')
+                @include('customer.foody.images-public')
+
+                @include('customer.foody.comment.comment')
 
                 @include('customer.foody.involve-foody')
 
@@ -168,9 +170,11 @@
 
     @include('customer.foody.image-viewer')
 
-    @include('customer.foody.comment-modal')
+    @include('customer.foody.comment.comment-modal')
 
-    @include('customer.foody.comment-modal-success')
+    @include('customer.foody.comment.comment-modal-success')
+
+    @include('customer.layouts.components.modal.require-modal')
 
     @include('customer.foody.style')
 
