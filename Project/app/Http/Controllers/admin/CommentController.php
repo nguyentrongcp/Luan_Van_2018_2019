@@ -38,9 +38,10 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $comment = new Comment();
-        $comment->admin_id = Auth::guard('admin')->id();
+        $comment->customer_id = Auth::guard('admin')->id();
         $comment->foody_id = $request->get('foody-id');
         $comment->parent_id = (int)$request->get('parent');
+        $comment->date = date('Y-m-d H:i:s');
         $comment->content = $request->get('content');
         $comment->title = $request->get('title');
         $comment->save();
@@ -80,8 +81,8 @@ class CommentController extends Controller
     public function update(Request $request, $id)
     {
         $comment = Comment::findOrFail($id);
-        $comment->approved = (int)$request->get('approve') % 2;
-        $comment->save();
+        $comment->is_approved = (int)$request->get('approve') % 2;
+        $comment->update();
 
         return back();
     }

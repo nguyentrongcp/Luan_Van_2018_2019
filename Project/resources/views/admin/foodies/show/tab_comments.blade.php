@@ -43,12 +43,13 @@
                                 <a class="author">{{ $child->name }}</a>
 
                                 <div class="metadata">
-                                    <div class="date">{{ \App\Comment::shortDate($child->date) }}</div>
+                                    <div class="date">{{$child->date}}</div>
                                     <div class="action">
                                         <form action="{{ route('comments.destroy', [$child->id]) }}" class="force-inline" method="post">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button class="ui basic mini red label pointer">Xóa</button>
+                                            <button class="ui mini red label pointer text-white">Xóa</button>
+
                                         </form>
                                     </div>
                                 </div>
@@ -70,9 +71,9 @@
                         <div class="field right">
                             <textarea name="content" placeholder="Nội dung"></textarea>
                         </div>
-                        <div class="ui mini blue right labeled submit icon button">
+                        <button type="submit" class="ui mini blue right icon button">
                             <i class="icon edit"></i> Trả lời
-                        </div>
+                        </button>
                     </form>
                 </div>
             </div>

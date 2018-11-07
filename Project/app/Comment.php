@@ -31,4 +31,5 @@ class Comment extends Model
     public function approved(){
         return $this->is_approved == 1;
     }
+
 }
