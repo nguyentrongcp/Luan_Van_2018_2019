@@ -32,8 +32,8 @@
         //
         // });
         function buildTableAmount() {
-            let types = JSON.parse('{!! \App\Statistic::getOrderByMonth() !!}');
-            let labels = types.months;
+            let types = JSON.parse('{!! \App\Statistic::getOrderByYear() !!}');
+            let labels = types.years;
             let unapproved = types.unapproved;
             let shipping = types.shipping;
             let delivered = types.delivered;
