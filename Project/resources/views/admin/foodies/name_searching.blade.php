@@ -7,8 +7,10 @@
            value="">
     <i class="search icon"></i>
 </div>
-<div class="results" id="search-result">
+<div class="menu scrolling">
+    <div class=" results " id="search-result">
 
+    </div>
 </div>
 
 @push('script')
@@ -17,7 +19,7 @@
         $('.ui.input').on('input', function () {
             var key_search = $('#search_foody').val();
             if (key_search == '') {
-                $('#search-result').removeClass('.results');
+                $('#search-result').removeClass('results');
                 $('#search-result').empty();
             }
             else {
@@ -28,7 +30,7 @@
                         key: key_search
                     },
                     success: function (data) {
-                        $('#search-result').addClass('.results');
+                        $('#search-result').addClass('results');
                         $('.results').html(data);
                     }
                 })

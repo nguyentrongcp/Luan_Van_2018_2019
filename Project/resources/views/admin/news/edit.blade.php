@@ -8,7 +8,7 @@
             <a href="{{ route('news.index') }}" class="a-decoration"><i class="double angle left circular fitted small icon"></i></a>
             Cập nhật bài viết</h3>
 
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
 
         @include('admin.layouts.components.success_msg')
 
@@ -20,24 +20,7 @@
                 <div class="eleven wide column">
                     <div class="field">
                         <label>Tiêu đề</label>
-                        <input type="text" required name="title" placeholder="Tiêu đề" value="{{ $news->title }}">
-                    </div>
-
-                    {{--@include('sharing.lfm_field', [--}}
-                        {{--'label' => 'Ảnh hiển thị',--}}
-                        {{--'thumb' => $news->thumb,--}}
-                        {{--'needThumb' => 0--}}
-                    {{--])--}}
-                </div>
-
-                <div class="five wide column">
-                    <div class="field">
-                        <label>Preview</label>
-                        @foreach (App\ImageNews::where('news_id', $news->id)->get() as $idImage)
-                            @foreach (App\Image::where('id', $idImage->image_id)->get() as $image)
-                                <img src="{{asset($image->link)}}" alt="{{$news->title}}" id="holder" style="margin-top:5px;max-height:100px;" class="ui border image">
-                            @endforeach
-                        @endforeach
+                        <input type="text"  name="title" placeholder="Tiêu đề" value="{{ $news->title }}" required>
                     </div>
                 </div>
             </div>

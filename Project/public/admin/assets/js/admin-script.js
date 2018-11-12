@@ -46,13 +46,12 @@ function confirmDelete() {
 }
 
 function bindSelectAll(id) {
-    let selector = $('#' + id);
-    $(selector).checkbox({
-        onChange() {
-            let checked = $(selector).find('input').prop('checked');
-            $('.ui.child.checkbox').checkbox(checked ? 'check': 'uncheck');
+    $('#select-all').on('change',function () {
+        let checkBoxes = document.getElementsByName(id);
+        for (let i = 0; i < checkBoxes.length; i++) {
+            checkBoxes[i].checked = $('.ui.checkbox').find('input').prop('checked');
         }
-    });
+    })
 }
 
 function bindDataTable(tableId, onlyPaging = false) {

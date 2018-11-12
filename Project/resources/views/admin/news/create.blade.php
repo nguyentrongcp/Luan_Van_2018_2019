@@ -8,7 +8,7 @@
                         class="double angle left circular fitted small icon"></i></a>
             Cập nhật bài viết</h3>
 
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
 
         @include('admin.layouts.components.success_msg')
 

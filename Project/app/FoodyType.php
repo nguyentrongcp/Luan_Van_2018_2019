@@ -19,7 +19,7 @@ class FoodyType extends Model
         return !self::whereSlug($slug)->get()->isEmpty();
     }
 
-    public function noProduct() {
-        return $this->products->isEmpty();
+    public function noFoody() {
+        return $this->foodies->isEmpty();
     }
 }

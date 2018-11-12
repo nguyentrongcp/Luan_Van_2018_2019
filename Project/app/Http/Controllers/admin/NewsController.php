@@ -145,8 +145,8 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
 
-        $news->title = $request->get('name-news');
-        $news->content = $request->get('des');
+        $news->title = $request->get('title');
+        $news->content = $request->get('content');
         $news->date = date('Y-m-d H:i:s');
         $news->admin_id = Auth::guard('admin')->id();
         $news->update();

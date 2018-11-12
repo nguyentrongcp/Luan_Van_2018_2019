@@ -3,7 +3,7 @@
 @section('title', 'Thêm mới nhân viên ')
 
 @section('content')
-    @include('admin.layouts.components.error_msg')
+    @include('admin.layouts.components.errors_msg')
     @include('admin.layouts.components.success_msg')
 
     <div class="ui blue raised segment">

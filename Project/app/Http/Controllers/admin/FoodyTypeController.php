@@ -159,12 +159,12 @@ class FoodyTypeController extends Controller
             foreach ($ids as $id) {
                 $foodyType = FoodyType::findOrFail($id);
 
-                if ($foodyType->noProduct())
+                if ($foodyType->noFoody())
                     continue;
 
-                $errors[] = "Loại sản phẩm "
-                    . $this->createLinkToProduct($foodyType)
-                    . " còn sản phẩm liên kết";
+                $errors[] = "Loại thực đơn "
+                    . $this->createLinkToFoody($foodyType)
+                    . " còn thực đơn liên kết";
             }
         }
         return $errors;
@@ -181,7 +181,7 @@ class FoodyTypeController extends Controller
             compact('foodyTypes','title_name','id'));
     }
 
-    private function createLinkToProduct($foodyType) {
+    private function createLinkToFoody($foodyType) {
         return "<a href='"
             . route('foodies.index') . "?pt="
             . $foodyType->id

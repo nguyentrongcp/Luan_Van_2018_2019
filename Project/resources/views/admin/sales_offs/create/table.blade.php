@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th class="collapsing">
-                <div class="ui checkbox" id="check-all">
+                <div class="ui checkbox" id="select-all">
                     <input type="checkbox">
                 </div>
             </th>
@@ -21,7 +21,7 @@
             <tr>
                 <td>
                     <div class="ui child checkbox">
-                        <input type="checkbox" name="sales-offs-id[]" value="{{$salesOff->id}}">
+                        <input type="checkbox" name="sale-offs-id[]" value="{{$salesOff->id}}">
                     </div>
 
                 </td>

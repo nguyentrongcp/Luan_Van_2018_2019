@@ -67,8 +67,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     /**      Employee       **/
 
     Route::resource('employees','admin\EmployeeController');
-    Route::post('employees/reset_password/{id}','admin\EmployeeController@resetPass')
+    Route::post('employees/reset_pass/{id}','admin\EmployeeController@resetPass')
         ->name('reset_pass');
+    Route::post('employees/change_pass/{id}','admin\EmployeeController@changePass')
+        ->name('change_pass');
+    Route::post('employees/change_info/{id}','admin\EmployeeController@changeInfo')
+        ->name('change_info');
 
     /**      orders       **/
     Route::resource('orders','admin\OrderController');
@@ -115,6 +119,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
 
     /** Sliders **/
     Route::resource('sliders','admin\SliderController');
+
 
 });
 

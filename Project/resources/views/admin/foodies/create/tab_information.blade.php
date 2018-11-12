@@ -99,24 +99,4 @@
             readURL(this);
         });
     </script>
-    <script>
-        // $('#create-foody-form').form({
-        //     fields: {
-        //         foody_name: {
-        //             rules: [{type: 'empty', prompt: 'Tên thực đơn không được bỏ trống '}]
-        //         },
-        //         foody_cost: {
-        //             identifier: 'foody-cost',
-        //             rules: [
-        //                 {type: 'empty', prompt: 'Giá không được bỏ trống'},
-        //                 {type: 'regExp[/^[,.\s0-9]+$/igm]', prompt: 'Giá sai định dạng'}
-        //             ]
-        //         },
-        //         "anh-dai-dien": {
-        //             rules: [{type: 'empty', prompt: 'Hãy chọn ảnh đại diện'}]
-        //         }
-        //     },
-        //     // inline:true
-        // })
-    </script>
 @endpush

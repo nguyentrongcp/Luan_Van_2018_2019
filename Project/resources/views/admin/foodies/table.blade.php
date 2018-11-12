@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th class="collapsing">
-                <div class="ui checkbox" id="check-all">
+                <div class="ui checkbox" id="select-all">
                     <input type="checkbox">
                 </div>
             </th>
@@ -69,3 +69,8 @@
         </div>
     @endif
 </div>
+@push('script')
+    <script>
+        bindSelectAll('foody-id[]');
+    </script>
+@endpush

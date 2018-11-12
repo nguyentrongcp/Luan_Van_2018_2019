@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th class="collapsing">
-            <div class="ui checkbox" id="check-all">
+            <div class="ui checkbox" id="select-all">
                 <input type="checkbox" class="hidden">
             </div>
         </th>
@@ -49,6 +49,6 @@
 
 @push('script')
     <script>
-        // bindDataTable('bang-nhap-hang');
+        bindSelectAll('goods-receipt-note-detail-id[]');
     </script>
 @endpush

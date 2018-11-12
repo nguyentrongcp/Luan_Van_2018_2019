@@ -8,16 +8,11 @@
 
         @include('admin.layouts.components.success_msg')
 
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
 
         <form action="{{ route('shop_infos.update',[1]) }}" class="ui form" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-
-            <div class="field">
-                <button class="ui blue button">
-                    <i class="save icon"></i>Lưu lại
-                </button>
-            </div>
+            {{ method_field('PUT') }}
 
             <div class="ui two column divided grid small-td-margin">
                 <div class="column">
@@ -45,22 +40,26 @@
                     </div>
                     <div class="field">
                         <label for="logo">Logo</label>
-                        <img src="{{asset('customer/image/logo.png')}}" alt="Logo">
-
+                        <img src="{{asset($shopInfo->logo)}}" alt="Logo">
                     </div>
-                    <div class="field">
-                        <a href="#" class="ui small blue button" onclick="$('#change-logo-modal').modal('show')">
-                            <i class="exchange icon"></i>Thay đổi
-                        </a>
+                    <div class="required field">
+                        <label>Thay đổi Logo cửa hàng</label>
+                        <label for="logo">
+                            <span class="ui blue compact label">Chọn một ảnh</span>
+                            <span id="logo-name"></span>
+                        </label>
+                        <input type="file" name="logo" id="logo" style="display: none;"
+                               onchange="$('#logo-name').text($('#logo')[0].files[0].name)"
+                               accept=".jpg, .png, .jpeg">
                     </div>
                 </div>
             </div>
             <div class="field">
-                <button class="ui blue button">
+                <button type="submit" class="ui blue button">
                     <i class="save icon"></i>Lưu lại
                 </button>
             </div>
         </form>
     </div>
-    @include('admin.shop_infos.modal')
+{{--    @include('admin.shop_infos.modal')--}}
 @endsection

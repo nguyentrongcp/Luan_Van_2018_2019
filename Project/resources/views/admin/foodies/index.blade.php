@@ -6,7 +6,7 @@
     <div class="ui blue raised segment">
         <h3 class="ui dividing header center aligned">QUẢN LÝ THỰC ĐƠN</h3>
         @include('admin.layouts.components.success_msg')
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
         <form action="{{route('foodies.destroy',[0])}}" method="post" class="ui form">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
@@ -23,7 +23,7 @@
                         <i class="add fitted icon"></i>
                         <strong>Thêm mới </strong>
                     </a>
-                    @include('admin.foodies.btn_filer')
+{{--                    @include('admin.foodies.btn_filer')--}}
                 </div>
                 <div class="five wide column">
 
@@ -37,8 +37,4 @@
     </div>
 @endsection
 
-@push('script')
-    <script>
-        bindSelectAll('check-all');
-    </script>
-@endpush
+

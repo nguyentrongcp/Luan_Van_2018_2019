@@ -22,9 +22,9 @@
 
     <div class="right menu">
 
-        {{--@include('admin.layouts.components.navbar_comment')--}}
+        @include('admin.layouts.components.navbar_comment')
 
-        {{--@include('admin.layouts.components.navbar_notification')--}}
+        @include('admin.layouts.components.navbar_notification')
 
         @include('admin.layouts.components.navbar_admin')
 

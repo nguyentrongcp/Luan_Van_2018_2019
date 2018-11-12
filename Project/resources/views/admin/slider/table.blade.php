@@ -16,6 +16,7 @@
     <tbody>
     @php $total = count($sliders); @endphp
     @for($i = 0; $i < $total; $i += 2)
+
         <tr>
             <td>
                 <div class="ui child checkbox">

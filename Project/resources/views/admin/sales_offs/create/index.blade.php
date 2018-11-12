@@ -10,7 +10,7 @@
         {{ \App\SalesOff::find($id)->name .'>>'}}
         </h3>
         @include('admin.layouts.components.success_msg')
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
         <form action="{{route('sales_offs.destroy',[0])}}" method="post" class="ui form">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
@@ -37,6 +37,6 @@
 
 @push('script')
     <script>
-        bindSelectAll('check-all');
+        bindSelectAll('sale-offs-id[]');
     </script>
 @endpush

@@ -6,7 +6,7 @@
     <div class="ui blue raised segment">
         <h3 class="ui dividing header center aligned">QUẢN LÝ THỰC ĐƠN</h3>
         @include('admin.layouts.components.success_msg')
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
         <form action="{{route('foodies.destroy',[0])}}" method="post" class="ui form">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
@@ -27,22 +27,13 @@
                     @if(!empty($foodyType_filter))
                         <div class="ui blue label need-popup" style="padding: 12px;">
                             <span class="blue">{{ $nameType_filter }} </span> - Tất cả &nbsp;&nbsp;
-                            <a class="a-decoration" href="{{ route('foodies.index') }}"><i class="delete fitted icon"></i></a>
+                            <a class="a-decoration" href="{{ route('foodies.index') }}"><i
+                                        class="delete fitted icon"></i></a>
                         </div>
                     @endif
                 </div>
                 <div class="six wide column">
-                    <div class="field force-right no-clear">
-                        <div class="ui search ">
-                            <div class="ui icon input">
-                                <input class="prompt" type="text" placeholder="Tìm kiếm...">
-                                <i class="search icon"></i>
-                            </div>
-                            <div class="results"></div>
-                        </div>
-                        {{--                    @include('admin.foodies.name_searching')--}}
-
-                    </div>
+                    @include('admin.foodies.name_searching')
                 </div>
             </div>
             @include('admin.foodies.filter.table')
@@ -51,8 +42,3 @@
     </div>
 @endsection
 
-@push('script')
-    <script>
-        bindSelectAll('check-all');
-    </script>
-@endpush

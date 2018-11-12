@@ -115,7 +115,7 @@ class Statistic extends Model
             round(sum(orders.total_of_cost)/1000000, 2) as extra')
             ->join('order_statuses','orders.id','=','order_statuses.order_id')
             ->where('order_statuses.status', '=',0)
-            ->whereYear('order_created_at','=',2018)
+            ->whereBetween('orders.order_created_at', ["2018-1-1", "2018-12-31"])
             ->groupBy(DB::raw('month(orders.order_created_at)'))
             ->get();
 
@@ -123,9 +123,7 @@ class Statistic extends Model
             ->selectRaw('month(orders.order_created_at) as label, count(*) as total,
             round(sum(orders.total_of_cost)/1000000, 2) as extra')
             ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->where('order_statuses.status', '=',1)
-            ->whereYear('order_created_at','=',2018)
-
+            ->whereBetween('orders.order_created_at', ["2018-1-1", "2018-12-31"])
             ->groupBy(DB::raw('month(orders.order_created_at)'))
             ->get();
 
@@ -133,9 +131,7 @@ class Statistic extends Model
             ->selectRaw('month(orders.order_created_at) as label, count(*) as total,
             round(sum(orders.total_of_cost)/1000000, 2) as extra')
             ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->where('order_statuses.status', '=',2)
-            ->whereYear('order_created_at','=',2018)
-
+            ->whereBetween('orders.order_created_at', ["2018-1-1", "2018-12-31"])
             ->groupBy(DB::raw('month(orders.order_created_at)'))
             ->get();
 
@@ -143,9 +139,7 @@ class Statistic extends Model
             ->selectRaw('month(orders.order_created_at) as label, count(*) as total,
             round(sum(orders.total_of_cost)/1000000, 2) as extra')
             ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->where('order_statuses.status', '=',3)
-            ->whereYear('order_created_at','=',2018)
-
+            ->whereBetween('orders.order_created_at', ["2018-1-1", "2018-12-31"])
             ->groupBy(DB::raw('month(orders.order_created_at)'))
             ->get();
 

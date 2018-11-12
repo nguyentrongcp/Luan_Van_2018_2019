@@ -79,6 +79,22 @@ class ShopInfoController extends Controller
         $shopInfos->email = $request->get('shop-email');
         $shopInfos->update();
 
+        if (!$request->hasFile('logo')) {
+            return back()->with('error', 'Bạn chưa upload hình ảnh!');
+        } else {
+            $shopInfos = ShopInfo::find($id);
+
+            $oldPath = $shopInfos->logo;
+            if (!empty($oldPath)) {
+                File::delete($oldPath);
+            }
+            $time = time();
+            $ext = $request->file('logo')->extension();
+            $path = $request->file('logo')
+                ->move('admin\assets\images', "logo-$id-$time.$ext");
+            $shopInfos->logo = str_replace('\\', '/', $path);
+            $shopInfos->update();
+        }
         return back()->with('success','Cập nhật thông tin thành công');
     }
 
@@ -95,7 +111,7 @@ class ShopInfoController extends Controller
 
     public function changeLogo(Request $request, $id){
 
-        if (!$request->hasFile('logo-upload')) {
+        if (!$request->hasFile('logo')) {
             return back()->with('error', 'Bạn chưa upload hình ảnh!');
         } else {
             $shopInfos = ShopInfo::find($id);
@@ -105,13 +121,13 @@ class ShopInfoController extends Controller
                 File::delete($oldPath);
             }
             $time = time();
-            $ext = $request->file('logo-upload')->extension();
-            $path = $request->file('logo-upload')
+            $ext = $request->file('logo')->extension();
+            $path = $request->file('logo')
                 ->move('admin\assets\images', "logo-$id-$time.$ext");
             $shopInfos->logo = str_replace('\\', '/', $path);
             $shopInfos->update();
 
-            return back()->with('success','Cập nhật thông tin thành công');
+            return back()->with('success','Cập nhật logo thành công');
         }
     }
 }

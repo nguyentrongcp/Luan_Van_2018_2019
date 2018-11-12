@@ -62,3 +62,8 @@
         </div>
     @endif
 </div>
+@push('script')
+    <script>
+        bindSelectAll('foody-id[]');
+    </script>
+@endpush

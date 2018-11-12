@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 
 class SliderController extends Controller
 {
@@ -38,7 +40,25 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->file('file') != ''){
+
+            return Response('đa');
+        }
+//        if ($request->images != '') {
+//            foreach($request->images as $key => $image) {
+//
+//                $slides = new Slider();
+//                $time = time();
+//                $ext = $image->extension();
+//                $path = $image
+//                    ->move('admin\assets\images\sliders', "sliders-$key.'-'.$time.$ext");
+//                $slides->image = str_replace('\\', '/', $path);
+//                $slides->save();
+//            }
+//
+//        }
+//
+//        return Response(['status' => 'success']);
     }
 
     /**

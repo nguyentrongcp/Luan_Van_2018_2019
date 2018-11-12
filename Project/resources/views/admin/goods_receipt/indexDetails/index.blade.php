@@ -16,7 +16,7 @@
 
         @include('admin.layouts.components.success_msg')
 
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
 
         <form action="{{ route('goods_receipt_note_detail.destroy', [0]) }}" method="post">
 

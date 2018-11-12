@@ -32,7 +32,7 @@
 
         @include('admin.layouts.components.success_msg')
 
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
 
         @include('admin.orders.show.table')
 

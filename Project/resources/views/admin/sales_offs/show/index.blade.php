@@ -28,7 +28,7 @@
             @include('admin.sales_offs.show.table')
         </form>
         @include('admin.layouts.components.success_msg')
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
         @include('admin.sales_offs.show.modals')
     </div>
 @endsection

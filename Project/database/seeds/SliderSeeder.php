@@ -13,15 +13,15 @@ class SliderSeeder extends Seeder
     {
         DB::table('sliders')->insert([
             [
-                'image'=>'customer/image/slide1.jpg',
+                'image'=>'customer/image/slider1.jpg',
                 'describes'=>''
             ],
             [
-                'image'=>'customer/image/slide2.jpg',
+                'image'=>'customer/image/slider2.jpg',
                 'describes'=>''
             ],
             [
-                'image'=>'customer/image/slide3.jpg',
+                'image'=>'customer/image/slider3.jpg',
                 'describes'=>''
             ],
             [
