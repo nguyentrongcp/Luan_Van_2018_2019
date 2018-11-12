@@ -160,6 +160,13 @@
         font-weight: 500;
         color: red;
     }
+    .foody-cost > span {
+        color: #666;
+        font-size: 12px;
+    }
+    .foody-cost > .old > span {
+        text-decoration: line-through;
+    }
 
 
     .index-guide {

@@ -11,18 +11,60 @@
             //     indicators: false,
             // })
 
-            if ($($('.foody-describe .cont')[0]).height() > 72) {
+            $('#foody-rating-modal').modal({
+                dismissible: false,
+                opacity: 0.8
+            });
+
+            if ($($('.foody-describe .cont')[0]).height() === 75) {
                 $($('.foody-describe')[0]).append("<a style='cursor: pointer' id='show-more'>Xem thêm</a>");
                 $('#show-more').on('click', function () {
                     if ($(this).text() === 'Xem thêm') {
                         $($('.foody-describe .cont')[0]).removeClass('cont');
                         $(this).text('Thu nhỏ');
+                        $('#foody-rating-show').removeClass('pinned');
+                        resetPushpin();
                     }
                     else {
                         $($($('.foody-describe')[0]).children().get(0)).addClass('cont');
                         $(this).text('Xem thêm');
+                        resetPushpin();
                     }
                 });
+            }
+
+            pushpinRating();
+            pushpinNav();
+
+            $(window).resize(function () {
+                resetPushpin();
+            });
+
+            function pushpinRating() {
+                $('#foody-rating-show').pushpin({
+                    top: $('#foody-rating-show').offset().top - $('#navbar').height(),
+                    onPositionChange: function (status) {
+                        if (status === 'pinned') {
+                            $('#foody-rating-show').css('top', $('#navbar').height());
+                        }
+                    }
+                });
+            }
+            function pushpinNav() {
+                $('#foody-scrollspy-container').pushpin({
+                    top: $('#foody-scrollspy-container').offset().top - $('#navbar').height(),
+                    onPositionChange: function (status) {
+                        if (status === 'pinned') {
+                            $('#foody-scrollspy-container').css('top', $('#navbar').height());
+                        }
+                    }
+                });
+            }
+            function resetPushpin() {
+                $('#foody-rating-show').removeClass('pinned');
+                pushpinRating();
+                $('#foody-scrollspy-container').removeClass('pinned');
+                pushpinNav();
             }
 
             $('#dimmer-image').dimmer({
@@ -30,7 +72,8 @@
             });
             $('#foody-comment-modal').modal({
                 dismissible: false,
-                endingTop: '5%'
+                endingTop: '5%',
+                opacity: 0.8
             });
 
             $('#comment-add-image').on('click', function () {
@@ -48,8 +91,6 @@
             if (getWidth() <= 610) {
                 $('#foody-comment-modal').css('height', $(window).outerHeight());
             }
-            let height_of_window = $(window).height();
-            let width_of_window = $(window).width();
             $(window).resize(function () {
                 if (getWidth() <= 610) {
                     $('#foody-comment-modal').css('height', $(window).outerHeight());
@@ -80,7 +121,11 @@
             }
         });
 
-        $("#add-cart-qty").change(function () {
+        $("#add-cart-qty").on('input', function () {
+            let qty = $(this).val();
+            if (qty <= 0) {
+                $(this).val('1');
+            }
             let cost = $(this).val() * parseFloat('{{ $foody->getSaleCost() }}');
             cost = numeral(cost).format('0,0');
             $('#add-cart-cost').html(cost + "<sup>đ</sup>");
@@ -195,4 +240,96 @@
     </script>
 
     @include('customer.foody.comment.js')
+
+    <script>
+        $('#foody-rating-modal-show').on('click', function () {
+            let logged = '{{ $logged }}';
+            if (logged === 'false') {
+                $('#require-modal').modal('open');
+            }
+            else {
+                if ('{{ $voted }}' === 'true') {
+                    $('#rating-content').append("<div id=\"rating-block\">\n" +
+                        "            <p class=\"white-text center-align\">Bạn đã thực hiện đánh giá sản phẩm này rồi</p>\n" +
+                        "            <div class=\"center\">\n" +
+                        "                <button id=\"change-rating\" class=\"blue waves-effect waves-light btn\">Thay đổi</button>\n" +
+                        "            </div>\n" +
+                        "        </div>");
+                    $('#change-rating').on('click', function () {
+                        $('#rating-block').remove();
+                    });
+                }
+                $('#foody-rating-modal').modal('open');
+            }
+        });
+        $('.rating-vote i').on('click', function () {
+            let current_rate = this;
+            let count = 0;
+            $($($(this).parent().get(0)).children().get()).attr('class', 'far fa-star');
+            $($($(this).parent().get(0)).children().get()).each(function (key, value) {
+                $(value).attr('class', 'fas fa-star');
+                count = key;
+                if (value === current_rate) {
+                    return false;
+                }
+            });
+            let describe = $($($(current_rate).parent().get(0)).parent().get(0)).children().get(2);
+            if (count === 0) {
+                $(describe).html("<span class='red-text'>1.0</span> <small>(Rất tệ)</small>");
+            }
+            if (count === 1) {
+                $(describe).html("<span class='grey-text'>2.0</span> <small>(Tệ)</small>");
+            }
+            if (count === 2) {
+                $(describe).html("3.0 <small>(Trung bình)</small>");
+            }
+            if (count === 3) {
+                $(describe).html("<span class='green-text'>4.0</span> <small>(Tốt)</small>");
+            }
+            if (count === 4) {
+                $(describe).html("<span class='purple-text'>5.0</span> <small>(Tuyệt vời)</small>");
+            }
+        });
+
+        $('#send-rating').on('click', function () {
+            let attitude = 0;
+            let quality = 0;
+            let cost = 0;
+            $('.rating-vote i').each(function (key, value) {
+                if (key <= 4) {
+                    if ($(value).attr('class') === 'fas fa-star') {
+                        cost++;
+                    }
+                }
+                else if (key <=9) {
+                    if ($(value).attr('class') === 'fas fa-star') {
+                        attitude++;
+                    }
+                }
+                else {
+                    if ($(value).attr('class') === 'fas fa-star') {
+                        quality++;
+                    }
+                }
+            });
+            $.ajax({
+                type: 'post',
+                url: '{{ route('customer.foody.rating') }}',
+                data: {
+                    attitude: attitude,
+                    quality: quality,
+                    cost: cost,
+                    foody_id: '{{ $foody->id }}'
+                },
+                success: function (data) {
+                    if (data.status === 'error') {
+                        console.log(data.content);
+                    }
+                    else {
+                        location.reload();
+                    }
+                }
+            });
+        });
+    </script>
 @endpush

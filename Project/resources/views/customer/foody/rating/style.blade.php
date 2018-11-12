@@ -3,14 +3,23 @@
         .foody-rating-show {
             margin-bottom: 20px;
         }
+        .foody-rating-show.pinned {
+            position: relative !important;
+            top: 0 !important;
+            right: unset !important;
+            float: left !important;
+            width: auto !important;
+        }
+
     }
-    .foody-rating-show.pinned{
-        overflow: hidden;
-    }
-    .foody-rating-show.pinned {
-        right: 5% !important;
-        float: right !important;
-        width: calc((90% - 180px) * 1 / 3) !important;
+    @media only screen and (min-width: 993px) {
+        .foody-rating-show.pinned {
+            right: 5% !important;
+            float: right !important;
+            width: calc((90% - 180px) * 1 / 3) !important;
+            overflow: hidden;
+        }
+
     }
     .rating-header {
         height: 50px;

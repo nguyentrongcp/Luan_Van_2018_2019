@@ -1,4 +1,4 @@
-<div class="row white section scrollspy" id="foody-images-container">
+<div class="row white section scrollspy">
     <div class="col s12 content">
         <span class="content-header">Hình ảnh từ cộng đồng</span>
         <div class="divider" style="margin-bottom: 10px"></div>

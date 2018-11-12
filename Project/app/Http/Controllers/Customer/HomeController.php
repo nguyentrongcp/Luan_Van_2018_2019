@@ -19,16 +19,26 @@ class HomeController extends Controller {
         $foody_types = FoodyType::all();
         $foodies = Foody::all();
         $type = '';
+        $sort = '';
         if ($request->session()->has('foody_type_id')) {
             $type = session('foody_type_id');
             $request->session()->forget('foody_type_id');
         }
+        elseif ($request->session()->has('foody_sort_id')) {
+            $sort = session('foody_sort_id');
+            $request->session()->forget('foody_sort_id');
+        }
 
-        return view('customer.home.index', compact(['foody_types', 'foodies', 'type']));
+        return view('customer.home.index', compact(['foody_types', 'foodies', 'type', 'sort']));
     }
 
     public function getFoody(Request $request) {
-        session(['foody_type_id' => $request->type_id]);
+        if ($request->sort_id != null) {
+            session(['foody_sort_id' => $request->sort_id]);
+        }
+        else {
+            session(['foody_type_id' => $request->type_id]);
+        }
 
         return Response(route('customer.home'));
 //        return Response(session('foody_type_id'));

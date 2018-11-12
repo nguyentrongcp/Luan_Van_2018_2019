@@ -13,7 +13,7 @@
 
             $('.foody-type').on('click', function () {
                 let id = $(this).attr('data-type');
-                getFoodyByType(id, '{{ route('home.get_foody') }}');
+                getFoodyByType(id,null,'{{ route('home.get_foody') }}');
             });
         });
 

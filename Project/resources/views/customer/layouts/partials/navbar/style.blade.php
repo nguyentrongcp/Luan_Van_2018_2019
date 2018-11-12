@@ -31,8 +31,8 @@
     }
     .nav-btn {
         text-transform: unset;
-        background: linear-gradient(rgba(33,33,33,0.6),rgba(66,66,66,0.6),rgba(97,97,97,0.6),rgba(66,66,66,0.6),rgba(33,33,33,0.6));
-        background-color: rgba(33,33,33,0.6) !important;
+        /*background: linear-gradient(rgba(33,33,33,0.6),rgba(66,66,66,0.6),rgba(97,97,97,0.6),rgba(66,66,66,0.6),rgba(33,33,33,0.6));*/
+        background-color: rgba(0,0,0,0.6) !important;
     }
     .navbar .nav-wrapper .brand-logo img {
         height: 64px;
@@ -41,7 +41,7 @@
         background-color: unset;
     }
     #dropdown-category-content {
-        min-width: 260px !important;
+        min-width: 287px !important;
     }
 
     /*.navbar-mobile {*/

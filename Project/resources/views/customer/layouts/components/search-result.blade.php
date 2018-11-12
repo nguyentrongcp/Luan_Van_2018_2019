@@ -48,6 +48,7 @@
     }
     .search-result-row:hover {
         background-color: #DFDDDD !important;
+        cursor: pointer;
     }
     .search-result-row {
         height: 64px;
