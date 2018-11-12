@@ -18,7 +18,7 @@ class SalesOffsController extends Controller
      */
     public function index()
     {
-        $salesOffs = SalesOff::where('parent_id',null)->paginate(10);
+        $salesOffs = SalesOff::where('sales_off_id',null)->paginate(10);
 
         return view('admin.sales_offs.index', compact('salesOffs'));
     }
@@ -121,7 +121,7 @@ class SalesOffsController extends Controller
         $sales_id = SalesOff::find($id);
         $sales_name = $sales_id->name;
 
-        $salesOffs = SalesOff::where('parent_id',$id)->paginate(10);
+        $salesOffs = SalesOff::where('sales_off_id',$id)->paginate(10);
 
         return view('admin.sales_offs.create.index',
             compact('sales_name','salesOffs','id'));

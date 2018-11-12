@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Foody;
 use App\GoodsReceiptNoteCost;
 use App\Order;
 use Faker\Provider\DateTime;
@@ -24,7 +25,11 @@ class StatisticController extends Controller
 
     public function foody()
     {
-        return view('admin.statistic.foody.index');
+        $outFoodies = DB::table('foodies')
+            ->join('foody_statuses','foodies.id','=','foody_statuses.foody_id')
+            ->where('foody_statuses.status','=',false)
+            ->get();
+        return view('admin.statistic.foody.index',compact('outFoodies'));
     }
 
     public function today(Request $request)
@@ -93,4 +98,6 @@ class StatisticController extends Controller
 
         return Response($data);
     }
+
+
 }
