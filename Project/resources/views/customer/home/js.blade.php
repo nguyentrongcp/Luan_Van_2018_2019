@@ -35,6 +35,9 @@
             if ('{{ $type }}' !== '') {
                 showFoodyByType($($('.type-{{ $type }}')[0]));
             }
+            else if ('{{ $sort }}' !== '') {
+                showFoodyBySort($($('.sort-{{ $sort }}')[0]));
+            }
             else {
                 showFoodyByType($('.foody-type.active')[0]);
             }
@@ -151,7 +154,10 @@
         }
 
         $('.foody-sort').on('click', function () {
-            let sort = this;
+            showFoodyBySort(this);
+        });
+
+        function showFoodyBySort(sort) {
             let sort_filter = $(sort).attr('data-filter');
             let type_id = $($('.foody-type.active')[0]).attr('data-filter');
             $.ajax({
@@ -174,7 +180,7 @@
                     detectShowChange();
                 }
             })
-        });
+        }
 
         $('.foody-type').on('click', function () {
             showFoodyByType(this);

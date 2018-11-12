@@ -8,7 +8,6 @@
             <li><a href="#comment-container">Bình luận</a></li>
         @endif
         <li><a href="#involve-foody-container">Cùng loại</a></li>
-        <li><a href="#initialization">Đánh giá cao</a></li>
     </ul>
     <div class="slider-ads-portrait">
         <img src="/customer/image/slider-ads2.jpg">

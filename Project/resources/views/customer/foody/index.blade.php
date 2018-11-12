@@ -2,7 +2,15 @@
 
 @section('title', 'fastfoody.vn - '.$foody->name)
 
-@php $logged = Auth::guard('customer')->check() ? 'true' : 'false'; @endphp
+@php
+    $logged = Auth::guard('customer')->check() ? 'true' : 'false';
+    $voted = 'false';
+    if ($logged == 'true') {
+        if (\App\VoteDetail::where('foody_id', $foody->id)->where('customer_id', Auth::guard('customer')->user()->id)->count() > 0) {
+            $voted = 'true';
+        }
+    }
+@endphp
 
 {{--@section('meta')--}}
     {{--<meta property="og:url"           content="{{ Request::url() }}" />--}}
@@ -119,24 +127,24 @@
                 <nav class="grey darken-2">
                     <div class="nav-wrapper">
                         <ul>
-                            <li class="col s4 text-center waves-effect waves-light">
+                            <li class="col s6 text-center waves-effect waves-light">
                                 <a id="foody-comment-show">
                                     <i class="comment icon"></i>
                                     Bình luận
                                 </a>
                             </li>
-                            <li class="col s4 waves-effect waves-light">
-                                <a href="#">
+                            <li class="col s6 waves-effect waves-light">
+                                <a id="foody-rating-modal-show">
                                     <i class="star icon"></i>
                                     Đánh giá
                                 </a>
                             </li>
-                            <li class="col s4 waves-effect waves-light">
-                                <a onclick="$('#commentcomment').click()">
-                                    <i class="share alternate icon"></i>
-                                    Chia sẻ
-                                </a>
-                            </li>
+                            {{--<li class="col s4 waves-effect waves-light">--}}
+                                {{--<a onclick="$('#commentcomment').click()">--}}
+                                    {{--<i class="share alternate icon"></i>--}}
+                                    {{--Chia sẻ--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
                         </ul>
                     </div>
                 </nav>
@@ -155,9 +163,11 @@
                 @include('customer.foody.rating.rating')
             </div>
             <div class="col s12 m12 l8 content-col left">
-                @include('customer.foody.images')
 
-                @include('customer.foody.images-public')
+                <div class="row section scrollspy" id="foody-images-container">
+                    @include('customer.foody.images')
+                    @include('customer.foody.images-public')
+                </div>
 
                 @include('customer.foody.comment.comment')
 
@@ -171,6 +181,8 @@
     @include('customer.foody.image-viewer')
 
     @include('customer.foody.comment.comment-modal')
+
+    @include('customer.foody.vote.rating-modal')
 
     @include('customer.foody.comment.comment-modal-success')
 

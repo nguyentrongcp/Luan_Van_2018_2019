@@ -146,6 +146,10 @@ body {
     background: linear-gradient(#263238,#37474f,#263238);
 }
 
+.modal-header {
+    font-weight: 600;
+}
+
 .input-field.col label {
     left: 0;
 }

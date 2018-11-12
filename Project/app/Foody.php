@@ -139,6 +139,9 @@ class Foody extends Model
             return $this->currentCost();
         }
     }
+
+    
+
 //
 //    public function getChangedQuantity($quantity) {
 //        $changed_quantity = $this->getQuantity() + $quantity;

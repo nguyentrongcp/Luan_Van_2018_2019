@@ -3,18 +3,28 @@
         <div class="container">
             <div class="nav-wrapper">
                 <ul id="navbar-ul">
-                    <li class="nav-col m-nav-col {{ Request::is('home') ? 'hide-on-small-only' : '' }}" id="navbar-back">
-                        <a>
-                            <i class="material-icons left hide-on-small-only">arrow_back</i>
-                            <span class="hide-on-small-only">Trở về</span>
-                            <i class="material-icons center hide-on-med-and-up">arrow_back</i>
-                        </a>
-                    </li>
-                    <li class="nav-col m-nav-col hide-on-med-and-up {{ Request::is('home') ? '' : 'hide' }}" id="navbar-filter">
-                        <a id="home-nav-dropdown" class="dropdown" data-target="m-home-nav-container">
-                            <i class="material-icons center hide-on-med-and-up">filter_list</i>
-                        </a>
-                    </li>
+                    @if(Request::is('home'))
+                        <li class="nav-col m-nav-col hide-on-small-only" id="navbar-back">
+                            <a href="{{ route('customer.index') }}">
+                                <i class="material-icons left hide-on-small-only">home</i>
+                                <span class="hide-on-small-only">Trang chính</span>
+                                <i class="material-icons center hide-on-med-and-up">home</i>
+                            </a>
+                        </li>
+                        <li class="nav-col m-nav-col hide-on-med-and-up" id="navbar-filter">
+                            <a id="home-nav-dropdown" class="dropdown" data-target="m-home-nav-container">
+                                <i class="material-icons center hide-on-med-and-up">filter_list</i>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-col m-nav-col" id="navbar-back">
+                            <a href="{{ route('customer.home') }}">
+                                <i class="material-icons left hide-on-small-only">home</i>
+                                <span class="hide-on-small-only">Trang chủ</span>
+                                <i class="material-icons center hide-on-med-and-up">home</i>
+                            </a>
+                        </li>
+                    @endif
 
                     <li data-search="{{ Request::is('home*') ? 'home' : 'result' }}"
                         class="hide nav-col" id="navbar-search">
@@ -57,21 +67,23 @@
 </div>
 
 <ul id='dropdown-category-content' class='dropdown-content'>
-    <li><a href="#!">
-            <i class="material-icons">access_time</i>Mới nhất
+    <li><a onclick="getFoodyByType(null,'vote', '{{ route('home.get_foody') }}')">
+            <i class="material-icons">star</i>Ẩm thực đánh giá cao
         </a></li>
-    <li><a href="#!">
-            <i class="material-icons">star</i>Đánh giá
+    <li><a onclick="getFoodyByType(null,'like', '{{ route('home.get_foody') }}')">
+            <i class="material-icons">favorite</i>Ẩm thực yêu thích nhất
         </a></li>
-    <li><a href="#!">
-            <i class="material-icons">favorite</i>Yêu thích
+    <li><a onclick="getFoodyByType(null,'buy', '{{ route('home.get_foody') }}')">
+            <i class="material-icons">shopping_cart</i>Ẩm thực được mua nhiều nhất
         </a></li>
-    <li><a href="#!">
-            <i class="material-icons">bookmark</i>Đã lưu
-        </a></li>
+    @if($logged == 'true')
+        <li><a onclick="getFoodyByType('favorite',null, '{{ route('home.get_foody') }}')">
+                <i class="material-icons">bookmark</i>Ẩm thực đã lưu
+            </a></li>
+    @endif
     <li class="divider"></li>
     <li>
-        <a href="#!">
+        <a href="{{ route('customer.news.index') }}">
             <i class="material-icons">event</i>Tin tức và khuyến mãi
         </a></li>
 </ul>

@@ -10,6 +10,8 @@ use App\Image;
 use App\ImageComment;
 use App\Like;
 use App\Order;
+use App\Vote;
+use App\VoteDetail;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -52,9 +54,10 @@ class FoodyController extends Controller
     public function search(Request $request) {
         if (Order::where('order_code', $request->value)->count() > 0) {
             $order_code = strtoupper($request->value);
+            $url = route('payment.order.show', $order_code);
             $date = date_format(date_create(Order::where('order_code', $order_code)->first()->order_created_at), 'd-m-Y H:i');
             return Response("
-                <div class='row search-result-row'>
+                <div class='row search-result-row search-order' data-target='$url'>
                     <a href='#' class='search-result-content' style='width: 100%'>
                         <i class='material-icons left center-align' style='font-size: 40px;line-height: 64px;width: 64px;margin-right: 0;'
                         >assignment</i>
@@ -72,6 +75,7 @@ class FoodyController extends Controller
         $foodies = Foody::where('slug','like', "%$slug%")->get();
         $data = '';
         foreach($foodies as $key => $foody) {
+            $url = route('customer.foody.show', $foody->slug);
             if ($key == 0) {
                 $divider = '';
             }
@@ -85,9 +89,9 @@ class FoodyController extends Controller
                 $sales_off = "";
             }
             $data .= "$divider
-                <div class=\"row search-result-row\">
+                <div class=\"row search-result-row search-foody\" data-target='$url'>
         <img src='$foody->avatar'>
-        <a href='#' class=\"search-result-content\">
+        <div class=\"search-result-content\">
             <div class=\"col s12 search-result-title truncate\">$foody->name</div>
             <div class=\"col s12 search-result-cost\">$cost<sup>đ</sup>$sales_off</div>
             <div class=\"col s12 search-result-rate\">";
@@ -106,7 +110,7 @@ class FoodyController extends Controller
             }
             $data .= "    
             </div>
-        </a>
+        </div>
     </div>
             ";
         }
@@ -228,6 +232,47 @@ class FoodyController extends Controller
 
                 return Response('favorited');
             }
+        }
+    }
+
+    public function rating(Request $request) {
+        if (($request->attitude < 1 && $request->attitude > 5) || ($request->cost < 1 && $request->cost > 5) ||
+            ($request->quality < 1 && $request->quality > 5)) {
+            return Response([
+                'status' => 'error',
+                'content' => 'Đánh giá không hợp lệ!'
+            ]);
+        }
+        if (Auth::guard('customer')->check()) {
+            $customer_id = Auth::guard('customer')->user()->id;
+            if (VoteDetail::where('customer_id', $customer_id)->where('foody_id', $request->foody_id)->count() > 0) {
+                $vote_detail = VoteDetail::where('customer_id', $customer_id)->where('foody_id', $request->foody_id)->first();
+                $vote_detail->attitude = $request->attitude;
+                $vote_detail->cost = $request->cost;
+                $vote_detail->quality = $request->quality;
+                $vote_detail->update();
+            }
+            else {
+                $vote_detail = new VoteDetail();
+                $vote_detail->attitude = $request->attitude;
+                $vote_detail->cost = $request->cost;
+                $vote_detail->quality = $request->quality;
+                $vote_detail->foody_id = $request->foody_id;
+                $vote_detail->customer_id = $customer_id;
+                $vote_detail->save();
+            }
+            $vote = Vote::where('foody_id', $request->foody_id)->first();
+            $vote->attitude = VoteDetail::where('foody_id',$request->foody_id)->avg('attitude');
+            $vote->cost = VoteDetail::where('foody_id',$request->foody_id)->avg('cost');
+            $vote->quality = VoteDetail::where('foody_id',$request->foody_id)->avg('quality');
+            $vote->average = number_format(($vote->attitude + $vote->cost + $vote->quality) / 3, 1);
+            $vote->update();
+        }
+        else {
+            return Response([
+                'status' => 'error',
+                'content' => 'Bạn chưa đăng nhập!'
+            ]);
         }
     }
 }

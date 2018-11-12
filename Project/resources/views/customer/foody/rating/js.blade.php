@@ -1,8 +1,6 @@
 @push('script')
     <script>
         let rating = $('#foody-rating-show');
-        let second_navbar = $('#navbar');
-        let container = $('#foody-content-container');
 
         if ($(window).scrollTop() + $(window).height() >= $('#footer-container').offset().top - 70) {
             let bottom = $(window).height() + $(window).scrollTop() - $('#footer-container').offset().top + 70;
@@ -25,13 +23,18 @@
             }
         });
 
-        $(rating).pushpin({
-            top: $(rating).offset().top - $(second_navbar).height(),
-            onPositionChange: function (status) {
-                if (status === 'pinned') {
-                    $(rating).css('top', $(second_navbar).height());
-                }
-            }
-        });
+
+        // let width_of_window = getWidth();
+        // $(window).resize(function () {
+        //     $(rating).pushpin({
+        //         top: $(rating).offset().top - $(second_navbar).height(),
+        //         onPositionChange: function (status) {
+        //             if (status === 'pinned') {
+        //                 $(rating).css('top', $(second_navbar).height());
+        //             }
+        //         }
+        //     })
+        // });
+
     </script>
 @endpush

@@ -158,6 +158,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::post('/customer/foody/comment', 'Customer\FoodyController@comment');
     Route::post('/customer/like', 'Customer\FoodyController@like');
     Route::post('/customer/favorite', 'Customer\FoodyController@favorite');
+    Route::post('/customer/rating', 'Customer\FoodyController@rating')->name('customer.foody.rating');
 
     // Order
     Route::get('/payment/order', 'Customer\OrderController@index')->name('payment.order.index');

@@ -58,6 +58,7 @@
             });
 
             $('#dropdown-category').dropdown({
+                alignment: 'right',
                 coverTrigger: false,
                 inDuration: 500,
                 outDuration: 500,
@@ -66,7 +67,7 @@
                     $('body').css('overflow', 'hidden');
                     $('#navbar-category').addClass('teal');
                     $('html, body').animate({scrollTop: $('#navbar').offset().top}, time);
-                    setDimmer($('#navbar-cart'));
+                    setDimmer($('#navbar-category'));
                 },
                 onOpenEnd: function() {
                     if ($('body').css('overflow') === 'auto') {
@@ -153,6 +154,16 @@
                         },
                         success: function (data) {
                             $('#search-result').html(data);
+                            $('.search-foody').each(function (key,value) {
+                                $(value).on('mousedown', function () {
+                                    window.location.href = $(value).attr('data-target');
+                                });
+                            });
+                            $('.search-order').each(function (key,value) {
+                                $(value).on('mousedown', function () {
+                                    window.location.href = $(value).attr('data-target');
+                                });
+                            });
                             let height = $(window).height() - $('#navbar').height();
                             if ($('#search-result').height() >= height) {
                                 $('#search-result').css({

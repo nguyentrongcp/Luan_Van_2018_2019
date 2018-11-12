@@ -95,12 +95,13 @@ function phoneFormat(phone) {
         phone.substr(phone.length - 3, 3);
 }
 
-function getFoodyByType(id, url) {
+function getFoodyByType(type_id, sort_id, url) {
     $.ajax({
         type: 'get',
         url: url,
         data: {
-            type_id: id
+            type_id: type_id,
+            sort_id: sort_id
         },
         success: function (data) {
             window.location.href = data;

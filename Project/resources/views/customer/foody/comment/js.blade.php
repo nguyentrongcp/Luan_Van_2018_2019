@@ -1,6 +1,4 @@
 <script>
-
-
     $('#foody-comment-show').on('click', function () {
         let logged = '{{ $logged }}';
         if (logged === 'false') {

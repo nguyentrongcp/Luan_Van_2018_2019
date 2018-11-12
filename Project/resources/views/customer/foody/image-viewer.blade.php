@@ -5,17 +5,17 @@
     <div class="divider"></div>
     <div class="image-view-action">
         <div class="image-view-close">
-            <i onclick="closeViewer()" class="material-icons">close</i>
+            <i onclick="closeViewer()" class="fas fa-times"></i>
         </div>
         <div class="image-view-previous">
             <i id="image-view-previous"
                onclick="viewImage($('#image-viewer-' + (parseInt($($('#image-viewer-list img.active')[0]).attr('data-image')) - 1)))"
-               class="material-icons">navigate_before</i>
+               class="fas fa-chevron-left"></i>
         </div>
         <div class="image-view-next">
             <i data-image="image-viewer-1"
                onclick="viewImage($('#image-viewer-' + (parseInt($($('#image-viewer-list img.active')[0]).attr('data-image')) + 1)))"
-               id="image-view-next" class="material-icons">navigate_next</i>
+               id="image-view-next" class="fas fa-chevron-right"></i>
         </div>
     </div>
     <div class="image-viewer-list">
@@ -35,12 +35,17 @@
         }
         .image-view-next i, .image-view-previous i {
             cursor: pointer;
+            font-size: 100px !important;
         }
         .image-view-action:hover {
             opacity: 1 !important;
         }
         .image-view-action {
             opacity: 0 !important;
+        }
+        .image-view-close i {
+            font-size: 50px !important;
+            margin-right: 10px !important;
         }
     }
 
@@ -86,13 +91,16 @@
         height: 100px;
     }
     .image-view-close i {
-        font-size: 50px;
+        font-size: 35px;
         float: right;
         cursor: pointer;
+        margin-right: 5px;
+        opacity: 0.5;
     }
     .image-view-previous i, .image-view-next i {
-        font-size: 100px !important;
+        font-size: 50px;
         height: 100%;
+        opacity: 0.5;
         padding-top: calc((100vh - 400px) / 2);
     }
     .image-view-previous {
@@ -127,10 +135,10 @@
 @push('script')
     <script>
 
-        var image_width = 85;
+        let image_width = 85;
 
         function initImageViewer(list_image, image_selected) {
-            var count = parseInt((($(window).width()) * 8 / 10) / image_width) + 1;
+            let count = parseInt((($(window).width()) * 8 / 10) / image_width) + 1;
             let width = count * image_width;
             if (list_image.length < count) {
                 width = image_width * list_image.length;
@@ -177,7 +185,7 @@
                     "                     src='" + src + "' onclick='viewImage(this)' data-image='" + key + "'>");
             });
             // $('#image-viewer-' + (next - count + 2)).attr('data-last', 'inactive');
-            scrollImageList(image_selected, 750);
+            scrollImageList(image_selected, 100);
         }
 
         // $(window).resize(function f() {
@@ -187,7 +195,6 @@
 
         function sizeChange() {
             $(window).resize(function () {
-                console.log('fsd');
                 // scrollImage(image_selected);
                 // console.log($('#image-viewer-list img'));
                 // $('#image-viewer-list').html('');
@@ -244,7 +251,7 @@
                 });
                 $(image_list).animate({
                     left: - width
-                }, time);
+                }, 250);
                 if (next !== image_selected) {
                     next -= count - 1;
                 }
@@ -282,6 +289,7 @@
             let image_previous = $('#image-view-previous');
             let image_total = $('.image-viewer-list img').length;
             $('#image-viewer-main').attr('src', $(image).attr('src'));
+            setMiddle($('#image-viewer-main'));
             $('#image-viewer-list .active').removeClass('active');
             $(image).addClass('active');
             $(image_next).attr('data-image', 'image-viewer-' + (data_image + 1));
@@ -317,7 +325,7 @@
                     });
                     $(image_list).animate({
                         'left' : "-=" + (image_width * (count - 1))
-                    }, 750);
+                    }, 250);
                     $(image_selected).attr('data-next', 'active');
                     // if ($(image_selected).attr('data-last') === 'inactive') {
                     //     $(image_selected).attr('data-last', 'active');
@@ -334,7 +342,7 @@
                     let image_list = $('#image-viewer-list');
                     $(image_list).animate({
                         'left' : "+=" + (image_width * (count - 1))
-                    }, 750, function () {
+                    }, 250, function () {
                         $(image_list).css({
                             width: "-=" + (image_width * (count - 1))
                         });

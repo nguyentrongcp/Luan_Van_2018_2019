@@ -1,6 +1,6 @@
 @if (count($images) != 0)
 
-    <div class="row white section scrollspy" id="foody-images-container">
+    <div class="row white" style="margin-bottom: 20px">
         <div class="col s12 content">
             <span class="content-header">Hình ảnh chuyên nghiệp</span>
             <div class="divider" style="margin-bottom: 10px"></div>
