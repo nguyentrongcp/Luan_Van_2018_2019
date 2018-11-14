@@ -15,6 +15,10 @@ class Admin extends Authenticatable
         $guard = Auth::guard('admin');
         return $guard;
     }
+    public static function adminLogged() {
+        return self::adminGuard()->check();
+    }
+
     public static function adminId() {
         return self::adminGuard()->id();
     }
@@ -33,5 +37,9 @@ class Admin extends Authenticatable
 
     public static function admin() {
         return self::adminGuard()->user();
+    }
+
+    public static function isAdmin(){
+        return self::admin()->role_id == 1;
     }
 }

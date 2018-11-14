@@ -44,13 +44,18 @@
                 //     }
                 // })
                 // console.log(filename);
+                console.log(file);
+
             },
             success(file, res) {
                 $('#dropzone-message')
                     .html("<div class='ui small info message'><strong>Tải lại trang để cập nhật</strong></div>");
                 if(file.previewElement)
                     return file.previewElement.classList.add("dz-success");
+
+
             }
+
         }
     </script>
 @endpush

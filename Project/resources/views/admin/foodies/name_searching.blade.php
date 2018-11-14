@@ -1,16 +1,10 @@
 <div class="ui small input right icon">
-    {{--@if (!empty())--}}
-        {{--<i class="remove-input remove red icon pointer"--}}
-           {{--onclick="{{ route('foodies.index') }}"></i>--}}
-    {{--@endif--}}
     <input type="text" class="need-remove" name="key-search" id="search_foody" placeholder="Tìm kiếm"
            value="">
     <i class="search icon"></i>
 </div>
-<div class="menu scrolling">
-    <div class=" results " id="search-result">
+<div class="ui list results " id="search-result">
 
-    </div>
 </div>
 
 @push('script')
@@ -41,14 +35,16 @@
     </script>
 @endpush
 <style>
+
     .results {
         position: absolute;
         z-index: 1000;
         display: block;
         /*top: 236px;*/
-        height: auto;
+        max-height: 500px !important;
         margin-bottom: 0 !important;
         background-color: white;
+        overflow: scroll;
     }
 
     .result-content {

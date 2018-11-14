@@ -23,10 +23,10 @@
                         <i class="add fitted icon"></i>
                         <strong>Thêm mới </strong>
                     </a>
-                    @include('admin.foodies.btn_filer')
+{{--                    @include('admin.foodies.btn_filer')--}}
                     @if(!empty($foodyType_filter))
                         <div class="ui blue label need-popup" style="padding: 12px;">
-                            <span class="blue">{{ $nameType_filter }} </span> - Tất cả &nbsp;&nbsp;
+                            <span>{{ $nameType_filter }} </span> - Tất cả &nbsp;&nbsp;
                             <a class="a-decoration" href="{{ route('foodies.index') }}"><i
                                         class="delete fitted icon"></i></a>
                         </div>

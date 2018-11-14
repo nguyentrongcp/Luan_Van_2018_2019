@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Employees extends Model
 {
@@ -13,38 +14,36 @@ class Employees extends Model
         return (Employees::where('email', $email)->count() > 0);
     }
 
-    public function decentralizes() {
-        return $this->belongsToMany(
-            Decentralization::class,
-            'decentralize_employees',
-            'admin_id',
-            'decentralization_id');
-    }
+//    public function roles(){
+//        return $this->hasMany(EmployeeRole::class);
+//    }
 
-    public function checkDecentralization($id)
+    public function checkRoles($id)
     {
-        if ($this->role == 0)
-        {
+        if ($this->role_id == 1) {
             return true;
         }
 
-        $roles = $this->decentralizes->toArray();
-
-        foreach ($roles as $role)
-        {
-            if ($role['id'] == $id)
+        $idr = Employees::find(Admin::adminId())->role_id;
+        $roles = DB::table('admins as a')
+            ->join('employee_roles as e', 'e.role_id', '=', 'a.role_id')
+            ->where('a.role_id', '=', $idr)
+            ->get();
+        foreach ($roles as $role) {
+            if ($role->function_id == $id)
                 return true;
         }
-
         return false;
+
     }
 
     public function isAdmin()
     {
-        return $this->role == 0;
+        return $this->role_id == 1;
     }
 
-    public function matchedIds($id) {
+    public function matchedIds($id)
+    {
         return $id == $this->id;
     }
 }

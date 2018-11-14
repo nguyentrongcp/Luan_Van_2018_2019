@@ -26,9 +26,7 @@
 {{--                    @include('admin.foodies.btn_filer')--}}
                 </div>
                 <div class="five wide column">
-
                     @include('admin.foodies.name_searching')
-
                 </div>
             </div>
             @include('admin.foodies.table')

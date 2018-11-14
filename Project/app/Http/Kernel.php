@@ -2,6 +2,14 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ContentAu;
+use App\Http\Middleware\EmployeeAu;
+use App\Http\Middleware\FoodyAu;
+use App\Http\Middleware\FoodyTypeAu;
+use App\Http\Middleware\GoodsReceiptNoteAu;
+use App\Http\Middleware\OrderAu;
+use App\Http\Middleware\SalesOffAu;
+use App\Http\Middleware\StatisticAu;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -59,5 +67,13 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'statistic'=>StatisticAu::class,
+        'foodytype'=>FoodyTypeAu::class,
+        'foody'=>FoodyAu::class,
+        'goodsreceiptnote'=>GoodsReceiptNoteAu::class,
+        'order'=>OrderAu::class,
+        'salesoff'=>SalesOffAu::class,
+        'content'=>ContentAu::class,
+        'employee'=>EmployeeAu::class
     ];
 }

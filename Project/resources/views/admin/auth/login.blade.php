@@ -1,5 +1,7 @@
+
 @include('admin.layouts.partials.header')
 
+@section('title', 'Login ')
 <body class="login-page sidebar-collapse">
     <div class="ui middle aligned center aligned grid">
         <div class="container" style="padding-top: 100px;width: 35%">

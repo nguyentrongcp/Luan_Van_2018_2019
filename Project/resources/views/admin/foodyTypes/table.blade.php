@@ -40,7 +40,7 @@
                 </td>
                 <td>
                     <a href="#" class="ui tiny red icon label"
-                       onclick="$('{{ "#delete-foody-type-modal-" . $foodyType->id }}').modal('show')">
+                       onclick="$('{{"#delete-foody-type-modal-" . $foodyType->id}}').modal('show')">
                         <i class="remove icon fitted"></i>
                     </a>
                 </td>

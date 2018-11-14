@@ -4,14 +4,14 @@
         <a href="/admin"><img class="ui medium image" src="{{ asset('customer/image/logo.png') }}" alt="Logo"></a>
     </div>
 
-    {{--@php--}}
-        {{--$nhanVien = \App\NhanVien::find(\App\Helper\AuthHelper::adminId());--}}
-    {{--@endphp--}}
+    @php
+        $employee = \App\Employees::find(\App\Admin::adminId());
+    @endphp
 
-    <a href="/admin/dashboard" class="title item {{ Request::is('*dashboard') ? 'active': '' }}">
+    <a href="/admin/dashboard" class="title item {{ Request::is('*dashboard') ? 'active-bar': '' }}">
         <i class="dashboard icon icon-left"></i>Tổng quan</a>
 
-    {{--@if($nhanVien->checkQuyen(1))--}}
+    @if($employee->checkRoles(1))
         <div class="ui accordion no-padding">
             <div class="title item menu-item-padding color-white {{ Request::is('*statistic*') ? 'active-bar': '' }}">
                 <i class="chart bar icon icon-left icon-accordion"></i>
@@ -33,33 +33,34 @@
                 </div>
             </div>
         </div>
-    {{--@endif--}}
+    @endif
 
-    {{--@if($nhanVien->checkQuyen(3))--}}
+    @if($employee->checkRoles(2))
         <a class="item {{ Request::is('*/foody_type') ? 'active-bar': '' }}" href="/admin/foody_type">
             <i class="sitemap icon icon-left"></i>Loại thực đơn</a>
-    {{--@endif--}}
+    @endif
 
-    {{--@if($nhanVien->checkQuyen(4))--}}
-        <a class="item {{ Request::is('*admin/foodies*') ? 'active-bar': '' }}" href="/admin/foodies">
+    @if($employee->checkRoles(3))
+        <a class="item {{ Request::is('*admin/foodies*')||Request::is('*/foody_type/*') ? 'active-bar': '' }}" href="/admin/foodies">
             <i class="box icon icon-left"></i>Thực đơn</a>
-    {{--@endif--}}
+    @endif
 
-    {{--@if($nhanVien->checkQuyen(6))--}}
-        <a class="item {{Request::is('*/goods_receipt_note') ? 'active-bar': '' }}" href="/admin/goods_receipt_note">
+    @if($employee->checkRoles(4))
+        <a class="item {{Request::is('*/goods_receipt_note')|| Request::is('*/goods_receipt_note_detail/*') ? 'active-bar': '' }}" href="/admin/goods_receipt_note">
             <i class="dolly icon icon-left"></i>Nhập hàng </a>
-    {{--@endif--}}
+    @endif
 
-    {{--@if($nhanVien->checkQuyen(7))--}}
+    @if($employee->checkRoles(5))
         <a class="item {{Request::is('*admin/orders*') ? 'active-bar': '' }}" href="/admin/orders">
             <i class="clipboard icon icon-left"></i>Đơn hàng </a>
-    {{--@endif--}}
+    @endif
 
-    {{--@if($nhanVien->checkQuyen(8))--}}
+    @if($employee->checkRoles(6))
         <a class="item {{Request::is('*/sales_offs') ? 'active-bar': '' }}" href="/admin/sales_offs">
             <i class="certificate icon icon-left"></i>Khuyến mãi </a>
-    {{--@endif--}}
+    @endif
 
+    @if($employee->checkRoles(7))
 
     <div class="ui accordion no-padding">
         <div class="title item menu-item-padding color-white {{ Request::is('*content*') ? 'active-bar': ''}}">
@@ -67,7 +68,7 @@
             Nội dung website
             <i class="dropdown icon"></i>
         </div>
-        <div class="content menu-item-padding color-white">
+        <div class="content menu-item-padding color-white {{ Request::is('*content*') ? 'active': ''}}">
             <div class="menu" style="padding-left: 10px">
                 <a class="title item {{ Request::is('*shop_infos') ? 'active': '' }}"
                    href="{{route('shop_infos.index')}}">
@@ -82,10 +83,12 @@
             </div>
         </div>
     </div>
-    {{--@if($nhanVien->isAdmin())--}}
-        <a class="item {{Request::is('*/employeees') ? 'active-bar': '' }}" href="/admin/employees">
+    @endif
+
+@if($employee->isAdmin())
+        <a class="item {{Request::is('*/employees') ? 'active-bar': '' }}" href="/admin/employees">
             <i class="users icon icon-left"></i>Nhân viên </a>
-    {{--@endif--}}
+@endif
 
 
 </div>
