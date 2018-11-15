@@ -17,4 +17,7 @@ class News extends Model
     public function getVisited() {
         return $this->newsVisiteds()->sum('count');
     }
+    public static function existedTitle($title){
+        return (News::where('title',$title)->count() > 0);
+    }
 }

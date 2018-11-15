@@ -2,14 +2,14 @@
     <thead>
     <tr>
         <th class="collapsing">
-            <div class="ui checkbox" id="chon-het-slider">
+            <div class="ui checkbox" id="select-all">
                 <input type="checkbox" class="hidden">
             </div>
         </th>
         <th class="collapsing">STT</th>
         <th>Hình ảnh (Click để phóng to)</th>
         <th class="collapsing">STT</th>
-        <th>Hình ảnh</th>
+        <th>Hình ảnh (Click để phóng to)</th>
         <th class="collapsing">Chọn</th>
     </tr>
     </thead>
@@ -24,14 +24,14 @@
                 </div>
             </td>
             <td>{{ $i + 1 }}</td>
-            <td><a href="#" onclick="$('{{ '#modal-xem-' . $sliders[$i]->id }}').modal('show')">
+            <td><a href="#" onclick="$('{{ '#modal-view-' . $sliders[$i]->id }}').modal('show')">
                     <img class="ui small image" src="{{ asset($sliders[$i]->image) }}">
                 </a>
             </td>
             @if (!empty($sliders[$i+1]))
                 <td>{{ $i + 2 }}</td>
                 <td>
-                    <a href="#" onclick="$('{{ '#modal-xem-' . $sliders[$i+1]->id }}').modal('show')">
+                    <a href="#" onclick="$('{{ '#modal-view-' . $sliders[$i+1]->id }}').modal('show')">
                         <img class="ui small image" src="{{ asset($sliders[$i+1]->image) }}">
                     </a>
                 </td>
@@ -47,4 +47,5 @@
     @endfor
     </tbody>
 </table>
+
 

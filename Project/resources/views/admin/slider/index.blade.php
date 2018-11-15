@@ -29,7 +29,6 @@
                 <i class="add fitted icon"></i>
                 <strong>Thêm mới </strong>
             </a>
-
             @include('admin.slider.table')
 
         </form>
@@ -52,6 +51,6 @@
 
 @push('script')
     <script>
-        bindSelectAll('chon-het-slider');
+        bindSelectAll('slider-id[]');
     </script>
 @endpush

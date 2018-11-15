@@ -25,7 +25,7 @@ class SliderSeeder extends Seeder
                 'describes'=>''
             ],
             [
-                'image'=>'customer/image/slide4.jpg',
+                'image'=>'customer/image/slider4.jpg',
                 'describes'=>''
             ],
         ]);

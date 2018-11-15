@@ -112,8 +112,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     /**      News       **/
     Route::resource('news', 'admin\NewsController')
         ->middleware('content');
-    Route::post('news/change_image/{id}', 'admin\NewsController@changeImage')->name('news_change_image')
-        ->middleware('content');
+//    Route::post('news', 'admin\NewsController@store')->name('news.store')
+//        ->middleware('content');
 
     /** Sliders **/
     Route::resource('sliders', 'admin\SliderController')

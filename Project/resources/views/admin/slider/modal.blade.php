@@ -1,61 +1,49 @@
-@push('style')
-    <link rel="stylesheet" href="{{ asset('admin/assets/plugin/dropzone/dropzone.min.css') }}">
-    <style>
-        #formUpload {
-            border: 2px dashed #2185d0;
-            border-radius: 10px;
-        }
-    </style>
-@endpush
-
-{{--script đặc biệt cần load trước khi form dropzone init--}}
-<script src="{{ asset('admin/assets/plugin/dropzone/dropzone.min.js') }}"></script>
-
-<div class="ui vertical flip modal" id="add-image-slider-modal">
+<div class="ui mini-40 flip modal" id="add-image-slider-modal">
     <div class="blue header">Thêm hình ảnh</div>
-    <div class="scrolling content">
-        <form action="{{ route('sliders.store') }}"
-              method="post"
-              class="dropzone"
-              enctype="multipart/form-data"
-              id="formUpload">
-            <div class="dz-message" data-dz-message><span>
-                    <strong>Chọn file để upload</strong>
-                </span></div>
+    <div class="ui content">
+        <form action="{{ route('sliders.store') }}" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+                <label for="slider-image">
+                    <span class="ui blue compact label">Chọn các ảnh</span>
+                    <ul class="ui list" id="list-slider-image"></ul>
+                </label>
+                <input type="file" multiple name="slider-image[]" max="5" id="slider-image" style="display: none;"
+                       onchange="updateFileNames()" accept="image/x-png,image/jpeg">
+            <div class="ui divider"></div>
+            <div class="field">
+                <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>
+            </div>
         </form>
     </div>
-    <div class="actions">
-        <button class="ui cancel blue button"><strong>Đóng</strong></button>
-    </div>
 </div>
+
+@foreach($sliders as $stt => $slider)
+    <div class="ui basic modal" id="{{ "modal-view-" . $slider->id }}">
+        <i class="close icon" style="color: #fff !important;"></i>
+        <div class="content">
+            <img src="{{ asset($slider->image) }}" class="ui centered image">
+        </div>
+    </div>
+@endforeach
+
 @push('script')
     <script>
-
-        Dropzone.options.formUpload = {
-            url: '{{ route('sliders.store') }}',
-            sending: function (file, xhr, formData) {
-                let filename = file.name;
-                formData.append("_token", '{{ csrf_token() }}');
-                // formData.append("images",file.name);
-                // $.ajax({
-                //     type:'POST',
-                //     data: {
-                //        images: filename,
-                //     }
-                // })
-                // console.log(filename);
-                console.log(file);
-
-            },
-            success(file, res) {
-                $('#dropzone-message')
-                    .html("<div class='ui small info message'><strong>Tải lại trang để cập nhật</strong></div>");
-                if(file.previewElement)
-                    return file.previewElement.classList.add("dz-success");
-
-
+        function updateFileNames() {
+            let files = $('#slider-image')[0].files;
+            if (files.length > 5) {
+                $.toast({
+                    heading: 'Lỗi', icon: 'error', text: 'Chỉ được chọn tối đa 5 file',
+                    loader: false, position: 'bottom-right'
+                });
+                return;
             }
 
+            let html = '';
+            $.each(files, (idx, file) => {
+                html += `<li>${file.name}</li>`;
+            });
+
+            $('#list-slider-image').html(html);
         }
     </script>
 @endpush
