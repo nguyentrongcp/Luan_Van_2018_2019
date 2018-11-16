@@ -1,4 +1,4 @@
-@foreach($employees as $stt => $employee)
+@foreach($employees as $employee)
     <div class="ui mini-40 vertical flip modal" id="{{ "modal-reset-pwd-" . $employee->id }}">
         <div class="blue header">Đặt lại mật khẩu</div>
         <div class="content">
@@ -6,23 +6,17 @@
 
                 {{ csrf_field() }}
                 <div class="field">
-                    <label>Mật khẩu cũ</label>
-                    <input type="password" name="old-pwd"
-                           minlength="6" maxlength="30" required>
-                </div>
-                <div class="field">
                     <label>Mật khẩu mới</label>
                     <input type="password" name="new-pwd"
                            minlength="6" maxlength="30" required>
                 </div>
-
                 <div class="field">
                     <label>Nhập lại mật khẩu</label>
                     <input type="password" name="confirm-pwd"
                            minlength="6" maxlength="30" required>
                 </div>
                 <div class="field">
-                    <button class="ui blue fluid button"><strong>OK</strong></button>
+                    <button type="submit" class="ui blue fluid button"><strong>OK</strong></button>
                 </div>
             </form>
         </div>
@@ -31,15 +25,14 @@
 
 
 @foreach($employees as $stt => $employee)
-    <div class="ui mini-50 vertical flip modal" id="{{ "update-employee-modal-" . $employee->id }}">
+    <div class="ui mini-50 vertical flip modal" id="{{"update-employee-modal-" . $employee->id}}">
         <div class="blue header">Cập nhật thông tin nhân viên</div>
         <div class="content">
             <form action="{{ route('employees.update', [$employee->id]) }}" class="ui form" method="post">
 
                 {{ csrf_field() }}
-
                 {{ method_field('PUT') }}
-
+                <input type="hidden" name="employee-role">
                 <div class="field">
                     <label>Tên nhân viên</label>
                     <input type="text" value="{{ $employee->name }}" name="employee-name"
@@ -73,7 +66,7 @@
                         </select>
                     </div>
                 <div class="field">
-                    <button class="ui blue fluid button"><strong>Lưu</strong></button>
+                    <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>
                 </div>
             </form>
         </div>

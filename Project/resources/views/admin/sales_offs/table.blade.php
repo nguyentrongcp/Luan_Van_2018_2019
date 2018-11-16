@@ -3,8 +3,8 @@
         <thead>
         <tr>
             <th class="collapsing">
-                <div class="ui checkbox" id="check-all">
-                    <input type="checkbox">
+                <div class="ui checkbox" id="select-all">
+                    <input type="checkbox" >
                 </div>
             </th>
             <th class="collapsing">STT</th>
@@ -54,3 +54,8 @@
         </div>
     @endif
 </div>
+@push('script')
+    <script>
+            bindSelectAll('sales-offs-id[]');
+    </script>
+@endpush

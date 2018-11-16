@@ -24,20 +24,15 @@
             <form action="{{ route('goods_receipt_note.update', [$goodsReceipt->id]) }}" class="ui form" method="post">
 
                 {{ csrf_field() }}
-
                 {{ method_field('PUT') }}
 
                 <div class="field">
                     <label for="dia-chi">Ngày nhập</label>
                     <input type="date" id="date" name="date"
                            value="{{ $goodsReceipt->date }}" max="{{ date('Y-m-d') }}" required>
-                    {{--<script>--}}
-                    {{--document.querySelector("#ngay-nhap").valueAsDate = new Date()--}}
-                    {{--</script>--}}
                 </div>
-
                 <div class="field">
-                    <button class="ui blue fluid button"><strong>Lưu</strong></button>
+                    <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>
                 </div>
             </form>
         </div>

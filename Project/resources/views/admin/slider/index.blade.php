@@ -8,7 +8,7 @@
 
         @include('admin.layouts.components.success_msg')
 
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
 
         <div id="dropzone-message" class="normal-td-margin"></div>
 
@@ -25,11 +25,10 @@
                 <strong>Xóa </strong>
             </button>
 
-            <button type="button" class="ui small blue button" onclick="$('#modal-them-slider').modal('show')">
+            <a href="#" class="ui small blue button" onclick="$('#add-image-slider-modal').modal('show')">
                 <i class="add fitted icon"></i>
                 <strong>Thêm mới </strong>
-            </button>
-
+            </a>
             @include('admin.slider.table')
 
         </form>
@@ -46,12 +45,12 @@
             </div>
         </div>
 
-{{--        @include('admin.content.slider.modals')--}}
+        @include('admin.slider.modal')
     </div>
 @endsection
 
 @push('script')
     <script>
-        bindSelectAll('chon-het-slider');
+        bindSelectAll('slider-id[]');
     </script>
 @endpush

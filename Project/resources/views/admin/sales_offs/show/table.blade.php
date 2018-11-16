@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th class="collapsing">
-                <div class="ui checkbox" id="check-all">
+                <div class="ui checkbox" id="select-all">
                     <input type="checkbox">
                 </div>
             </th>
@@ -18,7 +18,7 @@
             <tr>
                 <td>
                     <div class="ui child checkbox">
-                        <input type="checkbox" name="sales-offs-id[]" value="{{$salesOffsDetail->id}}">
+                        <input type="checkbox" name="sales-offs-details-id[]" value="{{$salesOffsDetail->id}}">
                     </div>
 
                 </td>
@@ -45,12 +45,8 @@
         </div>
     @endif
 </div>
-<script>
-    function eventCheckBox() {
-        let checkboxs = document.getElementsByName('sales-offs-details-id[]');
-        let checkAll = document.getElementById('check-all');
-        for (let i = 0; i < checkboxs.length; i++) {
-            checkboxs[i].checked = checkAll.checked;
-        }
-    }
-</script>
+@push('script')
+    <script>
+        bindSelectAll('sales-offs-details-id[]');
+    </script>
+@endpush

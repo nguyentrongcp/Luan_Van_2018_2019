@@ -1,4 +1,4 @@
-<div class="ui fixed borderless menu" style="height: 50px;">
+<div class="ui fixed borderless menu" style="height: 50px;padding-left: 220px;">
     {{--@if($wideMenu)--}}
         {{--<a class="item header" id="logo" href='/admin'>--}}
             {{-- <img class="ui small image" src="{{ asset('assets/images/logo.png') }}" alt="Logo"> --}}
@@ -22,9 +22,9 @@
 
     <div class="right menu">
 
-        {{--@include('admin.layouts.components.navbar_comment')--}}
+        @include('admin.layouts.components.navbar_comment')
 
-        {{--@include('admin.layouts.components.navbar_notification')--}}
+        @include('admin.layouts.components.navbar_notification')
 
         @include('admin.layouts.components.navbar_admin')
 

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class Comment extends Model
 {
@@ -30,6 +31,16 @@ class Comment extends Model
     }
     public function approved(){
         return $this->is_approved == 1;
+    }
+    public static function getUnapprovedComments() {
+        $comments = DB::table('comments')
+            ->where([
+                ['is_approved', 0],
+            ])
+            ->join('foodies', 'comments.foody_id', '=', 'foodies.id')
+            ->get();
+
+        return $comments;
     }
 
 }

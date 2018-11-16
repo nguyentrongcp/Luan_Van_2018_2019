@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Slider;
+use Faker\Provider\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 
 class SliderController extends Controller
 {
@@ -17,7 +20,7 @@ class SliderController extends Controller
     {
         $sliders = Slider::all();
 
-        return view('admin.slider.index',compact('sliders'));
+        return view('admin.slider.index', compact('sliders'));
     }
 
     /**
@@ -33,18 +36,44 @@ class SliderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        if (!$request->hasFile('slider-image')) {
+            return back()->with('error', 'Bạn chưa upload ảnh!');
+        }
+        $images = $request->file('slider-image');
+
+        if (is_array($images)){
+            foreach ($images as $key => $image) {
+                $slides = new Slider();
+                $time = time();
+                $ext = $image->extension();
+                $path = $image
+                    ->move('admin\assets\images\sliders', "sliders-$key.'-'.$time.$ext");
+                $slides->image = str_replace('\\', '/', $path);
+                $slides->save();
+            }
+        }else{
+            $slides = new Slider();
+            $time = time();
+            $ext = $images->extension();
+            $path = $images
+                ->move('admin\assets\images\sliders', "sliders-0.'-'.$time.$ext");
+            $slides->image = str_replace('\\', '/', $path);
+            $slides->save();
+        }
+
+
+        return back()->with('success','Thêm ảnh thành công!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -55,7 +84,7 @@ class SliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -66,8 +95,8 @@ class SliderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -78,11 +107,20 @@ class SliderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $ids = $request->get('slider-id');
+        foreach ($ids as $id){
+            $sliders = Slider::findOrFail($id);
+            $oldPath = $sliders->image;
+            if (file_exists($oldPath)){
+                unlink($oldPath);
+                $sliders->delete();
+            }
+        }
+        return back()->with('success','Xóa thánh công!');
     }
 }

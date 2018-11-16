@@ -8,7 +8,7 @@
 
         @include('admin.layouts.components.success_msg')
 
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
 
         <form action="{{ route('news.destroy', [0]) }}" method="post">
 
@@ -32,7 +32,7 @@
                 <thead>
                 <tr>
                     <th class="collapsing">
-                        <div class="ui checkbox" id="select-all-news">
+                        <div class="ui checkbox" id="select-all">
                             <input type="checkbox">
                         </div>
                     </th>
@@ -73,6 +73,6 @@
 
 @push('script')
     <script>
-        bindSelectAll('select-all-news');
+        bindSelectAll('news-id[]');
     </script>
 @endpush

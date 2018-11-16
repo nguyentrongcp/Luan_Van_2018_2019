@@ -44,9 +44,9 @@ class GoodsReceiptNotesController extends Controller
     {
         $goodsReceipt = new GoodsReceiptNote();
 
-        $goodsReceipt->name = Auth::guard('admin')->user()->name;
+        $goodsReceipt->name = Admin::adminName();
         $goodsReceipt->date = $request->get('date');
-        $goodsReceipt->admin_id = Auth::guard('admin')->id();
+        $goodsReceipt->admin_id = Admin::adminId();
         $goodsReceipt->save();
 
         return back()->with('success','Thêm phiếu nhập thành công!');
@@ -85,9 +85,9 @@ class GoodsReceiptNotesController extends Controller
     {
         $goodsReceipt = GoodsReceiptNote::findOrFail($id);
 
-        $goodsReceipt->name = Auth::guard('admin')->user();
+        $goodsReceipt->name = Admin::adminName();
         $goodsReceipt->date = $request->get('date');
-        $goodsReceipt->admin_id = Auth::guard('admin')->id();
+        $goodsReceipt->admin_id = Admin::adminId();
         $goodsReceipt->update();
 
         return back()->with('success','Cập nhật phiếu nhập thành công!');

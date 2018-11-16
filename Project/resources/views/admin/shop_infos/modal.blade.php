@@ -5,12 +5,16 @@
         <form action="{{ route('shop_change_logo',[1])}}" class="ui form" method="post" enctype="multipart/form-data">
 
             {{ csrf_field() }}
-
             {{ method_field('PUT') }}
-
-            <div class="field">
-                <label for="sales-offs-name">Logo</label>
-                <input type="file" class="hidden" id="logo" name="logo-upload" accept=".jpg, .png, .jpeg">
+            <div class="required field">
+                <label>Logo</label>
+                <label for="logo">
+                    <span class="ui blue compact label">Chọn một ảnh</span>
+                    <span id="logo-name"></span>
+                </label>
+                <input type="file" name="logo" id="logo" style="display: none;"
+                       onchange="$('#logo-name').text($('#logo')[0].files[0].name)"
+                       accept=".jpg, .png, .jpeg">
             </div>
             <div class="field">
                 <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>

@@ -40,8 +40,9 @@
                     type: 'post',
                     url: '{{ route('news.store') }}',
                     data: {
+                        "_token": "{{ csrf_token() }}",
                         title: $('#news-title').val(),
-                        content: $('#news-content').val()
+                        content: $('#news-content').val(),
                     },
                     success: function (data) {
                         if (data.status === 'success') {

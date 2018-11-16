@@ -3,6 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
+
     <div class="ui two column padded stackable grid">
         <div class="sixteen wide column">
             <h2 class="ui header dividing">Tổng quan</h2>

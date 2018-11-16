@@ -6,27 +6,31 @@
                    value="Nguyễn Văn A {{rand(1,100)}}" required>
         </div>
         @if($errors->has('employee-name'))
-            <div style="color: red; margin-top: 5px; font-size: 13px">
+            <div class="message-error">
                 {{ $errors->first('employee-name') }}
             </div>
         @endif
         <div class="inline required field">
             <label class="label-fixed">Mật khẩu</label>
             <input type="password" name="employee-pwd" id="employee_pwd" placeholder="Mật khẩu"
-                   value="111111" required>
+                   value="admin123" required>
+        </div>
+        <div class="ui error message">
         </div>
         @if($errors->has('employee-pwd'))
-            <div style="color: red; margin-top: 5px; font-size: 13px">
+            <div class="message-error">
                 {{ $errors->first('employee-pwd') }}
             </div>
         @endif
         <div class="inline required field">
             <label class="label-fixed">Nhập lại mật khẩu</label>
             <input type="password" name="employee-confirm-pwd" id="employee_confirm_pwd" placeholder="Nhập lại mật khẩu"
-                   value="111111" required>
+                   value="admin123" required>
+        </div>
+        <div class="ui error message">
         </div>
         @if($errors->has('employee-confirm-pwd'))
-            <div style="color: red; margin-top: 5px; font-size: 13px">
+            <div class="message-error">
                 {{ $errors->first('employee-confirm-pwd') }}
             </div>
         @endif
@@ -46,17 +50,17 @@
                    placeholder="Email" required>
         </div>
         @if($errors->has('employee-email'))
-            <div style="color: red; margin-top: 5px; font-size: 13px">
+            <div class="message-error">
                 {{ $errors->first('employee-email') }}
             </div>
         @endif
         <div class="inline required field">
             <label class="label-fixed">Số điện thoại</label>
-            <input type="text" name="employee-phone" value="0123456789" id="employee-phone"
+            <input type="text" name="employee-phone" value="0323456789" id="employee-phone"
                    placeholder="Số điện thoại" required>
         </div>
         @if($errors->has('employee-phone'))
-            <div style="color: red; margin-top: 5px; font-size: 13px">
+            <div class="message-error">
                 {{ $errors->first('employee-phone') }}
             </div>
         @endif
@@ -84,25 +88,24 @@
 
 @push('script')
     <script>
-        $('#create-employee-form').form({
-            fields: {
-                employee_name: {
-                    rules: [{type: 'empty', prompt: 'Họ và tên không được bỏ trống '}]
-                },
-                employee_pwd: {
-                    rules: [{type: 'empty', prompt: 'Mật khẩu không được bỏ trống '}]
-                },
-                employee_email: {
-                    rules: [{type: 'empty', prompt: 'Email không được bỏ trống '}]
-                },
-                employee_phone: {
-                    rules: [
-                        {type: 'empty', prompt: 'Số điện thoại không được bỏ trống '},
-                        {type: 'regExp[/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im]', prompt: 'Sai định dạng'}]
-                }
-            },
-            // inline:true
-        })
+        // $('#create-employee-form').form({
+        //     fields: {
+        //         employee_name: {
+        //             rules: [{type: 'empty', prompt: 'Họ và tên không được bỏ trống '}]
+        //         },
+        //         employee_pwd: {
+        //             rules: [{type: 'empty', prompt: 'Mật khẩu không được bỏ trống '}]
+        //         },
+        //         employee_email: {
+        //             rules: [{type: 'empty', prompt: 'Email không được bỏ trống '}]
+        //         },
+        //         employee_phone: {
+        //             rules: [
+        //                 {type: 'empty', prompt: 'Số điện thoại không được bỏ trống '},
+        //                 {type: 'regExp[/^(0[35789])[0-9]{8}$/]', prompt: 'Sai định dạng'}]
+        //         }
+        //     },
+        // })
     </script>
     <script>
         var pass = document.getElementById("employee-pwd")

@@ -1,6 +1,7 @@
 <div href="" class="ui dropdown item">
-    <img id="admin-avt" src="{{ asset('admin/assets/img/mike.jpg') }}" class="ui mini circular image">
-    {{--<strong>{{ \App\Helper\AuthHelper::adminName() }}</strong>--}}
+    <img id="admin-avt" src="{{ asset('admin/assets/img/mike.jpg') }}"
+         class="ui mini circular image">
+    <strong>&nbsp;&nbsp;&nbsp; {{ \App\Admin::adminName() }}</strong>
     <i class="dropdown icon"></i>
     <div class="menu">
         <a onclick="$('#modal-edit-info').modal('show')" class="item">
@@ -12,8 +13,8 @@
         <a href="{{ route('admin.logout') }}" class="item">
             <i class="sign out icon"></i>Đăng xuất</a>
 
-        {{--@include('admin.layouts.components.modals_edit')--}}
-        {{--@include('admin.layouts.components.modal_change_password')--}}
-        {{--@include('sharing.components.error')--}}
+        @include('admin.layouts.components.modals_edit')
+        @include('admin.layouts.components.modal_change_password')
+        @include('admin.layouts.components.error_msg')
     </div>
 </div>

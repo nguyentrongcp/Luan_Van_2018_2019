@@ -1,13 +1,9 @@
 <div class="ui small input right icon">
-    {{--@if (!empty())--}}
-        {{--<i class="remove-input remove red icon pointer"--}}
-           {{--onclick="{{ route('foodies.index') }}"></i>--}}
-    {{--@endif--}}
     <input type="text" class="need-remove" name="key-search" id="search_foody" placeholder="Tìm kiếm"
            value="">
     <i class="search icon"></i>
 </div>
-<div class="results" id="search-result">
+<div class="ui list results " id="search-result">
 
 </div>
 
@@ -17,7 +13,7 @@
         $('.ui.input').on('input', function () {
             var key_search = $('#search_foody').val();
             if (key_search == '') {
-                $('#search-result').removeClass('.results');
+                $('#search-result').removeClass('results');
                 $('#search-result').empty();
             }
             else {
@@ -28,7 +24,7 @@
                         key: key_search
                     },
                     success: function (data) {
-                        $('#search-result').addClass('.results');
+                        $('#search-result').addClass('results');
                         $('.results').html(data);
                     }
                 })
@@ -39,14 +35,16 @@
     </script>
 @endpush
 <style>
+
     .results {
         position: absolute;
         z-index: 1000;
         display: block;
         /*top: 236px;*/
-        height: auto;
+        max-height: 500px !important;
         margin-bottom: 0 !important;
         background-color: white;
+        overflow: scroll;
     }
 
     .result-content {

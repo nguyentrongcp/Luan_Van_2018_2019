@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Mr. Blo bla',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'blabla@gmail.com',
-                'phone' => '01639883047',
+                'phone' => '0339883047',
                 'username' => 'blabla',
                 'password' => bcrypt('111111'),
                 'role_id' => 1
@@ -25,7 +25,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Nguyễn Đình Trọng',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'nguyentrongcp@gmail.com',
-                'phone' => '01639883047',
+                'phone' => '0331542678',
                 'username' => 'nguyentrong',
                 'password' => bcrypt('111111'),
                 'role_id' => 1
@@ -34,7 +34,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Lý Trường Giang',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'ltgiang@gmail.com',
-                'phone' => '01639883047',
+                'phone' => '0962987036',
                 'username' => 'ltgiang',
                 'password' => bcrypt('111111'),
                 'role_id' => 1
@@ -43,7 +43,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Nguyễn Văn Lộc',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'nvloc@gmail.com',
-                'phone' => '01639883047',
+                'phone' => '0381245564',
                 'username' => 'nvloc',
                 'password' => bcrypt('111111'),
                 'role_id' => 2
@@ -52,7 +52,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Phạm Hoài An',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'phoaian@gmail.com',
-                'phone' => '01639883047',
+                'phone' => '0665584568',
                 'username' => 'phoaian',
                 'password' => bcrypt('111111'),
                 'role_id' => 3
@@ -61,7 +61,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Phan Văn Thành',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'pvthanh@gmail.com',
-                'phone' => '01639883047',
+                'phone' => '0839883047',
                 'username' => 'pvthanh',
                 'password' => bcrypt('111111'),
                 'role_id' => 4
@@ -70,7 +70,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Nguyễn Văn Tài',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'nvantai@gmail.com',
-                'phone' => '01639883047',
+                'phone' => '0375846788',
                 'username' => 'nvantai',
                 'password' => bcrypt('111111'),
                 'role_id' => 5
@@ -79,7 +79,7 @@ class AdminSeeder extends Seeder
                 'name' => 'La Thị Kiều Oanh',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'ltkoanh@gmail.com',
-                'phone' => '01639883047',
+                'phone' => '0709587451',
                 'username' => 'ltkoanh',
                 'password' => bcrypt('111111'),
                 'role_id' => 3
@@ -88,7 +88,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Phan Thị Kiều Loan',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'ptkloan@gmail.com',
-                'phone' => '01639883047',
+                'phone' => '0325588987',
                 'username' => 'ptkloan',
                 'password' => bcrypt('111111'),
                 'role_id' => 3
@@ -97,7 +97,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Đỗ Việt Hùng',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'dvhung@gmail.com',
-                'phone' => '01639883047',
+                'phone' => '0354412154',
                 'username' => 'dvhung',
                 'password' => bcrypt('111111'),
                 'role_id' => 3

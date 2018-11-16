@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th class="collapsing">
-                <div class="ui checkbox" id="check-all">
+                <div class="ui checkbox" id="select-all">
                     <input type="checkbox">
                 </div>
             </th>
@@ -43,7 +43,7 @@
                 <td class="text-info header">{{\App\Role::find($employee->role_id)->name}}</td>
                 <td class="collapsing">
                     <a href="#" class="ui tiny green icon label a-decoration"
-                        onclick="$('{{"#update-employee-modal-".$employee->id}}').modal('show')">
+                        onclick="$('{{"#update-employee-modal-" . $employee->id}}').modal('show')">
                         <i class="pencil alternate fitted icon"></i>
                     </a>
                 </td>
@@ -63,12 +63,3 @@
         </div>
     @endif
 </div>
-<script>
-    function eventCheckBox() {
-        let checkboxs = document.getElementsByName('employee-id[]');
-        let checkAll = document.getElementById('check-all');
-        for (let i = 0; i < checkboxs.length; i++) {
-            checkboxs[i].checked = checkAll.checked;
-        }
-    }
-</script>

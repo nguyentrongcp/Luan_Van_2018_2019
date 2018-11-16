@@ -1,12 +1,12 @@
 @php
-$totalOrderUncheck = \App\Helper\Statistic::totalOrder('uncheck');
+$totalOrderUncheck = \App\Statistic::getTotalOrderNotApproved();
 @endphp
 <div href="" class="ui dropdown icon item">
     <i class="bell icon"></i>
-    {!! $totalOrderUncheck > 0 ? '<span class="ui small floating red circular label">1</span>' : '' !!}
+    {!! $totalOrderUncheck > 0 ? '<span class="ui small floating red circular label " style="top:-0.168em!important; font-size: 0.659rem!important;">1</span>' : '' !!}
     <div class="menu">
         @if (!empty($totalOrderUncheck))
-            <a class="item" href="{{ route('don_hang.index') }}">
+            <a class="item" href="{{route('orders_filter',[0]) }}">
                 <span class="ui blue label">{{ $totalOrderUncheck }}</span>đơn hàng chưa duyệt
             </a>
         @endif

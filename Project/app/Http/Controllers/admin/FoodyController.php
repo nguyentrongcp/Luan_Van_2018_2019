@@ -58,7 +58,6 @@ class FoodyController extends Controller
      */
     public function store(Request $request)
     {
-
         $validate = $this->validationStore($request);
         if ($validate->fails()) {
             return back()->withErrors($validate)
@@ -129,7 +128,8 @@ class FoodyController extends Controller
         $foodyTypes = FoodyType::all();
         $foodies = Foody::findOrFail($id);
         $typeFoody = FoodyType::find($foodies->foody_type_id)->name;
-        $costFoodys = Cost::where('foody_id',$id)->get();
+        $costFoodys = Cost::where('foody_id',$id)
+            ->orderBy('cost_updated_at','DESC')->get();
         return view('admin.foodies.show.index',
             compact('id', 'foodies','typeFoody','costFoodys'));
     }
@@ -217,23 +217,25 @@ class FoodyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request)
     {
-        if (!$request->has('foody-id')) {
-            return back();
-        }
         $ids = $request->get('foody-id');
 
-
-        foreach($ids as $id) {
-            $foody = Foody::findOrFail($id);
-            if ($foody->canDelete()) {
-                $foody->delete();
-            } else {
+        if (empty($ids)) {
+            return back();
+        }
+        if (is_array($ids)){
+            foreach($ids as $id) {
+                $foody = Foody::findOrFail($id);
                 $foody->is_deleted = true;
                 $foody->update();
             }
         }
+       else{
+           $foody = Foody::findOrFail($ids);
+           $foody->is_deleted = true;
+           $foody->update();
+       }
 
         return back()->with('success', 'Xóa thành công.');
     }
@@ -335,7 +337,7 @@ class FoodyController extends Controller
 
     public function search(Request $request) {
         $key_search = $request->key;
-        $foodies = Foody::where('name','like', "%$key_search%")->paginate(10);
+        $foodies = Foody::where('name','like', "%$key_search%")->get();
         $data = '';
         foreach($foodies as $key => $foody) {
 

@@ -6,7 +6,7 @@
     <div class="ui blue raised segment">
         <h3 class="ui dividing header center aligned">QUẢN LÝ KHUYẾN MÃI</h3>
         @include('admin.layouts.components.success_msg')
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
         <form action="{{route('sales_offs.destroy',[0])}}" method="post" class="ui form">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
@@ -31,10 +31,4 @@
     </div>
 @endsection
 
-@push('script')
-    <script>
-        bindSelectAll('check-all');
 
-        // bindDataTable('bang-loai-sp');
-    </script>
-@endpush

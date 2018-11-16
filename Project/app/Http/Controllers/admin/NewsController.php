@@ -6,6 +6,7 @@ use App\Admin;
 use App\Image;
 use App\ImageNews;
 use App\News;
+use foo\bar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,13 @@ class NewsController extends Controller
         $content = $request->get('content');
         $title = $request->get('title');
         $count = 0;
+        if (News::existedTitle($title)){
+            return back()->withErrors(['title'=>'Tiêu đề đã tồn tại! Vui lòng nhập tiêu đề khác.']);
+        }
+        if (!$request->hasFile('avatar-news')){
+            return back()->withErrors(['avatar-news'=>'Bạn chưa chọn ảnh đại diện!']);
+        }
+
         while(strpos($content, 'src="data:image') != false &&
               strpos($content, '" style="') != false) {
             $start = strpos($content, 'src="data:image');
@@ -70,41 +78,19 @@ class NewsController extends Controller
         $news = new News();
         $news->title = $title;
         $news->content = $content;
-        $news->admin_id = Auth::guard('admin')->user()->id;
+        $news->admin_id = Admin::adminId();
         $news->date = date('Y-m-d H:i:s');
+
+        $time = time();
+
+        $ext = $request->file('avatar-news')->extension();
+        $path = $request->file('avatar-news')->move('admin\image_news',"avatar-new-$time.$ext");
+        $news->avatar = str_replace('\\', '/', $path);
         $news->save();
 
-        return Response(['status' => 'success']);
+        return redirect(route('news.index'));
 
-//        $titleNews = $request->get('name-news');
-//        $content = $request->get('des');
-//
-//        $new = new News();
-//        $new->title = $titleNews;
-//        $new->content = $content;
-//        $new->date = date('Y-m-d H:i:s');
-//        $new->admin_id = Auth::guard('admin')->id();
-//        $new->save();
-//
-//        $time = time();
-//        if ($request->hasFile('news-image-upload')) {
-//            $news_image = $request->File('news-image-upload');
-//            $ext = $news_image->extension();
-//
-//            $image = new Image();
-//            $path = $news_image
-//                ->move('admin\assets\images\news', "news-$new->id-$time.$ext");
-//            $image->link = str_replace('\\', '/', $path);
-//            $image->save();
-//
-//            $image_news = new ImageNews();
-//            $image_news->image_id = $image->id;
-//            $image_news->news_id = $new->id;
-//            $image_news->save();
-//
-//        }
-//
-//        return back()->with('success', 'Thêm thành công!');
+
     }
 
     /**
@@ -145,10 +131,28 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
 
-        $news->title = $request->get('name-news');
-        $news->content = $request->get('des');
+        $title = $request->get('title');
+//        if (News::existedTitle($title)){
+//            return back()->withErrors(['title'=>'Tiêu đề đã tồn tại! Vui lòng nhập tiêu đề khác.']);
+//        }
+        $news->title = $title;
+        $news->content = $request->get('content');
         $news->date = date('Y-m-d H:i:s');
-        $news->admin_id = Auth::guard('admin')->id();
+        $news->admin_id = Admin::adminId();
+
+        if (!$request->hasFile('avatar-news')){
+            return back()->withErrors(['avatar-news'=>'Bạn chưa chọn ảnh đại diện!']);
+        }else{
+            $oldPath = $news->avatar;
+            if (file_exists($oldPath)){
+                unlink($oldPath);
+            }
+        }
+
+        $time = time();
+        $ext = $request->file('avatar-news')->extension();
+        $path = $request->file('avatar-news')->move('admin\image_news',"avatar-new-$time.$ext");
+        $news->avatar = str_replace('\\', '/', $path);
         $news->update();
 
         return back()->with('success', 'Cập nhật thành công.');
@@ -164,42 +168,20 @@ class NewsController extends Controller
     public function destroy(Request $request)
     {
         if (!$request->has('news-id')) {
-            return back();
+            return back()->with('error','Bạn chưa chọn dữ liệu cần xóa!');
         }
         $ids = $request->get('news-id');
-        foreach ($ids as $id) {
-
-            $news = News::findOrFail($id);
-            $news->delete();
-        }
-
-        return back()->with('success', 'Xóa thành công.');
-    }
-
-    public function changeImage(Request $request, $id){
-
-        if (!$request->hasFile('news-image-upload')) {
-            return back()->with('error', 'Bạn chưa upload hình ảnh!');
-        } else {
-
-            foreach (ImageNews::where('news_id', $id)->get() as $idImage) {
-                foreach (Image::where('id', $idImage->image_id)->get() as $image) {
-                    $oldPath = $image->link;
-                    if (!empty($oldPath)) {
-                        File::delete($oldPath);
-                    }
-                    $time = time();
-                    $news_image = $request->File('news-image-upload');
-                    $ext = $news_image->extension();
-                    $path = $news_image
-                        ->move('admin\assets\images\news', "news-$id-$time.$ext");
-                    $image->link = str_replace('\\', '/', $path);
-                    $image->update();
+        if (is_array($ids)){
+            foreach ($ids as $id) {
+                $news = News::findOrFail($id);
+                $oldPath = $news->avatar;
+                if (file_exists($oldPath)){
+                    unlink($oldPath);
+                    $news->delete();
                 }
             }
-
         }
-        return back()->with('success','Thay đổi thành công!');
+        return back()->with('success', 'Xóa thành công.');
     }
 
     public function testImage(Request $request) {

@@ -1,7 +1,7 @@
-<div class="ui mini vertical flip modal" id="modal-change-password">
+<div class="ui mini-40 vertical flip modal" id="modal-change-password">
     <div class="blue header">Đổi mật khẩu</div>
     <div class="content">
-        <form action="{{ route('change_mat_khau', [\App\Helper\AuthHelper::adminId()]) }}" class="ui form" method="post">
+        <form action="{{ route('change_pass', [\App\Admin::adminId()]) }}" class="ui form" method="post">
 
             {{ csrf_field() }}
 
@@ -20,7 +20,7 @@
                 <input type="password" id="password_confirmation" minlength="6" maxlength="30" required>
             </div>
             <div class="field">
-                <button class="ui blue fluid button"><strong>Lưu</strong></button>
+                <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>
             </div>
         </form>
     </div>

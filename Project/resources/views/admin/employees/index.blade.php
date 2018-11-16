@@ -6,7 +6,7 @@
     <div class="ui blue raised segment">
         <h3 class="ui dividing header center aligned">QUẢN LÝ NHÂN VIÊN</h3>
         @include('admin.layouts.components.success_msg')
-        @include('admin.layouts.components.error_msg')
+        @include('admin.layouts.components.errors_msg')
         <form action="{{route('employees.destroy',[0])}}" method="post" class="ui form">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
@@ -33,6 +33,6 @@
 
 @push('script')
     <script>
-        bindSelectAll('check-all');
+        bindSelectAll('employee-id[]');
     </script>
 @endpush

@@ -1,5 +1,5 @@
 {{--modal cost history--}}
-<div class="ui mini fade modal" id="cost-history-modal">
+<div class="ui mini vertical flip modal" id="cost-history-modal">
     <i class="close icon"></i>
     <div class="content">
         <h3 class="ui dividing header">Lịch sử giá</h3>
@@ -30,7 +30,7 @@
 
 {{--Modal update cost--}}
 
-<div class="ui mini fade modal" id="cost-update-modal">
+<div class="ui mini vertical flip modal" id="cost-update-modal">
     <i class="close icon"></i>
     <div class="content">
         <h3 class="ui dividing header">Cập nhật giá mới</h3>

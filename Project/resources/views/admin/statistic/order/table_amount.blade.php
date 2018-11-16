@@ -47,7 +47,7 @@
             let unapprovedSum = 0, shippingSum = 0, deliveredSum = 0, cancelledSum = 0;
             for (let i = 0; i < labels.length; i++) {
                 tbody += buildRowAmount(unapproved[i], shipping[i], delivered[i], cancelled[i]);
-                unapprovedSum += parseFloat(unapproved[i].total);console.log(unapproved[i].total);
+                unapprovedSum += parseFloat(unapproved[i].total);
                 shippingSum += parseFloat(shipping[i].total);
                 deliveredSum += parseFloat(delivered[i].total);
                 cancelledSum += parseFloat(cancelled[i].total);

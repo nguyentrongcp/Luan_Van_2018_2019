@@ -298,6 +298,13 @@
 }
 .ui.mini-50.modal{
     width: 30%;
-    height: 70%;
+    height: 80%;
     margin: auto;
+}
+.message-error{
+    color: red;
+    padding-left: 150px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
 }

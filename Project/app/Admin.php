@@ -4,48 +4,42 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class Admin extends Authenticatable
 {
-//    public static function Existed($email)
-//    {
-//        return (Admin::where('email', $email)->count() > 0);
-//    }
-//    public function decentralizes() {
-//        return $this->belongsToMany(
-//            DecentralizeEmployees::class,
-//            'decentralize_employees',
-//            'admin_id',
-//            'decentralization_id');
-//    }
-//
-//    public function checkDecetralize($id)
-//    {
-//        if ($this->role == 0)
-//        {
-//            return true;
-//        }
-//
-//        $roles = $this->decentralizes->toArray();
-//
-//        foreach ($roles as $role)
-//        {
-//            if ($role['id'] == $id)
-//                return true;
-//        }
-//
-//        return false;
-//    }
-//
-//    public function isAdmin()
-//    {
-//        return $this->role == 0;
-//    }
-//
-//    public function matchedIds($id) {
-//        return $id == $this->id;
-//    }
     protected $hidden = [
         'password', 'remember_token',
     ];
+    private static function adminGuard() {
+        $guard = Auth::guard('admin');
+        return $guard;
+    }
+    public static function adminLogged() {
+        return self::adminGuard()->check();
+    }
+
+    public static function adminId() {
+        return self::adminGuard()->id();
+    }
+
+    public static function adminEmail() {
+        return self::admin()->email;
+    }
+
+    public static function adminName() {
+        return self::admin()->name;
+    }
+
+    public static function adminPhone() {
+        return self::admin()->phone;
+    }
+
+    public static function admin() {
+        return self::adminGuard()->user();
+    }
+
+    public static function isAdmin(){
+        return self::admin()->role_id == 1;
+    }
 }
