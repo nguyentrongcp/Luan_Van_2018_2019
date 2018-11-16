@@ -402,6 +402,12 @@
         float: right !important;
         font-size: 12px;
     }
+    /*.comment-comment-content-container, .comment-comment-time-container {*/
+        /*width: calc(100% - 100px) !important;*/
+        /*float: left !important;*/
+        /*font-size: 12px;*/
+        /*margin-left: 10px;*/
+    /*}*/
     .comment-comment-name {
         margin-right: 5px;
     }

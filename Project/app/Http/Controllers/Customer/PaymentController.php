@@ -180,7 +180,7 @@ class PaymentController extends Controller
             $order_foody->sales_off_percent = $foody->getSalePercent();
             $order_foody->save();
         }
-
+        session(['order_code' => $order_code]);
 
     }
 
@@ -191,6 +191,13 @@ class PaymentController extends Controller
                 $data = [
                     'status' => 'error_cost',
                     'error_text' => 'Giá sản phẩm có thay đổi. Hãy cập nhật lại trước khi gửi đơn hàng.'
+                ];
+            }
+            if (!Foody::find($cart->id)->checkQuantity($cart->qty)) {
+                $data = [
+                    'status' => 'error_cost',
+                    'error_text' => 'Rất tiếc, nguyên liệu không đủ. Hãy cập nhật lại trang để
+                    xem lại số lượng mới trong giỏ hàng của bạn.'
                 ];
             }
         }
@@ -205,7 +212,7 @@ class PaymentController extends Controller
             }
             else {
                 $total_cost = CartFunction::getCost() + (double)session('transport_fee');
-                $url = $this->buildCheckoutUrl('fastfoody.vn/payment/process_payment',
+                $url = $this->buildCheckoutUrl(route('payment.process'),
                     'nguyentrongcp@gmail.com','',$order_code,$total_cost);
                 $data = [
                     'status' => 'success',
@@ -299,7 +306,10 @@ class PaymentController extends Controller
         else return false;
     }
 
-    public function successPayment() {
-        return view('customer.payment.success');
+    public function successPayment(Request $request) {
+        $order_code = session('order_code');
+        $request->session()->forget('order_code');
+
+        return view('customer.payment.success', compact('order_code'));
     }
 }

@@ -19,7 +19,7 @@
                 <div class="col s12">
                     <div class="til white-text">Có {{ count($foodies) }} món ăn và nước uống đang chờ bạn</div>
                     <div class="input-field col s12" style="margin-top: 0">
-                        <input id="search" type="text" placeholder="Món ăn, nước uống, đơn hàng...">
+                        <input id="search" type="text" placeholder="Món ăn, nước uống, đơn hàng..." autocomplete="off">
                         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                     </div>
                     <a data-type="all" class="foody-type waves-effect waves-light ui large label">Tất cả</a>
@@ -141,8 +141,13 @@
                                     </a>
                                     <div class="cont truncate-twolines">
                                         @php
-                                            $length = strpos($news->content, '</p>') - strpos($news->content, '<p>') - 3;
-                                            $content = substr($news->content, strpos($news->content, '<p>') + 3, $length);
+                                            $news_content = $news->content;
+                                            do {
+                                                $length = strpos($news_content, '</p>') - strpos($news_content, '<p>') - 3;
+                                                $content = substr($news_content, strpos($news_content, '<p>') + 3, $length);
+                                                $news_content = substr($news_content, strpos($news_content, $content) + 4 + strlen($content));
+                                            }
+                                            while(strpos($content, '<img') === 0);
                                         @endphp
                                         {!! $content !!}
                                     </div>

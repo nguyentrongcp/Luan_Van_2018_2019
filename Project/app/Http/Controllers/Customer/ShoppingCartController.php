@@ -40,6 +40,30 @@ class ShoppingCartController extends Controller
         elseif (CartFunction::matchedInCart($request->foody_id) == null && $request->count == -1) {
             return Response(['status' => 'error']);
         }
+        if ($foody->isMaterial()) {
+            $cart = CartFunction::matchedInCart($request->foody_id);
+            if ($cart == null) {
+                $qty = $request->count;
+            }
+            else {
+                $qty = $request->count + $cart->qty;
+            }
+            if (!$foody->checkQuantity($qty)) {
+                return Response(['status' => 'full', 'qty' => $foody->getQuantity()]);
+            }
+        }
+
+        $cart = CartFunction::matchedInCart($request->foody_id);
+        if ($cart != null) {
+            if ($cart->qty + $request->count > 100) {
+                return Response(['status' => 'max']);
+            }
+        }
+        else {
+            if ($request->count > 100) {
+                return Response(['status' => 'max']);
+            }
+        }
 
         $role = Cart::count() == 0 ? 'new' : 'old';
 

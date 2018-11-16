@@ -140,7 +140,8 @@ function updateCart() {
                     count: count
                 },
                 success: function (data) {
-                    if (data.status !== 'error') {
+                    console.log(data.status);
+                    if (data.status !== 'error' && data.status !== 'full' && data.status !== 'max') {
                         $('#cart-qty').text(data.total_count);
                         $('#cart-total-cost').html(data.total_cost + '<sup>đ</sup>');
                         if (data.status === 'updated') {
@@ -171,9 +172,23 @@ function updateCart() {
                             $('#cart-payment').removeClass('disabled');
                             updateCart();
                         }
-                        if ($('#add-cart-qty').val() !== 'undefined') {
-                            $('#add-cart-qty').val('1');
-                        }
+                    }
+                    else if (data.status === 'full') {
+                        M.Toast.dismissAll();
+                        M.toast({
+                            html: "Rất tiếc, nguyên liệu không đủ" +
+                                "<i style='margin: 0 5px' class=\"far fa-frown\"></i>" +
+                                "Số lượng tối đa bạn của thể đặt hiện tại là " + data.qty,
+                            displayLength: 5000,
+                        });
+                    }
+                    else if (data.status === 'max') {
+                        M.Toast.dismissAll();
+                        M.toast({
+                            html: "<i class='material-icons left red-text'>error_outline</i> " +
+                                "Số lượng tối đa bạn được mua là 100",
+                            displayLength: 4000,
+                        });
                     }
                 }
             })

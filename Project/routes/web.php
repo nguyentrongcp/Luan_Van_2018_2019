@@ -144,8 +144,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::post('/payment/check_payment_otp', 'Customer\PaymentController@checkOTP');
     Route::post('/payment/get_ward', 'Customer\PaymentController@getWard');
     Route::post('/payment/get_transport_fee', 'Customer\PaymentController@getTransportFee');
-    Route::get('/payment/process_payment', 'Customer\PaymentController@processPayment');
-    Route::get('/payment/success', 'Customer\PaymentController@successPayment');
+    Route::get('/payment/process_payment', 'Customer\PaymentController@processPayment')->name('payment.process');
+    Route::get('/payment/success', 'Customer\PaymentController@successPayment')->name('payment.success');
 
     // Foody
     Route::get('/foody/{slug}', 'Customer\FoodyController@index')->name('customer.foody.show');
@@ -154,12 +154,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     Route::post('/customer/like', 'Customer\FoodyController@like');
     Route::post('/customer/favorite', 'Customer\FoodyController@favorite');
     Route::post('/customer/rating', 'Customer\FoodyController@rating')->name('customer.foody.rating');
+    Route::get('customer/foody/comment/delete', 'Customer\FoodyController@deleteComment')->name('customer.foody.comment.delete');
+    Route::post('customer/foody/comment/mini', 'Customer\FoodyController@miniComment')->name('customer.foody.comment.mini');
 
     // Order
     Route::get('/payment/order', 'Customer\OrderController@index')->name('payment.order.index');
     Route::get('/payment/order/get', 'Customer\OrderController@getOrder');
     Route::get('/payment/order/show/{order_code}', 'Customer\OrderController@showOrder')->name('payment.order.show');
     Route::post('/payment/order/remove', 'Customer\OrderController@removeOrder');
+    Route::get('/payment/order/get_otp', 'Customer\OrderController@getOTP')->name('payment.order.get_otp');
+    Route::post('/payment/order/check_otp', 'Customer\OrderController@checkOTP')->name('payment.order.check_otp');
 
     // News
     Route::get('/news', 'Customer\NewsController@index')->name('customer.news.index');
@@ -168,3 +172,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function (){
     // Login & logout
     Route::post('/customer/login', 'Customer\CustomerLoginController@login');
     Route::get('logout/', 'Customer\CustomerLoginController@logout')->name('customer.logout');
+    Route::get('/customer/register', 'Customer\CustomerController@showRegister')->name('customer.register.show');
+    Route::post('/customer/register/submit',
+        'Customer\CustomerController@register')->name('customer.register.submit');
+    Route::get('/customer/register/get_otp', 'Customer\CustomerController@getOTP')->name('customer.register.get_otp');
+    Route::post('/customer/register/check_otp', 'Customer\CustomerController@checkOTP')->name('customer.register.check_otp');
+    Route::post('/customer/profile/change', 'Customer\CustomerController@changeProfile')->name('customer.profile.change');

@@ -57,4 +57,62 @@
         font-size: 18px;
         margin-bottom: 20px;
     }
+
+    /*profile modal*/
+    #profile-modal {
+        max-width: 450px;
+        max-height: 100%;
+    }
+    .profile-title {
+        margin-bottom: 20px;
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .profile-avatar {
+        width: 100px;
+        display: inline-block;
+        float: left;
+        position: relative;
+    }
+    .profile-avatar img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+    .profile-avatar div {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: rgba(0,0,0,0.7);
+        position: absolute;
+        top: 0;
+        opacity: 0;
+    }
+    .profile-avatar div:hover {
+        opacity: 1;
+    }
+    .profile-avatar div i {
+        cursor: pointer;
+        font-size: 30px;
+        position: relative;
+        top: 35px;
+        left: 35px;
+        color: rgba(255,255,255,0.8);
+    }
+    .profile-name, .profile-gender {
+        width: calc(100% - 120px);
+        display: inline-block;
+        float: right;
+    }
+
+    @media only screen and (max-width: 450px) {
+        #profile-modal {
+            width: 100%;
+            height: 100%;
+            top: 0 !important;
+            left: 0 !important;
+        }
+
+    }
 </style>

@@ -14,6 +14,9 @@
     </div>
 
     @include('customer.layouts.components.modal.login-modal')
+    @if(Auth::guard('customer')->check())
+        @include('customer.layouts.components.modal.profile-modal')
+    @endif
     @include('customer.layouts.components.modal.style')
     @include('customer.layouts.components.modal.js')
 

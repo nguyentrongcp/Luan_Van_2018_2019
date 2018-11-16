@@ -11,11 +11,24 @@
                 Giỏ hàng trống
             </div>
         @endif
+        @foreach($carts as $cart)
+            @php
+                $foody = \App\Foody::find($cart->id);
+                    if ($foody->getQuantity() > 0 && !$foody->checkQuantity($cart->qty)) {
+                        $cart_old = $cart;
+                        Cart::remove($cart->rowId);
+                        Cart::add($cart_old->id,$foody->name,$foody->getQuantity(),0);
+                    }
+                    if ($foody->getQuantity() == 0) {
+                        Cart::remove($cart->rowId);
+                    }
+            @endphp
+        @endforeach
         @php $cost = 0 @endphp
         @foreach($carts as $cart)
             @php
                 $foody = \App\Foody::find($cart->id);
-                $cost += $foody->currentCost() * $cart->qty;
+                $cost += $foody->getSaleCost() * $cart->qty;
             @endphp
             <div class="cart-row row" id="{{ $cart->id }}">
                 <div class="col" id="cart-qty-{{ $cart->id }}"
@@ -36,7 +49,7 @@
                     </a>
                 </div>
                 <div class="col right-align" style="width: 70px" id="cart-cost-{{ $cart->id }}">
-                    {{ number_format($foody->currentCost() * $cart->qty) }}<sup>đ</sup>
+                    {{ number_format($foody->getSaleCost() * $cart->qty) }}<sup>đ</sup>
                 </div>
                 <div class="col cart-remove">
                     <i onclick="removeCart({{ $cart->id }})" class="trash alternate icon"></i>

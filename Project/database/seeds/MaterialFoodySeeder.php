@@ -40,7 +40,7 @@ class MaterialFoodySeeder extends Seeder
             [
                 'material_id' => 7,
                 'foody_id' => 14,
-                'value' => 120
+                'value' => 0.12
             ],
             // id = 6
             [

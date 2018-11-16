@@ -19,9 +19,10 @@ class CreateCustomersTable extends Migration
             $table->string('address', 100);
             $table->string('email', 100);
             $table->string('phone', 20);
-            $table->string('username', 16);
+            $table->string('gender', 16);
+            $table->string('avatar', 100);
             $table->string('password', 100);
-            $table->boolean('subscribed');
+            $table->boolean('subscribed')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

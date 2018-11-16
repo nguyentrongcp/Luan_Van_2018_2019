@@ -1,5 +1,5 @@
 <script>
-    $('#foody-comment-show').on('click', function () {
+    $('.foody-comment-show').on('click', function () {
         let logged = '{{ $logged }}';
         if (logged === 'false') {
             $('#require-modal').modal('open');
@@ -134,5 +134,92 @@
             previousImage();
             $('#comment-modal-next').addClass('hide');
         }
+    }
+
+    $('.comment-delete').on('click', function () {
+        let comment = null;
+        let comment_id = $(this).attr('data-id');
+        comment = $('#comment-row-' + comment_id);
+        $('#confirm-modal').css('max-width', '370px');
+        $('#confirm-modal-text').text('Bạn chắc chắn muốn xóa bình luận này?');
+        $('#confirm-modal-button').off('click');
+        $('#confirm-modal-button').on('click', function () {
+            $.ajax({
+                type: 'get',
+                url: '{{ route('customer.foody.comment.delete') }}',
+                data: {
+                    comment_id: comment_id,
+                    type: 'comment'
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        $('#confirm-modal').modal('close');
+                        $(comment).remove();
+                        M.toast({
+                            html: data.content
+                        });
+                    }
+                }
+            })
+        });
+        $('#confirm-modal').modal('open');
+    });
+
+    $('.mini-comment').on('keyup', function (e) {
+        let id = $(this).attr('data-id');
+        let input = $(this).val();
+        if (e.keyCode == 13) {
+            $(this).val('');
+            if (input != '') {
+                $.ajax({
+                    type: 'post',
+                    url: '{{ route('customer.foody.comment.mini') }}',
+                    data: {
+                        content: input,
+                        comment_id: id
+                    },
+                    success: function (data) {
+                        if (data.status === 'success') {
+                            $('#mini-comment-' + id).append(data.content);
+                            $('.delete-mini-comment').off('click');
+                            $('.delete-mini-comment').on('click', function () {
+                                deleteMiniChat(this, $(this).attr('data-id'));
+                            });
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+    $('.delete-mini-comment').on('click', function () {
+        deleteMiniChat(this, $(this).attr('data-id'));
+    });
+
+    function deleteMiniChat(element, id) {
+        let comment = $($(element).parent().get(0)).parent().get(0);
+        $('#confirm-modal').css('max-width', '370px');
+        $('#confirm-modal-text').text('Bạn chắc chắn muốn xóa bình luận này?');
+        $('#confirm-modal-button').off('click');
+        $('#confirm-modal-button').on('click', function () {
+            $.ajax({
+                type: 'get',
+                url: '{{ route('customer.foody.comment.delete') }}',
+                data: {
+                    comment_id: id,
+                    type: 'mini'
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        $('#confirm-modal').modal('close');
+                        $(comment).remove();
+                        M.toast({
+                            html: data.content
+                        });
+                    }
+                }
+            })
+        });
+        $('#confirm-modal').modal('open');
     }
 </script>

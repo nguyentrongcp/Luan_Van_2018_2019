@@ -36,7 +36,7 @@
                         <i class="far fa-star"></i>
                     @endif
                 @endfor
-                <span class="rate-number-avg">{{ $votes->quality }}</span>
+                <span class="rate-number-avg">{{ number_format($votes->quality, 1) }}</span>
             </div>
             <div class="col s12 foody-rating center-align foody-rating-detail">
                 <span class="rate-title">Giá cả</span>
@@ -49,7 +49,7 @@
                         <i class="far fa-star"></i>
                     @endif
                 @endfor
-                <span class="rate-number-avg">{{ $votes->cost }}</span>
+                <span class="rate-number-avg">{{ number_format($votes->cost, 1) }}</span>
             </div>
             <div class="col s12 foody-rating center-align foody-rating-detail">
                 <span class="rate-title">Phục vụ</span>
@@ -62,7 +62,7 @@
                         <i class="far fa-star"></i>
                     @endif
                 @endfor
-                <span class="rate-number-avg">{{ $votes->attitude }}</span>
+                <span class="rate-number-avg">{{ number_format($votes->attitude, 1) }}</span>
             </div>
         @else
             <div class="col s12 foody-rating center-align foody-rating-detail">
@@ -72,7 +72,7 @@
         <div class="col s12 divider" style="margin-top: 10px"></div>
     </div>
     <div class="col s12 rating-footer center-align">
-        <span class="rate-avg">{{ $votes->average }}</span>
+        <span class="rate-avg">{{ number_format($votes->average, 1) }}</span>
         <i class="fas fa-star"></i>
         <span style="margin: 0 4px"> - </span>
         <span style="font-weight: 500">
@@ -88,6 +88,26 @@
                 Rất tệ
             @endif
         </span>
+    </div>
+    <div class="foody-action navbar col s12">
+        <nav class="grey darken-2">
+            <div class="nav-wrapper">
+                <ul>
+                    <li class="col s6 text-center waves-effect waves-light">
+                        <a class="foody-comment-show">
+                            <i class="comment icon"></i>
+                            Bình luận
+                        </a>
+                    </li>
+                    <li class="col s6 waves-effect waves-light">
+                        <a class="foody-rating-modal-show">
+                            <i class="star icon"></i>
+                            Đánh giá
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
 </div>
 

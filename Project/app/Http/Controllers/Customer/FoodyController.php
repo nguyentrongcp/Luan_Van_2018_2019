@@ -9,6 +9,7 @@ use App\FoodyType;
 use App\Image;
 use App\ImageComment;
 use App\Like;
+use App\MiniComment;
 use App\Order;
 use App\Vote;
 use App\VoteDetail;
@@ -274,5 +275,51 @@ class FoodyController extends Controller
                 'content' => 'Bạn chưa đăng nhập!'
             ]);
         }
+    }
+
+    public function deleteComment(Request $request) {
+        if($request->type == 'comment') {
+            $comment = Comment::find($request->comment_id);
+            $comment->delete();
+        }
+        else {
+            $comment = MiniComment::find($request->comment_id);
+            $comment->delete();
+        }
+
+        return Response(['status' => 'success',
+            'content' => "<i class='material-icons left green-text'>check</i> Xóa bình luận thành công"]);
+    }
+
+    public function miniComment(Request $request) {
+        $user = Auth::guard('customer')->user();
+        $mini_comment = new MiniComment();
+        $mini_comment->customer_id = $user->id;
+        $mini_comment->content = $request->get('content');
+        $mini_comment->date = date('Y-m-d H:i:s');
+        $mini_comment->comment_id = $request->comment_id;
+        $mini_comment->save();
+
+        $date = date_format(date_create($mini_comment->date), 'd-m-Y H:i:s');
+
+        return Response([
+            'status' => 'success',
+            'content' => "
+                <div class=\"col comment-comment-container\">
+                                <span class=\"comment-avatar\">
+                                    <img class=\"circle\" src='$user->avatar'>
+                                </span>
+                                <div class=\"col comment-comment-content-container\">
+                                    <span class=\"comment-comment-name\"><b>$user->name</b></span>
+                                    <span id=\"comment-comment-content\">$mini_comment->content</span>
+                                </div>
+                                <div class=\"col comment-comment-time-container\">
+                                    $date
+                                    <span data-id=\"$mini_comment->id\" class=\"delete-mini-comment\"
+                                                  style=\"cursor: pointer; margin-left: 10px;font-weight: 500\">Xóa</span>
+                                </div>
+                            </div>
+            "
+        ]);
     }
 }

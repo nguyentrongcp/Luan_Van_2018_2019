@@ -11,6 +11,9 @@
 </div>
 
 <style>
+    #comment-modal-success {
+        max-width: 810px;
+    }
     .success-modal-content {
         font-size: 18px;
         margin-bottom: 20px;

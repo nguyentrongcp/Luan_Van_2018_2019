@@ -15,20 +15,20 @@ class CustomerSeeder extends Seeder
             [
                 'name' => 'Nguyễn Nguyễn',
                 'email' => 'nguyennguyencp@gmail.com',
-                'username' => 'nguyennguyencp',
                 'password' => bcrypt('635982359'),
                 'phone' => '01628446973',
                 'address' => 'Trên mặt đất / kế nhà tui',
-                'subscribed' => true
+                'gender' => 'male',
+                'avatar' => asset('customer/image/my_avatar.jpg')
             ],
             [
                 'name' => 'Lý Trường Giang',
                 'email' => 'ltgiang@gmail.com',
-                'username' => 'ltgiang',
                 'password' => bcrypt('1'),
                 'phone' => '01628446973',
                 'address' => 'Trên mặt đất / kế nhà tui',
-                'subscribed' => true
+                'gender' => 'female',
+                'avatar' => asset('customer/image/default.png')
             ]
         ]);
 
@@ -37,18 +37,14 @@ class CustomerSeeder extends Seeder
         $rows = [];
         for($i=1; $i<399; $i++) {
             $phone = $ran[$i%4] + rand(10000000, 99999999);
-            $username = substr($data[$i]['email'], 0, strpos($data[$i]['email'], '@'));
-            if (strlen($username) > 16) {
-                $username = substr($username, 0, 15);
-            }
             $row = [
                 'name' => $data[$i]['name'],
                 'email' => $data[$i]['email'],
-                'username' => $username,
                 'password' => bcrypt('635982359'),
                 'phone' => $phone,
                 'address' => $data[$i]['address'],
-                'subscribed' => true
+                'gender' => rand(1,2)==1 ? 'male' : 'female',
+                'avatar' => asset('customer/image/default.png')
             ];
             array_push($rows, $row);
         }

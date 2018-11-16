@@ -115,36 +115,30 @@
 
             </div>
             <div class="foody-cart">
-                <button data-qty="add" data-id="{{ $foody->id }}"
-                        class="cart-update waves-effect waves-light btn col s3" style="width: 170px">
+                <button id="add-cart-button" data-qty="add" data-id="{{ $foody->id }}"
+                        class="waves-effect waves-light btn col s3" style="width: 170px">
                     <i class="shopping cart plus icon"></i>
                     Thêm vào giỏ
                 </button>
                 <input id="add-cart-qty" class="input-field col s2 cart-number number-only" type="number" value="1">
-                <span id="add-cart-cost" class="cost cart-number">{{ number_format($foody->currentCost()) }}<sup>đ</sup></span>
+                <span id="add-cart-cost" class="cost cart-number">{{ number_format($foody->getSaleCost()) }}<sup>đ</sup></span>
             </div>
             <div class="foody-action navbar col s12">
                 <nav class="grey darken-2">
                     <div class="nav-wrapper">
                         <ul>
                             <li class="col s6 text-center waves-effect waves-light">
-                                <a id="foody-comment-show">
+                                <a class="foody-comment-show">
                                     <i class="comment icon"></i>
                                     Bình luận
                                 </a>
                             </li>
                             <li class="col s6 waves-effect waves-light">
-                                <a id="foody-rating-modal-show">
+                                <a class="foody-rating-modal-show">
                                     <i class="star icon"></i>
                                     Đánh giá
                                 </a>
                             </li>
-                            {{--<li class="col s4 waves-effect waves-light">--}}
-                                {{--<a onclick="$('#commentcomment').click()">--}}
-                                    {{--<i class="share alternate icon"></i>--}}
-                                    {{--Chia sẻ--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
                         </ul>
                     </div>
                 </nav>
@@ -164,10 +158,12 @@
             </div>
             <div class="col s12 m12 l8 content-col left">
 
-                <div class="row section scrollspy" id="foody-images-container">
-                    @include('customer.foody.images')
-                    @include('customer.foody.images-public')
-                </div>
+                @if(count($images) > 0)
+                    <div class="row section scrollspy" id="foody-images-container">
+                        {{--@include('customer.foody.images')--}}
+                        @include('customer.foody.images-public')
+                    </div>
+                @endif
 
                 @include('customer.foody.comment.comment')
 

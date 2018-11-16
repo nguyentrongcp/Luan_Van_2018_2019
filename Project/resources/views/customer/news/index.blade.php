@@ -27,8 +27,13 @@
                         <img class="news-image" src="{{ asset($news->avatar) }}">
                         <div class="news-content">
                             @php
-                                $length = strpos($news->content, '</p>') - strpos($news->content, '<p>') - 3;
-                                $content = substr($news->content, strpos($news->content, '<p>') + 3, $length);
+                                $news_content = $news->content;
+                                            do {
+                                                $length = strpos($news_content, '</p>') - strpos($news_content, '<p>') - 3;
+                                                $content = substr($news_content, strpos($news_content, '<p>') + 3, $length);
+                                                $news_content = substr($news_content, strpos($news_content, $content) + 4 + strlen($content));
+                                            }
+                                            while(strpos($content, '<img') === 0);
                             @endphp
                             {!! $content !!}
                         </div>

@@ -11,17 +11,20 @@
                     <a href="{{ route('customer.index') }}" class="brand-logo left">
                         <img class="responsive-img" src="{{ asset("customer/image/logo-white.png") }}">
                     </a>
-                    <ul class="right hide-on-small-only">
+                    <ul class="right">
                         @if(!Auth::guard('customer')->check())
-                            <li><a href="#" class="waves-effect waves-light btn nav-btn">
+                            <li class="hide-on-med-and-up">
+                                <a href="#login-modal" class="waves-effect waves-light btn modal-trigger nav-btn">
+                                    <i class="material-icons">menu</i></a></li>
+                            <li class="hide-on-small-only"><a href="{{ route('customer.register.show') }}" class="waves-effect waves-light btn nav-btn">
                                     <b>Tạo tài khoản</b></a></li>
-                            <li><a href="#login-modal" class="waves-effect waves-light btn modal-trigger nav-btn">
+                            <li class="hide-on-small-only"><a href="#login-modal" class="waves-effect waves-light btn modal-trigger nav-btn">
                                     <b>Đăng nhập</b></a></li>
                         @else
-                            <li><a style="height: 64px;" class="dropdown-trigger waves-effect waves-teal" id="dropdown-profile" data-target="customer-profile">
-                                    <img class="responsive-img circle" src="https://scontent.fsgn5-4.fna.fbcdn.net/v/t1.0-9/29244095_2127623837457107_1960178588228106477_n.jpg?_nc_cat=102&oh=2e5468930f3c7be683b7ed7428b9eaed&oe=5C5E95CB">
+                            <li><a style="height: 64px;" class="dropdown-trigger waves-effect waves-light" id="dropdown-profile" data-target="customer-profile">
+                                    <img class="responsive-img circle" src="{{ asset(Auth::guard('customer')->user()->avatar) }}">
 
-                                    <b style="position: relative; vertical-align: top">{{ Auth::guard('customer')->user()->name }}</b>
+                                    <b style="position: relative; vertical-align: top" class="hide-on-small-only">{{ Auth::guard('customer')->user()->name }}</b>
                                 </a></li>
                         @endif
                     </ul>
@@ -35,10 +38,10 @@
 </div>
 
 <ul id="customer-profile" class="dropdown-content">
-    <li><a href="">
+    <li><a href="{{ route('payment.order.index') }}">
             <i class="material-icons left">history</i>Lịch sử đặt món
         </a></li>
-    <li><a href="">
+    <li><a href="#profile-modal" class="modal-trigger">
             <i class="material-icons left">account_box</i>Cập nhật tài khoản
         </a></li>
     <li><a href="{{ route('customer.logout') }}">

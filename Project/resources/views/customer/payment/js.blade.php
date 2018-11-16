@@ -142,6 +142,7 @@
                                 }
                             }, 1000);
                             console.log(data.otp);
+                            console.log('9874563254178962');
                         }
                     })
                 }
@@ -164,19 +165,6 @@
                     data: {
                         otp: $('#payment-otp').val()
                     },
-                    // error: function(data) {
-                    //     if (data.status === 404) {
-                    //         $('#error-payment-otp').text(data.responseText);
-                    //         $('#error-payment-otp').removeClass('hide');
-                    //     }
-                    //     else {
-                    //         $('#payment-otp-modal').modal('close');
-                    //         $('#error-modal-text').text(data.responseText);
-                    //         $('#error-modal-button').text('Cập nhật ngay');
-                    //         $('#error-modal').modal('open');
-                    //
-                    //     }
-                    // },
                     success: function (data) {
                         if(data.status === 'error_cost') {
                             $('#notify-modal-text').html("<i class='exclamation icon'></i>" + data.error_text);
@@ -200,7 +188,7 @@
                                 window.location.href = data.url;
                             }
                             else {
-                                window.location.href = '{{ route('customer.home') }}';
+                                window.location.href = '{{ route('payment.success') }}';
                             }
                         }
                     }

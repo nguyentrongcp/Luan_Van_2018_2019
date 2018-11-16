@@ -6,25 +6,37 @@
     </div>
     <div class="divider"></div>
     <div class="news-nav-content">
-        @for($i=1; $i<=5; $i++)
+        @foreach(\App\Functions::getHotNews() as $key => $news)
             <div class="news-nav-row row">
-                <img class="news-nav-image" src="{{ asset('/customer/image/slider4.jpg') }}">
+                <img class="news-nav-image" src="{{ asset($news->avatar) }}">
                 <div class="news-nav-row-content">
                     <div class="til truncate">
-                        Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
+                        {{ $news->title }}
                     </div>
                     <div class="cont truncate-twolines">
-                        Dưới những tán cây đang vơi dần lá, có phiến đá đầy rêu xanh. Hàng ngày đón nắng một cách vô tri bầu trời có mưa cũng chẳng lạnh. Vì đó là đá.
+                        @php
+                            $news_content = $news->content;
+                                        do {
+                                            $length = strpos($news_content, '</p>') - strpos($news_content, '<p>') - 3;
+                                            $content = substr($news_content, strpos($news_content, '<p>') + 3, $length);
+                                            $news_content = substr($news_content, strpos($news_content, $content) + 4 + strlen($content));
+                                        }
+                                        while(strpos($content, '<img') === 0);
+                        @endphp
+                        {!! $content !!}
                     </div>
                     <div class="time">
-                        {{ date('d-m-Y H:i:s') }}
+                        {{ date_format(date_create($news->date), 'd-m-Y H:i:s') }}
                     </div>
                 </div>
             </div>
-            @if($i != 5)
+            @if($key != 4)
                 <div class="divider"></div>
             @endif
-        @endfor
+            @if($key == 4)
+                @break
+            @endif
+        @endforeach
     </div>
 </div>
 

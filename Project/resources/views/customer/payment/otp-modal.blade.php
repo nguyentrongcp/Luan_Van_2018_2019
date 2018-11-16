@@ -22,3 +22,15 @@
         </div>
     </div>
 </div>
+
+<style>
+    #payment-otp-modal {
+        max-width: 360px;
+    }
+    #payment-otp-modal .modal-header {
+        margin-bottom: 25px;
+    }
+    #otp-text a {
+        cursor: pointer;
+    }
+</style>

@@ -2,8 +2,8 @@
     <div class="modal-content">
         <h5 class="modal-header">Đăng nhập</h5>
         <div class="input-field col s12">
-            <input id="username-login" type="text" name="username" value="nguyennguyencp">
-            <label for="username-login" class="active">Tài khoản</label>
+            <input id="username-login" type="text" name="username" value="nguyennguyencp@gmail.com">
+            <label for="username-login" class="active">Email</label>
             <span id="username-login-error"></span>
         </div>
 
@@ -14,7 +14,7 @@
         </div>
 
         <div class="col s12">
-            Bạn chưa có tài khoản? <a href="#">Đăng ký ngay</a>
+            Bạn chưa có tài khoản? <a href="{{ route('customer.register.show') }}">Đăng ký ngay</a>
         </div>
 
         <div class="modal-action">

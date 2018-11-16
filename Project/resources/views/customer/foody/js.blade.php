@@ -121,14 +121,81 @@
             }
         });
 
-        $("#add-cart-qty").on('input', function () {
-            let qty = $(this).val();
-            if (qty <= 0) {
-                $(this).val('1');
-            }
-            let cost = $(this).val() * parseFloat('{{ $foody->getSaleCost() }}');
+
+        function changeCost(qty) {
+            let cost = qty * parseFloat('{{ $foody->getSaleCost() }}');
             cost = numeral(cost).format('0,0');
             $('#add-cart-cost').html(cost + "<sup>đ</sup>");
+        }
+
+        $("#add-cart-qty").on('input', function () {
+            let qty = $(this).val();
+            changeCost(qty);
+        });
+
+        $('#add-cart-button').on('click', function () {
+            let element = this;
+            let id = $(element).attr('data-id');
+            let qty = $('#add-cart-qty').val();
+            if (qty < 1) {
+                $('#add-cart-qty').val('1');
+                changeCost(1);
+                M.toast({
+                    html: "<i class='material-icons red-text left'>error_outline</i>Số lượng không hợp lệ!",
+                    displayLength: 2000
+                });
+            }
+            else {
+                $.ajax({
+                    type: "post",
+                    url: "/customer/update_shopping_cart",
+                    data: {
+                        foody_id: id,
+                        count: qty
+                    },
+                    success: function (data) {
+                        if (data.status !== 'full' && data.status !== 'error' && data.status !== 'max') {
+                            $('#cart-qty').text(data.total_count);
+                            $('#cart-total-cost').html(data.total_cost + '<sup>đ</sup>');
+                            if (data.status === 'updated') {
+                                $('#cart-qty-' + id).text(data.count);
+                                $('#cart-cost-' + id).html(data.cost + '<sup>đ</sup>');
+                                $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
+                                    "</span>)");
+                            }
+                            else {
+                                if (data.role === 'new') {
+                                    $('#cart-body').empty();
+                                }
+                                $('#cart-body').append(data.cart_body);
+                                $('#cart-added-home-' + id).html("(<span class='red-text'>" + data.count +
+                                    "</span>)");
+                                $('#cart-payment').removeClass('disabled');
+                                updateCart();
+                            }
+                        }
+                        else if (data.status === 'full') {
+                            M.Toast.dismissAll();
+                            M.toast({
+                                html: "Rất tiếc, nguyên liệu không đủ" +
+                                    "<i style='margin: 0 5px' class=\"far fa-frown\"></i>" +
+                                    "Số lượng tối đa bạn có thể đặt hiện tại là " + data.qty,
+                                displayLength: 5000,
+                            });
+                        }
+                        else if (data.status === 'max') {
+                            M.Toast.dismissAll();
+                            M.toast({
+                                html: "<i class='material-icons left red-text'>error_outline</i> " +
+                                    "Số lượng tối đa bạn được mua là 100",
+                                displayLength: 4000,
+                            });
+                        }
+                        $('#add-cart-qty').val('1');
+                        changeCost(1);
+                    }
+                })
+            }
         });
 
         $.each($('.comment-image img'), function (key, value) {
@@ -153,10 +220,6 @@
         //         readURL(value);
         //     });
         // }
-
-        function changeCost() {
-
-        }
 
         // function sliderImage() {
         //     $('#comment-modal-image').append("<div class='comment-modal-next'" + " onclick='nextImage()'" +
@@ -242,7 +305,7 @@
     @include('customer.foody.comment.js')
 
     <script>
-        $('#foody-rating-modal-show').on('click', function () {
+        $('.foody-rating-modal-show').on('click', function () {
             let logged = '{{ $logged }}';
             if (logged === 'false') {
                 $('#require-modal').modal('open');

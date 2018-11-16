@@ -140,7 +140,42 @@ class Foody extends Model
         }
     }
 
-    
+    public function materialFoodies() {
+        return $this->hasMany(MaterialFoody::class);
+    }
+    public function isMaterial() {
+        return $this->materialFoodies()->count() > 0;
+    }
+    public function checkQuantity($qty) {
+        if ($this->isMaterial()) {
+            foreach($this->materialFoodies as $material) {
+                if ($qty * $material->value > Material::find($material->material_id)->value) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public function minusQuantity($qty) {
+        if ($this->isMaterial()) {
+            foreach($this->materialFoodies as $material_foody) {
+                $material = Material::find($material_foody->material_id);
+                $material->value -= $material_foody->value * $qty;
+                $material->update();
+            }
+        }
+    }
+    public function getQuantity() {
+        $sorts = [];
+        if ($this->isMaterial()) {
+            foreach($this->materialFoodies as $material_foody) {
+                $material = Material::find($material_foody->material_id);
+                $sorts[] = $material->value / $material_foody->value;
+            }
+            return min($sorts);
+        }
+        return -1;
+    }
 
 //
 //    public function getChangedQuantity($quantity) {

@@ -66,33 +66,68 @@ class OrderController extends Controller
     }
 
     public function removeOrder(Request $request) {
-        if (Order::find($request->order_id) == null) {
-            $data = [
-                'status' => 'error_null',
-                'text' => "<i class='exclamation icon'></i> Đơn hàng này đã bị xóa.",
-                'button' => "Về trang chủ"
-            ];
-        }
-        else {
-            $order = Order::find($request->order_id);
-            if ($order->getStatus() != 0) {
+        if ($request->otp == session('otp')) {
+            if (Order::find($request->order_id) == null) {
                 $data = [
-                    'status' => 'error',
-                    'text' => "<i class='exclamation icon'></i> 
-                               Đơn hàng đã được duyệt và đang thực hiện, bạn không thể hủy đơn hàng này.",
-                    'button' => "Xác nhận"
+                    'status' => 'error_null',
+                    'text' => "<i class='exclamation icon'></i> Đơn hàng này đã bị xóa.",
+                    'button' => "Về trang chủ"
                 ];
             }
             else {
-                $order->delete();
-                $data = [
-                    'status' => 'success',
-                    'text' => "<i class='check icon'></i> Bạn đã hủy đơn hàng thành công.",
-                    'button' => 'Xác nhận'
-                ];
+                $order = Order::find($request->order_id);
+                if ($order->getStatus() != 0) {
+                    $data = [
+                        'status' => 'error',
+                        'text' => "<i class='exclamation icon'></i> 
+                               Đơn hàng đã được duyệt và đang thực hiện, bạn không thể hủy đơn hàng này.",
+                        'button' => "Xác nhận"
+                    ];
+                }
+                else {
+                    $order->delete();
+                    $data = [
+                        'status' => 'success',
+                        'text' => "<i class='check icon'></i> Bạn đã hủy đơn hàng thành công.",
+                        'button' => 'Xác nhận'
+                    ];
+                }
             }
+            $request->session()->forget('otp');
+        }
+        else {
+            $data = [
+                'status' => 'error_otp',
+                'error_text' => 'Mã OTP không chính xác!'
+            ];
         }
 
         return Response($data);
+    }
+
+    public function create($request) {
+        $otp = rand(100000, 999999);
+        session(['time' => time(), 'otp' => $otp]);
+    }
+
+    public function getOTP(Request $request) {
+        if (!$request->session()->has('time')) {
+            $time = 10;
+            $this->create($request);
+        }
+        else {
+            $time = time() - session('time');
+            if ($time < 10) {
+                $time = 10 - $time;
+            }
+
+            else {
+                $time = 10;
+                $this->create($request);
+            }
+
+        }
+
+        return Response(['time' => $time, 'otp' => session('otp')]);
     }
 }

@@ -39,7 +39,7 @@ class Functions extends Model
             if ($key == 5) {
                 break;
             }
-            $results[] = News::find($news->id);
+            $results[] = News::find($news['id']);
         }
 
         return $results;

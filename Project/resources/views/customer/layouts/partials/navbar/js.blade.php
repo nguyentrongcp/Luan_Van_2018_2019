@@ -2,7 +2,17 @@
     <script>
         $(document).ready(function(){
             let width_of_window = getWidth();
+            let time = 'slow';
+            if (getWidth() <= 992) {
+                time = 0;
+            }
             $(window).resize(function () {
+                if (getWidth() > 992) {
+                    time = 'slow';
+                }
+                else {
+                    time = 0;
+                }
                 if (getWidth() !== width_of_window) {
                     width_of_window = getWidth();
                     $('#dropdown-cart').dropdown('close');
@@ -11,10 +21,7 @@
                 }
             });
             updateCart();
-            let time = 'slow';
-            if (getWidth() <= 992) {
-                time = 0;
-            }
+            $('#cart-qty').text('{{ Cart::count() }}');
             $('#dropdown-cart').dropdown({
                 coverTrigger: false,
                 alignment: 'right',
@@ -43,6 +50,7 @@
             });
 
             $('#dropdown-profile').dropdown({
+                alignment: 'right',
                 constrainWidth: false,
                 coverTrigger: false,
                 inDuration: 500,

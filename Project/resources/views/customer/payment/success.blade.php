@@ -12,7 +12,7 @@
             <span id="payment-success-title">
                 Mã đơn hàng của bạn:
             </span>
-            <label id="order-code">DH-XH43KSHIELWQ</label>
+            <label id="order-code">{{ $order_code }}</label>
             <i id="order-code-copy" class="material-icons center tooltipped" data-position="top" data-tooltip="copy">content_copy</i>
         </div>
         <div class="col s12 center-align payment-success-note">
@@ -26,7 +26,8 @@
             @else
                 <a href="{{ route('customer.home') }}" class="waves-effect waves-light btn red lighten-2">
                     <i class="material-icons left">home</i>Về trang chủ</a>
-                <a class="waves-effect waves-light btn"><i class="material-icons left">assignment</i>Quản lý đơn hàng</a>
+                <a href="{{ route('payment.order.index') }}" class="waves-effect waves-light btn">
+                    <i class="material-icons left">assignment</i>Quản lý đơn hàng</a>
             @endif
         </div>
     </div>

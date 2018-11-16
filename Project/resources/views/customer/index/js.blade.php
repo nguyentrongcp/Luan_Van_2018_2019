@@ -20,6 +20,9 @@
         $('#search').focus(function () {
             $('#search-result').addClass('search-result');
             setCssSearch();
+            if(getWidth() > 992) {
+                $('body').css('overflow', 'hidden');
+            }
             setDimmer($('#type-container'));
         });
 
@@ -38,6 +41,16 @@
                     },
                     success: function (data) {
                         $('#search-result').html(data);
+                        $('.search-foody').each(function (key,value) {
+                            $(value).on('mousedown', function () {
+                                window.location.href = $(value).attr('data-target');
+                            });
+                        });
+                        $('.search-order').each(function (key,value) {
+                            $(value).on('mousedown', function () {
+                                window.location.href = $(value).attr('data-target');
+                            });
+                        });
                         if ($('#search-result').height() >= 320) {
                             $('#search-result').css({
                                 'overflow' : 'auto'
@@ -56,6 +69,7 @@
 
         $('#search').focusout(function () {
             $('#search-result').removeClass('search-result');
+            $('body').css('overflow', 'auto');
             closeDimmer($('#type-container'));
         });
 
