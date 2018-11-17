@@ -13,8 +13,7 @@ class Dashboard extends Model
 
     public static function totalCommentNotApproved(){
         return Comment::where([
-            ['is_approved',false],
-            ['parent_id',null]
+            ['is_approved',false]
         ])->count();
     }
     public static function totalOrders(){

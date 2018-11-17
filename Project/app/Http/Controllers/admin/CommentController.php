@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Admin;
 use App\Comment;
+use App\MiniComment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -37,13 +39,11 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = new Comment();
-        $comment->customer_id = Auth::guard('admin')->id();
-        $comment->foody_id = $request->get('foody-id');
-        $comment->parent_id = (int)$request->get('parent');
+        $comment = new MiniComment();
+        $comment->comment_id = $request->get('comment-id');
+        $comment->admin_id = Admin::adminId();
         $comment->date = date('Y-m-d H:i:s');
         $comment->content = $request->get('content');
-        $comment->title = $request->get('title');
         $comment->save();
 
         return back();

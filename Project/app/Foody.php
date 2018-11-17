@@ -83,7 +83,6 @@ class Foody extends Model
 //
     public function backendComments() {
         return $this->hasMany(Comment::class)
-            ->where('parent_id', null)
             ->orderBy('created_at', 'desc');
     }
 

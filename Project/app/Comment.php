@@ -29,6 +29,7 @@ class Comment extends Model
     public function miniComments() {
         return $this->hasMany(MiniComment::class);
     }
+
     public function approved(){
         return $this->is_approved == 1;
     }
