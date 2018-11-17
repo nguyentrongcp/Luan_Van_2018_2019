@@ -140,7 +140,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
 /**      Customer       **/
 
-<<<<<<< HEAD
     // Test sms api
     Route::get('/testsms', 'Customer\ShoppingCartController@testAPI')->name('test.sms');
 
@@ -198,52 +197,3 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/customer/register/get_otp', 'Customer\CustomerController@getOTP')->name('customer.register.get_otp');
     Route::post('/customer/register/check_otp', 'Customer\CustomerController@checkOTP')->name('customer.register.check_otp');
     Route::post('/customer/profile/change', 'Customer\CustomerController@changeProfile')->name('customer.profile.change');
-=======
-// Test sms api
-Route::get('/testsms', 'Customer\ShoppingCartController@testAPI')->name('test.sms');
-
-// Index
-Route::get('/', 'Customer\CustomerController@index')->name('customer.index');
-
-// Home
-Route::get('/home', 'Customer\HomeController@index')->name('customer.home');
-Route::get('/customer/show_foody', 'Customer\HomeController@showFoody')->name('home.show_foody');
-Route::get('/customer/get_foody', 'Customer\HomeController@getFoody')->name('home.get_foody');
-
-// Shopping cart
-Route::get('/testcart', 'Customer\ShoppingCartController@test')->name('cart.test');
-Route::post('/customer/add_shopping_cart', 'Customer\ShoppingCartController@addCart');
-Route::post('/customer/update_shopping_cart', 'Customer\ShoppingCartController@updateCart');
-Route::post('/customer/remove_shopping_cart', 'Customer\ShoppingCartController@removeCart');
-
-// Payment
-Route::get('/payment', 'Customer\PaymentController@index')->name('payment.index');
-Route::post('/payment/get_payment_otp', 'Customer\PaymentController@getOTP');
-Route::post('/payment/check_payment_otp', 'Customer\PaymentController@checkOTP');
-Route::post('/payment/get_ward', 'Customer\PaymentController@getWard');
-Route::post('/payment/get_transport_fee', 'Customer\PaymentController@getTransportFee');
-Route::get('/payment/process_payment', 'Customer\PaymentController@processPayment');
-Route::get('/payment/success', 'Customer\PaymentController@successPayment');
-
-// Foody
-Route::get('/foody/{slug}', 'Customer\FoodyController@index')->name('customer.foody.show');
-Route::get('/customer/search', 'Customer\FoodyController@search');
-Route::post('/customer/foody/comment', 'Customer\FoodyController@comment');
-Route::post('/customer/like', 'Customer\FoodyController@like');
-Route::post('/customer/favorite', 'Customer\FoodyController@favorite');
-Route::post('/customer/rating', 'Customer\FoodyController@rating')->name('customer.foody.rating');
-
-// Order
-Route::get('/payment/order', 'Customer\OrderController@index')->name('payment.order.index');
-Route::get('/payment/order/get', 'Customer\OrderController@getOrder');
-Route::get('/payment/order/show/{order_code}', 'Customer\OrderController@showOrder')->name('payment.order.show');
-Route::post('/payment/order/remove', 'Customer\OrderController@removeOrder');
-
-// News
-Route::get('/news', 'Customer\NewsController@index')->name('customer.news.index');
-Route::get('/news/{slug}', 'Customer\NewsController@show')->name('customer.news.show');
-
-// Login & logout
-Route::post('/customer/login', 'Customer\CustomerLoginController@login');
-Route::get('logout/', 'Customer\CustomerLoginController@logout')->name('customer.logout');
->>>>>>> 19b799d81efd6269e17e0baf02c1556e66cf46eb
