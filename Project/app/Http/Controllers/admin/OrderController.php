@@ -102,10 +102,12 @@ class OrderController extends Controller
     }
 
     public function filter($id){
-        $orderFilters = DB::table('orders')
-            ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->join('order_foodies','orders.id','=','order_foodies.order_id')
-            ->where('order_statuses.status','=',$id)->paginate(10);
+        $orderFilters = DB::table('orders as o')
+                    ->join('order_statuses as os','os.order_id','=','o.id')
+                    ->join('order_foodies as of','o.id','=','of.order_id')
+                    ->where('os.status','=',$id)
+                    ->groupBy('o.id')
+                    ->paginate(10);
 
         return view('admin.orders.filter.index',compact('orderFilters'));
     }
@@ -114,7 +116,7 @@ class OrderController extends Controller
         $orders = OrderStatus::where('order_id',$id)->get();
         foreach ($orders as $order){
             $order->status = 1;
-            $order->admin_id = Auth::guard('admin')->id();
+            $order->admin_id = Admin::adminId();
             $order->approved_date = date('Y-m-d H:i:s');
             $order->update();
         }
@@ -129,7 +131,7 @@ class OrderController extends Controller
             $orderStatuses = OrderStatus::where('order_id',$id)->get();
             foreach ($orderStatuses as $orderStatus){
                 $orderStatus->status = 3;
-                $orderStatus->admin_id = Auth::guard('admin')->id();
+                $orderStatus->admin_id = Admin::adminId();
                 $orderStatus->approved_date = date('Y-m-d H:i:s');
                 $orderStatus->update();
             }

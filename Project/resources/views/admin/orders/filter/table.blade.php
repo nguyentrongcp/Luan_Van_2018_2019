@@ -14,6 +14,7 @@
         </tr>
         </thead>
         <tbody>
+
         @foreach($orderFilters as $stt => $orderFilter)
 
             <tr>
@@ -53,7 +54,7 @@
                 </td>
                 <td class="center aligned">
                     @if($orderFilter->status == 0)
-                        <a class="ui small teal label a-decoration" href="{{ route('order_approved', [$orderFilter->id]) }}"
+                        <a class="ui small teal label a-decoration" href="{{ route('order_approved', [$orderFilter->order_id]) }}"
                            onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')">
                             <i class="check open fitted icon"></i>
                         </a>
@@ -61,12 +62,12 @@
                 </td>
                 <td>
                     @if($orderFilter->status == 0)
-                        <a class="ui small orange label a-decoration" href="{{ route('order_cancelled', [$orderFilter->id]) }}"
+                        <a class="ui small orange label a-decoration" href="{{ route('order_cancelled', [$orderFilter->order_id]) }}"
                            onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')">
                             <i class="trash open fitted icon"></i>
                         </a>
                     @elseif($orderFilter->status == 3)
-                        <a class="ui small red label a-decoration" href="{{ route('order_cancelled', [$orderFilter->id]) }}"
+                        <a class="ui small red label a-decoration" href="{{ route('order_cancelled', [$orderFilter->order_id]) }}"
                            onclick="return confirm('Bạn chắc chắn muốn xóa đơn hàng này?')">
                             <i class="remove open fitted icon"></i>
                         </a>
