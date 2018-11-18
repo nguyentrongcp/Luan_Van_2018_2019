@@ -17,7 +17,7 @@ class CreateGoodsReceiptNoteDetailsTable extends Migration
             $table->increments('id');
             $table->string('material', 100);
             $table->integer('material_id')->unsigned()->nullable();
-            $table->string('value', 20);
+            $table->float('quantity');
 //            $table->integer('amount');
             $table->double('cost');
             $table->double('total_cost');

@@ -30,6 +30,9 @@
         *:not(i) {
             font-family: 'Segoe UI', Tahoma, Arial, san-serif !important;
         }
+        .hidden {
+            display: none !important;
+        }
     </style>
     @stack('style')
 </head>
