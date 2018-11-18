@@ -19,9 +19,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-//        $orders = DB::table('orders')->join('order_statuses','orders.id','=','order_statuses.order_id')
-//                    ->orderBy('order_statuses.status','ASC')->paginate(10);
-        $orders = Order::where('is_deleted',false)->paginate(10);
+        $orders = Order::join('order_statuses as os','os.order_id','=','orders.id')
+                        ->where('is_deleted',false)
+                        ->orderBy('os.status','ASC')
+                        ->orderBy('orders.order_created_at','DESC')
+                        ->paginate(10);
         return view('admin.orders.index',compact('orders'));
     }
 

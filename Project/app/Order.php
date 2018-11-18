@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
+
     public function admin()
     {
         return $this->belongsTo(Admin::class);

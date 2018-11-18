@@ -138,6 +138,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::resource('comments', 'admin\CommentController');
     Route::post('comments/{id}', 'admin\CommentController@update')->name('admin.approved');
     Route::get('comments/filter/{id}', 'admin\CommentController@filter')->name('admin_comment_filter');
+    /** transport fees **/
+    Route::resource('transport_fees','admin\TransportFeesController');
+    Route::post('storedistrict','admin\TransportFeesController@storeDistrict')->name('district.store');
+    Route::post('updatedistrict/{$id}','admin\TransportFeesController@updateDistrict')->name('district.update');
 
 });
 
