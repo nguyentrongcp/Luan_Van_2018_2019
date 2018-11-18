@@ -13,6 +13,7 @@
 <script src="{{ asset('admin/assets/js/admin-script.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="{{asset('admin/assets/plugin/chartjs/Chart.PieceLabel.min.js')}}"></script>
+<script src="{{ asset('/customer/js/numeral.js') }}"></script>
 {{--Color--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>

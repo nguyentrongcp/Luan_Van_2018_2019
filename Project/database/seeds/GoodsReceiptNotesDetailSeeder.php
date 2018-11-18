@@ -13,7 +13,7 @@ class GoodsReceiptNotesDetailSeeder extends Seeder
 
     public function run()
     {
-        $rows = [];
+
         for ($i = 1; $i <= 150; $i++) {
                 $value = random_int(5, 10);
                 $cost = random_int(10000, 100000);

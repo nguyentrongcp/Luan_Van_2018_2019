@@ -44,6 +44,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('statistic');
     Route::get('statistis/foody', 'admin\StatisticController@foody')->name('foody')
         ->middleware('statistic');
+    Route::get('statistic/order/get', 'admin\OrderStatisticController@getValue')->name('statistic.order.get')
+        ->middleware('statistic');
 
     /** Foody type */
 

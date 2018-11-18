@@ -51,29 +51,40 @@
                     @endforeach
                 </div>
                 <div class="row comment-footer-container">
-                    <div id="mini-comment-{{ $comment->id }}">
-                        @foreach($comment->miniComments as $comment_child)
-                            <div class="col comment-comment-container">
+                    @if($comment->miniComments()->count() > 0)
+                        <div id="mini-comment-{{ $comment->id }}" style="display: inline-block">
+                            @foreach($comment->miniComments as $comment_child)
+                                <div class="col comment-comment-container">
                                 <span class="comment-avatar">
-                                    <img class="circle" src="{{ asset($comment_child->customer->avatar) }}">
-                                </span>
-                                <div class="col comment-comment-content-container">
-                                    <span class="comment-comment-name"><b>{{ $comment_child->customer->name }}</b></span>
-                                    <span id="comment-comment-content">{{ $comment_child->content }}</span>
-                                </div>
-                                {{--<span class="right"><i class="material-icons right">delete_forever</i></span>--}}
-                                <span class="col comment-comment-time-container">
-                                    {{ date_format(date_create($comment_child->date), 'd-m-Y H:i:s') }}
-                                    @if($logged == 'true')
-                                        @if($comment_child->customer_id == Auth::guard('customer')->user()->id)
-                                            <span data-id="{{ $comment_child->id }}" class="delete-mini-comment"
-                                                  style="cursor: pointer; margin-left: 10px;font-weight: 500">Xóa</span>
-                                        @endif
+                                    @if($comment_child->customer_id != null)
+                                        <img class="circle" src="{{ asset($comment_child->customer->avatar) }}">
+                                    @else
+                                        <img class="circle" src="{{ asset($comment_child->admin->avatar) }}">
                                     @endif
                                 </span>
-                            </div>
-                        @endforeach
-                    </div>
+                                    <div class="col comment-comment-content-container">
+                                        @if($comment_child->customer_id != null)
+                                            <span class="comment-comment-name"><b>{{ $comment_child->customer->name }}</b></span>
+                                        @else
+                                            <span class="comment-comment-name"><b>{{ $comment_child->admin->name }}
+                                                    <span class="blue-text">Quản trị viên</span></b></span>
+                                        @endif
+                                        <span id="comment-comment-content">{{ $comment_child->content }}</span>
+                                    </div>
+                                    {{--<span class="right"><i class="material-icons right">delete_forever</i></span>--}}
+                                    <span class="col comment-comment-time-container">
+                                    {{ date_format(date_create($comment_child->date), 'd-m-Y H:i:s') }}
+                                        @if($logged == 'true')
+                                            @if($comment_child->customer_id == Auth::guard('customer')->user()->id)
+                                                <span data-id="{{ $comment_child->id }}" class="delete-mini-comment"
+                                                      style="cursor: pointer; margin-left: 10px;font-weight: 500">Xóa</span>
+                                            @endif
+                                        @endif
+                                </span>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                     @if($logged == 'true')
                         <div class="col comment-comment-container" style="width: 100%">
                             <span class="comment-avatar">
@@ -87,7 +98,7 @@
                             </div>
                         </div>
                     @else
-                        <p style="font-size: 12px; padding-top: 10px"><i style="font-size: 17px" class="material-icons left">lock</i>
+                        <p style="font-size: 12px; display: inline-block"><i style="font-size: 17px" class="material-icons left">lock</i>
                             Hãy đăng nhập để tham gia bình luận cho bài viết này</p>
                     @endif
                 </div>
