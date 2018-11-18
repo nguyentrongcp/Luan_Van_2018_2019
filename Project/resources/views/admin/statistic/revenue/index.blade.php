@@ -17,44 +17,60 @@
             <div class="inline fields">
                 <div class="field" id="select-type">
                     <label>Xem theo: </label>
-                    <select name="type" id="type" onchange="show()">
+                    <select name="type" id="type">
                         <option value="year">Năm</option>
                         <option value="quarter">Quý</option>
                         <option value="month">Tháng</option>
                         <option value="day">Ngày</option>
                     </select>
                 </div>
-                <div class="field will-hide" id="select-year" style="display: none;">
-                    <select name="year" id="year">
+                <div class="field select-hide hidden" id="select-year">
+                    <select name="year" id="year" onchange="yearChanged()">
                         @for($i = date('Y'); $i >= 2014 ; $i--)
                             <option value="{{ $i }}">Năm {{ $i }}</option>
                         @endfor
                     </select>
                 </div>
-                <div class="field will-hide" id="select-quarter" style="display: none;">
+                <div class="field select-hide hidden" id="select-quarter">
                     <select name="quarter" id="quarter">
                         @for($i = 1; $i <= 4 ; $i++)
                             <option value="{{ $i }}">Quý {{ $i }}</option>
                         @endfor
                     </select>
                 </div>
-                <div class="field will-hide" id="select-month" style="display: none;">
-                    <select name="month" id="month">
+                <div class="field select-hide hidden" id="select-month">
+                    <select name="month" id="month" onchange="monthChanged()">
                         @for($i = 1; $i <= 12 ; $i++)
                             <option value="{{ $i }}">Tháng {{ $i }}</option>
                         @endfor
                     </select>
                 </div>
-                <div class="field will-hide" id="select-day-start" style="display: none;">
-                    <label>Từ ngày: </label>
-                    <select name="month" id="day-start">
+                <div class="field select-hide hidden" id="select-month-start">
+                    <label>Từ: </label>
+                    <select name="month" id="month-start" onchange="beginMonthChanged()">
+                        @for($i = 1; $i <= 12 ; $i++)
+                            <option value="{{ $i }}">Tháng {{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="field select-hide hidden" id="select-month-end">
+                    <label>Đến: </label>
+                    <select name="month" id="month-end">
+                        @for($i = 1; $i <= 12 ; $i++)
+                            <option value="{{ $i }}">Tháng {{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="field select-hide hidden" id="select-day-start">
+                    <label>Từ: </label>
+                    <select name="month" id="day-start" onchange="beginChanged()">
                         @for($i = 1; $i <= 31 ; $i++)
                             <option value="{{ $i }}">{{ $i }}</option>
                         @endfor
                     </select>
                 </div>
-                <div class="field will-hide" id="select-day-end" style="display: none;">
-                    <label>Đến ngày: </label>
+                <div class="field select-hide hidden" id="select-day-end">
+                    <label>Đến: </label>
                     <select name="month" id="day-end">
                         @for($i = 1; $i <= 31 ; $i++)
                             <option value="{{ $i }}" {{ $i == 5 ? 'selected': '' }}>{{ $i }}</option>
@@ -63,50 +79,17 @@
                 </div>
 
                 <div class="field" id="btn-view">
-                    <button class="ui blue label">OK</button>
+                    <a class="ui blue label" id="statistic-btn">OK</a>
                 </div>
             </div>
         </form>
 
         <div class="ui grid">
-
-            <div class="ten wide column">
-
-                <h5 class="ui header">Giá trị mua bán theo thời gian (Đơn vị: triệu đồng)</h5>
-
-{{--                @include('admin.dashboard.account.revenue')--}}
-
-            </div>
-            <div class="six wide column">
-
-                <h5 class="ui header right aligned">
-                    <span onclick="showExport(title, cols, rows)" class="pointer">
-                        <i class="file pdf outline red large icon small-lr-margin"></i>PDF
-                    </span>
-                </h5>
-
-                @include('admin.statistic.revenue.table')
-
-            </div>
+            @include('admin.statistic.revenue.chart')
         </div>
 {{--        @include('admin.dashboard.account.export')--}}
     </div>
+
+    @include('admin.statistic.js')
+    @include('admin.statistic.revenue.js')
 @endsection
-
-<script>
-    let needShow = {
-        year: [],
-        quarter: ['year'],
-        month: ['year'],
-        day: ['year', 'month', 'day-start', 'day-end']
-    };
-    function show() {
-        let type = $('#type').val();
-        if (type === 'all')
-            return $('.will-hide').hide();
-        $('.will-hide').hide();
-        needShow[type].forEach((e) => $('#select-' + e).show());
-    }
-
-
-</script>

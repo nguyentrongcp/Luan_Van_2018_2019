@@ -32,7 +32,8 @@ class OrdersSeeder extends Seeder
                 ];
             }
             DB::table('orders')->insert($this->getRow($i, $data, $total_of_cost));
-            $date = date_modify(date_create(date('Y-m-d')), '-3 days')->getTimestamp();
+//            $date = date_modify(date_create(date('Y-m-d')), '-3 days')->getTimestamp();
+            $date = date_create('2018-01-01')->getTimestamp();
             DB::table('order_statuses')->insert([
                 [
                     'order_id' => $i,
