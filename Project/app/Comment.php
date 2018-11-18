@@ -35,10 +35,11 @@ class Comment extends Model
     }
     public static function getUnapprovedComments() {
         $comments = DB::table('comments')
-            ->where([
-                ['is_approved', 0],
-            ])
             ->join('foodies', 'comments.foody_id', '=', 'foodies.id')
+            ->where([
+                ['comments.is_approved', 0],
+            ])
+            ->orderBy('comments.created_at','DESC')
             ->get();
 
         return $comments;

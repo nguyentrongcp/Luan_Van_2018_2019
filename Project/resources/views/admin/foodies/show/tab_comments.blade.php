@@ -11,7 +11,8 @@
                     <div class="metadata">
                         <div class="date">{{ $comment->date}}</div>
                         <div class="action">
-                            <form action="{{ route('comments.update', [$comment->id]) }}" class="force-inline" method="post">
+                            <form action="{{ route('comments.update', [$comment->id]) }}" class="force-inline"
+                                  method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('PUT') }}
                                 <input type="hidden" name="approve" value="{{ ($comment->is_approved + 1) % 2 }}">
@@ -22,7 +23,8 @@
                                 @endif
                             </form>
 
-                            <form action="{{ route('comments.destroy', [$comment->id]) }}" class="force-inline" method="post">
+                            <form action="{{ route('comments.destroy', [$comment->id]) }}" class="force-inline"
+                                  method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <button class="ui mini red label pointer text-white">Xóa</button>
@@ -33,27 +35,48 @@
                     <div class="text">{{ $comment->content }}</div>
                     <div class="card-image">
                         @foreach(\App\Image::where($comment->image_id) as $image)
-                        <img src="{{asset($image->link)}}" alt="comment image">
-                            @endforeach
+                            <img src="{{asset($image->link)}}" alt="comment image">
+                        @endforeach
                     </div>
                     @foreach($comment->miniComments as $child)
                         <div class="comment">
                             <a class="avatar"><img src="{{ asset('admin/assets/img/mike.jpg') }}"></a>
                             <div class="content">
-                                <a class="author">{{ \App\Admin::find($child->admin_id)->name }}</a>
-                                <div class="metadata">
-                                    <div class="date">{{$child->date}}</div>
-                                    <div class="action">
-                                        <form action="{{ route('comments.destroy', [$child->id]) }}" class="force-inline" method="post">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button class="ui mini red label pointer text-white">Xóa</button>
+                                @if($child->admin_id != '')
+                                    <a class="author">{{ \App\Admin::find($child->admin_id)->name }}</a>
+                                    <div class="metadata">
+                                        <div class="date">{{$child->date}}</div>
+                                        <div class="action">
+                                            <form action="{{ route('comments.destroy', [$child->id]) }}"
+                                                  class="force-inline" method="post">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <button type="submit" class="ui mini red label pointer text-white">Xóa</button>
 
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="title"><strong>{{$child->title}}</strong></div>
-                                <div class="text">{{ $child->content }}</div>
+                                    <div class="title"><strong>{{$child->title}}</strong></div>
+                                    <div class="text">{{ $child->content }}</div>
+                                @endif
+
+                                @if($child->customer_id != '')
+                                    <a class="author">{{ \App\Customer::find($child->customer_id)->name }}</a>
+                                    <div class="metadata">
+                                        <div class="date">{{$child->date}}</div>
+                                        <div class="action">
+                                            <form action="{{ route('comments.destroy', [$child->id]) }}"
+                                                  class="force-inline" method="post">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <button class="ui mini red label pointer text-white">Xóa</button>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="title"><strong>{{$child->title}}</strong></div>
+                                    <div class="text">{{ $child->content }}</div>
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -63,9 +86,9 @@
                         <input type="hidden" name="comment-id" value="{{ $comment->id }}">
                         <input type="hidden" name="foody-id" value="{{ $foodies->id }}">
                         {{--<div class="field">--}}
-                            {{--<div class="ui right labeled input">--}}
-                                {{--<input type="text" name="title" placeholder="Tiêu đề">--}}
-                            {{--</div>--}}
+                        {{--<div class="ui right labeled input">--}}
+                        {{--<input type="text" name="title" placeholder="Tiêu đề">--}}
+                        {{--</div>--}}
                         {{--</div>--}}
                         <div class="field right">
                             <textarea name="content" placeholder="Nội dung"></textarea>

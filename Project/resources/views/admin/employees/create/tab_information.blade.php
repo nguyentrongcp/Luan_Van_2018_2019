@@ -66,12 +66,21 @@
         @endif
         <div class="inline required field">
             <label class="label-fixed">Cấp quyền</label>
-            <select name="employee-role-id"
-                    class="ui fluid dropdown">
-                @foreach($roles as $role)
-                    <option value="{{$role->id}}">{{$role->name}}</option>
-                @endforeach
-            </select>
+            <div class="two column row">
+                {{--<div class="column">--}}
+                    <select name="employee-role-id"
+                            class="ui six column fluid dropdown">
+                        @foreach($roles as $role)
+                            <option value="{{$role->id}}">{{$role->name}}</option>
+                        @endforeach
+                    </select>
+                {{--</div>--}}
+                {{--<div class="wide column">--}}
+                    <a href="#" onclick="$('#add-employee-role-modal').modal('show')" class="ui blue mini button a-decoration">
+                        <i class="dot fitted icon"></i> ...
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="ui divider">
         </div>
@@ -85,28 +94,9 @@
         </div>
     </div>
 </div>
-
+@include('admin.employees.create.modal')
 @push('script')
-    <script>
-        // $('#create-employee-form').form({
-        //     fields: {
-        //         employee_name: {
-        //             rules: [{type: 'empty', prompt: 'Họ và tên không được bỏ trống '}]
-        //         },
-        //         employee_pwd: {
-        //             rules: [{type: 'empty', prompt: 'Mật khẩu không được bỏ trống '}]
-        //         },
-        //         employee_email: {
-        //             rules: [{type: 'empty', prompt: 'Email không được bỏ trống '}]
-        //         },
-        //         employee_phone: {
-        //             rules: [
-        //                 {type: 'empty', prompt: 'Số điện thoại không được bỏ trống '},
-        //                 {type: 'regExp[/^(0[35789])[0-9]{8}$/]', prompt: 'Sai định dạng'}]
-        //         }
-        //     },
-        // })
-    </script>
+
     <script>
         var pass = document.getElementById("employee-pwd")
             , confirm_pass = document.getElementById("employee-confirm-pwd");

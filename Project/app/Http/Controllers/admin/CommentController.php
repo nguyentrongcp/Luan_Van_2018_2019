@@ -93,16 +93,11 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        if (!$request->get('comment-id')){
-            return back()->with('error','Dữ liệu không đúng vui lòng kiểm tra lại!');
-        }
-        $ids = $request->get('comment-id');
-        foreach ($ids as $id){
             $comments = Comment::findOrFail($id);
             $comments->delete();
-        }
+
         return back()->with('success','Xóa thành công!');
     }
 
