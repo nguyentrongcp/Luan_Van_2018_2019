@@ -113,12 +113,36 @@ class Foody extends Model
     }
 
     public function getBuyCount() {
-        DB::table('foodies')->join('order_foodies', 'foodies.id', 'foody_id')
+        return DB::table('foodies')->join('order_foodies', 'foodies.id', 'foody_id')
             ->join('orders', 'order_foodies.order_id', 'orders.id')
             ->join('order_statuses', 'orders.id', 'order_statuses.order_id')
             ->where('foodies.id', $this->id)
-            ->where('status', 2)
-            ->orWhere('status', 3)
+            ->where(function ($query) {
+                $query->where('status', 2)
+                    ->orWhere('status', 3);})
+            ->count('order_foodies.foody_id');
+    }
+    public function getBuyCountByDate($date) {
+        return DB::table('foodies')->join('order_foodies', 'foodies.id', 'foody_id')
+            ->join('orders', 'order_foodies.order_id', 'orders.id')
+            ->join('order_statuses', 'orders.id', 'order_statuses.order_id')
+            ->where('foodies.id', $this->id)
+            ->where('order_created_at', '<=', $date)
+            ->where(function ($query) {
+                $query->where('status', 2)
+                    ->orWhere('status', 3);})
+            ->count('order_foodies.foody_id');
+    }
+    public function getBuyCountByDates($start, $end) {
+        return DB::table('foodies')->join('order_foodies', 'foodies.id', 'foody_id')
+            ->join('orders', 'order_foodies.order_id', 'orders.id')
+            ->join('order_statuses', 'orders.id', 'order_statuses.order_id')
+            ->where('foodies.id', $this->id)
+            ->where('order_created_at', '>=', $start)
+            ->where('order_created_at', '<=', $end)
+            ->where(function ($query) {
+                $query->where('status', 2)
+                    ->orWhere('status', 3);})
             ->count('order_foodies.foody_id');
     }
 

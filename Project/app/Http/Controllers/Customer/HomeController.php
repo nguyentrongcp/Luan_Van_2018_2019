@@ -144,9 +144,9 @@ class HomeController extends Controller {
         foreach($foodies as $foody) {
             $foody_sorts[] = ['id' => $foody->id, 'vote' => $foody->getVoted()->average];
         }
-        $foody_sorts = array_sort($foody_sorts, function($foody_sorts) {
+        $foody_sorts = array_reverse(array_sort($foody_sorts, function($foody_sorts) {
             return $foody_sorts['vote'];
-        });
+        }));
 
         return $foody_sorts;
     }
@@ -156,9 +156,9 @@ class HomeController extends Controller {
         foreach($foodies as $foody) {
             $foody_sorts[] = ['id' => $foody->id, 'like' => $foody->getLiked()];
         }
-        $foody_sorts = array_sort($foody_sorts, function($foody_sorts) {
+        $foody_sorts = array_reverse(array_sort($foody_sorts, function($foody_sorts) {
             return $foody_sorts['like'];
-        });
+        }));
 
         return $foody_sorts;
     }
@@ -166,11 +166,11 @@ class HomeController extends Controller {
     public function getFoodyByBuy($foodies) {
         $foody_sorts = [];
         foreach($foodies as $foody) {
-            $foody_sorts[] = ['id' => $foody->id, 'buy' => $foody->orderFoodies()->count()];
+            $foody_sorts[] = ['id' => $foody->id, 'buy' => $foody->getBuyCount()];
         }
-        $foody_sorts = array_sort($foody_sorts, function($foody_sorts) {
+        $foody_sorts = array_reverse(array_sort($foody_sorts, function($foody_sorts) {
             return $foody_sorts['buy'];
-        });
+        }));
 
         return $foody_sorts;
     }
@@ -288,7 +288,7 @@ class HomeController extends Controller {
         $favorite = 'bookmark outline';
         $slug = $foody->slug;
         $liked = $foody->getLiked();
-        $buy_count = $foody->orderFoodies()->count();
+        $buy_count = $foody->getBuyCount();
         if (Auth::guard('customer')->check()) {
             if (Favorite::where('foody_id', $id)
                     ->where('customer_id', Auth::guard('customer')->user()->id)->count() > 0) {

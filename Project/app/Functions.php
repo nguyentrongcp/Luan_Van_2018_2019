@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Functions extends Model
 {
@@ -46,7 +47,60 @@ class Functions extends Model
     }
 
     public static function getHotFoody() {
+        $results = [];
+        foreach(Foody::all() as $foody) {
+            $results[] = [
+                'id' => $foody->id,
+                'count' => $foody->getBuyCount()
+            ];
+        }
+        $results = array_reverse(array_sort($results, function($results) {
+            return $results['count'];
+        }));
+        $foodies = [];
+        foreach($results as $result) {
+            $foodies[] = Foody::find($result['id']);
+        }
 
+        return $foodies;
+    }
+
+    public static function getHotFoodyByDate($date) {
+        $results = [];
+        foreach(Foody::all() as $foody) {
+            $results[] = [
+                'id' => $foody->id,
+                'count' => $foody->getBuyCountByDate($date)
+            ];
+        }
+        $results = array_reverse(array_sort($results, function($results) {
+            return $results['count'];
+        }));
+        $foodies = [];
+        foreach($results as $result) {
+            $foodies[] = Foody::find($result['id']);
+        }
+
+        return $foodies;
+    }
+
+    public static function getHotFoodyByDates($start, $end) {
+        $results = [];
+        foreach(Foody::all() as $foody) {
+            $results[] = [
+                'id' => $foody->id,
+                'count' => $foody->getBuyCountByDates($start, $end)
+            ];
+        }
+        $results = array_reverse(array_sort($results, function($results) {
+            return $results['count'];
+        }));
+        $foodies = [];
+        foreach($results as $result) {
+            $foodies[] = Foody::find($result['id']);
+        }
+
+        return $foodies;
     }
 
     public static function isSalesOff() {
