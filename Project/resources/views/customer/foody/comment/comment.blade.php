@@ -1,6 +1,6 @@
 <div class="row comment section scrollspy" id="comment-container">
 
-    @foreach($foody->comments as $stt => $comment)
+    @foreach($foody->comments()->where('is_approved', 1)->get() as $stt => $comment)
         <div id="comment-row-{{ $comment->id }}" class="col s12 white content">
             <div class="row comment">
                 <div class="row comment-title">

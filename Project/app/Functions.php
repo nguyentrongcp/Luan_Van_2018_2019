@@ -45,6 +45,10 @@ class Functions extends Model
         return $results;
     }
 
+    public static function getHotFoody() {
+
+    }
+
     public static function isSalesOff() {
         foreach (SalesOff::all() as $sale) {
             if ($sale->salesOffDetails()->count() > 0) {

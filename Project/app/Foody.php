@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 /**
  * @property mixed costs
  * @property mixed name
@@ -108,6 +110,16 @@ class Foody extends Model
 
     public function getAttitudeVotes() {
         return $this->votes->avg('attitude');
+    }
+
+    public function getBuyCount() {
+        DB::table('foodies')->join('order_foodies', 'foodies.id', 'foody_id')
+            ->join('orders', 'order_foodies.order_id', 'orders.id')
+            ->join('order_statuses', 'orders.id', 'order_statuses.order_id')
+            ->where('foodies.id', $this->id)
+            ->where('status', 2)
+            ->orWhere('status', 3)
+            ->count('order_foodies.foody_id');
     }
 
     public function isSalesOff() {

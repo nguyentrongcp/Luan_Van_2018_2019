@@ -58,7 +58,7 @@ class PaymentController extends Controller
         $otp = rand(100000, 999999);
         session(['time' => time(), 'otp' => $otp]);
         $this->store($request);
-//            $this->sendOTP([$request->phone]);
+            $this->sendOTP([$request->phone]);
     }
 
     public function store($request) {
