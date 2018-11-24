@@ -30,6 +30,9 @@ class Admin extends Authenticatable
     public static function adminName() {
         return self::admin()->name;
     }
+    public static function adminAvatar(){
+        return self::admin()->avatar;
+    }
 
     public static function adminPhone() {
         return self::admin()->phone;

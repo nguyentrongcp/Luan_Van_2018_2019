@@ -12,7 +12,7 @@
                     <select class="ui dropdown label" name="available-material" id="available-material">
                         <option value="">Chọn nguyên liệu</option>
                         @foreach(\App\Material::all() as $material)
-                            <option class="item" value="{{$material->name}}">
+                            <option class="item" value="{{$material->id}}">
                                 {{$material->name}}
                             </option>
                         @endforeach
@@ -22,11 +22,11 @@
             <div class="field">
                 <label for="amount">Số lượng</label>
                 <div class="ui right labeled input">
-                    <input type="number" name="amount" id="amount" placeholder="Số lượng">
+                    <input type="number" name="quantity" id="quantity" placeholder="Số lượng">
                     <select class="ui dropdown label" name="unit" id="unit">
                         <option value="">Chọn đơn vị tính</option>
                         @foreach(\App\CalculationUnit::all() as $unit)
-                            <option class="item" value="{{$unit->name}}">
+                            <option class="item" value="{{$unit->id}}">
                                 {{$unit->name}}
                             </option>
                         @endforeach
@@ -70,17 +70,17 @@
                     </div>
                 </div>
                 <div class="field">
-                    @php
-                            $arr = explode(' ',$goodsReceiptDetail->value)
-                            @endphp
                     <label for="amount">Số lượng</label>
                     <div class="ui right labeled input">
-                        <input type="number" name="amount" id="amount" placeholder="Số lượng"
-                        value="{{$arr[0]}}">
+                        <input type="number" name="quantity" id="quantity" placeholder="Số lượng"
+                        value="{{$goodsReceiptDetail->quantity}}">
                         <select class="ui dropdown label" name="unit" id="unit">
                             <option value="">Chọn đơn vị tính</option>
+                            @php
+                                $name_unit = \App\CalculationUnit::find($goodsReceiptDetail->unit_id)->name;
+                            @endphp
                             @foreach(\App\CalculationUnit::all() as $unit)
-                                <option class="item" value="{{$unit->name}}" {{$arr[1]==$unit->name ? 'selected':''}}>
+                                <option class="item" value="{{$unit->id}}" {{$name_unit==$unit->name ? 'selected':''}}>
                                     {{$unit->name}}
                                 </option>
                             @endforeach

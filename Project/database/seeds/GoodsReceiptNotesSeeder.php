@@ -71,7 +71,7 @@ class GoodsReceiptNotesSeeder extends Seeder
                 $cost += $material['cost'] * 1000 * $material['qty'];
                 $total_cost += $material['cost'] * 1000 * $material['qty'];
                 $row_details[] = [
-                    'material_id' => $material['id'],
+                    'unit_id' => $material['id'],
                     'material' => $material['name'],
                     'quantity' => $material['qty'],
                     'cost' => $material['cost'] * 1000,

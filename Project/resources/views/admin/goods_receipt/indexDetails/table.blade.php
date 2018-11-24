@@ -25,7 +25,10 @@
             </td>
             <td>{{ $stt + 1 }}</td>
             <td>{{$goodsReceiptDetail->material}}</td>
-            <td class="text-center">{{$goodsReceiptDetail->value}}</td>
+            @php
+                $unit = \App\CalculationUnit::find($goodsReceiptDetail->unit_id)->unit;
+            @endphp
+            <td>{{$goodsReceiptDetail->quantity . ' '. $unit}}</td>
             <td class="text-center">{{number_format($goodsReceiptDetail->cost).' đ'}}</td>
             <td class="text-center">
                 {{number_format($goodsReceiptDetail->total_cost).' đ'}}

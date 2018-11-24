@@ -29,7 +29,15 @@ class StatisticController extends Controller
             ->join('foody_statuses','foodies.id','=','foody_statuses.foody_id')
             ->where('foody_statuses.status','=',false)
             ->get();
-        return view('admin.statistic.foody.index',compact('outFoodies'));
+
+        $saleOffFoodies = DB::table('sales_offs as s')
+                        ->join('sales_off_details as sd','s.id','=','sd.sales_off_id')
+                        ->join('foodies as f','f.id','=','sd.foody_id')
+                        ->where('s.end_date', '>=', date('Y-m-d'))
+                        ->groupBy('f.id')
+                        ->get();
+
+        return view('admin.statistic.foody.index',compact('outFoodies','saleOffFoodies'));
     }
 
     public function today(Request $request)

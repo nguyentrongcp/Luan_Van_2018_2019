@@ -12,17 +12,10 @@ class AdminSeeder extends Seeder
     public function run()
     {
         DB::table('admins')->insert([
-            [
-                'name' => 'Mr. Blo bla',
-                'address'=>'Ninh Kiều - Cần Thơ',
-                'email' => 'blabla@gmail.com',
-                'phone' => '0339883047',
-                'username' => 'blabla',
-                'password' => bcrypt('111111'),
-                'role_id' => 1
-            ],
+
             [
                 'name' => 'Nguyễn Đình Trọng',
+                'avatar'=>'admin/assets/img/mike.jpg',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'nguyentrongcp@gmail.com',
                 'phone' => '0331542678',
@@ -32,6 +25,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'name' => 'Lý Trường Giang',
+                'avatar'=>'admin/assets/img/mike.jpg',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'ltgiang@gmail.com',
                 'phone' => '0962987036',
@@ -41,6 +35,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Văn Lộc',
+                'avatar'=>'admin/assets/img/mike.jpg',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'nvloc@gmail.com',
                 'phone' => '0381245564',
@@ -50,6 +45,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'name' => 'Phạm Hoài An',
+                'avatar'=>'admin/assets/img/mike.jpg',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'phoaian@gmail.com',
                 'phone' => '0665584568',
@@ -59,6 +55,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'name' => 'Phan Văn Thành',
+                'avatar'=>'admin/assets/img/mike.jpg',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'pvthanh@gmail.com',
                 'phone' => '0839883047',
@@ -68,6 +65,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'name' => 'Nguyễn Văn Tài',
+                'avatar'=>'admin/assets/img/mike.jpg',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'nvantai@gmail.com',
                 'phone' => '0375846788',
@@ -77,6 +75,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'name' => 'La Thị Kiều Oanh',
+                'avatar'=>'admin/assets/img/mike.jpg',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'ltkoanh@gmail.com',
                 'phone' => '0709587451',
@@ -86,6 +85,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'name' => 'Phan Thị Kiều Loan',
+                'avatar'=>'admin/assets/img/mike.jpg',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'ptkloan@gmail.com',
                 'phone' => '0325588987',
@@ -95,6 +95,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'name' => 'Đỗ Việt Hùng',
+                'avatar'=>'admin/assets/img/mike.jpg',
                 'address'=>'Ninh Kiều - Cần Thơ',
                 'email' => 'dvhung@gmail.com',
                 'phone' => '0354412154',

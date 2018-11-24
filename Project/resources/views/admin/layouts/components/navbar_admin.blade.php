@@ -1,5 +1,5 @@
 <div href="" class="ui dropdown item">
-    <img id="admin-avt" src="{{ asset('admin/assets/img/mike.jpg') }}"
+    <img id="admin-avt" src="{{ asset(\App\Admin::adminAvatar()) }}"
          class="ui mini circular image">
     <strong>&nbsp;&nbsp;&nbsp; {{ \App\Admin::adminName() }}</strong>
     <i class="dropdown icon"></i>

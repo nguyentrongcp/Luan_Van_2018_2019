@@ -36,18 +36,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     /** Statistic */
 
-    Route::get('statistis/revenue', 'admin\StatisticController@revenue')->name('revenue')
+    Route::get('statistic/revenue', 'admin\StatisticController@revenue')->name('revenue')
         ->middleware('statistic');
     Route::get('statistic/today', 'admin\StatisticController@today')->name('statistic.today')
         ->middleware('statistic');
-    Route::get('statistis/order', 'admin\StatisticController@order')->name('order')
+    Route::get('statistic/order', 'admin\StatisticController@order')->name('order')
         ->middleware('statistic');
-    Route::get('statistis/foody', 'admin\StatisticController@foody')->name('foody')
+    Route::get('statistic/foody', 'admin\StatisticController@foody')->name('foody')
         ->middleware('statistic');
     Route::get('statistic/order/get', 'admin\OrderStatisticController@getValue')->name('statistic.order.get')
         ->middleware('statistic');
     Route::get('statistic/revenue/get', 'admin\RevenueStatisticController@getValue')->name('statistic.revenue.get')
         ->middleware('statistic');
+    Route::get('statistic/foody/get', 'admin\FoodyStatisticController@getValue')->name('statistic.foody.get')
+        ->middleware('statistic');
+
 
     /** Foody type */
 
@@ -85,7 +88,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('goodsreceiptnote');
     Route::resource('goods_receipt_note_detail', 'admin\GoodsReceiptNotesDetailController')
         ->middleware('goodsreceiptnote');
-
+    Route::get('goods_receipt', 'admin\GoodsReceiptNotesController@showMaterialNeededGoods')
+        ->name('admin.material')
+        ->middleware('goodsreceiptnote');
 
     /**      orders       **/
     Route::resource('orders', 'admin\OrderController')
@@ -132,6 +137,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('employees/change_pass/{id}', 'admin\EmployeeController@changePass')->name('change_pass')
         ->middleware('employee');
     Route::post('employees/change_info/{id}', 'admin\EmployeeController@changeInfo')->name('change_info')
+        ->middleware('employee');
+    Route::get('employees/add_role', 'admin\EmployeeController@addRole')->name('employee.add.role')
         ->middleware('employee');
 
     /** Comments **/

@@ -61,91 +61,15 @@ class Statistic extends Model
         return $total;
     }
 
-    public static function getOrderByYear() {
-        $years = [];
-        for ($i = 2014; $i <= date('Y'); $i++){
-            $years[] = $i;
-        }
-
-        $unApprovedOrders = DB::table('orders')
-            ->selectRaw('year(orders.order_created_at) as label, count(*) as total, 
-            round(sum(orders.total_of_cost)/1000000, 2) as extra')
-            ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->where('order_statuses.status', '=',0)
-            ->groupBy(DB::raw('year(orders.order_created_at)'))
-            ->get();
-
-        $shippingdOrders = DB::table('orders')
-            ->selectRaw('year(orders.order_created_at) as label, count(*) as total,
-            round(sum(orders.total_of_cost)/1000000, 2) as extra')
-            ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->where('order_statuses.status', '=',1)
-            ->groupBy(DB::raw('year(orders.order_created_at)'))
-            ->get();
-
-        $deliveredOrders = DB::table('orders')
-            ->selectRaw('year(orders.order_created_at) as label, count(*) as total,
-            round(sum(orders.total_of_cost)/1000000, 2) as extra')
-            ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->where('order_statuses.status', '=',2)
-            ->groupBy(DB::raw('year(orders.order_created_at)'))
-            ->get();
-
-        $cancelleddOrders = DB::table('orders')
-            ->selectRaw('year(orders.order_created_at) as label, count(*) as total,
-            round(sum(orders.total_of_cost)/1000000, 2) as extra')
-            ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->where('order_statuses.status', '=',3)
-            ->groupBy(DB::raw('year(orders.order_created_at)'))
-            ->get();
-
-        $source = ['years'=> $years,'unapproved' => $unApprovedOrders, 'shipping' => $shippingdOrders, 'delivered' => $deliveredOrders,'cancelled'=>$cancelleddOrders];
-//        $source = [$unApprovedOrders, $ShippingdOrders,$deliveredOrders,$cancelleddOrders];
-
-        return json_encode($source,true);
-    }
-
-    public static function getOrderByMonth() {
-        $months = [];
-        for ($i = 1; $i <= 12; $i++){
-            $months[] = $i;
-        }
-        $unApprovedOrders = DB::table('orders')
-            ->selectRaw('month(orders.order_created_at) as label, count(*) as total, 
-            round(sum(orders.total_of_cost)/1000000, 2) as extra')
-            ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->where('order_statuses.status', '=',0)
-            ->whereBetween('orders.order_created_at', ["2018-1-1", "2018-12-31"])
-            ->groupBy(DB::raw('month(orders.order_created_at)'))
-            ->get();
-
-        $shippingdOrders = DB::table('orders')
-            ->selectRaw('month(orders.order_created_at) as label, count(*) as total,
-            round(sum(orders.total_of_cost)/1000000, 2) as extra')
-            ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->whereBetween('orders.order_created_at', ["2018-1-1", "2018-12-31"])
-            ->groupBy(DB::raw('month(orders.order_created_at)'))
-            ->get();
-
-        $deliveredOrders = DB::table('orders')
-            ->selectRaw('month(orders.order_created_at) as label, count(*) as total,
-            round(sum(orders.total_of_cost)/1000000, 2) as extra')
-            ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->whereBetween('orders.order_created_at', ["2018-1-1", "2018-12-31"])
-            ->groupBy(DB::raw('month(orders.order_created_at)'))
-            ->get();
-
-        $cancelleddOrders = DB::table('orders')
-            ->selectRaw('month(orders.order_created_at) as label, count(*) as total,
-            round(sum(orders.total_of_cost)/1000000, 2) as extra')
-            ->join('order_statuses','orders.id','=','order_statuses.order_id')
-            ->whereBetween('orders.order_created_at', ["2018-1-1", "2018-12-31"])
-            ->groupBy(DB::raw('month(orders.order_created_at)'))
-            ->get();
-
-        $source = ['months'=> $months,'unapproved' => $unApprovedOrders, 'shipping' => $shippingdOrders, 'delivered' => $deliveredOrders,'cancelled'=>$cancelleddOrders];
-//        $source = [$unApprovedOrders, $ShippingdOrders,$deliveredOrders,$cancelleddOrders];
-
-        return json_encode($source,true);
+    public static function getTotalHotSales(){
+        $total =  DB::table('foodies')->join('order_foodies', 'foodies.id', 'foody_id')
+            ->join('orders', 'order_foodies.order_id', 'orders.id')
+            ->join('order_statuses', 'orders.id', 'order_statuses.order_id')
+            ->where(function ($query) {
+                $query->where('status', 2)
+                    ->orWhere('status', 3);})
+            ->groupBy('order_foodies.foody_id')
+            ->count('order_foodies.foody_id');
+        return $total;
     }
 }

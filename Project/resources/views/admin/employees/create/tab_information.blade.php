@@ -41,9 +41,6 @@
         </div>
         <div class="ui error message">
         </div>
-    </div>
-
-    <div class="eight wide column">
         <div class="inline required field">
             <label class="label-fixed">Email</label>
             <input type="email" name="employee-email" value="nvana{{rand(1,100)}}@gmail.com" id="employee-email"
@@ -64,36 +61,53 @@
                 {{ $errors->first('employee-phone') }}
             </div>
         @endif
+    </div>
+
+    <div class="eight wide column">
+
+
         <div class="inline required field">
             <label class="label-fixed">Cấp quyền</label>
-            <div class="two column row">
-                {{--<div class="column">--}}
-                    <select name="employee-role-id"
-                            class="ui six column fluid dropdown">
-                        @foreach($roles as $role)
-                            <option value="{{$role->id}}">{{$role->name}}</option>
-                        @endforeach
-                    </select>
+            <div class="inline field row">
+                <select name="employee-role-id"
+                        class="ui six column fluid dropdown">
+                    @foreach($roles as $role)
+                        <option value="{{$role->id}}">{{$role->name}}</option>
+                    @endforeach
+                </select>
+                {{--<div class="ui six column field">--}}
+                <a href="#" onclick="$('#add-employee-role-modal').modal('show')"
+                   class="ui blue mini button a-decoration">
+                    <i class="dot fitted icon"></i> ...
+                </a>
                 {{--</div>--}}
-                {{--<div class="wide column">--}}
-                    <a href="#" onclick="$('#add-employee-role-modal').modal('show')" class="ui blue mini button a-decoration">
-                        <i class="dot fitted icon"></i> ...
-                    </a>
-                </div>
             </div>
         </div>
-        <div class="ui divider">
+        <div class="inline required field">
+            <label>Ảnh đại diện</label>
+            <label for="avatar">
+                <span class="ui blue compact label">Chọn một ảnh</span>
+                <span id="avatar-name"></span>
+            </label>
+            <input type="file" name="avatar" id="avatar" style="display: none;"
+                   onchange="$('#avatar-name').text($('#avatar')[0].files[0].name)"
+                   accept=".jpg, .png, .jpeg">
         </div>
+        @if($errors->has('avatar'))
+            <div style="color: red; margin-top: 5px; font-size: 13px">
+                {{ $errors->first('avatar') }}
+            </div>
+        @endif
     </div>
-    <div class="row">
-        <div class="sixteen wide column">
-            <button class="ui blue button" type="submit">
-                <i class="save fitted icon"></i>
-                Lưu lại
-            </button>
-        </div>
+    <div class="ui divider">
     </div>
 </div>
+    <div class="sixteen wide column">
+        <button class="ui blue button" type="submit">
+            <i class="save fitted icon"></i>
+            Lưu lại
+        </button>
+    </div>
 @include('admin.employees.create.modal')
 @push('script')
 

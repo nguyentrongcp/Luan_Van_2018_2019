@@ -40,19 +40,6 @@
 
 @push('script')
     <script>
-        bindDataTable('product-out-table', true);
-        bindDataTable('product-stop-table', true);
 
-        let outProductCols = ['STT', 'Ten san pham'];
-        let stopProductRows = [], outProductRows = [];
-
-        {{--let outProducts = JSON.parse('{!! $outProducts !!}');--}}
-        {{--let stopProducts = JSON.parse('{!! $stopProducts !!}');--}}
-        outProducts.forEach((p, i) => {
-            outProductRows.push([i+1, toAscii(p.ten_san_pham)]);
-        });
-        stopProducts.forEach((p, i) => {
-            stopProductRows.push([i+1, toAscii(p.ten_san_pham)]);
-        });
     </script>
 @endpush

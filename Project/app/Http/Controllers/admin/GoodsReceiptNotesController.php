@@ -6,6 +6,7 @@ use App\Admin;
 use App\GoodsReceiptNote;
 use App\GoodsReceiptNoteCost;
 use App\GoodsReceiptNoteDetail;
+use App\Material;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,8 @@ class GoodsReceiptNotesController extends Controller
      */
     public function index()
     {
-        $goodsReceipts = GoodsReceiptNote::where('is_deleted',false)->paginate(10);
+        $goodsReceipts = GoodsReceiptNote::where('is_deleted',false)
+                        ->orderBy('date','DESC')->paginate(10);
 
         return view('admin.goods_receipt.indexGoods.index',compact('goodsReceipts'));
     }
@@ -137,5 +139,11 @@ class GoodsReceiptNotesController extends Controller
 
         return view('admin.goods_receipt.indexDetails.index',
             compact('goodsReceiptDetails','id','date','name','totalCost'));
+    }
+
+    public function showMaterialNeededGoods(){
+        $materials = Material::where('is_deleted',false)->where('value','<=',15)->get();
+
+        return view('admin.goods_receipt.index',compact('materials'));
     }
 }

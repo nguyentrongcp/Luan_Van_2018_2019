@@ -56,7 +56,9 @@ class EmployeeController extends Controller
         if (Employees::Existed($email)) {
             return back()->withErrors(['employee-email' => "Email $email đã tồn tại"]);
         }
-
+        if (!$request->hasFile('avatar')){
+            return back()->withErrors(['avatar'=>'Bạn chưa chọn ảnh đại diện!']);
+        }
         $pass = $request->get('employee-pwd');
         $pass_confirm = $request->get('employee-confirm-pwd');
         if ($pass != $pass_confirm) {
@@ -72,6 +74,14 @@ class EmployeeController extends Controller
         $admins->address = $request->get('employee-address');
         $admins->password = bcrypt($request->get('employee-pwd'));
         $admins->role_id = $request->get('employee-role-id');
+
+        $time = time();
+        $ext = $request->file('avatar')->extension();
+
+        $path = $request->file('avatar')
+            ->move('admin\avatar_employees', "avatar-$time.$ext");
+        $admins->avatar = str_replace('\\', '/', $path);
+
         $admins->save();
         return back()->with('success', 'Thêm nhân viên thành công');
     }
@@ -224,5 +234,26 @@ class EmployeeController extends Controller
         $employee->update();
 
         return back()->with('success','Cập nhật thành công!');
+    }
+
+    public function addRole(Request $request){
+        $role = new Role();
+        $role->name = $request->get('role');
+        $role->save();
+
+        $ids = $request->get('function-id');
+        if (is_array($ids)){
+            foreach ($ids as $id){
+                $employeeRole = new EmployeeRole();
+                $employeeRole->role_id = Role::count();
+                $employeeRole->function_id = $id;
+                $employeeRole->save();
+            }
+        }
+        $employeeRole = new EmployeeRole();
+        $employeeRole->role_id = Role::count();
+        $employeeRole->function_id = $ids;
+        $employeeRole->save();
+        return back()->with('success','Thêm thành công!');
     }
 }

@@ -110,25 +110,3 @@
     @include('admin.statistic.order.js')
 
 @endsection
-
-{{--@push('script')--}}
-    {{--<script>--}}
-        {{--let needShow = {--}}
-            {{--year: [],--}}
-            {{--quarter: ['year'],--}}
-            {{--month: ['year'],--}}
-            {{--day: ['year', 'month', 'day-start', 'day-end']--}}
-        {{--};--}}
-        {{--function show() {--}}
-            {{--let type = $('#type').val();--}}
-            {{--if (type === 'all')--}}
-                {{--return $('.select-hide hidden').hide();--}}
-            {{--$('.select-hide hidden').hide();--}}
-            {{--needShow[type].forEach((e) => $('#select-' + e).show());--}}
-        {{--}--}}
-
-        {{--$('#select-day-start').change(function () {--}}
-            {{--$('#select-day-end').val(parseInt($(this).val()) + 3);--}}
-        {{--});--}}
-    {{--</script>--}}
-{{--@endpush--}}

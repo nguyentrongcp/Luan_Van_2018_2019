@@ -88,11 +88,9 @@
 @if($employee->isAdmin())
         <a class="item {{Request::is('*/employees') ? 'active-bar': '' }}" href="/admin/employees">
             <i class="users icon icon-left"></i>Nhân viên </a>
-@endif
-    {{--@if($employee->checkRoles(6))--}}
         <a class="item {{Request::is('*/transport_fees') ? 'active-bar': '' }}" href="/admin/transport_fees">
             <i class="shipping fast icon icon-left"></i>Phí vận chuyển </a>
-    {{--@endif--}}
+@endif
 
 </div>
 

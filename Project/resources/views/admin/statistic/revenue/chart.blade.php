@@ -11,13 +11,6 @@
 
 </div>
 <div class="six wide column">
-
-    <h5 class="ui header right aligned">
-                    <span onclick="showExport(title, cols, rows)" class="pointer">
-                        <i class="file pdf outline red large icon small-lr-margin"></i>PDF
-                    </span>
-    </h5>
-
     <table class="ui very compact table celled striped center aligned" id="revenue-table">
         <thead>
         <tr><th id="table-title"></th><th>Mua vào</th><th>Bán ra</th><th>Hiệu số</th></tr>
