@@ -156,7 +156,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 /**      Customer       **/
 
     // Test sms api
-    Route::get('/testsms', 'Customer\ShoppingCartController@testAPI')->name('test.sms');
+    Route::get('/testlocation', 'Customer\TestController@testLocation')->name('test.location');
 
     // Index
     Route::get('/', 'Customer\CustomerController@index')->name('customer.index');

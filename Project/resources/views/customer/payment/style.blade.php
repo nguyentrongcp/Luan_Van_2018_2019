@@ -19,6 +19,11 @@
 
     }
 
+    #google_map {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
     .payment-header {
         font-size: 35px !important;
         font-weight: 600 !important;

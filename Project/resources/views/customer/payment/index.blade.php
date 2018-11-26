@@ -13,9 +13,13 @@
                 Bạn đã sẵn sàng để thanh toán?
             </span>
             <span class="col s12 payment-title">
-                Thông tin giao hàng
+                Thông tin giao hàng <a id="detect-location" data-share="off" style="font-size: 13px; cursor: pointer">Chia sẻ vị trí?</a>
             </span>
             <div class="col s12 divider"></div>
+            <div id="maps">
+                <iframe id="google_map" src="" style="display: none" frameborder="0" scrolling="no" marginheight="0"
+                        marginwidth="0"></iframe>
+            </div>
             <div class="col s12 payment-form">
                 <div class="row">
                     <div class="col s12 m6 l6 payment-col-left">

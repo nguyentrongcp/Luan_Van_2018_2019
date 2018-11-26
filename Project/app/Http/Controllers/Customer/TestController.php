@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class TestController extends Controller
 {
-    public function test() {
+    public function testLocation() {
         return view('customer.test');
     }
 }

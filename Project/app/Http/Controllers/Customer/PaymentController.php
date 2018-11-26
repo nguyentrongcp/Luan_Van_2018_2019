@@ -58,7 +58,7 @@ class PaymentController extends Controller
         $otp = rand(100000, 999999);
         session(['time' => time(), 'otp' => $otp]);
         $this->store($request);
-            $this->sendOTP([$request->phone]);
+//            $this->sendOTP([$request->phone]);
     }
 
     public function store($request) {
@@ -70,6 +70,7 @@ class PaymentController extends Controller
             'note' => $request->note,
             'type' => $request->type,
             'to' => $request->to,
+            'src' => $request->src
         ]);
     }
 
@@ -86,6 +87,7 @@ class PaymentController extends Controller
         $request->session()->forget('transport_fee');
         $request->session()->forget('total_of_cost');
         $request->session()->forget('secure_code');
+        $request->session()->forget('src');
     }
 
     public function getOTP(Request $request) {
@@ -161,6 +163,9 @@ class PaymentController extends Controller
         $order->to = session('to');
         $order->total_of_cost = CartFunction::getCost() + (double)session('transport_fee');
         $order->transport_fee = session('transport_fee');
+        if (session('src') != '') {
+            $order->location = session('src');
+        }
         $order->save();
 
         $order_status = new OrderStatus();

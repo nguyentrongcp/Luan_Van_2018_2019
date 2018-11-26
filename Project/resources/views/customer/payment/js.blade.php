@@ -1,6 +1,9 @@
 @push('script')
+    <script src="{{ asset('customer/js/geoPosition.js') }}"></script>
     <script>
         M.textareaAutoResize($('#note'));
+
+        let share = false;
 
         $(document).ready(function(){
             $('#payment-otp-modal').modal({
@@ -8,6 +11,46 @@
                 opacity: 0.8
             });
             getFee();
+        });
+
+        function initLocation() {
+            let success = function(pos) {
+                let lat = pos.coords.latitude,
+                    long = pos.coords.longitude,
+                    coords = lat + ', ' + long;
+                $('#google_map').attr('src', 'https://maps.google.co.uk/?q=' + coords + '&z=60&output=embed');
+            };
+            let error = function() {
+                alert('Không xác định được vị trí của bạn!');
+            };
+            if(geoPosition.init()){
+                geoPosition.getCurrentPosition(success,error,{enableHighAccuracy:true});
+            }
+        }
+
+        $('#detect-location').on('click', function () {
+            share = true;
+            if ($('#detect-location').attr('data-share') === 'off') {
+                $('#google_map').css('display', 'block');
+                $('#detect-location').attr('data-share', 'on');
+                $('#detect-location').text('Tắt chia sẻ vị trí?');
+                $('#google_map').attr('height', $('#google_map').width() / 2 + 'px');
+                // navigator.geolocation.getCurrentPosition(c,e);
+                initLocation();
+            }
+            else {
+                share = false;
+                $('#google_map').css('display', 'none');
+                $('#detect-location').attr('data-share', 'off');
+                $('#detect-location').text('Chia sẻ vị trí?');
+                $('#google_map').attr('src', '');
+            }
+
+            return false;
+        });
+
+        $(window).resize(function () {
+            $('#google_map').attr('height', $('#google_map').width() / 2 + 'px');
         });
 
         $('#district').change(function () {
@@ -98,6 +141,10 @@
             else {
                 if (!checkEmpty()) {
                     let cost = [];
+                    let src = '';
+                    if (share === true) {
+                        src = $('#google_map').attr('src');
+                    }
                     $('.payment-table-cost').each(function (key, value) {
                         cost[$(value).attr('data-id')] = $(value).attr('data-cost');
                     });
@@ -114,7 +161,8 @@
                             email: $('#email').val(),
                             note: $('#note').val(),
                             type: type,
-                            cost: cost
+                            cost: cost,
+                            src: src
                         },
                         error: function(data) {
                             empty();
