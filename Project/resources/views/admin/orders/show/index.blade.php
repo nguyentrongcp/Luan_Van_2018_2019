@@ -34,11 +34,13 @@
 
         @include('admin.layouts.components.errors_msg')
 
-        <div id="maps">
-            <iframe id="google_map" src="https://maps.google.co.uk/?q=14.058324, 108.277199&z=60&output=embed"
-                    width="500" height="300" frameborder="0" scrolling="no" marginheight="0"
-                    marginwidth="0"></iframe>
-        </div>
+        @if($orders->location != null)
+            <div id="maps">
+                <iframe id="google_map" src="https://maps.google.co.uk/?q=14.058324, 108.277199&z=60&output=embed"
+                        width="500" height="300" frameborder="0" scrolling="no" marginheight="0"
+                        marginwidth="0"></iframe>
+            </div>
+        @endif
 
         @include('admin.orders.show.table')
 
