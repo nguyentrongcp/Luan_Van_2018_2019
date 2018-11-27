@@ -108,6 +108,7 @@ class OrderController extends Controller
                     ->join('order_statuses as os','os.order_id','=','o.id')
                     ->join('order_foodies as of','o.id','=','of.order_id')
                     ->where('os.status','=',$id)
+                    ->orderBy('o.order_created_at','DESC')
                     ->groupBy('o.id')
                     ->paginate(10);
 

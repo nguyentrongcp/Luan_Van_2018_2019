@@ -145,8 +145,12 @@ class EmployeeController extends Controller
      */
     public function destroy(Request $request)
     {
+
         $ids = $request->get('employee-id');
         foreach ($ids as $id) {
+            if (Admin::adminId() == $id){
+                return back()->with('error', 'Tài khoản hiện tại đăng đăng nhập!');
+            }
             $employee = Employees::find($id);
             $employee->is_deleted = true;
             $employee->update();
