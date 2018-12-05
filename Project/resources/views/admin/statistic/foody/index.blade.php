@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Thực đơn')
+@section('title', 'Ẩm thực')
 
 @push('style')
     <style>
@@ -23,7 +23,7 @@
 @section('content')
     <div class="ui blue raised segment">
 
-        <h3 class="ui dividing header">Thống kê thực đơn</h3>
+        <h3 class="ui dividing header">Thống kê ẩm thực</h3>
 
         <div class="ui top attached tabular menu">
             <a class="item {{ Request::has('lim') ? '': 'active' }}" data-tab="first">Tổng quan</a>
@@ -38,11 +38,3 @@
     </div>
     @include('admin.statistic.foody.js')
 @endsection
-
-
-
-@push('script')
-    <script>
-
-    </script>
-@endpush

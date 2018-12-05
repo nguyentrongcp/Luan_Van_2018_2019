@@ -18,7 +18,8 @@ class SalesOffsController extends Controller
      */
     public function index()
     {
-        $salesOffs = SalesOff::where('sales_off_id',null)->paginate(10);
+        $salesOffs = SalesOff::where('sales_off_id',null)
+                                ->orderBy('created_at','DESC')->paginate(10);
 
         return view('admin.sales_offs.index', compact('salesOffs'));
     }
@@ -41,11 +42,21 @@ class SalesOffsController extends Controller
      */
     public function store(Request $request)
     {
+        $start = $request->get('start-date');
+        $end = $request->get('end-date');
+        $name = $request->get('sales-offs-name');
+        if ($start > $end){
+            return back()->with('error','Ngày khuyến mại không hợp lệ!');
+        }
+
         $salesOff = new SalesOff();
-        $salesOff->name = $request->get('sales-offs-name');
+        if ($salesOff->checkName($name)){
+            return back()->with('error','Tên khuyến mãi đã tồi tại!');
+        }
+        $salesOff->name = $name;
         $salesOff->percent = $request->get('percent');
-        $salesOff->start_date = $request->get('start-date');
-        $salesOff->end_date = $request->get('end-date');
+        $salesOff->start_date = $start;
+        $salesOff->end_date = $start;
         $salesOff->save();
 
         return back()->with('success', 'Thêm mới khuyến mãi thành công!');
@@ -85,12 +96,17 @@ class SalesOffsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $start = $request->get('start-date');
+        $end = $request->get('end-date');
+        if ($start > $end){
+            return back()->with('error','Ngày khuyến mại không hợp lệ!');
+        }
         $salesOff = SalesOff::findOrFail($id);
 
         $salesOff->name = $request->get('name-sales');
         $salesOff->percent = $request->get('percent');
-        $salesOff->start_date = $request->get('start-date');
-        $salesOff->end_date = $request->get('end-date');
+        $salesOff->start_date = $start;
+        $salesOff->end_date = $end;
         $salesOff->update();
 
         return back()->with('success', 'Khuyến mãi đã cập nhật thành công!');

@@ -1,7 +1,7 @@
 <!-- Modal add sales offs-->
 <div class="ui mini-50 vertical flip modal" id="create-foodies-sales-offs-modal">
     <i class="close icon"></i>
-    <div class="blue header">Thêm mới khuyến mãi</div>
+    <div class="blue header">Thêm ẩm thực khuyến mãi</div>
     <div class="content">
         <form action="{{ route('sales_offs_details.store') }}" class="ui form" method="post">
 

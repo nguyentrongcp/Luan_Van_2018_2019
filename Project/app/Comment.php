@@ -30,6 +30,9 @@ class Comment extends Model
         return $this->hasMany(MiniComment::class);
     }
 
+    public static function showImageComment(){
+//        $commentId =
+    }
     public function approved(){
         return $this->is_approved == 1;
     }

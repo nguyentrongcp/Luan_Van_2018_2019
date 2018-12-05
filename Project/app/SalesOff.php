@@ -20,4 +20,8 @@ class SalesOff extends Model
         return date('Y-m-d') >= $this->start_date && date('Y-m-d') <= $this->end_date;
     }
 
+    public function checkName($nameSalesOffs){
+        return SalesOff::where('name',$nameSalesOffs)->count() > 0;
+    }
+
 }

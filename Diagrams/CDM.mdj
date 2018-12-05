@@ -265,10 +265,10 @@
 											},
 											"font": "Arial;13;1",
 											"left": 8,
-											"top": 173,
+											"top": 165,
 											"width": 170.130859375,
 											"height": 13,
-											"text": "LoaiThucDon"
+											"text": "LoaiAmThuc"
 										},
 										{
 											"_type": "ERDColumnCompartmentView",
@@ -291,7 +291,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 13,
-													"top": 196,
+													"top": 188,
 													"width": 160.130859375,
 													"height": 13
 												},
@@ -306,7 +306,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 13,
-													"top": 211,
+													"top": 203,
 													"width": 160.130859375,
 													"height": 13
 												},
@@ -321,21 +321,21 @@
 													},
 													"font": "Arial;13;0",
 													"left": 13,
-													"top": 226,
+													"top": 218,
 													"width": 160.130859375,
 													"height": 13
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 8,
-											"top": 191,
+											"top": 183,
 											"width": 170.130859375,
 											"height": 53
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 8,
-									"top": 168,
+									"top": 160,
 									"width": 170.130859375,
 									"height": 76,
 									"nameLabel": {
@@ -366,7 +366,7 @@
 											"top": 13,
 											"width": 196.16259765625,
 											"height": 13,
-											"text": "GiaThucDon"
+											"text": "GiaAmThuc"
 										},
 										{
 											"_type": "ERDColumnCompartmentView",
@@ -464,7 +464,7 @@
 											"top": 253,
 											"width": 209.16259765625,
 											"height": 13,
-											"text": "ThucDon"
+											"text": "AmThuc"
 										},
 										{
 											"_type": "ERDColumnCompartmentView",
@@ -3818,7 +3818,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkHHWApZTIp8s="
 							},
-							"name": "LoaiThucDon",
+							"name": "LoaiAmThuc",
 							"ownedElements": [
 								{
 									"_type": "ERDRelationship",
@@ -3889,7 +3889,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkHHWApZTIp8s="
 							},
-							"name": "GiaThucDon",
+							"name": "GiaAmThuc",
 							"columns": [
 								{
 									"_type": "ERDColumn",
@@ -3927,7 +3927,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkHHWApZTIp8s="
 							},
-							"name": "ThucDon",
+							"name": "AmThuc",
 							"ownedElements": [
 								{
 									"_type": "ERDRelationship",

@@ -18,7 +18,7 @@
 
             <div class="ui top attached tabular menu">
                 <a class="item active" data-tab="first">Thông tin</a>
-                <a class="item" data-tab="second">Mô tả sản phẩm</a>
+                <a class="item" data-tab="second">Mô tả ẩm thực</a>
             </div>
             @include('admin.foodies.create.tab_information')
             @include('admin.foodies.create.tab_describe')

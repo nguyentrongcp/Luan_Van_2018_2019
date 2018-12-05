@@ -9,7 +9,7 @@
 
     <div class="ui blue raised segment">
         <h3 class="ui dividing header">
-            <a href="{{ route('foodies.index') }}" class="need-popup a-decoration" data-content="Danh sách thực đơn">
+            <a href="{{ route('foodies.index') }}" class="need-popup a-decoration" data-content="Danh sách ẩm thực">
                 <i class="small angle double left circular fitted icon"></i></a>
             <a href="{{ route('foodies.show', [$foodies->id]) }}"  class="need-popup a-decoration" data-content="Chi tiết">
                 <i class="small angle left circular fitted icon"></i></a>
@@ -20,7 +20,7 @@
 
             <div class="ui top attached tabular menu">
                 <a class="item active" data-tab="first">Thông tin</a>
-                <a class="item" data-tab="second">Mô tả sản phẩm</a>
+                <a class="item" data-tab="second">Mô tả ẩm thực</a>
                 {{--            <a class="item" data-tab="second">Ảnh chi tiết ({{ $sanPham->hinhAnhs->count() }})</a>--}}
             </div>
             @include('admin.foodies.update.tab_information')

@@ -43,16 +43,13 @@ class GoodsReceiptNotesDetailController extends Controller
         if (!$request->get('unit')){
             return back()->with('error','Bạn chưa chọn đơn vị tính');
         }
-        $nameMaterial = Material::find($request->get('available-material'))->name;
         if ($request->get('material') != '') {
-
-
-
             $goodsReceiptDetail = new GoodsReceiptNoteDetail();
             $goodsReceiptDetail->material = $request->get('material');
 
         }
         else {
+            $nameMaterial = Material::find($request->get('available-material'))->name;
             $material = Material::findOrFail($request->get('available-material'));
             $material->value += $request->get('quantity');
             $material->update();
@@ -74,7 +71,7 @@ class GoodsReceiptNotesDetailController extends Controller
             foreach ($goodsReceiptCost as $goodsCost) {
                 $goodsCost->cost = $totalCosts;
                 $goodsCost->update();
-//                return back()->with('success', ' thành công!');
+                return back()->with('success', ' thành công!');
             }
         }
         $goodsReceiptCosts = new GoodsReceiptNoteCost();

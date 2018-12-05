@@ -9,7 +9,7 @@
             </th>
             <th class="collapsing">STT</th>
             <th>Tên khuyến mãi</th>
-            <th class="text-center">Số TĐ</th>
+            <th class="text-center">Số ẩm thực</th>
             <th class="text-center">Ngày bắt đầu</th>
             <th class="text-center">Ngày kết thúc</th>
             <th class="collapsing">Xem</th>

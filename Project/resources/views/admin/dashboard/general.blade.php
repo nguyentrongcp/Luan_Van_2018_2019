@@ -7,7 +7,7 @@
                 {{ \App\Dashboard::totalFoody() }}
             </div>
             <div class="label">
-                Thực đơn
+                Ẩm thực
             </div>
         </div>
 

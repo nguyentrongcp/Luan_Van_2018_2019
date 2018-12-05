@@ -39,12 +39,12 @@
                         return false;
                     }
                         console.log(data.data);
-
                     buildTable(data);
 
                 }
             })
         });
+        $('#statistic-btn').click();
         function buildTable(data) {
             $('#hot-foody-table').append('<tbody id="table-hot-foody">\n' +
                 '\n' +
@@ -58,8 +58,5 @@
                     "</tr>")
             }
         }
-
-
-
     </script>
 @endpush

@@ -1,7 +1,8 @@
 
 @include('admin.layouts.partials.header')
 
-@section('title', 'Login ')
+@section('Login', 'title')
+
 <body class="login-page sidebar-collapse">
     <div class="ui middle aligned center aligned grid">
         <div class="container" style="padding-top: 100px;width: 35%">
@@ -30,6 +31,11 @@
                                         <input type="password" name="password" placeholder="Password" value="111111">
                                     </div>
                                 </div>
+                                @if($errors->has('username') || $errors->has('password'))
+                                    <div style="color: red; margin-top: 5px; font-size: 13px; padding-bottom: 5px">
+                                        {{ $errors->first('username') }}
+                                    </div>
+                                @endif
                                 <button type="submit" class="ui fluid large teal submit button">Đăng nhập</button>
                             </div>
                             <div class="ui error message"></div>
