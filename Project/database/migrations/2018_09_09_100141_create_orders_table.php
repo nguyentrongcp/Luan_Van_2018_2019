@@ -16,18 +16,19 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('order_code', 15);
-            $table->string('receiver', 50);
-            $table->string('to', 100);
+            $table->string('receiver', 50)->nullable();
+            $table->string('to', 100)->nullable();
             $table->string('location', 100)->nullable();
             $table->integer('customer_id')->unsigned()->nullable();
-            $table->string('email', 100);
-            $table->string('phone', 20);
-            $table->string('address', 100);
+            $table->string('email', 100)->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->string('address', 100)->nullable();
             $table->dateTime('order_created_at');
-            $table->tinyInteger('payment_type');
+            $table->tinyInteger('payment_type')->nullable();
             $table->double('total_of_cost');
 //            $table->tinyInteger('payment_status');
-            $table->double('transport_fee');
+            $table->double('transport_fee')->nullable();
+            $table->boolean('is_in_place')->default(false);
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
