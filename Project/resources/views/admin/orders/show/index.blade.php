@@ -20,6 +20,8 @@
                     <i class="remove open fitted icon"></i>
                     Hủy
                 </a>
+            @else
+                <span style="color: red">(Đơn hàng đang thực hiện thanh toán online)</span>
             @endif
 
             <a href="{{ route('print_order', [$orders->id]) }}" class="ui label a-decoration" style="float: right" target="_blank">

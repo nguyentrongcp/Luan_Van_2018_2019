@@ -3,12 +3,11 @@
         <thead>
         <tr>
             <th class="collapsing">STT</th>
-            <th class="text-center">Mã đơn hàng</th>
+            <th>Mã đơn hàng</th>
             <th>Người đặt hàng</th>
-            <th class="center aligned">SĐT</th>
+            <th class="right aligned">Số điện thoại</th>
             <th class="text-center">Ngày đặt hàng</th>
-            <th class="text-center">Số SP</th>
-            <th class="text-center">Tổng tiền</th>
+            <th class="right aligned">Tổng tiền</th>
             <th class="">Tình trạng</th>
             <th class="collapsing">Duyệt</th>
             <th class="collapsing">Hủy</th>
@@ -16,7 +15,11 @@
         </thead>
         <tbody>
         @foreach($orders as $stt => $order)
-
+            @php
+                $phone = substr($order->phone, 0, strlen($order->phone) - 6).' ';
+                $phone .= substr($order->phone, strlen($order->phone) - 6, 3).' ';
+                $phone .= substr($order->phone, strlen($order->phone) - 3, 3);
+            @endphp
             <tr>
                 <td>{{$stt + 1}}</td>
                 <td>
@@ -27,11 +30,11 @@
                 <td>
                     {{$order->receiver}}
                 </td>
-                <td class="text-center">{{$order->phone}}</td>
-                <td class="text-center">{{$order->order_created_at}}</td>
-                <td class="text-center" id="">{{$order->amountOrderFoody()}}
+                <td class="right aligned">{{$phone}}</td>
+                <td class="text-center">
+                    {{ \App\Functions::getTimeCount(date_create($order->order_created_at)->getTimestamp(), false) }}
                 </td>
-                <td class="text-center" id="">{{number_format($order->total_of_cost).' đ'}}
+                <td class="right aligned" id="">{{number_format($order->total_of_cost).' đ'}}
                 </td>
                 <td>
                     @if($order->cancelled())
@@ -40,11 +43,20 @@
                     @elseif($order->unapproved())
                         <i class="warning open fitted orange icon"></i>
                         <span style="color: orange" ><strong> Chưa duyệt</strong></span>
+                    @elseif($order->getStatus() == -1)
+                        @if(date_create(date('Y-m-d H:i:s'))->getTimestamp() -
+                                date_create($order->order_created_at)->getTimestamp() > 600)
+                            <i class="wait open fitted red icon"></i>
+                            <span style="color: red" ><strong> Đang thanh toán online</strong></span>
+                        @else
+                            <i class="wait open fitted orange icon"></i>
+                            <span style="color: orange" ><strong> Đang thanh toán online</strong></span>
+                        @endif
                     @elseif($order->getStatus() == 2)
                         <i class="check green open fitted red icon"></i>
                         <span style="color: green"><strong>Đã giao hàng</strong></span>
                     @else
-                        <i class="wait teal open fitted red icon"></i>
+                        <i class="shipping fast teal open fitted red icon"></i>
                         <span style="color: teal"><strong>Đang vận chuyển</strong></span>
                     @endif
                 </td>
@@ -62,7 +74,7 @@
                            onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')">
                             <i class="trash open fitted icon"></i>
                         </a>
-                    @elseif($order->cancelled())
+                    @elseif($order->cancelled() || $order->status == -1)
                         <a class="ui small red label a-decoration" href="{{ route('order_cancelled', [$order->id]) }}"
                            onclick="return confirm('Bạn chắc chắn muốn xóa đơn hàng này?')">
                             <i class="remove open fitted icon"></i>

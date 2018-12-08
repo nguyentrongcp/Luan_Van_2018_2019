@@ -35,7 +35,6 @@ class Order extends Model
     }
     public function paymentType() {
         $payment = [
-            0 => 'Thanh toán online(Đang chờ thanh toán)',
             1 => 'Tiền mặt',
             2 => 'Thanh toán online'
         ];

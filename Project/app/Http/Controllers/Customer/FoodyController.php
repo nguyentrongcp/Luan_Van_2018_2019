@@ -27,7 +27,9 @@ class FoodyController extends Controller
         $foody_type = $foody->foodyType;
         $votes = $foody->getVoted();
         $images = DB::table('foodies')->join('comments', 'foodies.id', 'foody_id')
-            ->join('image_comments', 'comments.id', 'comment_id')->join('images', 'image_id', 'images.id')
+            ->join('image_comments', 'comments.id', 'comment_id')
+            ->join('images', 'image_id', 'images.id')
+            ->where('is_approved', 1)
             ->select('images.link')->get();
 
         return view('customer.foody.index', compact(['foody', 'foody_type', 'images', 'votes']));

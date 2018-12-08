@@ -7,11 +7,26 @@ use Illuminate\Support\Facades\DB;
 
 class Functions extends Model
 {
-    public static function getTimeCount($last_time) {
+    public static function getTimeCount($last_time, $time = true) {
         $current_time = time();
         $time_count = $current_time - $last_time;
         if ($time_count / 86400 >= 1) {
-            return (int)($time_count / 86400).' ngày trước';
+            $date = (int)($time_count / 86400);
+            if ($time) {
+                $format = 'd/m/Y H:i';
+            }
+            else {
+                $format = 'd/m/Y';
+            }
+            if ($date == 1) {
+                return 'Hôm qua';
+            }
+            elseif ($date > 7) {
+                return date_format(date_create(date('Y-m-d H:i:s', $last_time)), $format);
+            }
+            else {
+                return $date.' ngày trước';
+            }
         }
         elseif ($time_count / 3600 >= 1) {
             return (int)($time_count / 3600).' giờ trước';
@@ -21,6 +36,32 @@ class Functions extends Model
         }
         else {
             return (int)($time_count).' giây trước';
+        }
+    }
+
+    public static function getDateCount($last_time) {
+        $current_time = time();
+        $time_count = $current_time - $last_time;
+        if ($time_count / 86400 >= 1) {
+            $date = (int)($time_count / 86400);
+            if ($date == 1) {
+                return '(Hôm qua)';
+            }
+            elseif ($date <= 30) {
+                return '('.$date.' ngày trước)';
+            }
+            else {
+                return '';
+            }
+        }
+        elseif ($time_count / 3600 >= 1) {
+            return '('.(int)($time_count / 3600).' giờ trước)';
+        }
+        elseif ($time_count / 60 >= 1) {
+            return '('.(int)($time_count / 60).' phút trước)';
+        }
+        else {
+            return '('.(int)($time_count).' giây trước)';
         }
     }
 

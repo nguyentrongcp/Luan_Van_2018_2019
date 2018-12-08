@@ -10,7 +10,7 @@
                     <span class="comment-name">
                         <div class="col s12 comment-customer-name">{{ $comment->customer->name }}</div>
                         <div class="col s12 comment-time">
-                            {{ date_format(date_create($comment->date), 'd-m-Y H:i') }}</div>
+                            {{ date_format(date_create($comment->date), 'd/m/Y H:i') }}</div>
                     </span>
                         {{--<span class="comment-rate">--}}
                         {{--<span class="ui label">7.2</span>--}}

@@ -7,11 +7,13 @@
     @php $logged = Auth::guard('customer')->check() ? 'true' : 'false' @endphp
 
     <div class="row white order-show">
-        <div class="navigation truncate">
-            <a>Trang chủ</a>
-            <i class="angle double right small icon"></i><a href="{{ route('payment.order.index') }}">Lịch sử đặt hàng</a>
-            <i class="angle double right small icon"></i>{{ strtoupper($order->order_code) }}
-        </div>
+        @if($logged == 'true')
+            <div class="navigation truncate">
+                <a>Trang chủ</a>
+                <i class="angle double right small icon"></i><a href="{{ route('payment.order.index') }}">Lịch sử đặt hàng</a>
+                <i class="angle double right small icon"></i>{{ strtoupper($order->order_code) }}
+            </div>
+        @endif
 
         <div class="col s12 order-show-header">
             Đơn hàng: {{ strtoupper($order->order_code) }}
@@ -37,7 +39,7 @@
                     <span class="col til">Số điện thoại:</span><span class="col cont phone-format">{{ $order->phone }}</span>
                 </div>
                 <div class="col s12 order-row">
-                    <span class="col til">Nơi nhận:</span><span class="col cont">căn hộ</span>
+                    <span class="col til">Nơi nhận:</span><span class="col cont">{{ $order->to }}</span>
                 </div>
                 <div class="col s12 order-row">
                     <span class="col til">Địa chỉ:</span><span class="col cont">{{ $order->address }}</span>
@@ -45,20 +47,47 @@
             </div>
             <div class="col s12 m12 l6 order-content-right">
                 <div class="col s12 order-row">
-                    <span class="col til">Ngày đặt hàng:</span><span class="col cont">{{ $order->receiver }}</span>
+                    <span class="col til">Ngày đặt hàng:</span><span class="col cont">
+                        {{ date_format(date_create($order->order_created_at), 'd/m/Y H:i') }}
+                        <span style="color: #666">
+                            {{ \App\Functions::getDateCount(date_create($order->order_created_at)->getTimestamp()) }}
+                        </span>
+                    </span>
                 </div>
                 <div class="col s12 order-row">
-                    <span class="col til">Hình thức thanh toán:</span><span class="col cont">{{ $order->email }}</span>
+                    <span class="col til">Hình thức thanh toán:</span><span class="col cont">
+                        {{ $order->paymentType() }}
+                    </span>
                 </div>
                 <div class="col s12 order-row">
-                    <span class="col til">Phí giao hàng:</span><span class="col cont">{{ $order->phone }}</span>
+                    <span class="col til">Phí giao hàng:</span><span class="col cont">
+                        {{ number_format($order->transport_fee) }}<sup>đ</sup>
+                    </span>
                 </div>
                 <div class="col s12 order-row">
-                    <span class="col til">Số tiền thanh toán:</span><span class="col cont">căn hộ</span>
+                    <span class="col til">Số tiền thanh toán:</span><span class="col cont">
+                        {{ number_format($order->total_of_cost) }}<sup>đ</sup>
+                    </span>
                 </div>
                 <div class="col s12 order-row">
                     <span class="col til">Tình trạng:</span><span class="col cont">
-                        {{ $order->getStatusText() }}</span>
+                        @if($order->cancelled())
+                            <i class="delete red-text open fitted icon"></i>
+                            <span class="red-text"><strong> Đã hủy</strong></span>
+                        @elseif($order->unapproved())
+                            <i class="warning open fitted orange-text icon"></i>
+                            <span class="orange-text"><strong> Chưa duyệt</strong></span>
+                        @elseif($order->getStatus() == -1)
+                            <i class="wait open fitted orange-text icon"></i>
+                            <span class="orange-text"><strong> Đang thanh toán online</strong></span>
+                        @elseif($order->getStatus() == 2)
+                            <i class="check open fitted green-text icon"></i>
+                            <span class="green-text"><strong>Đã giao hàng</strong></span>
+                        @else
+                            <i class="shipping fast open fitted teal-text icon"></i>
+                            <span class="teal-text"><strong>Đang vận chuyển</strong></span>
+                        @endif
+                    </span>
                 </div>
             </div>
 

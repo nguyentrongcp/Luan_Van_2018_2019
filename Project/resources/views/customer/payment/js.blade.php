@@ -140,6 +140,7 @@
             }
             else {
                 if (!checkEmpty()) {
+                    setLoader();
                     let cost = [];
                     let src = '';
                     if (share === true) {
@@ -173,6 +174,7 @@
                             $("html, body").animate({ scrollTop: 0 }, "slow");
                         },
                         success: function (data) {
+                            closeLoader();
                             $('#error-payment-otp').addClass('hide');
                             empty();
                             $('#payment-otp-modal').modal('open');
@@ -207,6 +209,7 @@
                 $('#error-payment-otp').removeClass('hide');
             }
             else {
+                setLoader();
                 $.ajax({
                     type: "post",
                     url: "/payment/check_payment_otp",
@@ -214,6 +217,7 @@
                         otp: $('#payment-otp').val()
                     },
                     success: function (data) {
+                        closeLoader();
                         if(data.status === 'error_cost') {
                             $('#notify-modal-text').html("<i class='exclamation icon'></i>" + data.error_text);
                             $('#notify-modal-button').text('Cập nhật ngay');
@@ -232,6 +236,7 @@
                         }
                         else {
                             if (data.type === 'payment') {
+                                setLoader('Đang chuyển sang trang thanh toán online');
                                 // SetExpressCheckout(data.order_code,data.total_code,data.name,data.email,data.phone,data.address);
                                 window.location.href = data.url;
                             }

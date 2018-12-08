@@ -1,3 +1,9 @@
+@php
+    $phone = substr($orders->phone, 0, strlen($orders->phone) - 6).' ';
+    $phone .= substr($orders->phone, strlen($orders->phone) - 6, 3).' ';
+    $phone .= substr($orders->phone, strlen($orders->phone) - 3, 3);
+@endphp
+
 <h4 class="ui dividing blue header">Thông tin</h4>
 <form action="" class="ui form static">
     <div class="ui two column padded divided grid">
@@ -14,7 +20,7 @@
 
             <div class="inline field">
                 <label class="label-fixed">Số điện thoại:</label>
-                <div class="static-input">{{ $orders->phone }}</div>
+                <div class="static-input">{{ $phone }}</div>
             </div>
 
             <div class="inline field">
@@ -29,7 +35,12 @@
 
             <div class="inline field">
                 <label class="label-fixed">Ngày đặt hàng:</label>
-                <div class="static-input">{{ $orders->order_created_at }}</div>
+                <div class="static-input">
+                    {{ date_format(date_create($orders->order_created_at), 'd/m/Y H:i') }}
+                    <span style="color: #666">
+                        {{ \App\Functions::getDateCount(date_create($orders->order_created_at)->getTimestamp()) }}
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -43,12 +54,12 @@
 
             <div class="inline field">
                 <label class="label-fixed">Tổng tiền:</label>
-                <div class="static-input">{{ number_format($orders->total_of_cost) }} đ</div>
+                <div class="static-input">{{ number_format($orders->total_of_cost) }}<sup>đ</sup></div>
             </div>
 
             <div class="inline field">
                 <label class="label-fixed">Phí vận chuyển:</label>
-                <div class="static-input">{{ $orders->transport_fee }}</div>
+                <div class="static-input">{{ number_format($orders->transport_fee) }}<sup>đ</sup></div>
             </div>
 
             @if($orders->approved())
@@ -88,24 +99,24 @@
 <table class="ui table striped celled">
     <thead>
     <tr>
-        <th class="collapsing">STT</th>
+        <th class="collapsing center aligned">STT</th>
         <th>Tên ẩm thực</th>
-        <th>Số lượng</th>
-        <th>Đơn giá</th>
-        <th>Tổng giá</th>
+        <th class="center aligned">Số lượng</th>
+        <th class="right aligned">Đơn giá</th>
+        <th class="right aligned">Tổng giá</th>
     </tr>
     </thead>
     <tbody>
     @foreach($orderFoodys as $stt => $orderFoody)
 
         <tr>
-            <td>{{ $stt + 1 }}</td>
+            <td class="center aligned">{{ $stt + 1 }}</td>
             <td><a class="a-decoration" href="{{route('foodies.show',[$orderFoody->foody_id])}}">
                     {{App\Foody::find($orderFoody->foody_id)->name}}</a>
             </td>
-            <td>{{$orderFoody->amount}}</td>
-            <td>{{ number_format($orderFoody->cost).' đ'}}</td>
-            <td>{{ number_format($orderFoody->total_of_cost).' đ' }}</td>
+            <td class="center aligned">{{$orderFoody->amount}}</td>
+            <td class="right aligned">{{ number_format($orderFoody->cost)}}<sup>đ</sup></td>
+            <td class="right aligned">{{ number_format($orderFoody->total_of_cost)}}<sup>đ</sup></td>
         </tr>
     @endforeach
     </tbody>

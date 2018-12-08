@@ -72,6 +72,21 @@ function setTimer(time) {
     }, 1000);
 }
 
+function setLoader(text = 'Đang xử lý') {
+    $('body').append("<div id='loader-container' style='background-color: #000;" +
+        "position: fixed; opacity: 0.8; top: 0; left: 0; height: 100vh; width: 100vw; z-index: 1003'></div>");
+    $('#loader-container').append('<div id="loader" class="ui segment" >\n' +
+        '  <div class="ui active dimmer">\n' +
+        '    <div class="ui text loader">' + text + '</div>\n' +
+        '  </div>\n' +
+        '  <p></p>\n' +
+        '</div>');
+}
+
+function closeLoader() {
+    $('#loader-container').remove();
+}
+
 function setDimmer(element1, element2 = null) {
     $('body').append("<div id='dimmer-container' style='background-color: #000;" +
         "position: fixed; opacity: 0.8; top: 0; left: 0; height: 100vh; width: 100vw; z-index: 999'></div>");

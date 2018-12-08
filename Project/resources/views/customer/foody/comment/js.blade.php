@@ -71,7 +71,7 @@
     }
 
     function uploadToServer(foody_id) {
-        console.log($('#comment-modal-content').val().replace(/\n/g, '<br />'));
+        // console.log($('#comment-modal-content').val().replace(/\n/g, '<br />'));
         if (($('#comment-modal-title').val() === '') || ($('#comment-modal-content').val() === '')) {
             if ($('#comment-modal-title').val() === '') {
                 $('#comment-modal-title-error').html("<span class=\"helper-text red-text\" >Vui lòng không bỏ trống tiêu đề!</span>");
@@ -81,7 +81,8 @@
             }
         }
         else {
-            var files = [];
+            setLoader();
+            let files = [];
             $.each($('.comment-modal-image img'), function (key, value) {
                 files[key] = $(value).attr('src');
             });
@@ -105,6 +106,7 @@
                         $('#comment-modal-title').val(null);
                         $('#comment-modal-content').val(null);
                         $('#comment-modal-image-location').empty();
+                        closeLoader();
                         $('#foody-comment-modal').modal('close');
                         $('#comment-modal-success-text').text('Bình luận của bạn đã được gửi. Chúng tôi sẽ xem xét và phê duyệt trong thời gian sớm nhất.');
                         $('#comment-modal-success').modal('open');

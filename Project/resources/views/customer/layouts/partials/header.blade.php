@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('/customer/semantic/button.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/customer/semantic/icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/customer/semantic/transition.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/customer/semantic/loader.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
           integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     {{--<link rel="stylesheet" href="/customer/semantic/dimmer.min.css">--}}
