@@ -22,7 +22,7 @@
                                     <b>Đăng nhập</b></a></li>
                         @else
                             <li><a style="height: 64px;" class="dropdown-trigger waves-effect waves-light" id="dropdown-profile" data-target="customer-profile">
-                                    <img class="responsive-img circle" src="{{ asset(Auth::guard('customer')->user()->avatar) }}">
+                                    <img id="avatar" class="responsive-img circle" src="{{ asset(Auth::guard('customer')->user()->avatar) }}">
 
                                     <b style="position: relative; vertical-align: top" class="hide-on-small-only">{{ Auth::guard('customer')->user()->name }}</b>
                                 </a></li>

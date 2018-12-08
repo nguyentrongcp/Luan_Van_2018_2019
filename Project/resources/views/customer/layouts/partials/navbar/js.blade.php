@@ -20,6 +20,7 @@
                     $('#dropdown-profile').dropdown('close');
                 }
             });
+            alert($('#avatar').attr('src'));
             updateCart();
             $('#cart-qty').text('{{ Cart::count() }}');
             $('#dropdown-cart').dropdown({

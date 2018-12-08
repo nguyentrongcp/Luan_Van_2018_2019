@@ -32,9 +32,9 @@
 
         <div class="col s12 m12 l7 foody-info" style="padding-left: 0">
             <div class="navigation truncate">
-                <a href="/">Trang chủ</a>
+                <a href="{{ route('customer.home') }}">Trang chủ</a>
                 <i class="angle double right small icon"></i>
-                <a href="#">Gà</a>
+                <a id="foody-type" href="#">{{ $foody->foodyType->name }}</a>
                 <i class="angle double right small icon"></i>
                 {{ $foody->name }}
             </div>

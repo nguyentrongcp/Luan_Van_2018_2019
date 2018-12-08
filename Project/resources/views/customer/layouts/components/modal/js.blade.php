@@ -109,13 +109,13 @@
             $('#profile-upload-input').click();
         });
         @if(Auth::guard('customer')->check())
-            $('#profile-avatar-preview').on('error', function () {
-                M.Toast.dismissAll();
-                M.toast({
-                    html: "<i class='material-icons left red-text'>error_outline</i> Hình ảnh không hợp lệ!"
-                });
-                $(this).attr('src', '{{ asset($customer->avatar) }}');
-            });
+            {{--$('#profile-avatar-preview').on('error', function () {--}}
+                {{--M.Toast.dismissAll();--}}
+                {{--M.toast({--}}
+                    {{--html: "<i class='material-icons left red-text'>error_outline</i> Hình ảnh không hợp lệ!"--}}
+                {{--});--}}
+                {{--$(this).attr('src', '{{ asset($customer->avatar) }}');--}}
+            {{--});--}}
             $('#profile-cancel').on('click', function () {
                 $('#pass-pro').val('');
                 $('#pass-old-pro').val('');
