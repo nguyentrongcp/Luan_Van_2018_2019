@@ -46,6 +46,10 @@ class EmployeeRoleSeeder extends Seeder
                 'function_id'=>8
             ],
             [
+                'role_id'=> 1,
+                'function_id'=>9
+            ],
+            [
                 'role_id'=> 2,
                 'function_id'=>1
             ],

@@ -47,28 +47,28 @@
            href="/admin/foodies">
             <i class="utensils icon icon-left"></i>Ẩm thực</a>
     @endif
-
-    <a class="item {{Request::is('*/materials')|| Request::is('*/materials/*')|| Request::is('*/materials') ? 'active-bar': '' }}"
-       href="/admin/material">
-        <i class="dolly icon icon-left"></i>Nguyên liệu </a>
-
     @if($employee->checkRoles(4))
+        <a class="item {{Request::is('*/materials')|| Request::is('*/materials/*')|| Request::is('*/materials') ? 'active-bar': '' }}"
+           href="/admin/material">
+            <i class="nutritionix icon icon-left"></i>Nguyên liệu </a>
+    @endif
+    @if($employee->checkRoles(5))
         <a class="item {{Request::is('*/goods_receipt_note')|| Request::is('*/goods_receipt_note_detail/*')|| Request::is('*/goods_receipt') ? 'active-bar': '' }}"
            href="/admin/goods_receipt_note">
             <i class="dolly icon icon-left"></i>Nhập hàng </a>
     @endif
 
-    @if($employee->checkRoles(5))
+    @if($employee->checkRoles(6))
         <a class="item {{Request::is('*admin/orders*') ? 'active-bar': '' }}" href="/admin/orders">
             <i class="clipboard icon icon-left"></i>Đơn hàng </a>
     @endif
 
-    @if($employee->checkRoles(6))
+    @if($employee->checkRoles(7))
         <a class="item {{Request::is('*/sales_offs') ? 'active-bar': '' }}" href="/admin/sales_offs">
             <i class="certificate icon icon-left"></i>Khuyến mãi </a>
     @endif
 
-    @if($employee->checkRoles(7))
+    @if($employee->checkRoles(8))
 
         <div class="ui accordion no-padding">
             <div class="title item menu-item-padding color-white {{ Request::is('*content*') ? 'active-bar': ''}}">
@@ -79,20 +79,20 @@
             <div class="content menu-item-padding color-white {{ Request::is('*content*') ? 'active': ''}}">
                 <div class="menu" style="padding-left: 10px">
                     <a class="title item {{ Request::is('*shop_infos') ? 'active': '' }}"
-                       href="{{route('shop_infos.index')}}">
+                       href="/admin/content/shop_infos">
                         <i class="info icon icon-left"></i>
                         Thông tin cửa hàng</a>
                     <a class="title item {{ Request::is('*sliders') ? 'active': '' }}"
-                       href="{{route('sliders.index')}}">
+                       href="/admin/content/sliders">
                         <i class="certificate icon icon-left"></i>Slide quảng cáo</a>
                     <a class="title item {{ Request::is('*news') ? 'active': '' }}"
-                       href="{{route('news.index')}}">
+                       href="/admin/content/news">
                         <i class="newspaper icon icon-left"></i>Tin tức</a>
                 </div>
             </div>
         </div>
     @endif
-    @if($employee->checkRoles(8))
+    @if($employee->checkRoles(9))
         <a class="item {{Request::is('*/transport_fees') ? 'active-bar': '' }}" href="/admin/transport_fees">
             <i class="shipping fast icon icon-left"></i>Phí vận chuyển </a>
     @endif
@@ -109,26 +109,35 @@
         </div>
         <div class="content menu-item-padding color-white {{ Request::is('*restore*') ? 'active': ''}}">
             <div class="menu" style="padding-left: 10px">
-                <a class="title item {{ Request::is('*foody_restore') ? 'active': '' }}"
-                   href="{{route('foody_type_restore.index')}}">
-                    <i class="certificate icon icon-left"></i>Loại ẩm thực</a>
-                <a class="title item {{ Request::is('*foody_restore') ? 'active': '' }}"
-                   href="{{route('foody_restore.index')}}">
-                    <i class="certificate icon icon-left"></i>Ẩm thực</a>
-                <a class="title item {{ Request::is('*material_restore') ? 'active': '' }}"
-                   href="{{route('material_restore.index')}}">
-                    <i class="certificate icon icon-left"></i>Nguyên liệu</a>
-                <a class="title item {{ Request::is('*goods_receipt_note_restore') ? 'active': '' }}"
-                   href="{{route('goods_receipt_note_restore.index')}}">
-                    <i class="certificate icon icon-left"></i>Nhập hàng</a>
-                <a class="title item {{ Request::is('*employee_restore') ? 'active': '' }}"
-                   href="{{route('employee_restore.index')}}">
-                    <i class="newspaper icon icon-left"></i>Nhân viên</a>
+                @if($employee->checkRoles(2))
+                    <a class="title item {{ Request::is('*foody_type_restore') ? 'active': '' }}"
+                       href="{{route('foody_type_restore.index')}}">
+                        <i class="sitemap icon icon-left"></i>Loại ẩm thực</a>
+                @endif
+                @if($employee->checkRoles(3))
+                    <a class="title item {{ Request::is('*foody_restore') ? 'active': '' }}"
+                       href="{{route('foody_restore.index')}}">
+                        <i class="utensils icon icon-left"></i>Ẩm thực</a>
+                @endif
+                @if($employee->checkRoles(4))
+                    <a class="title item {{ Request::is('*material_restore') ? 'active': '' }}"
+                       href="{{route('material_restore.index')}}">
+                        <i class="nutritionix icon icon-left"></i>Nguyên liệu</a>
+                @endif
+                @if($employee->checkRoles(5))
+                    <a class="title item {{ Request::is('*goods_receipt_note_restore') ? 'active': '' }}"
+                       href="{{route('goods_receipt_note_restore.index')}}">
+                        <i class="dolly icon icon-left"></i>Nhập hàng</a>
+                @endif
+                @if($employee->isAdmin())
+                    <a class="title item {{ Request::is('*employee_restore') ? 'active': '' }}"
+                       href="{{route('employee_restore.index')}}">
+                        <i class="users icon icon-left"></i>Nhân viên</a>
+                @endif
             </div>
         </div>
     </div>
-
-
 </div>
+
 
 

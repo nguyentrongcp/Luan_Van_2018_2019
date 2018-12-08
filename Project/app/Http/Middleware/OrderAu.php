@@ -17,7 +17,7 @@ class OrderAu
      */
     public function handle($request, Closure $next)
     {
-        if (Employees::find(Admin::adminId())->checkRoles(5)){
+        if (Employees::find(Admin::adminId())->checkRoles(6)){
             return $next($request);
         }
         else{

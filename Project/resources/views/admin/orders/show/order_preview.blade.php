@@ -65,7 +65,7 @@
     </div>
 
     <div class="info">
-        <p>Đơn vị bán hàng: <strong>Fast Food Shop</strong></p>
+        <p>Đơn vị bán hàng: <strong>Fast Foody Shop</strong></p>
         <p>Tên khách hàng: <strong>{{ $order->receiver }}</strong></p>
         <p>Địa chỉ: {{ $order->address }}</p>
         <p>Điện thoại: {{ $order->phone }}</p>

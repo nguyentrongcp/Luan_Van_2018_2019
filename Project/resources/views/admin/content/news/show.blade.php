@@ -16,6 +16,9 @@
                 <i class="calendar outline fitted icon"></i> {{ $news->date }}
             </span>
         </h3>
+        <div class="field">
+            <img src="{{asset($news->avatar)}}" class="ui img-tb" alt="{{$news->title}}">
+        </div>
         {!! $news->content !!}
     </div>
 @endsection

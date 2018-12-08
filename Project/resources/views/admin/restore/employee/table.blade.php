@@ -1,4 +1,4 @@
-<div class="ui basic segment no-padding no-margin table-responsive">
+<div class="ui basic segment no-padding table-responsive">
     <table class="ui table very compact striped celled selectable unstackable">
         <thead>
         <tr>

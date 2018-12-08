@@ -1,5 +1,5 @@
-<div class="ui basic segment no-padding no-margin table-responsive">
-    <table class="ui table very compact striped celled selectable unstackable" id="bang-loai-sp">
+<div class="ui basic segment no-padding table-responsive">
+    <table class="ui table very compact striped celled selectable unstackable">
         <thead>
         <tr>
             <th class="collapsing">

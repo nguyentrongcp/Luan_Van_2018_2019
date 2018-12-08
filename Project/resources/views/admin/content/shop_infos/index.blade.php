@@ -35,10 +35,6 @@
                 </div>
                 <div class="column">
                     <div class="field">
-                        <label>Email Cổng thanh toán Ngân Lượng</label>
-                        {{--<input type="email" name="nganluong_email" value="{{ $info->nganluong_email }}">--}}
-                    </div>
-                    <div class="field">
                         <label for="logo">Logo</label>
                         <img src="{{asset($shopInfo->logo)}}" alt="Logo">
                     </div>
@@ -51,6 +47,10 @@
                         <input type="file" name="logo" id="logo" style="display: none;"
                                onchange="$('#logo-name').text($('#logo')[0].files[0].name)"
                                accept=".jpg, .png, .jpeg">
+                    </div>
+                    <div class="field">
+                        <label for="time">Thời gian hoạt động của cửa hàng</label>
+
                     </div>
                 </div>
             </div>

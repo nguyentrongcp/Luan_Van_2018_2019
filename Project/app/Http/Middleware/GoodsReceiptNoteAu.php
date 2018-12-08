@@ -17,7 +17,7 @@ class GoodsReceiptNoteAu
      */
     public function handle($request, Closure $next)
     {
-        if (Employees::find(Admin::adminId())->checkRoles(4)){
+        if (Employees::find(Admin::adminId())->checkRoles(5)){
             return $next($request);
         }
         else{

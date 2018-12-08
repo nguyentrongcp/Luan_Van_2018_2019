@@ -6,7 +6,7 @@ use App\Admin;
 use App\Employees;
 use Closure;
 
-class SalesOffAu
+class MaterialAu
 {
     /**
      * Handle an incoming request.
@@ -17,12 +17,11 @@ class SalesOffAu
      */
     public function handle($request, Closure $next)
     {
-        if (Employees::find(Admin::adminId())->checkRoles(7)){
+        if (Employees::find(Admin::adminId())->checkRoles(4)){
             return $next($request);
         }
         else{
             return redirect('/admin/error');
         }
-
     }
 }

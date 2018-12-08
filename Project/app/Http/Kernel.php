@@ -7,9 +7,11 @@ use App\Http\Middleware\EmployeeAu;
 use App\Http\Middleware\FoodyAu;
 use App\Http\Middleware\FoodyTypeAu;
 use App\Http\Middleware\GoodsReceiptNoteAu;
+use App\Http\Middleware\MaterialAu;
 use App\Http\Middleware\OrderAu;
 use App\Http\Middleware\SalesOffAu;
 use App\Http\Middleware\StatisticAu;
+use App\Http\Middleware\TransportFeeAu;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -74,6 +76,8 @@ class Kernel extends HttpKernel
         'order'=>OrderAu::class,
         'salesoff'=>SalesOffAu::class,
         'content'=>ContentAu::class,
-        'employee'=>EmployeeAu::class
+        'employee'=>EmployeeAu::class,
+        'material'=>MaterialAu::class,
+        'transportfee'=>TransportFeeAu::class
     ];
 }

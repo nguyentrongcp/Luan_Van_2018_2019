@@ -24,7 +24,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::paginate(10);
-        return view('admin.news.index', compact('news'));
+        return view('admin.content.news.index', compact('news'));
     }
 
     /**
@@ -34,7 +34,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('admin.news.create');
+        return view('admin.content.news.create');
     }
 
     /**
@@ -103,7 +103,7 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
 
-        return view('admin.news.show', compact('news'));
+        return view('admin..content.news.show', compact('news'));
 
     }
 
@@ -117,7 +117,7 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
 
-        return view('admin.news.edit', compact('news'));
+        return view('admin.content.news.edit', compact('news'));
     }
 
     /**

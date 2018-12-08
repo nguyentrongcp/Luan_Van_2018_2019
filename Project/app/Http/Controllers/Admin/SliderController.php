@@ -20,7 +20,7 @@ class SliderController extends Controller
     {
         $sliders = Slider::all();
 
-        return view('admin.slider.index', compact('sliders'));
+        return view('admin.content.slider.index', compact('sliders'));
     }
 
     /**

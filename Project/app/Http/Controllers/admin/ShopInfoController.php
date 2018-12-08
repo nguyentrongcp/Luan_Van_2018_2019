@@ -17,7 +17,7 @@ class ShopInfoController extends Controller
     public function index()
     {
         $shopInfo = ShopInfo::find(1);
-        return view('admin.shop_infos.index',compact('shopInfo'));
+        return view('admin.content.shop_infos.index',compact('shopInfo'));
     }
 
     /**

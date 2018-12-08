@@ -84,9 +84,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     /**      Materials       **/
     Route::resource('material', 'admin\MaterialController')
-        ->middleware('goodsreceiptnote');
+        ->middleware('material');
     Route::resource('material_restore', 'admin\restore\MaterialRestoreController', ['only' => ['index', 'store','destroy']])
-        ->middleware('goodsreceiptnote');
+        ->middleware('material');
 
 
     /**      Goods receipt notes       **/
@@ -127,19 +127,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('salesoff');
 
 
-    /**      Shop information       **/
-    Route::resource('shop_infos', 'admin\ShopInfoController')
+
+    /**      Content       **/
+    Route::resource('content/shop_infos', 'admin\ShopInfoController')
         ->middleware('content');
 
-    /**      News       **/
-    Route::resource('news', 'admin\NewsController')
+    Route::resource('content/news', 'admin\NewsController')
         ->middleware('content');
-//    Route::post('news', 'admin\NewsController@store')->name('news.store')
-//        ->middleware('content');
 
-    /** Sliders **/
-    Route::resource('sliders', 'admin\SliderController')
+    Route::resource('content/sliders', 'admin\SliderController')
         ->middleware('content');
+
+
 
     /**      Employee       **/
 

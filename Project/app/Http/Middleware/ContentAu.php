@@ -17,7 +17,7 @@ class ContentAu
      */
     public function handle($request, Closure $next)
     {
-        if (Employees::find(Admin::adminId())->checkRoles(7)){
+        if (Employees::find(Admin::adminId())->checkRoles(8)){
             return $next($request);
         }
         else{

@@ -29,7 +29,7 @@
                 <i class="add fitted icon"></i>
                 <strong>Thêm mới </strong>
             </a>
-            @include('admin.slider.table')
+            @include('admin.content.slider.table')
 
         </form>
 
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        @include('admin.slider.modal')
+        @include('admin.content.slider.modal')
     </div>
 @endsection
 

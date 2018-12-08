@@ -51,6 +51,6 @@
 </div>
 @push('script')
     <script>
-        bindSelectAll('foody-id[]');
+        bindSelectAll('foody-ids[]');
     </script>
 @endpush
