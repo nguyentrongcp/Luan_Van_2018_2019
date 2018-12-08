@@ -6,12 +6,12 @@
             {{ csrf_field() }}
             <div class="inline required field">
                 <label class="label-fixed">Tên công việc</label>
-                <input type="text" name="role" id="role" placeholder="Công việc"
-                       value="Kế toán {{rand(1,100)}}" required>
+                <input type="text" name="role" id="role" placeholder="Tên công việc..."
+                       value="Nhân viên kế toán {{rand(1,100)}}" required>
             </div>
-            <div class="inline required field">
+            <div class="required field">
                 <label for="function">Chức năng</label>
-                <select name="function[]" multiple id="function" class="ui fluid dropdown" id="multi-select">
+                <select name="function[]" multiple=" " id="function" class="ui fluid dropdown" id="multi-select">
                     @foreach(\App\Functions::all() as $function)
                         <option value="{{$function->id}}">{{$function->name}}</option>
                     @endforeach

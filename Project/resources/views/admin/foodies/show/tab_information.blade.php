@@ -38,7 +38,8 @@
                     <div class="inline field">
                         <label class="label-fixed">Khuyến mãi</label>
                         <div class="static-input">
-                                {{$foodies->getSalePercent() .' %'}}
+                            <span class="ui red label pulse">{{$foodies->getSalePercent() .' %'}}</span>
+
                         </div>
                     </div>
                 @endif
@@ -82,4 +83,34 @@
     </form>
 </div>
 @include('admin.foodies.show.modals')
+
+<style>
+    .pulse {
+        overflow: visible;
+        position: relative;
+    }
+
+    .pulse::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: inherit;
+        border-radius: inherit;
+        -webkit-transition: opacity .3s, -webkit-transform .3s;
+        transition: opacity .3s, -webkit-transform .3s;
+        transition: opacity .3s, transform .3s;
+        transition: opacity .3s, transform .3s, -webkit-transform .3s;
+        -webkit-animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+        animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+        z-index: -1;
+    }
+</style>
+
+
+
+
 

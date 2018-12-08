@@ -34,6 +34,7 @@ class StatisticController extends Controller
                         ->join('sales_off_details as sd','s.id','=','sd.sales_off_id')
                         ->join('foodies as f','f.id','=','sd.foody_id')
                         ->where('s.end_date', '>=', date('Y-m-d'))
+                        ->orderBy('s.percent','ASC')
                         ->groupBy('f.id')
                         ->get();
 

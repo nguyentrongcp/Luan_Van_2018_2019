@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 class OrderController extends Controller
 {
     /**
@@ -34,7 +35,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('admin.orders.create.index');
     }
 
     /**
@@ -45,7 +47,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -144,5 +146,16 @@ class OrderController extends Controller
                 $orderFoody->update();
             }
             return back()->with('success','Hủy đơn hàng thành công!');
+    }
+
+    public function printOrder($id){
+        $order = Order::find($id);
+        $orderDetails = DB::table('orders as o')
+            ->join('order_foodies as of','o.id','of.order_id')
+            ->where('o.id',$id)
+            ->get();
+        $pdf = PDF::loadView('admin.orders.show.order_preview',compact('order','orderDetails'));
+
+        return $pdf->stream();
     }
 }

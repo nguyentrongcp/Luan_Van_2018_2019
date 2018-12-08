@@ -99,9 +99,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('order');
     Route::get('order_cancelled/{id}', 'admin\OrderController@orderCancelled')->name('order_cancelled')
         ->middleware('order');
-    Route::get('orders/filter/{id}', 'admin\OrderController@filter')->name('orders_filter')
+    Route::get('orders/{id}/filter', 'admin\OrderController@filter')->name('orders_filter')
         ->middleware('order');
-
+    Route::get('orders/{id}/print', 'admin\OrderController@printOrder')->name('print_order')
+        ->middleware('order');
 
     /**      Sales offs       **/
     Route::resource('sales_offs', 'admin\SalesOffsController', ["except" => ["create", "edit"]])
@@ -138,7 +139,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('employee');
     Route::post('employees/change_info/{id}', 'admin\EmployeeController@changeInfo')->name('change_info')
         ->middleware('employee');
-    Route::get('employees/add_role', 'admin\EmployeeController@addRole')->name('employee.add.role')
+    Route::post('employees/add_role', 'admin\EmployeeController@addRole')->name('employee.add.role')
         ->middleware('employee');
 
     /** Comments **/

@@ -17,5 +17,6 @@
             {{ csrf_field() }}
             @include('admin.employees.create.tab_information')
         </form>
+        @include('admin.employees.create.modal')
     </div>
 @endsection

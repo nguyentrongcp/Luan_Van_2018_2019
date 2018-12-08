@@ -3,10 +3,10 @@
     <h5 class="ui header right aligned">
     </h5>
     <div class="column">
-        <h5 class="ui dividing header no-margin-bottom">Thực đơn đang khuyến mãi</h5>
+        <h5 class="ui dividing header no-margin-bottom">Ẩm thực đang khuyến mãi</h5>
         <table class="ui table celled striped compact" id="product-out-table">
             <thead>
-            <tr><th class="collapsing">STT</th><th>Tên thực đơn</th></tr>
+            <tr><th class="collapsing">STT</th><th>Tên ẩm thực</th><th>Phần trăm giảm (%)</th></tr>
             </thead>
             <tbody>
             @foreach($saleOffFoodies as $idx => $saleOffFoody)
@@ -18,6 +18,7 @@
                             {{ $saleOffFoody->name }}
                         </a>
                     </td>
+                    <td class="center aligned">{{$saleOffFoody->percent}}</td>
                 </tr>
             @endforeach
             </tbody>

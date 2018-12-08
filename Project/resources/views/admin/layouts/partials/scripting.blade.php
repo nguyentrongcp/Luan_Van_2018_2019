@@ -7,6 +7,7 @@
 <script type="text/javascript" src="{{asset('/customer/semantic/checkbox.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('/customer/semantic/tab.min.js')}}"></script>
 
+
 <script src="{{ asset('admin/assets/plugin/jq-toast/jquery.toast.min.js') }}"></script>
 <script src="{{ asset('admin/assets/plugin/fotorama/fotorama.js') }}"></script>
 <script src="{{ asset('admin/assets/plugin/ckeditor/ckeditor.js') }}"></script>
@@ -45,6 +46,7 @@
             $('#multi-select').dropdown();
             $('.ui.accordion').accordion();
             $('.ui.dropdown').dropdown();
+
         });
 </script>
 <script>

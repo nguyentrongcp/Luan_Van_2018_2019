@@ -3,7 +3,7 @@
     <div class="ui padded stackable grid">
         <div class="ten wide column">
 
-            <div class="inline required field">
+            <div class="inline  field">
                 <label class="label-fixed">Tên ẩm thực</label>
                 <input type="text" name="foody-name" id="foody_name" placeholder="Tên thực đơn"
                 value="{{old('foody-name')}}">

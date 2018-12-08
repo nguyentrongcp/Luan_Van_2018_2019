@@ -17,6 +17,9 @@
                     <i class="delete fitted icon"></i>
                     <strong>Xóa </strong>
                 </button>
+                <a href="{{ route('orders.create') }}" class="ui small blue button">
+                    <i class="plus icon"></i>Thêm mới
+                </a>
                 @include('admin.orders.btn_filer')
             </div>
 

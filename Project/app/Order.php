@@ -35,9 +35,9 @@ class Order extends Model
     }
     public function paymentType() {
         $payment = [
-            0 => 'Tiền mặt',
-            1 => 'Cổng Ngân Lượng',
-            2 => 'Thẻ tín dụng / ATM'
+            0 => 'Thanh toán online(Đang chờ thanh toán)',
+            1 => 'Tiền mặt',
+            2 => 'Thanh toán online'
         ];
         return $payment[$this->payment_type];
     }

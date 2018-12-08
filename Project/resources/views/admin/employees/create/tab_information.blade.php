@@ -108,7 +108,7 @@
             Lưu lại
         </button>
     </div>
-@include('admin.employees.create.modal')
+
 @push('script')
 
     <script>

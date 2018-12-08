@@ -22,13 +22,14 @@
                 </a>
             @endif
 
-            {{--<a href="{{ route('print_order', [$donHang->id]) }}" class="ui label" style="float: right" target="_blank">--}}
-                {{--<i class="print open fitted icon"></i>--}}
-                {{--Xuất hóa đơn--}}
-            {{--</a>--}}
+            <a href="{{ route('print_order', [$orders->id]) }}" class="ui label a-decoration" style="float: right" target="_blank">
+                <i class="print open fitted icon"></i>
+                Xuất hóa đơn
+            </a>
 
         </h3>
 
+        {{--@include('admin.orders.show.order_preview')--}}
 
         @include('admin.layouts.components.success_msg')
 

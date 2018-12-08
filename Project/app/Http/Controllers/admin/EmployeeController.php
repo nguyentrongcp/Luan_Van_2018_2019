@@ -245,19 +245,20 @@ class EmployeeController extends Controller
         $role->name = $request->get('role');
         $role->save();
 
-        $ids = $request->get('function-id');
+        $ids = $request->get('function');
         if (is_array($ids)){
             foreach ($ids as $id){
                 $employeeRole = new EmployeeRole();
-                $employeeRole->role_id = Role::count();
+                $employeeRole->role_id = $role->id;
                 $employeeRole->function_id = $id;
                 $employeeRole->save();
             }
+            return redirect(route('employees.create'))->with('success','Thêm thành công!');
         }
         $employeeRole = new EmployeeRole();
         $employeeRole->role_id = Role::count();
         $employeeRole->function_id = $ids;
         $employeeRole->save();
-        return back()->with('success','Thêm thành công!');
+        return redirect(route('employees.create'))->with('success','Thêm thành công!');
     }
 }
