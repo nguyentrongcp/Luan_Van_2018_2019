@@ -60,7 +60,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('foodytype');
     Route::resource('add_new', 'admin\AddTypeController', ["except" => ["create", "show", "edit"]])
         ->middleware('foodytype');
-
+    Route::resource('foody_type_restore', 'admin\restore\FoodyTypeRestoreController', ['only' => ['index', 'store']])
+        ->middleware('foodytype');
 
     /** Foody */
 
@@ -78,6 +79,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('foody');
     Route::get('search', 'admin\FoodyController@search')
         ->middleware('foody');
+    Route::resource('foody_restore', 'admin\restore\FoodyRestoreController', ['only' => ['index', 'store']])
+        ->middleware('foody');
+
+    /**      Materials       **/
+    Route::resource('material', 'admin\MaterialController')
+        ->middleware('goodsreceiptnote');
+    Route::resource('material_restore', 'admin\restore\MaterialRestoreController', ['only' => ['index', 'store','destroy']])
+        ->middleware('goodsreceiptnote');
 
 
     /**      Goods receipt notes       **/
@@ -91,6 +100,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('goods_receipt', 'admin\GoodsReceiptNotesController@showMaterialNeededGoods')
         ->name('admin.material')
         ->middleware('goodsreceiptnote');
+    Route::resource('goods_receipt_note_restore', 'admin\restore\GoodsReceiptNotesRestoreController', ['only' => ['index', 'store']])
+        ->middleware('goodsreceiptnote');
 
     /**      orders       **/
     Route::resource('orders', 'admin\OrderController')
@@ -103,6 +114,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('order');
     Route::get('orders/{id}/print', 'admin\OrderController@printOrder')->name('print_order')
         ->middleware('order');
+
 
     /**      Sales offs       **/
     Route::resource('sales_offs', 'admin\SalesOffsController', ["except" => ["create", "edit"]])
@@ -141,12 +153,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('employee');
     Route::post('employees/add_role', 'admin\EmployeeController@addRole')->name('employee.add.role')
         ->middleware('employee');
+    Route::resource('employee_restore', 'admin\restore\EmployeeRestoreController', ['only' => ['index', 'store']])
+        ->middleware('employee');
 
     /** Comments **/
+
     Route::resource('comments', 'admin\CommentController');
     Route::post('comments/{id}', 'admin\CommentController@update')->name('admin.approved');
     Route::get('comments/filter/{id}', 'admin\CommentController@filter')->name('admin_comment_filter');
+
     /** transport fees **/
+
     Route::resource('transport_fees','admin\TransportFeesController');
     Route::post('storedistrict','admin\TransportFeesController@storeDistrict')->name('district.store');
     Route::post('updatedistrict/{$id}','admin\TransportFeesController@updateDistrict')->name('district.update');
