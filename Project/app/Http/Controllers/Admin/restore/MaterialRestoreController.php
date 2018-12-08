@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\admin\restore;
 
-use App\Admin;
+use App\Material;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EmployeeRestoreController extends Controller
+class MaterialRestoreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class EmployeeRestoreController extends Controller
      */
     public function index()
     {
-        $employees = Admin::where('is_deleted', true)->paginate(10);
+        $materials = Material::where('is_deleted', true)->paginate(10);
 
-        return view('admin.restore.employee.index', compact('employees'));
+        return view('admin.restore.material.index', compact('materials'));
     }
 
     /**
@@ -33,20 +33,20 @@ class EmployeeRestoreController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if (!$request->has('employee-ids')) {
+        if (!$request->has('material-ids')) {
             return back();
         }
 
-        $ids = $request->get('employee-ids');
-        foreach($ids as $id) {
-            $employee = Admin::findOrFail($id);
-            $employee->is_deleted = false;
-            $employee->update();
+        $ids = $request->get('material-ids');
+        foreach ($ids as $id) {
+            $foody = Material::findOrFail($id);
+            $foody->is_deleted = false;
+            $foody->update();
         }
 
         return back()->with('success', 'Phục hồi thành công.');
@@ -55,7 +55,7 @@ class EmployeeRestoreController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -66,7 +66,7 @@ class EmployeeRestoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -77,8 +77,8 @@ class EmployeeRestoreController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -89,11 +89,12 @@ class EmployeeRestoreController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $material = Material::destroy($id);
+        return back()->with('success', 'Phục hồi thành công.');
     }
 }

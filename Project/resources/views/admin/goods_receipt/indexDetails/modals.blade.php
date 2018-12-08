@@ -22,7 +22,7 @@
             <div class="field">
                 <label for="amount">Số lượng</label>
                 <div class="ui right labeled input">
-                    <input type="number" name="quantity" id="quantity" placeholder="Số lượng">
+                    <input type="number" name="quantity" id="quantity" placeholder="Số lượng" min="0">
                     <select class="ui dropdown label" name="unit" id="unit">
                         <option value="">Chọn đơn vị tính</option>
                         @foreach(\App\CalculationUnit::all() as $unit)
@@ -72,7 +72,7 @@
                 <div class="field">
                     <label for="amount">Số lượng</label>
                     <div class="ui right labeled input">
-                        <input type="number" name="quantity" id="quantity" placeholder="Số lượng"
+                        <input type="number" name="quantity" id="quantity" placeholder="Số lượng" min="0"
                         value="{{$goodsReceiptDetail->quantity}}">
                         <select class="ui dropdown label" name="unit" id="unit">
                             <option value="">Chọn đơn vị tính</option>

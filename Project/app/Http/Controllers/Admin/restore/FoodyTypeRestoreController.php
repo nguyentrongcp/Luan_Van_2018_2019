@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\admin\restore;
 
-use App\Admin;
+use App\FoodyType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EmployeeRestoreController extends Controller
+class FoodyTypeRestoreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class EmployeeRestoreController extends Controller
      */
     public function index()
     {
-        $employees = Admin::where('is_deleted', true)->paginate(10);
+        $foodyTypes = FoodyType::where('is_deleted',true)->paginate(10);
 
-        return view('admin.restore.employee.index', compact('employees'));
+        return view('admin.restore.foodyType.index',compact('foodyTypes'));
     }
 
     /**
@@ -38,15 +38,15 @@ class EmployeeRestoreController extends Controller
      */
     public function store(Request $request)
     {
-        if (!$request->has('employee-ids')) {
+        if (!$request->has('foody-type-ids')) {
             return back();
         }
 
-        $ids = $request->get('employee-ids');
+        $ids = $request->get('foody-type-ids');
         foreach($ids as $id) {
-            $employee = Admin::findOrFail($id);
-            $employee->is_deleted = false;
-            $employee->update();
+            $foody = FoodyType::findOrFail($id);
+            $foody->is_deleted = false;
+            $foody->update();
         }
 
         return back()->with('success', 'Phục hồi thành công.');

@@ -48,6 +48,10 @@
             <i class="utensils icon icon-left"></i>Ẩm thực</a>
     @endif
 
+    <a class="item {{Request::is('*/materials')|| Request::is('*/materials/*')|| Request::is('*/materials') ? 'active-bar': '' }}"
+       href="/admin/material">
+        <i class="dolly icon icon-left"></i>Nguyên liệu </a>
+
     @if($employee->checkRoles(4))
         <a class="item {{Request::is('*/goods_receipt_note')|| Request::is('*/goods_receipt_note_detail/*')|| Request::is('*/goods_receipt') ? 'active-bar': '' }}"
            href="/admin/goods_receipt_note">
@@ -74,14 +78,14 @@
             </div>
             <div class="content menu-item-padding color-white {{ Request::is('*content*') ? 'active': ''}}">
                 <div class="menu" style="padding-left: 10px">
-                    <a class="title item {{ Request::is('*content/shop_infos') ? 'active': '' }}"
+                    <a class="title item {{ Request::is('*shop_infos') ? 'active': '' }}"
                        href="{{route('shop_infos.index')}}">
                         <i class="info icon icon-left"></i>
                         Thông tin cửa hàng</a>
-                    <a class="title item {{ Request::is('*content/sliders') ? 'active': '' }}"
+                    <a class="title item {{ Request::is('*sliders') ? 'active': '' }}"
                        href="{{route('sliders.index')}}">
                         <i class="certificate icon icon-left"></i>Slide quảng cáo</a>
-                    <a class="title item {{ Request::is('*content/news') ? 'active': '' }}"
+                    <a class="title item {{ Request::is('*news') ? 'active': '' }}"
                        href="{{route('news.index')}}">
                         <i class="newspaper icon icon-left"></i>Tin tức</a>
                 </div>
@@ -96,6 +100,34 @@
         <a class="item {{Request::is('*/employees') ? 'active-bar': '' }}" href="/admin/employees">
             <i class="users icon icon-left"></i>Nhân viên </a>
     @endif
+
+    <div class="ui accordion no-padding">
+        <div class="title item menu-item-padding color-white {{ Request::is('*restore*') ? 'active-bar': ''}}">
+            <i class="newspaper icon icon-left icon-accordion"></i>
+            Phục hồi
+            <i class="dropdown icon"></i>
+        </div>
+        <div class="content menu-item-padding color-white {{ Request::is('*restore*') ? 'active': ''}}">
+            <div class="menu" style="padding-left: 10px">
+                <a class="title item {{ Request::is('*foody_restore') ? 'active': '' }}"
+                   href="{{route('foody_type_restore.index')}}">
+                    <i class="certificate icon icon-left"></i>Loại ẩm thực</a>
+                <a class="title item {{ Request::is('*foody_restore') ? 'active': '' }}"
+                   href="{{route('foody_restore.index')}}">
+                    <i class="certificate icon icon-left"></i>Ẩm thực</a>
+                <a class="title item {{ Request::is('*material_restore') ? 'active': '' }}"
+                   href="{{route('material_restore.index')}}">
+                    <i class="certificate icon icon-left"></i>Nguyên liệu</a>
+                <a class="title item {{ Request::is('*goods_receipt_note_restore') ? 'active': '' }}"
+                   href="{{route('goods_receipt_note_restore.index')}}">
+                    <i class="certificate icon icon-left"></i>Nhập hàng</a>
+                <a class="title item {{ Request::is('*employee_restore') ? 'active': '' }}"
+                   href="{{route('employee_restore.index')}}">
+                    <i class="newspaper icon icon-left"></i>Nhân viên</a>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 

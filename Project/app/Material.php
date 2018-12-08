@@ -15,4 +15,8 @@ class Material extends Model
             ])->count();
         return $count;
     }
+
+    public function checkName($name){
+        return (Material::where('name',$name)->count() > 0);
+    }
 }

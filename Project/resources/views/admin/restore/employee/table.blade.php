@@ -20,7 +20,7 @@
             <tr>
                 <td>
                     <div class="ui child checkbox">
-                        <input type="checkbox" name="employee-id[]" value="{{$employee->id}}">
+                        <input type="checkbox" name="employee-ids[]" value="{{$employee->id}}">
                     </div>
 
                 </td>
