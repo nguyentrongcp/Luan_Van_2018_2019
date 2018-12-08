@@ -4,7 +4,7 @@
         <div class="ten wide column">
 
             <div class="inline required field">
-                <label class="label-fixed">Tên thực đơn</label>
+                <label class="label-fixed">Tên ẩm thực</label>
                 <input type="text" name="foody-name" id="foody_name" placeholder="Tên thực đơn"
                 value="{{old('foody-name')}}">
             </div>
@@ -14,7 +14,7 @@
                 </div>
             @endif
             <div class="inline required field">
-                <label class="label-fixed">Loại thực đơn</label>
+                <label class="label-fixed">Loại ẩm thực</label>
                 <select name="foody-type-name" class="ui search dropdown">
                     @foreach($foodyTypes as $foodyType)
                         <option value="{{ $foodyType->id }}">
@@ -53,17 +53,17 @@
         <div class="six wide column">
             <div class="required field">
                 <label>Ảnh đại diện</label>
-                <label for="anh-dai-dien">
+                <label for="foody-avatar">
                     <span class="ui blue compact label">Chọn một ảnh</span>
-                    <span id="anh-dai-dien-name"></span>
+                    <span id="foody-avatar-name"></span>
                 </label>
-                <input type="file" name="anh-dai-dien" id="anh-dai-dien" style="display: none;"
-                       onchange="$('#anh-dai-dien-name').text($('#anh-dai-dien')[0].files[0].name)"
+                <input type="file" name="foody-avatar" id="foody-avatar" style="display: none;"
+                       onchange="$('#foody-avatar-name').text($('#foody-avatar')[0].files[0].name)"
                        accept=".jpg, .png, .jpeg">
             </div>
-            @if($errors->has('anh-dai-dien'))
+            @if($errors->has('foody-avatar'))
                 <div style="color: red; margin-top: 5px; font-size: 13px">
-                    {{ $errors->first('anh-dai-dien') }}
+                    {{ $errors->first('foody-avatar') }}
                 </div>
             @endif
             <div class="ui divider">

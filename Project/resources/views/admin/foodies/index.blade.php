@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="ui blue raised segment">
-        <h3 class="ui dividing header center aligned">QUẢN LÝ THỰC ĐƠN</h3>
+        <h3 class="ui dividing header center aligned">QUẢN LÝ ẨM THỰC</h3>
         @include('admin.layouts.components.success_msg')
         @include('admin.layouts.components.errors_msg')
         <form action="{{route('foodies.destroy',[0])}}" method="post" class="ui form">

@@ -1,6 +1,6 @@
 <!-- Modal create goods receipt note detail-->
 <div class="ui mini-40 modal" id="create-goods-receipt-note-detail-modal">
-    <div class="blue header">Thêm mới phiếu nhập</div>
+    <div class="blue header">Thêm mới nguyên liệu</div>
     <div class="content">
         <form action="{{ route('goods_receipt_note_detail.store')}}" class="ui form" method="post">
             {{ csrf_field() }}

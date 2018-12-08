@@ -19,7 +19,7 @@
                                 @if ($comment->approved())
                                     <button class="ui mini orange label pointer">Bỏ duyệt</button>
                                 @else
-                                    <button class="ui mini green color-white label pointer">Duyệt</button>
+                                    <button class="ui mini green color-white label pointer" onclick="return confirm('Bạn chắc chắn muốn duyệt bình luận này?')"">Duyệt</button>
                                 @endif
                             </form>
 
@@ -27,20 +27,31 @@
                                   method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
-                                <button class="ui mini red label pointer text-white">Xóa</button>
+                                <button class="ui mini red label pointer text-white" onclick="return confirm('Bạn chắc chắn muốn xóa bình luận này?')">Xóa</button>
                             </form>
                         </div>
                     </div>
                     {{--<div class="title"><strong>{{$comment->title}}</strong></div>--}}
                     <div class="text">{{ $comment->content }}</div>
-                    <div class="card-image">
-                        @foreach(\App\Image::where($comment->image_id) as $image)
-                            <img src="{{asset($image->link)}}" alt="comment image">
+                    <div class="ui tiny images">
+                        @foreach($comment->imageComments as $imagecoment)
+                            @foreach(\App\Image::where('id',$imagecoment->image_id)->get() as $image)
+                                <a href="#" onclick="$('{{ '#modal-view-' . $image->id }}').modal('show')">
+                                <img class="ui image" src="{{asset($image->link)}}" alt="comment image">
+                                </a>
+
+                                <div class="ui basic modal" id="{{ "modal-view-" . $image->id }}">
+                                    <i class="close icon" style="color: #fff !important;"></i>
+                                    <div class="content">
+                                        <img src="{{ asset($image->link) }}" class="ui centered image">
+                                    </div>
+                                </div>
+                            @endforeach
                         @endforeach
                     </div>
                     @foreach($comment->miniComments as $child)
                         <div class="comment">
-                            <a class="avatar"><img src="{{ asset('admin/assets/img/mike.jpg') }}"></a>
+                            <a class="avatar"><img src="{{ asset(\App\Admin::find($child->admin_id)->avatar) }}"></a>
                             <div class="content">
                                 @if($child->admin_id != '')
                                     <a class="author">{{ \App\Admin::find($child->admin_id)->name }}</a>
@@ -51,7 +62,8 @@
                                                   class="force-inline" method="post">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <button type="submit" class="ui mini red label pointer text-white">Xóa</button>
+                                                <button type="submit" class="ui mini red label pointer text-white">Xóa
+                                                </button>
 
                                             </form>
                                         </div>

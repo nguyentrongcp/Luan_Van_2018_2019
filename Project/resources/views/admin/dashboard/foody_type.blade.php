@@ -1,5 +1,5 @@
 <div class="ui segment">
-    <h4 class="ui header">Số lượng thực đơn theo loại</h4>
+    <h4 class="ui header">Số lượng ẩm thực theo loại</h4>
     <div class="holder">
         <canvas id="product-ptype-chart"></canvas>
     </div>

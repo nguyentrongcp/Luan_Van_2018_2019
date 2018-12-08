@@ -1,6 +1,6 @@
 <div class="ui grid stackable">
     <div class="ten wide column">
-        <h4 class="ui header">Thực đơn bán chạy nhất</h4>
+        <h4 class="ui header">Top 10 ẩm thực bán chạy nhất</h4>
         <form class="ui tiny form">
             <div class="inline fields">
                 <div class="field" id="select-type">
@@ -34,7 +34,7 @@
                 <thead>
                 <tr>
                     <th id="table-title"></th>
-                    <th>Thực đơn</th>
+                    <th>Ẩm thực</th>
                     <th>Lượt mua</th>
                 </tr>
                 </thead>

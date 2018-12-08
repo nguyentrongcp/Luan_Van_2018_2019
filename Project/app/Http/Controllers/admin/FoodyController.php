@@ -68,12 +68,12 @@ class FoodyController extends Controller
             return back()->withErrors(['foody-cost' => 'Giá tiền không được nhỏ hơn 1,000đ !'])
                 ->withInput($request->only('foody-cost', 'foody-name'));
         }
-        if ($cost_input > 100000000) {
-            return back()->withErrors(['foody-cost' => 'Giá tiền không được vượt quá 100,000,000đ !'])
+        if ($cost_input > 10000000) {
+            return back()->withErrors(['foody-cost' => 'Giá tiền không được vượt quá 10,000,000đ !'])
                 ->withInput($request->only('foody-cost', 'foody-name'));
         }
-        if (!$request->hasFile('anh-dai-dien')) {
-            return back()->withErrors(['anh-dai-dien'=>'Bạn chưa upload hình ảnh!'])
+        if (!$request->hasFile('foody-avatar')) {
+            return back()->withErrors(['foody-avatar'=>'Bạn chưa upload hình ảnh!'])
                 ->withInput($request->only('foody-cost', 'foody-name'));
         }
 
@@ -92,9 +92,9 @@ class FoodyController extends Controller
         $foody->foody_type_id = $request->get('foody-type-name');
 
         $time = time();
-        $ext = $request->file('anh-dai-dien')->extension();
+        $ext = $request->file('foody-avatar')->extension();
 
-        $path = $request->file('anh-dai-dien')
+        $path = $request->file('foody-avatar')
             ->move('admin\assets\images\avatar', "avatar-$foody->id-$time.$ext");
         $foody->avatar = str_replace('\\', '/', $path);
         $foody->save();
@@ -167,14 +167,20 @@ class FoodyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validate = $this->validationUpdate($request,$id);
+        if ($validate->fails()) {
+            return back()->withErrors($validate)
+                ->withInput($request->only('foody-cost', 'foody-name'));
+        }
         $foodyName = $request->get('foody-name');
         $cost_input = str_replace(',', '', $request->get('foody-cost'));
-        if ($cost_input > 100000000) {
-            return back()->withErrors(['foody-cost' => 'Giá tiền không được vượt quá 100,000,000đ !']);
+        if ($cost_input > 10000000) {
+            return back()->withErrors(['foody-cost' => 'Giá tiền không được vượt quá 10,000,000đ !']);
         }
         if ($cost_input < 1000) {
             return back()->withErrors(['foody-cost' => 'Giá tiền không được thấp hơn 1000đ !']);
         }
+
         $foodys = Foody::findOrFail($id);
         $foodys->name = $foodyName;
         $foodys->slug = str_slug($foodyName);
@@ -192,9 +198,8 @@ class FoodyController extends Controller
         $cost->cost_updated_at = date('Y-m-d H:i:s');
         $cost->save();
 
-        if (!$request->hasFile('anh-dai-dien')) {
-            return back()->with('error', 'Bạn chưa upload hình ảnh!');
-        } else {
+        if ($request->hasFile('foody-avatar')) {
+//
             $foody = Foody::findOrFail($id);
             $oldPath = $foody->avatar;
             if (!empty($oldPath)) {
@@ -202,8 +207,8 @@ class FoodyController extends Controller
             }
 
             $time = time();
-            $ext = $request->file('anh-dai-dien')->extension();
-            $path = $request->file('anh-dai-dien')
+            $ext = $request->file('foody-avatar')->extension();
+            $path = $request->file('foody-avatar')
                 ->move('admin\assets\images\avatar', "avatar-$id-$time.$ext");
             $foody->avatar = str_replace('\\', '/', $path);
             $foody->update();
@@ -239,63 +244,6 @@ class FoodyController extends Controller
 
         return back()->with('success', 'Xóa thành công.');
     }
-    public function changeCost(Request $request, $id)
-    {
-
-//        $validate = Validator::make($request->all(),
-//            [
-//                'cost-pro' => array('required', 'regex:/^(([1-9]\d*)|([1-9]\d{0,2}(,\d{3})*))$/')
-//            ],
-//            [
-//                'required' => ':attribute không được bỏ trống!',
-//                'regex' => ':attribute không hợp lệ!'
-//            ],
-//            [
-//                'cost-pro' => 'Giá tiền'
-//            ]
-//        );
-//        if($validate->fails()) {
-//            return back()->withErrors($validate)->withInput($request->only('cost-pro'));
-//        }
-        $cost_input = str_replace(',', '', $request->get('foody-cost'));
-        if ($cost_input > 100000000) {
-            return back()->withErrors(['foody-cost' => 'Giá tiền không được vượt quá 100,000,000đ !']);
-        }
-        if ($cost_input < 1000) {
-            return back()->withErrors(['foody-cost' => 'Giá tiền không được thấp hơn 1000đ !']);
-        }
-
-        $cost = new Cost();
-        $cost->cost = $cost_input;
-        $cost->foody_id = $id;
-        $cost->cost_updated_at = date('Y-m-d H:i:s');
-        $cost->save();
-
-        return back()->with('success', 'Thay đổi thành công.');
-    }
-
-    public function changeAvatar(Request $request, $id)
-    {
-
-        if (!$request->hasFile('anh-dai-dien')) {
-            return back()->with('error', 'Bạn chưa upload hình ảnh!');
-        } else {
-            $foody = Foody::findOrFail($id);
-            $oldPath = $foody->avatar;
-            if (!empty($oldPath)) {
-                File::delete($oldPath);
-            }
-
-            $time = time();
-            $ext = $request->file('anh-dai-dien')->extension();
-            $path = $request->file('anh-dai-dien')
-                ->move('admin\assets\images\avatar', "avatar-$id-$time.$ext");
-            $foody->avatar = str_replace('\\', '/', $path);
-            $foody->update();
-
-            return back()->with('success', 'Cập nhật thành công.');
-        }
-    }
 
     public function showSlugType($slug){
         $foodyType_filter = FoodyType::where('slug',$slug)
@@ -308,36 +256,10 @@ class FoodyController extends Controller
         return view('admin.foodyTypes.filter.index',compact('foodyType_filter','nameType_filter','foody_filter'));
     }
 
-    public function filter(Request $request){
-        dd($request);
-//        $key_filter = '';
-//        $key_search = '';
-//        $idType = $request->get('type-id');
-//        $nameType = FoodyType::find($idType)->name;
-//        $idStatus = $request->get('status-id');
-//        if (!empty($idType)){
-//            if (!empty($idStatus)){
-//                $foody_filter = DB::table('foodies')
-//                    ->join('foody_statuses','foodies.id','=','foody_statuses.foody_id')
-//                    ->where('foodies.type_id',$idType)
-//                    ->where('foody_status.status',$idStatus)
-//                    ->where('foodies.is_delete',false)
-//                    ->paginate(10);
-//                return view('admin.foodies.filter.index',compact('foody_filter'));
-//            }
-//            $foody_filter = DB::table('foodies')
-//                ->join('foody_statuses','foodies.id','=','foody_statuses.foody_id')
-//                ->where('foodies.type_id',$idType)
-//                ->where('foodies.is_delete',false)
-//                ->paginate(10);
-//            return view('admin.foodies.filter.index',compact('foody_filter'));
-//        }
-        return view('admin.foodies.filter.index',compact('foody_filter'));
-    }
 
     public function search(Request $request) {
         $key_search = $request->key;
-        $foodies = Foody::where('name','like', "%$key_search%")->get();
+        $foodies = Foody::where('is_deleted',false)->where('name','like', "%$key_search%")->get();
         $data = '';
         foreach($foodies as $key => $foody) {
 
@@ -384,7 +306,8 @@ class FoodyController extends Controller
         $validate = Validator::make(
             $request->all(),
             [
-                "foody-name-$id" => array('required', 'max:100', "regex:/^[A-ỹ][0-ỹ \+\(\)\/]*$/"),
+
+                'foody-cost' => array('required', 'regex:/^(([1-9]\d*)|([1-9]\d{0,2}(,\d{3})*))$/')
             ],
             [
                 'required' => ':attribute không được bỏ trống!',
@@ -392,7 +315,8 @@ class FoodyController extends Controller
                 'regex' => ':attribute không hợp lệ!'
             ],
             [
-                "foody-name-$id" => 'Tên thực đơn'
+
+                'foody-cost' => 'Giá tiền'
             ]
         );
 

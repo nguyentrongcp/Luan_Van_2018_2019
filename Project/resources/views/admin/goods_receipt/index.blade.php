@@ -23,6 +23,10 @@
                     <i class="delete fitted icon"></i>
                     <strong>Xóa </strong>
                 </button>
+                <button type="button" class="ui small blue button" onclick="$('#create-good-receipt-note-modal').modal('show')">
+                    <i class="add fitted icon"></i>
+                    <strong>Thêm mới </strong>
+                </button>
             </div>
             <table class="ui table very compact striped celled selectable" id="form-goods-receipt-notes">
                 <thead>
@@ -65,6 +69,7 @@
             @endif
         </form>
     </div>
+
 @endsection
 
 @push('script')
@@ -72,3 +77,23 @@
         bindSelectAll('check-all');
     </script>
 @endpush
+
+{{--Modal add goods receipt--}}
+<div class="ui mini modal" id="create-good-receipt-note-modal">
+    <div class="blue header">Thêm mới phiếu nhập</div>
+    <div class="content">
+        <form action="{{ route('goods_receipt_note.store') }}" class="ui form" method="post">
+
+            {{ csrf_field() }}
+
+            <div class="field">
+                <label for="dia-chi">Ngày nhập</label>
+                <input type="date" id="date" name="date" value="{{ date('Y-m-d') }}"
+                       max="{{ date('Y-m-d') }}" required>
+            </div>
+            <div class="field">
+                <button class="ui blue fluid button"><strong>Lưu</strong></button>
+            </div>
+        </form>
+    </div>
+</div>

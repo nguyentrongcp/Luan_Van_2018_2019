@@ -51,7 +51,7 @@ class GoodsReceiptNotesController extends Controller
         $goodsReceipt->admin_id = Admin::adminId();
         $goodsReceipt->save();
 
-        return back()->with('success','Thêm phiếu nhập thành công!');
+        return redirect(route('goods_receipt_note.index'))->with('success','Thêm phiếu nhập thành công!');
     }
 
     /**
