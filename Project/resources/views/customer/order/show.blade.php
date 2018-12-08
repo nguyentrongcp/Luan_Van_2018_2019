@@ -118,7 +118,8 @@
                             </td>
                             <td class="center-align">{{ $order_detail->amount }}</td>
                             <td class="right-align">{{ number_format($order_detail->cost) }}<sup>đ</sup></td>
-                            <td class="center-align">{{ $order_detail->sales_off_percent }}%</td>
+                            <td class="center-align">
+                                <span class="ui red small label">{{ $order_detail->sales_off_percent }}%</span></td>
                             <td class="right-align">{{ number_format($order_detail->total_of_cost) }}<sup>đ</sup></td>
                         </tr>
                     @endforeach

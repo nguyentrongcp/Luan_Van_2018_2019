@@ -11,7 +11,8 @@ class OrderController extends Controller
 {
     public function index() {
         if (Auth::guard('customer')->check()) {
-            $orders = Order::where('customer_id', Auth::guard('customer')->user()->id)->get();
+            $orders = Order::where('customer_id', Auth::guard('customer')->user()->id)
+                ->orderBy('order_created_at', 'desc')->get();
 
             return view('customer.order.index', compact('orders'));
         }
@@ -85,6 +86,9 @@ class OrderController extends Controller
                     ];
                 }
                 else {
+                    foreach($order->orderFoody as $order_foody) {
+                        $order_foody->foody->restoreMaterial($order_foody->amount);
+                    }
                     $order->delete();
                     $data = [
                         'status' => 'success',
