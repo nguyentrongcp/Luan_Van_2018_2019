@@ -110,7 +110,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('order');
     Route::get('order_cancelled/{id}', 'admin\OrderController@orderCancelled')->name('order_cancelled')
         ->middleware('order');
-    Route::get('orders/{id}/filter', 'admin\OrderController@filter')->name('orders_filter')
+    Route::get('orders/filter/show', 'admin\OrderController@filter')->name('orders_filter')
         ->middleware('order');
     Route::get('orders/{id}/print', 'admin\OrderController@printOrder')->name('print_order')
         ->middleware('order');

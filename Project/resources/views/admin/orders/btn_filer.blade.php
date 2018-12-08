@@ -1,45 +1,29 @@
-<div class="ui floating green labeled icon dropdown button">
-    <i class="filter icon"></i>
-    <span class="text">Bộ lọc</span>
-    <div class="menu">
-        <form action="{{route('foody_filter')}}" method="post">
-            {{csrf_field()}}
-            <div class="header">
-                Chọn tình trạng đơn hàng
-            </div>
-            <a class="item a-decoration" href="{{route('orders.index')}}">
-                <div class="ui default empty circular"></div>
-                Tất cả
-            </a>
-            <a class="item a-decoration" href="{{route('orders_filter',[0])}}">
-                <div class="ui default empty circular "></div>
-                <i class="warning open fitted orange icon"></i>
-                <span style="color: orange">
-                                <b>Chưa duyệt</b>
-                            </span>
-            </a>
-            <a class="item a-decoration" href="{{route('orders_filter',[1])}}">
-                <div class="ui default empty circular radio"></div>
-                <i class="wait teal open fitted icon"></i>
-                <span style="color: teal">
-                                <b>Đang vận chuyển</b>
-                            </span>
-            </a>
-            <a class="item a-decoration" href="{{route('orders_filter',[2])}}">
-                <div class="ui default empty circular radio"></div>
-                <i class="check green open fitted icon"></i>
-                <span style="color: green">
-                                <b>Đã giao hàng</b>
-                            </span>
-            </a>
-            <a class="item a-decoration" href="{{route('orders_filter',[3])}}">
-                <div class="ui default empty circular radio"></div>
-                <i class="delete red open fitted icon"></i>
-                <span style="color: red">
-                                <b>Đã hủy</b>
-                            </span>
-            </a>
-        </form>
 
+<div class="ui floating green labeled icon dropdown filter button">
+    <form id="form-filter" action="{{ route('orders.index') }}" method="get">
+        <input id="key-filter" type="hidden" name="filter">
+    </form>
+    <i class="filter icon"></i>
+    <span class="text">Chọn tình trạng đơn hàng</span>
+    <div class="menu">
+        <div class="header">
+            Chọn tình trạng đơn hàng
+        </div>
+        <div class="item" style="color: orange" data-value="chua-duyet">
+            <i class="warning icon"></i>
+            Chưa duyệt
+        </div>
+        <div class="item" style="color: teal" data-value="dang-van-chuyen">
+            <i class="shipping fast icon"></i>
+            Đang vận chuyển
+        </div>
+        <div class="item" style="color: green" data-value="da-giao-hang">
+            <i class="check icon"></i>
+            Đã giao hàng
+        </div>
+        <div class="item" style="color: red" data-value="da-huy">
+            <i class="remove icon"></i>
+            Đã hủy
+        </div>
     </div>
 </div>

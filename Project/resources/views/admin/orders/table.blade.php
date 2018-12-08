@@ -13,7 +13,7 @@
             <th class="collapsing">Hủy</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="order-table">
         @foreach($orders as $stt => $order)
             @php
                 $phone = substr($order->phone, 0, strlen($order->phone) - 6).' ';
@@ -86,7 +86,8 @@
         </tbody>
     </table>
     @if (method_exists($orders, 'render'))
-        <div class="ui basic segment center aligned no-padding">
-            {{ $orders->render('admin.layouts.components.pagination.smui')}}
+        <div id="order-pagination" class="ui basic segment center aligned no-padding">
+            {{ $orders->appends($_GET)->render('admin.layouts.components.pagination.smui')}}
+            {{--{{ $orders->links() }}--}}
         </div>
     @endif

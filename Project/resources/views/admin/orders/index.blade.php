@@ -7,24 +7,31 @@
         <h3 class="ui dividing header center aligned">QUẢN LÝ ĐƠN HÀNG</h3>
         @include('admin.layouts.components.success_msg')
         @include('admin.layouts.components.errors_msg')
-        <form action="{{route('orders.destroy',[0])}}" method="post" class="ui form">
+
+        <div class="field">
+            <a href="{{ route('orders.create') }}" class="ui small blue button">
+                <i class="plus icon"></i>Thêm mới
+            </a>
+            @include('admin.orders.btn_filer')
+            @if(\Illuminate\Support\Facades\Request::has('filter'))
+                @php
+                    $text = [
+                        'chua-duyet' => 'Chưa duyệt',
+                        'dang-van-chuyen' => 'Đang vận chuyển',
+                        'da-giao-hang' => 'Đã giao hàng',
+                        'da-huy' => 'Đã hủy'
+                    ]
+                @endphp
+                <div class="ui small label">
+                    {{ $text[\Illuminate\Support\Facades\Request::get('filter')] }}
+                    <a href="{{ route('orders.index') }}"><i class="delete icon"></i></a>
+                </div>
+            @endif
+        </div>
+        @include('admin.orders.table')
+        <form id="form-delete" action="{{route('orders.destroy',[0])}}" method="post" class="ui form">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
-            <div class="field">
-                <button class="ui small red delete button need-popup"
-                        data-content="Xóa các mục vừa chọn"
-                        onclick="return confirmDelete()">
-                    <i class="delete fitted icon"></i>
-                    <strong>Xóa </strong>
-                </button>
-                <a href="{{ route('orders.create') }}" class="ui small blue button">
-                    <i class="plus icon"></i>Thêm mới
-                </a>
-                @include('admin.orders.btn_filer')
-            </div>
-
-            @include('admin.orders.table')
-
         </form>
 
 {{--        @include('admin.foodyTypes.modals')--}}
@@ -34,5 +41,9 @@
 @push('script')
     <script>
         bindSelectAll('check-all');
+        $('.item').on('click', function () {
+            $('#key-filter').val($(this).attr('data-value'));
+            $('#form-filter').submit();
+        });
     </script>
 @endpush

@@ -18,14 +18,29 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $orders = Order::join('order_statuses as os','os.order_id','=','orders.id')
-                        ->where('is_deleted',false)
-                        ->orderBy('os.status','ASC')
-                        ->orderBy('orders.order_created_at','DESC')
-                        ->paginate(10);
-        return view('admin.orders.index',compact('orders'));
+            ->where('is_deleted',false)
+            ->orderBy('os.status','ASC')
+            ->orderBy('orders.order_created_at','DESC')
+            ->paginate(10);
+        if ($request->has('filter')) {
+            $id = [
+                'chua-duyet' => 0,
+                'dang-van-chuyen' => 1,
+                'da-giao-hang' => 2,
+                'da-huy' => 3
+            ];
+            $orders = Order::join('order_statuses as os','os.order_id','=','orders.id')
+                ->where('is_deleted',false)->where('status', $id[$request->filter])
+                ->orderBy('os.status','ASC')
+                ->orderBy('orders.order_created_at','DESC')
+                ->paginate(10);
+        }
+
+
+        return view('admin.orders.index',compact(['orders']));
     }
 
     /**
@@ -105,16 +120,17 @@ class OrderController extends Controller
         //
     }
 
-    public function filter($id){
+    public function filter(Request $request){
         $orderFilters = DB::table('orders as o')
                     ->join('order_statuses as os','os.order_id','=','o.id')
                     ->join('order_foodies as of','o.id','=','of.order_id')
-                    ->where('os.status','=',$id)
+                    ->where('os.status','=',$request->id)
                     ->orderBy('o.order_created_at','DESC')
                     ->groupBy('o.id')
                     ->paginate(10);
 
-        return view('admin.orders.filter.index',compact('orderFilters'));
+        return Response($orderFilters);
+//        return view('admin.orders.filter.index',compact('orderFilters'));
     }
 
     public function orderApproved($id){

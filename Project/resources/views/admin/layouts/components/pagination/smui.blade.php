@@ -17,6 +17,7 @@
             {{-- Array Of Links --}}
             @if (is_array($element))
                 @foreach ($element as $page => $url)
+                    {{--@php dd(\Illuminate\Support\Facades\Request::url()); @endphp--}}
                     @if ($page == $paginator->currentPage())
                         <a style="border-bottom: 2px solid #2185d0" class="item active" href="{{ $url }}"><strong>{{ $page }}</strong></a>
                     @else
