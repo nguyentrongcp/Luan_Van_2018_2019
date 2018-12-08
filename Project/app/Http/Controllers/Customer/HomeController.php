@@ -352,11 +352,11 @@ class HomeController extends Controller {
         }
         $data .= "
                     <span>
-                        <i class=\"like icon\" style=\"font-size: 12px\"></i> $liked
+                        <i class=\"like red-text icon\" style=\"font-size: 12px\"></i> $liked
                     </span>
                     <span class=\"rating-spacing\">|</span>
                     <span>
-                        <i class=\"comment icon\" style=\"font-size: 12px\"></i> 13
+                        <i class=\"comment icon\" style=\"font-size: 12px; color: #039be5\"></i> 13
                     </span>
                     <span class=\"show-foody-favorite\">
                         <a class=\"foody-favorite tooltipped\" data-id='$id'

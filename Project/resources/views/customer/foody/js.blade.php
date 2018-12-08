@@ -11,6 +11,7 @@
             //     indicators: false,
             // })
 
+
             $('#foody-rating-modal').modal({
                 dismissible: false,
                 opacity: 0.8
@@ -32,6 +33,10 @@
                     }
                 });
             }
+
+            $('#foody-type').on('click', function () {
+                getFoodyByType('{!! $foody->foodyType->id !!}',null,'{{ route('home.get_foody') }}');
+            });
 
             pushpinRating();
             pushpinNav();

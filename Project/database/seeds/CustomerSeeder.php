@@ -19,7 +19,7 @@ class CustomerSeeder extends Seeder
                 'phone' => '01628446973',
                 'address' => 'Trên mặt đất / kế nhà tui',
                 'gender' => 'male',
-                'avatar' => asset('customer/image/my_avatar.jpg')
+                'avatar' => 'customer/image/my_avatar.jpg'
             ],
             [
                 'name' => 'Lý Trường Giang',
@@ -28,7 +28,7 @@ class CustomerSeeder extends Seeder
                 'phone' => '01628446973',
                 'address' => 'Trên mặt đất / kế nhà tui',
                 'gender' => 'female',
-                'avatar' => asset('customer/image/default.png')
+                'avatar' => 'customer/image/default.png'
             ]
         ]);
 
@@ -44,7 +44,7 @@ class CustomerSeeder extends Seeder
                 'phone' => $phone,
                 'address' => $data[$i]['address'],
                 'gender' => rand(1,2)==1 ? 'male' : 'female',
-                'avatar' => asset('customer/image/default.png')
+                'avatar' => 'customer/image/default.png'
             ];
             array_push($rows, $row);
         }
