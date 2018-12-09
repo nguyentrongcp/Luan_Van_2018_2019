@@ -287,18 +287,21 @@
 .a-decoration{
     text-decoration: none!important;
 }
+.ui.modal {
+    left: unset;
+    bottom: unset;
+    right: unset;
+    top: unset;
+}
 .ui.mini.modal{
-    height: 35%;
     margin: auto;
 }
 .ui.mini-40.modal{
     width: 30%;
-    height: 60%;
     margin: auto;
 }
 .ui.mini-50.modal{
     width: 30%;
-    height: 80%;
     margin: auto;
 }
 .message-error{

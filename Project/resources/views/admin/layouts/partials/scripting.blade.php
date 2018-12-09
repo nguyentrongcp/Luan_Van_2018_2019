@@ -46,7 +46,9 @@
             $('#multi-select').dropdown();
             $('.ui.accordion').accordion();
             $('.ui.dropdown').dropdown();
-
+            $('.ui.dropdown.search.material-name').dropdown({
+                allowAdditions: true
+            });
         });
 </script>
 <script>
