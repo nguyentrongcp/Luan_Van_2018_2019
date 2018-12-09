@@ -145,9 +145,13 @@ class Functions extends Model
     }
 
     public static function isSalesOff() {
-        foreach (SalesOff::all() as $sale) {
-            if ($sale->salesOffDetails()->count() > 0) {
-                return true;
+        foreach (SalesOff::where('sales_off_id', null)
+                     ->where('start_date', '<=', date('Y-m-d'))
+                     ->where('end_date', '>=', date('Y-m-d'))->get() as $saleOff) {
+            foreach($saleOff->salesOffs as $sale) {
+                if ($sale->salesOffDetails()->count() > 0) {
+                    return true;
+                }
             }
         }
 

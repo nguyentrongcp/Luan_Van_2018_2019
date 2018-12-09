@@ -32,51 +32,53 @@
 
             <div class="col s12 m12 l7 index-info-container right">
 
-                <div class="index-row index-foody-container">
-                    <div class="til truncate">
+                @if(\App\Functions::isSalesOff())
+                    <div class="index-row index-foody-container">
+                        <div class="til truncate">
                     <span>
                         Ẩm thực đang giảm giá
                     </span>
-                        <a style="cursor: pointer" onclick="getFoodyByType('sale',null,'{{ route('home.get_foody') }}')">
-                            Xem tất cả
-                        </a>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="index-foody">
-                        @php $count = 0; @endphp
-                        @foreach($foody_sales as $foody)
-                            @if($count == 6)
-                                @break
-                            @endif
-                            @php $foody = \App\Foody::find($foody->id); $count++ @endphp
-                            <div class="foody-row col s4">
-                                <div class="z-depth-1 hoverable">
-                                    <a href="{{ route('customer.foody.show', $foody->slug) }}">
-                                        <div class="foody-image">
-                                            <img src="{{ asset($foody->avatar) }}">
-                                        </div>
-                                        <div class="foody-content">
-                                            <div class="foody-name truncate">
-                                                {{ $foody->name }}
+                            <a style="cursor: pointer" onclick="getFoodyByType('sale',null,'{{ route('home.get_foody') }}')">
+                                Xem tất cả
+                            </a>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="index-foody">
+                            @php $count = 0; @endphp
+                            @foreach($foody_sales as $foody)
+                                @if($count == 6)
+                                    @break
+                                @endif
+                                @php $foody = \App\Foody::find($foody->id); $count++ @endphp
+                                <div class="foody-row col s4">
+                                    <div class="z-depth-1 hoverable">
+                                        <a href="{{ route('customer.foody.show', $foody->slug) }}">
+                                            <div class="foody-image">
+                                                <img src="{{ asset($foody->avatar) }}">
                                             </div>
-                                            <div class="foody-type truncate">
-                                                {{ $foody->foodyType->name }}
+                                            <div class="foody-content">
+                                                <div class="foody-name truncate">
+                                                    {{ $foody->name }}
+                                                </div>
+                                                <div class="foody-type truncate">
+                                                    {{ $foody->foodyType->name }}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="divider"></div>
-                                        <div class="foody-cost center-align">
+                                            <div class="divider"></div>
+                                            <div class="foody-cost center-align">
                                             <span class="old">
                                                 <span>{{ number_format($foody->currentCost()) }}</span><sup>đ</sup>
                                             </span>
-                                            {{ number_format($foody->getSaleCost()) }}<sup>đ</sup>
-                                            <span>-{{ $foody->getSalePercent() }}%</span>
-                                        </div>
-                                    </a>
+                                                {{ number_format($foody->getSaleCost()) }}<sup>đ</sup>
+                                                <span>-{{ $foody->getSalePercent() }}%</span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                @endif
 
                 <div class="index-row index-foody-container">
                     <div class="til truncate">

@@ -148,7 +148,7 @@ class Foody extends Model
 
     public function isSalesOff() {
         foreach ($this->salesOffDetail as $sale_detail) {
-            if ($sale_detail->salesOff->isActive()) {
+            if ($sale_detail->salesOff->salesOff->isActive()) {
                 return true;
             }
         }
@@ -157,7 +157,7 @@ class Foody extends Model
 
     public function getSalePercent() {
         foreach ($this->salesOffDetail as $sale_detail) {
-            if ($sale_detail->salesOff->isActive()) {
+            if ($sale_detail->salesOff->salesOff->isActive()) {
                 return $sale_detail->salesOff->percent;
             }
         }

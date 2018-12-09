@@ -28,11 +28,13 @@ class CustomerController extends Controller
         $foody_buys = array_sort($foody_sorts, function($foody_sorts) {
             return $foody_sorts['buy'];
         });
-        $foody_sales = DB::table('sales_off_details')->join('foodies', 'foody_id', 'foodies.id')
-            ->join('sales_offs', 'sales_off_details.sales_off_id', 'sales_offs.id')
-            ->where('start_date', '<=', date('Y-m-d'))
-            ->where('end_date', '>=', date('Y-m-d'))
-            ->orderBy('percent', 'desc')
+        $foody_sales = DB::table('sales_off_details')
+            ->join('foodies', 'foody_id', 'foodies.id')
+            ->join('sales_offs as s2', 'sales_off_details.sales_off_id', 's2.id')
+            ->join('sales_offs as s1', 's2.sales_off_id', 's1.id')
+            ->where('s1.start_date', '<=', date('Y-m-d'))
+            ->where('s1.end_date', '>=', date('Y-m-d'))
+            ->orderBy('s2.percent', 'desc')
             ->select('foodies.id')->get();
 
         return view('customer.index.index', compact([

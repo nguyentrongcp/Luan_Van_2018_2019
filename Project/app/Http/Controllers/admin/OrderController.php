@@ -32,7 +32,6 @@ class OrderController extends Controller
                 'chua-duyet' => 0,
                 'dang-van-chuyen' => 1,
                 'da-giao-hang' => 2,
-                'da-huy' => 3
             ];
             $orders = Order::join('order_statuses as os','os.order_id','=','orders.id')
                 ->where('is_deleted',false)->where('status', $id[$request->filter])

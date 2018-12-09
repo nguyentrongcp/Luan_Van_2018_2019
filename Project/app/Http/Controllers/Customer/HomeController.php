@@ -46,19 +46,23 @@ class HomeController extends Controller {
 
     public function getFoodySale($percent) {
         if ($percent == 0) {
-            $foodies = DB::table('sales_off_details')->join('foodies', 'foody_id', 'foodies.id')
-                ->join('sales_offs', 'sales_off_details.sales_off_id', 'sales_offs.id')
-                ->where('start_date', '<=', date('Y-m-d'))
-                ->where('end_date', '>=', date('Y-m-d'))
-                ->orderBy('percent', 'desc')
+            $foodies = DB::table('sales_off_details')
+                ->join('foodies', 'foody_id', 'foodies.id')
+                ->join('sales_offs as s2', 'sales_off_details.sales_off_id', 's2.id')
+                ->join('sales_offs as s1', 's2.sales_off_id', 's1.id')
+                ->where('s1.start_date', '<=', date('Y-m-d'))
+                ->where('s1.end_date', '>=', date('Y-m-d'))
+                ->orderBy('s2.percent', 'desc')
                 ->select('foodies.id')->get();
         }
         else {
-            $foodies = DB::table('sales_off_details')->join('foodies', 'foody_id', 'foodies.id')
-                ->join('sales_offs', 'sales_off_details.sales_off_id', 'sales_offs.id')
-                ->where('start_date', '<=', date('Y-m-d'))
-                ->where('end_date', '>=', date('Y-m-d'))
-                ->where('percent', $percent)
+            $foodies = DB::table('sales_off_details')
+                ->join('foodies', 'foody_id', 'foodies.id')
+                ->join('sales_offs as s2', 'sales_off_details.sales_off_id', 's2.id')
+                ->join('sales_offs as s1', 's2.sales_off_id', 's1.id')
+                ->where('s1.start_date', '<=', date('Y-m-d'))
+                ->where('s1.end_date', '>=', date('Y-m-d'))
+                ->where('s2.percent', $percent)
                 ->select('foodies.id')->get();
         }
         $results = [];
@@ -217,6 +221,14 @@ class HomeController extends Controller {
             $foodies = $this->getFoodyType($request->foody_type_id, $foody_sales);
         }
         else {
+            return Response([
+                'content' => "<div style='text-align: center;font-size: 20px;font-weight: bolder'>Không tìm thấy ẩm thực nào</div>",
+                'end' => true,
+                'number' => 0
+            ]);
+        }
+
+        if ($foodies == null) {
             return Response([
                 'content' => "<div style='text-align: center;font-size: 20px;font-weight: bolder'>Không tìm thấy ẩm thực nào</div>",
                 'end' => true,
