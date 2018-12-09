@@ -11,7 +11,6 @@
             <th class="center aligned">Giá trị (%)</th>
             <th class="center aligned">Số ẩm thực</th>
             <th class="collapsing">Xem</th>
-            <th class="collapsing">Sửa</th>
         </tr>
         </thead>
         <tbody>
@@ -19,7 +18,7 @@
             <tr>
                 <td>
                     <div class="ui child checkbox">
-                        <input type="checkbox" name="sale-offs-id[]" value="{{$salesOff->id}}">
+                        <input type="checkbox" name="sales-offs-id[]" value="{{$salesOff->id}}">
                     </div>
 
                 </td>
@@ -31,12 +30,7 @@
                         <i class="fa fa-eye"></i>
                     </a>
                 </td>
-                <td class="center aligned">
-                    <a href="#" class="ui tiny green icon label a-decoration"
-                       onclick="$('{{ "#update-sales-offs-modal-" . $salesOff->id }}').modal('show')">
-                        <i class="pencil fitted icon"></i>
-                    </a>
-                </td>
+
             </tr>
         @endforeach
         </tbody>

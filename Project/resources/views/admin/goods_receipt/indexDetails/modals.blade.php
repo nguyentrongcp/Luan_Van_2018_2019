@@ -23,7 +23,7 @@
             </div>
             <div class="field">
                 <label>Đơn vị tính</label>
-                <select class="ui search dropdown material-name" name="unit" id="unit">
+                <select class="ui dropdown material-name" name="unit" id="unit">
                     <option value="">Chọn đơn vị tính</option>
                     @foreach(\App\CalculationUnit::all() as $unit)
                         <option class="item" value="{{$unit->id}}">

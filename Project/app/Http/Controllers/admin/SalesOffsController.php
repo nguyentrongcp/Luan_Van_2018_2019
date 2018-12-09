@@ -102,7 +102,7 @@ class SalesOffsController extends Controller
         }
         $salesOff = SalesOff::findOrFail($id);
 
-        $salesOff->name = $request->get('name-sales');
+        $salesOff->name = $request->get('sales-offs-name');
         $salesOff->percent = $request->get('percent');
         $salesOff->start_date = $start;
         $salesOff->end_date = $end;

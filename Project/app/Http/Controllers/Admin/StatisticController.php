@@ -26,19 +26,20 @@ class StatisticController extends Controller
     public function foody()
     {
         $outFoodies = DB::table('foodies')
-            ->join('foody_statuses','foodies.id','=','foody_statuses.foody_id')
-            ->where('foody_statuses.status','=',false)
+            ->join('foody_statuses', 'foodies.id', '=', 'foody_statuses.foody_id')
+            ->where('foody_statuses.status', '=', false)
             ->get();
 
-        $saleOffFoodies = DB::table('sales_offs as s')
-                        ->join('sales_off_details as sd','s.id','=','sd.sales_off_id')
-                        ->join('foodies as f','f.id','=','sd.foody_id')
-                        ->where('s.end_date', '>=', date('Y-m-d'))
-                        ->orderBy('s.percent','ASC')
-                        ->groupBy('f.id')
-                        ->get();
+        $saleOffFoodies = DB::table('sales_off_details')
+            ->join('sales_offs as s2', 's2.id', '=', 'sales_off_details.sales_off_id')
+            ->join('sales_offs as s1', 's1.id', 's2.sales_off_id')
+            ->join('foodies as f', 'f.id', '=', 'sales_off_details.foody_id')
+            ->where('s1.end_date', '>=', date('Y-m-d'))
+            ->orderBy('s2.percent', 'ASC')
+            ->groupBy('f.id')
+            ->get();
 
-        return view('admin.statistic.foody.index',compact('outFoodies','saleOffFoodies'));
+        return view('admin.statistic.foody.index', compact('outFoodies', 'saleOffFoodies'));
     }
 
     public function today(Request $request)

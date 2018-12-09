@@ -7,7 +7,7 @@
         <h3 class="ui dividing header">
         <a href="{{ route('sales_offs.index') }}" class="need-popup a-decoration" data-content="Danh sách khuyến mãi">
             <i class="blue small angle double left circular fitted icon"></i></a>
-        {{ \App\SalesOff::find($id)->name .'>>'}}
+        {{ \App\SalesOff::find($id)->name}}
         </h3>
         @include('admin.layouts.components.success_msg')
         @include('admin.layouts.components.errors_msg')

@@ -10,10 +10,10 @@ class Statistic extends Model
 {
     public static function getFoodyAmountOnSale() {
         $total = DB::table('sales_off_details')
-            ->join('sales_offs', 'sales_offs.id', '=', 'sales_off_details.sales_off_id')
-            ->where('sales_offs.end_date', '>=', date('Y-m-d'))
+            ->join('sales_offs as s2', 's2.id', '=', 'sales_off_details.sales_off_id')
+            ->join('sales_offs as s1', 's1.id', 's2.sales_off_id')
+            ->where('s1.end_date', '>=', date('Y-m-d'))
             ->count();
-
         return $total;
     }
     public static function getOutOffStock(){

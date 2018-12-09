@@ -48,7 +48,7 @@
             <i class="utensils icon icon-left"></i>Ẩm thực</a>
     @endif
     @if($employee->checkRoles(4))
-        <a class="item {{Request::is('*/materials')|| Request::is('*/materials/*')|| Request::is('*/materials') ? 'active-bar': '' }}"
+        <a class="item {{Request::is('*/material')|| Request::is('*/materials/*')|| Request::is('*/material') ? 'active-bar': '' }}"
            href="/admin/material">
             <i class="nutritionix icon icon-left"></i>Nguyên liệu </a>
     @endif

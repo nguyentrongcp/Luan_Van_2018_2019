@@ -10,7 +10,7 @@
         <th>Người nhập hàng</th>
         <th class="text-center">Ngày nhập</th>
         <th class="text-center">Số hàng nhập</th>
-        <th class="text-center">Tình trạng</th>
+        {{--<th class="text-center">Tình trạng</th>--}}
         <th class="collapsing">Xem</th>
         <th class="collapsing">Sửa</th>
     </tr>
@@ -30,10 +30,10 @@
             <td class="text-center">
                 {{ $goods->soMaterial() }}
             </td>
-            <td class="text-center">
-                <i class="check fitted green icon"></i>
-                <span style="color: green"> Đã cập nhật vào kho</span>
-            </td>
+            {{--<td class="text-center">--}}
+                {{--<i class="check fitted green icon"></i>--}}
+                {{--<span style="color: green"> Đã cập nhật vào kho</span>--}}
+            {{--</td>--}}
             <td>
                 <a href="{{ route('admin.move_detail',[$goods->id]) }}"
                    class="ui small blue label a-decoration">

@@ -13,11 +13,11 @@
             </div>
             <div class="field">
                 <label for="percent">Ngày bắt đầu</label>
-                <input type="date" id="start_date" name="start-date" value="{{date('Y-m-d')}}" required>
+                <input type="date" id="start_date" name="start-date" min="{{date('Y-m-d', strtotime('+1 day'))}}" value="{{date('Y-m-d', strtotime('+1 day'))}}" required>
             </div>
             <div class="field">
                 <label for="percent">Ngày kết thúc</label>
-                <input type="date" id="end_date" name="end-date" value="{{date('Y-m-d')}}" required>
+                <input type="date" id="end_date" name="end-date" min="{{date('Y-m-d',strtotime('+1 day'))}}" value="{{date('Y-m-d',strtotime('+1 day'))}}" required>
             </div>
             <div class="field">
                 <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>
@@ -31,7 +31,7 @@
 @foreach($salesOffs as $salesOff)
     <div class="ui mini-50 vertical flip modal" id="{{ "update-sales-offs-modal-" . $salesOff->id }}">
         <i class="close icon"></i>
-        <div class="blue header">Sửa tên loại thực đơn</div>
+        <div class="blue header">Sửa tên khuyến mãi</div>
         <div class="content">
             <form action="{{ route('sales_offs.update', [$salesOff->id]) }}" class="ui form" method="post">
 
@@ -44,16 +44,12 @@
                     <input type="text" id="sales_offs_name" name="sales-offs-name" value="{{$salesOff->name}}" required>
                 </div>
                 <div class="field">
-                    <label for="percent">Phần trăm giảm</label>
-                    <input type="number" id="percent" name="percent" value="{{$salesOff->percent}}" required>
-                </div>
-                <div class="field">
                     <label for="percent">Ngày bắt đầu</label>
-                    <input type="date" id="start_date" name="start-date" value="{{$salesOff->start_date}}" required>
+                    <input type="date" id="start_date" name="start-date" min="{{date('Y-m-d',strtotime('+1 day'))}}" value="{{$salesOff->start_date}}" required>
                 </div>
                 <div class="field">
                     <label for="percent">Ngày kết thúc</label>
-                    <input type="date" id="end_date" name="end-date" value="{{$salesOff->end_date}}" required>
+                    <input type="date" id="end_date" name="end-date" min="{{date('Y-m-d',strtotime('+1 day'))}}" value="{{$salesOff->end_date}}" required>
                 </div>
                 <div class="field">
                     <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>
