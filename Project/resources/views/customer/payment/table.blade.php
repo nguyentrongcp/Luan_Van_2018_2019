@@ -24,7 +24,7 @@
                 data-cost="{{ $foody->getSaleCost() }}">
                 {{ number_format($foody->getSaleCost()) }}<sup>đ</sup></td>
             <td class="center-align">
-                <span class="ui red small label">-60%</span>
+                <span class="ui red small label">{{ $foody->getSalePercent() }}%</span>
             </td>
             <td class="right-align" id="payment-table-total">{{ number_format($foody->getSaleCost() * $cart->qty) }}<sup>đ</sup></td>
         </tr>

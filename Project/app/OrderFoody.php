@@ -11,4 +11,7 @@ class OrderFoody extends Model
         return Foody::find($this->foody_id)->name;
     }
 
+    public function foody() {
+        return $this->belongsTo(Foody::class);
+    }
 }

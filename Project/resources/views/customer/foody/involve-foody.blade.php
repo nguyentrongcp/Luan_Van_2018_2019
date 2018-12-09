@@ -21,10 +21,12 @@
                             <span class="describe truncate">{{ $foody_involve->describe }}</span>
                         </div>
                         <div class="col s1 hide-on-small-only involve-foody-action right-align">
-                            <a href="#" class="ui small label"><i class="ui plus icon"></i></a>
+                            <a class="ui small label cart-update" data-id="{{ $foody_involve->id }}">
+                                <i class="ui plus icon"></i></a>
                         </div>
                     </div>
-                    <a class="s12 hide-on-med-and-up ui attached button waves-effect waves-light" style="margin-bottom: 5px">
+                    <a class="s12 hide-on-med-and-up ui attached button waves-effect waves-light cart-update"
+                            data-id="{{ $foody_involve->id }}" style="margin-bottom: 5px">
                         <i class="cart plus icon"></i>Thêm vào giỏ hàng
                     </a>
                 </div>
@@ -55,7 +57,8 @@
 
 
         <div class="col s12 involve-footer">
-            <a href="#" class="ui attached teal button waves-effect waves-light">
+            <a onclick="getFoodyByType('{{ $foody_type->id }}',null,'{{ route('home.get_foody') }}')"
+               class="ui attached teal button waves-effect waves-light">
                 Xem tất cả
             </a>
         </div>

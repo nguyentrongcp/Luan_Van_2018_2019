@@ -40,7 +40,9 @@
                                 {{ strtoupper($order->order_code) }}</a></td>
                         <td>{{ $order->receiver }}</td>
                         <td class="center-align"><span class="phone-format">{{ $order->phone }}</span></td>
-                        <td class="center-align">{{ date_format(date_create($order->order_created_at), 'd-m-Y H:i:s') }}</td>
+                        <td class="center-align">
+                            {{ \App\Functions::getTimeCount((date_create($order->order_created_at)->getTimestamp())) }}
+                        </td>
                         <td class="right-align">{{ number_format($order->total_of_cost) }}<sup>đ</sup></td>
                     </tr>
                 @endforeach

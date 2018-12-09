@@ -211,6 +211,16 @@ class Foody extends Model
         return -1;
     }
 
+    public function restoreMaterial($qty) {
+        if ($this->isMaterial()) {
+            foreach($this->materialFoodies as $material_foody) {
+                $material = Material::find($material_foody->material_id);
+                $material->value += $material_foody->value * $qty;
+                $material->update();
+            }
+        }
+    }
+
 //
 //    public function getChangedQuantity($quantity) {
 //        $changed_quantity = $this->getQuantity() + $quantity;

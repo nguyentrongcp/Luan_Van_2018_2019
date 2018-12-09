@@ -11,6 +11,7 @@ use App\TransportFee;
 use App\Ward;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -179,6 +180,7 @@ class PaymentController extends Controller
 
         foreach(Cart::content() as $cart) {
             $foody = Foody::find($cart->id);
+//            $foody->minusQuantity($cart->qty);
             $cost = $foody->getSaleCost();
             $order_foody = new OrderFoody();
             $order_foody->order_id = $order->id;
@@ -221,14 +223,13 @@ class PaymentController extends Controller
                 Cart::destroy();
             }
             else {
-                if($request->session()->has('payment_code')) {
-                    $order = Order::where('order_code', session('payment_code'))->first();
-                    $order->delete();
-                    $request->session()->forget('payment_code');
+                if($request->session()->has('order_code')) {
+                    $order = Order::where('order_code', session('order_code'))->first();
+                    if ($order != null) {
+                        $order->delete();
+                    }
                 }
                 $this->storeOrder($order_code, 2, -1);
-                session(['payment_code' => $order_code]);
-                $this->forget($request);
                 $total_cost = CartFunction::getCost() + (double)session('transport_fee');
                 $url = $this->buildCheckoutUrl(route('payment.process'),
                     'nguyentrongcp@gmail.com','',$order_code,$total_cost);
@@ -254,10 +255,16 @@ class PaymentController extends Controller
         if ($this->verifyPaymentUrl($request->transaction_info,$request->order_code,$request->price,
             $request->payment_id,$request->payment_type,$request->error_text,$request->secure_code)) {
             $order = Order::where('order_code', session('payment_code'))->first();
-            $order_status = $order->orderStatus;
-            $order_status->status = 0;
-            $order_status->update();
-            $request->session()->forget('payment_code');
+            if ($order != null) {
+                $order_status = $order->orderStatus;
+                $order_status->status = 0;
+                $order_status->update();
+                $request->session()->forget('payment_code');
+            }
+            else {
+                $this->storeOrder(session('order_code'), 2);
+            }
+            $this->forget($request);
             Cart::destroy();
 
             return redirect(route('payment.success'));
@@ -303,6 +310,9 @@ class PaymentController extends Controller
                 $url .= '&' . $key . '=' . $value;
         }
         session(['secure_code' => $arr_param['secure_code']]);
+        if ($order_code != "") {
+            $url .='&cancel_url='.route('payment.cancel');
+        }
         return $redirect_url.$url;
     }
 
@@ -333,5 +343,15 @@ class PaymentController extends Controller
         $request->session()->forget('order_code');
 
         return view('customer.payment.success', compact('order_code'));
+    }
+
+    public function cancelPayment(Request $request) {
+        $order = Order::where('order_code', session('order_code'))->first();
+        if ($order != null) {
+            $order->delete();
+        }
+        $request->session()->forget('order_code');
+
+        return redirect(route('payment.index'));
     }
 }

@@ -202,6 +202,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('/payment/get_transport_fee', 'Customer\PaymentController@getTransportFee');
     Route::get('/payment/process_payment', 'Customer\PaymentController@processPayment')->name('payment.process');
     Route::get('/payment/success', 'Customer\PaymentController@successPayment')->name('payment.success');
+    Route::get('/payment/cancel', 'Customer\PaymentController@cancelPayment')->name('payment.cancel');
 
     // Foody
     Route::get('/foody/{slug}', 'Customer\FoodyController@index')->name('customer.foody.show');
