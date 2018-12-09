@@ -62,7 +62,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('foodytype');
     Route::resource('foody_type_restore', 'admin\restore\FoodyTypeRestoreController', ['only' => ['index', 'store']])
         ->middleware('foodytype');
-
+    Route::post('foody_type_delete', 'admin\restore\FoodyTypeRestoreController@delete')->name('foody_type_delete')
+        ->middleware('foodytype');
     /** Foody */
 
     Route::resource('foodies', 'admin\FoodyController')
@@ -80,6 +81,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('search', 'admin\FoodyController@search')
         ->middleware('foody');
     Route::resource('foody_restore', 'admin\restore\FoodyRestoreController', ['only' => ['index', 'store']])
+        ->middleware('foody');
+    Route::post('foody_delete', 'admin\restore\FoodyRestoreController@delete')->name('foody_delete')
         ->middleware('foody');
 
     /**      Materials       **/
@@ -103,6 +106,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->name('admin.material')
         ->middleware('goodsreceiptnote');
     Route::resource('goods_receipt_note_restore', 'admin\restore\GoodsReceiptNotesRestoreController', ['only' => ['index', 'store']])
+        ->middleware('goodsreceiptnote');
+    Route::post('goods_receipt_note_delete', 'admin\restore\GoodsReceiptNotesRestoreController@delete')->name('goods_receipt_note_delete')
         ->middleware('goodsreceiptnote');
 
     /**      orders       **/
@@ -159,7 +164,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('employee');
     Route::resource('employee_restore', 'admin\restore\EmployeeRestoreController', ['only' => ['index', 'store']])
         ->middleware('employee');
-
+    Route::post('employee_delete', 'admin\restore\EmployeeRestoreController@delete')->name('employee_delete')
+        ->middleware('employee');
     /** Comments **/
 
     Route::resource('comments', 'admin\CommentController');

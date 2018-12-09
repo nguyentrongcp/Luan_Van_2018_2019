@@ -16,16 +16,15 @@
         <div class="ui top attached tabular menu">
             <a class="item active" data-tab="first">Thông tin</a>
             <a class="item" data-tab="second">Mô tả ẩm thực</a>
-            <a class="item" data-tab="third">Bình luận</a>
+            <a class="item" data-tab="third">Nguyên liệu</a>
+            <a class="item" data-tab="fourth">Bình luận</a>
         </div>
 
 
         @include('admin.foodies.show.tab_information')
-
         @include('admin.foodies.show.tab_describe')
-
+        @include('admin.foodies.show.tab_material')
         @include('admin.foodies.show.tab_comments')
-
 
     </div>
 @endsection

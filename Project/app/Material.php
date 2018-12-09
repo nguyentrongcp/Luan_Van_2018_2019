@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 class Material extends Model
 {
 
+    public function calculationUnit() {
+        return $this->belongsTo(CalculationUnit::class);
+    }
+
     public static function getTotalGoodsReceiptMaterial(){
         $count = Material::where([
                 ['value','<=',15],

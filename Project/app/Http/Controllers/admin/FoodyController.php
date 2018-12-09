@@ -8,6 +8,7 @@ use App\FoodyStatus;
 use App\FoodyType;
 use App\Image;
 use App\ImageFoody;
+use App\MaterialFoody;
 use App\Vote;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -35,6 +36,8 @@ class FoodyController extends Controller
             $foodies = Foody::where('is_deleted', false)
                 ->where('name', 'like', "%$key_search%")->paginate(10);
         }
+
+
         return view('admin.foodies.index', compact( 'foodies'));
     }
 
@@ -130,8 +133,11 @@ class FoodyController extends Controller
         $typeFoody = FoodyType::find($foodies->foody_type_id)->name;
         $costFoodys = Cost::where('foody_id',$id)
             ->orderBy('cost_updated_at','DESC')->get();
+
+        $materialFoodys = MaterialFoody::where('foody_id', $id)->get();
+//        dd($materialFoodys[0]->material);
         return view('admin.foodies.show.index',
-            compact('id', 'foodies','typeFoody','costFoodys'));
+            compact('id', 'foodies','typeFoody','costFoodys','materialFoodys'));
     }
 
     /**

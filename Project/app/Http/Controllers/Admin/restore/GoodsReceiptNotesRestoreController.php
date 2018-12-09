@@ -15,10 +15,10 @@ class GoodsReceiptNotesRestoreController extends Controller
      */
     public function index()
     {
-        $goodsReceipts = GoodsReceiptNote::where('is_deleted',true)
-            ->orderBy('date','DESC')->paginate(10);
+        $goodsReceipts = GoodsReceiptNote::where('is_deleted', true)
+            ->orderBy('date', 'DESC')->paginate(10);
 
-        return view('admin.restore.goods_receipt_notes.index',compact('goodsReceipts'));
+        return view('admin.restore.goods_receipt_notes.index', compact('goodsReceipts'));
     }
 
     /**
@@ -34,7 +34,7 @@ class GoodsReceiptNotesRestoreController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,7 +44,7 @@ class GoodsReceiptNotesRestoreController extends Controller
         }
 
         $ids = $request->get('goods-receipt-ids');
-        foreach($ids as $id) {
+        foreach ($ids as $id) {
             $foody = GoodsReceiptNote::findOrFail($id);
             $foody->is_deleted = false;
             $foody->update();
@@ -56,7 +56,7 @@ class GoodsReceiptNotesRestoreController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,7 +67,7 @@ class GoodsReceiptNotesRestoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -78,8 +78,8 @@ class GoodsReceiptNotesRestoreController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -90,11 +90,24 @@ class GoodsReceiptNotesRestoreController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    public function delete(Request $request)
+    {
+        if (!$request->has('goods-receipt-ids')) {
+            return back();
+        }
+        $ids = $request->get('goods-receipt-ids');
+        foreach ($ids as $id) {
+            $goods = GoodsReceiptNote::find($id);
+            $goods->delete();
+        }
+        return redirect()->route('goods_receipt_note_restore.index')->with('success', 'Xóa thành công.');
     }
 }

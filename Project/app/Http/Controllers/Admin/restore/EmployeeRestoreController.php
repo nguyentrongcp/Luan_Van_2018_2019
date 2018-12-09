@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin\restore;
 
 use App\Admin;
+use App\Employees;
+use App\GoodsReceiptNote;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -95,5 +97,21 @@ class EmployeeRestoreController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function delete(Request $request)
+    {
+        if (!$request->has('employee-ids')) {
+            return back();
+        }
+        $ids = $request->get('employee-ids');
+        foreach ($ids as $id) {
+            $goodsIds = GoodsReceiptNote::where('admin_id',$id)->get();
+            foreach ($goodsIds as $goodsId){
+                $goodsId->delete();
+            }
+            $employee = Employees::find($id);
+            $employee->delete();
+        }
+        return redirect()->route('employee_restore.index')->with('success', 'Xóa thành công.');
     }
 }

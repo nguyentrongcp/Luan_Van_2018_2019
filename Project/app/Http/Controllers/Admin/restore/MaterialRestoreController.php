@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\restore;
 
 use App\Material;
+use App\MaterialFoody;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -97,13 +98,20 @@ class MaterialRestoreController extends Controller
         $material = Material::destroy($id);
         return back()->with('success', 'Phục hồi thành công.');
     }
-    public function delete(Request $request){
+
+    public function delete(Request $request)
+    {
         if (!$request->has('material-ids')) {
             return back();
         }
         $ids = $request->get('material-ids');
-        foreach($ids as $id) {
-            $material = Material::destroy($id);
+        foreach ($ids as $id) {
+            $materialFoodys = MaterialFoody::where('material_id', $id)->get();
+            foreach ($materialFoodys as $materialFoody) {
+                $materialFoody->delete();
+            }
+            $material = Material::find($id);
+            $material->delete();
         }
         return redirect(route('material_restore.index'))->with('success', 'Xóa thành công.');
     }

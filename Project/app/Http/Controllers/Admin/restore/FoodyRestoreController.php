@@ -96,4 +96,17 @@ class FoodyRestoreController extends Controller
     {
         //
     }
+
+    public function delete(Request $request)
+    {
+        if (!$request->has('foody-ids')) {
+            return back();
+        }
+        $ids = $request->get('foody-ids');
+        foreach ($ids as $id) {
+            $foodyType = Foody::find($id);
+            $foodyType->delete();
+        }
+        return redirect()->route('foody_restore.index')->with('success', 'Xóa thành công.');
+    }
 }

@@ -20,7 +20,7 @@
                     <i class="remove open fitted icon"></i>
                     Hủy
                 </a>
-            @else
+            @elseif($orders->waitingPay())
                 <span style="color: red">(Đơn hàng đang thực hiện thanh toán online)</span>
             @endif
 

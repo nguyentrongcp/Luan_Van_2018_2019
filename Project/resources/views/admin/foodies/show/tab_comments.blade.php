@@ -1,4 +1,4 @@
-<div class="ui bottom attached tab segment" data-tab="third">
+<div class="ui bottom attached tab segment" data-tab="fourth">
     <div class="ui comments">
         @foreach($foodies->backendComments as $comment)
             <div class="comment">
@@ -17,9 +17,9 @@
                                 {{ method_field('PUT') }}
                                 <input type="hidden" name="approve" value="{{ ($comment->is_approved + 1) % 2 }}">
                                 @if ($comment->approved())
-                                    <button class="ui mini orange label pointer">Bỏ duyệt</button>
+                                    {{--<button class="ui mini orange label pointer">Bỏ duyệt</button>--}}
                                 @else
-                                    <button class="ui mini green color-white label pointer" onclick="return confirm('Bạn chắc chắn muốn duyệt bình luận này?')"">Duyệt</button>
+                                    <button class="ui mini green color-white label pointer" onclick="return confirm('Bạn chắc chắn muốn duyệt bình luận này?')">Duyệt</button>
                                 @endif
                             </form>
 
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     {{--<div class="title"><strong>{{$comment->title}}</strong></div>--}}
-                    <div class="text">{{ $comment->content }}</div>
+                    <div class="text">{!!  $comment->content !!}</div>
                     <div class="ui tiny images">
                         @foreach($comment->imageComments as $imagecoment)
                             @foreach(\App\Image::where('id',$imagecoment->image_id)->get() as $image)
