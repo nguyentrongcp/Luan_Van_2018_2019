@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Thêm thực đơn ')
+@section('title', 'Thêm mới ẩm thực ')
 
 @section('content')
     @include('admin.layouts.components.errors_msg')
@@ -19,9 +19,11 @@
             <div class="ui top attached tabular menu">
                 <a class="item active" data-tab="first">Thông tin</a>
                 <a class="item" data-tab="second">Mô tả ẩm thực</a>
+                {{--<a class="item" data-tab="third">Nguyên liệu</a>--}}
             </div>
             @include('admin.foodies.create.tab_information')
             @include('admin.foodies.create.tab_describe')
+            {{--@include('admin.foodies.create.tab_material')--}}
 
 
         </form>

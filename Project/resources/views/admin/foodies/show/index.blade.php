@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Chi tiết sản phẩm ')
+@section('title', 'Chi tiết ẩm thực ')
 
 @section('content')
     <div class="ui blue raised segment">

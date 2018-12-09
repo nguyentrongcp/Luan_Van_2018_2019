@@ -15,6 +15,8 @@ class AddFkToGoodsReceiptDetails extends Migration
     {
         Schema::table('goods_receipt_note_details', function (Blueprint $table) {
             $table->foreign('unit_id')->references('id')->on('calculation_units')->onDelete('cascade');
+            $table->foreign('material_id')->references('id')->on('calculation_units')->onDelete('cascade');
+
         });
     }
 

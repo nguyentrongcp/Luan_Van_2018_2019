@@ -188,14 +188,14 @@ class OrderController extends Controller
         $orders = Order::where('is_deleted',false)->where('order_code','like', "%$key_search%")->get();
         $data = '';
         foreach($orders as $key => $order) {
-//            $date = date_format($order->order_created_at,'d/m/Y');
+            $date = date_format(date_create($order->order_created_at),'d/m/Y');
 //            dd($date);
             $data .= "<div class=\"divider\"></div>
     <div class=\"result-content\">
         <div class=\"col twelve medium row\">
             <div class=\"col five medium\">
                 <i class=\"clipboard icon icon-left\"></i><a href=\"orders/$order->id\"><strong>ĐH:</strong>$order->order_code</a>
-                   <label>$order->order_created_at</label>
+                   <label>$date</label>
             </div>
         </div>
         <div class=\"divider\"></div>

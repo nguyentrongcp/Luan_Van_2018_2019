@@ -59,7 +59,7 @@
         @endif
         <div class="row">
             <div class="sixteen wide column">
-                <button class="ui blue button" type="submit">
+                <button class="ui blue button" type="submit" id="btn-save">
                     <i class="save fitted icon"></i>
                     Lưu lại thay đổi
                 </button>

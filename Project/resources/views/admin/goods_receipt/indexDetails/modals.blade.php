@@ -7,7 +7,7 @@
             <input type="hidden" name="goods-id" value="{{$id}}">
             <div class="field">
                 <label for="material-name">Tên nguyên liệu</label>
-                <select class="ui search dropdown material-name" name="available-material" id="available-material">
+                <select class="ui search dropdown material-name" name="material" id="material">
                     @foreach(\App\Material::all() as $material)
                         <option class="item" value="{{$material->id}}">
                             {{$material->name}}
@@ -55,7 +55,7 @@
                 <input type="hidden" name="goods-id" value="{{$id}}">
                 <div class="field">
                     <label for="material-name">Tên nguyên liệu</label>
-                    <select class="ui dropdown label" name="available-material" id="available-material">
+                    <select class="ui search dropdown material-name" name="material" id="material">
                         <option value="{{$goodsReceiptDetail->material}}">{{$goodsReceiptDetail->material}}</option>
                         @foreach(\App\Material::all() as $material)
                             @if($goodsReceiptDetail->material == $material->name)
@@ -74,7 +74,7 @@
                 </div>
                 <div class="field">
                     <label>Đơn vị tính</label>
-                    <select class="ui dropdown label" name="unit" id="unit">
+                    <select class="ui dropdown material-name" name="unit" id="unit">
                         <option value="">Chọn đơn vị tính</option>
                         @php
                             $name_unit = \App\CalculationUnit::find($goodsReceiptDetail->unit_id)->name;

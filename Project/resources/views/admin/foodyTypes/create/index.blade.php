@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title','ADMIN | Loại thực đơn')
+@section('title','Thêm mới loại ẩm thực')
 
 @section('content')
     <div class="content">
