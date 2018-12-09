@@ -8,6 +8,7 @@ use App\FoodyStatus;
 use App\FoodyType;
 use App\Image;
 use App\ImageFoody;
+use App\Material;
 use App\MaterialFoody;
 use App\Vote;
 use Illuminate\Http\Request;
@@ -153,8 +154,10 @@ class FoodyController extends Controller
             $cost = $cosf->cost;
             $costUpdated = $cosf->cost_updated_at;
         }
+        $materialFoodys = MaterialFoody::where('foody_id', $id)->get();
+
         return view('admin.foodies.update.index',
-            compact('id', 'foodies', 'nameFoody','foodyTypes', 'cost', 'avatarFoody', 'describe', 'costUpdated'));
+            compact('id', 'foodies', 'nameFoody','foodyTypes', 'cost', 'avatarFoody', 'describe', 'costUpdated','materialFoodys'));
     }
 
     /**
@@ -316,6 +319,28 @@ class FoodyController extends Controller
         );
 
         return $validate;
+    }
+
+    public function addMaterialFoody(Request $request, $id){
+
+        $name = $request->get('material-name');
+
+        $material = MaterialFoody::where('foody_id',$id)->get();
+        if ($material->checkName($name)){
+            return back()->with('error','Tên nguyên liệu đã tồn tại!');
+        }
+        if (!$request->has('unit')){
+            return back()->with('error','Bạn chưa chọn đơn vị tính');
+        }
+        if ($request->get('value') == ''){
+            return back()->with('error','Bạn chưa chọn đơn vị tính');
+        }
+        $material->name = $name;
+        $material->value = $request->get('value');
+        $material->calculation_unit_id = $request->get('unit');
+
+        $material->update();
+        return back()->with('success','Cập nhật nguyên liệu thành công!');
     }
 
 }

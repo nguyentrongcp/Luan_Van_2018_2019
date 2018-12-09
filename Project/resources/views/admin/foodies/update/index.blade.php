@@ -21,11 +21,12 @@
             <div class="ui top attached tabular menu">
                 <a class="item active" data-tab="first">Thông tin</a>
                 <a class="item" data-tab="second">Mô tả ẩm thực</a>
-                {{--            <a class="item" data-tab="second">Ảnh chi tiết ({{ $sanPham->hinhAnhs->count() }})</a>--}}
+                <a class="item" data-tab="third">Nguyên liệu</a>
             </div>
             @include('admin.foodies.update.tab_information')
-
             @include('admin.foodies.update.tab_describe')
+            @include('admin.foodies.update.tab_material')
+
         </form>
 
     </div>
