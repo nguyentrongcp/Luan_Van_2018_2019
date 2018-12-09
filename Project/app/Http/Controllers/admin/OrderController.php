@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Admin;
+use App\Material;
+use App\MaterialFoody;
 use App\Order;
 use App\OrderFoody;
 use App\OrderStatus;
@@ -146,6 +148,14 @@ class OrderController extends Controller
     public function orderCancelled($id){
         $order = Order::findOrFail($id);
             if ($order->waitingPay() || $order->unapproved()){
+                foreach (OrderFoody::where('order_id',$id)->get() as $orderFoody){
+                    foreach (MaterialFoody::where('foody_id',$orderFoody->foody_id)->get() as $materialFoody){
+                        foreach (Material::where('id',$materialFoody->material_id)->get() as $material){
+                            $material->value += $orderFoody->amount * $materialFoody->value;
+                            $material->update();
+                        }
+                    }
+                }
                 $order->delete();
             }
             if ($order->approved()) {
@@ -154,7 +164,6 @@ class OrderController extends Controller
                     $orderStatus->status = 0;
                     $orderStatus->update();
                 }
-//
             }
             if ($order->getStatus() == 2){
                 $order->is_deleted = true;
@@ -172,5 +181,26 @@ class OrderController extends Controller
         $pdf = PDF::loadView('admin.orders.show.order_preview',compact('order','orderDetails'));
 
         return $pdf->stream();
+    }
+
+    public function search(Request $request) {
+        $key_search = $request->key;
+        $orders = Order::where('is_deleted',false)->where('order_code','like', "%$key_search%")->get();
+        $data = '';
+        foreach($orders as $key => $order) {
+//            $date = date_format($order->order_created_at,'d/m/Y');
+//            dd($date);
+            $data .= "<div class=\"divider\"></div>
+    <div class=\"result-content\">
+        <div class=\"col twelve medium row\">
+            <div class=\"col five medium\">
+                <i class=\"clipboard icon icon-left\"></i><a href=\"orders/$order->id\"><strong>ĐH:</strong>$order->order_code</a>
+                   <label>$order->order_created_at</label>
+            </div>
+        </div>
+        <div class=\"divider\"></div>
+    </div>";
+        }
+        return Response($data);
     }
 }

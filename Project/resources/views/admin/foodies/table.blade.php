@@ -12,7 +12,7 @@
             <th>Tên ẩm thực</th>
             <th class="collapsing">Loại ẩm thực</th>
             <th class="collapsing">Đơn giá</th>
-            <th class="collapsing">Tình trạng</th>
+            {{--<th class="collapsing">Tình trạng</th>--}}
             <th class="collapsing">Cập nhật</th>
             <th class="collapsing">Xem</th>
 
@@ -42,13 +42,13 @@
                 <td class="collapsing">
                     {{number_format($foody->currentCost()).' đ'}}
                 </td>
-                <td class="collapsing">
-                    @if($foody->getStatus()== 0)
-                        <label class="ui red label" for="">Tạm hết</label>
-                    @else
-                        <label class="ui green label" for="">Đang bán</label>
-                    @endif
-                </td>
+                {{--<td class="collapsing">--}}
+                    {{--@if($foody->getStatus()== 0)--}}
+                        {{--<label class="ui red label" for="">Tạm hết</label>--}}
+                    {{--@else--}}
+                        {{--<label class="ui green label" for="">Đang bán</label>--}}
+                    {{--@endif--}}
+                {{--</td>--}}
                 <td class="center aligned">
                     <a href="{{route('foodies.edit',[$foody->id])}}" class="ui tiny green icon label a-decoration">
                         <i class="pencil fitted icon"></i>

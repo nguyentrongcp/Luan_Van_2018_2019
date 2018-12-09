@@ -7,8 +7,8 @@
         <h3 class="ui dividing header center aligned">QUẢN LÝ ĐƠN HÀNG</h3>
         @include('admin.layouts.components.success_msg')
         @include('admin.layouts.components.errors_msg')
-
-        <div class="field">
+        <div class="ui padded grid">
+        <div class="eleven wide column">
             <a href="{{ route('orders.create') }}" class="ui small blue button">
                 <i class="plus icon"></i>Thêm mới
             </a>
@@ -28,13 +28,18 @@
                 </div>
             @endif
         </div>
+        <div class="five wide column">
+            @include('admin.orders.name_searching')
+
+        </div>
+        </div>
         @include('admin.orders.table')
         <form id="form-delete" action="{{route('orders.destroy',[0])}}" method="post" class="ui form">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
         </form>
 
-{{--        @include('admin.foodyTypes.modals')--}}
+        {{--        @include('admin.foodyTypes.modals')--}}
     </div>
 @endsection
 

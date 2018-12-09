@@ -64,6 +64,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('foodytype');
     Route::post('foody_type_delete', 'admin\restore\FoodyTypeRestoreController@delete')->name('foody_type_delete')
         ->middleware('foodytype');
+
     /** Foody */
 
     Route::resource('foodies', 'admin\FoodyController')
@@ -78,7 +79,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('foody');
     Route::get('foodies_filter', 'admin\FoodyController@filter')->name('foody_filter')
         ->middleware('foody');
-    Route::get('search', 'admin\FoodyController@search')
+    Route::get('foody_search', 'admin\FoodyController@search')
         ->middleware('foody');
     Route::resource('foody_restore', 'admin\restore\FoodyRestoreController', ['only' => ['index', 'store']])
         ->middleware('foody');
@@ -122,6 +123,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('orders/filter/show', 'admin\OrderController@filter')->name('orders_filter')
         ->middleware('order');
     Route::get('orders/{id}/print', 'admin\OrderController@printOrder')->name('print_order')
+        ->middleware('order');
+    Route::get('order_search', 'admin\OrderController@search')->name('order_search')
         ->middleware('order');
     Route::resource('order_restore', 'admin\restore\OrderRestoreController', ['only' => ['index', 'store']])
         ->middleware('order');
