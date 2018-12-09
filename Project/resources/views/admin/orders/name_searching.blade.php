@@ -1,9 +1,11 @@
-<div class="ui small input right icon">
-    <input type="text" class="need-remove" name="key-search" id="search_foody" placeholder="Tìm kiếm"
+<div class="ui small input right aligned icon">
+    <input type="text" class="need-remove" name="key-search" id="search_order" placeholder="Tìm kiếm"
            value="">
     <i class="search icon"></i>
 </div>
 <div class="ui list results " id="search-result">
+
+
 
 </div>
 
@@ -11,14 +13,14 @@
     <script>
 
         $('.ui.input').on('input', function () {
-            var key_search = $('#search_foody').val();
+            var key_search = $('#search_order').val();
             if (key_search == '') {
                 $('#search-result').removeClass('results');
                 $('#search-result').empty();
             }
             else {
                 $.ajax({
-                    url: 'foody_search',
+                    url: 'order_search',
                     type: 'get',
                     data: {
                         key: key_search
