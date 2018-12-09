@@ -12,10 +12,7 @@
         <thead>
         <tr>
             <th id="table-cost-title"></th>
-            <th>Chưa duyệt</th>
-            <th>Đang vận chuyển</th>
-            <th>Đã giao hàng</th>
-            <th>Đã hủy</th>
+            <th>Đơn hàng</th>
         </tr>
         </thead>
         <tbody id="table-cost">

@@ -31,38 +31,14 @@ class OrderStatisticController extends Controller
         $data = [];
         foreach($this->getYearable() as $year) {
             $data['labels'][] = $year;
-            $data['amount']['unapproved'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 0)->whereYear('order_created_at', $year)
-                ->count();
-            $data['amount']['shipping'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 1)->whereYear('order_created_at', $year)
-                ->count();
-            $data['amount']['delivered'][] = DB::table('orders')
+            $data['amount'][] = DB::table('orders')
                 ->join('order_statuses', 'orders.id', 'order_id')
                 ->where('status', 2)->whereYear('order_created_at', $year)
                 ->count();
-            $data['amount']['cancelled'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 3)->whereYear('order_created_at', $year)
-                ->count();
 
-            $data['cost']['unapproved'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 0)->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['shipping'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 1)->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['delivered'][] = DB::table('orders')
+            $data['cost'][] = DB::table('orders')
                     ->join('order_statuses', 'orders.id', 'order_id')
                     ->where('status', 2)->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['cancelled'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 3)->whereYear('order_created_at', $year)
                     ->sum('total_of_cost') / 1000000;
         }
 
@@ -74,52 +50,16 @@ class OrderStatisticController extends Controller
         for($i=1; $i<=4; $i++) {
             $month = $i + ($i-1) * 2;
             $data['labels'][] = $i;
-            $data['amount']['unapproved'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 0)->whereMonth('order_created_at', '>=', $month)
-                ->whereMonth('order_created_at', '<=', $month+2)
-                ->whereYear('order_created_at', $year)
-                ->count();
-            $data['amount']['shipping'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 1)->whereMonth('order_created_at', '>=', $month)
-                ->whereMonth('order_created_at', '<=', $month+2)
-                ->whereYear('order_created_at', $year)
-                ->count();
-            $data['amount']['delivered'][] = DB::table('orders')
+            $data['amount'][] = DB::table('orders')
                 ->join('order_statuses', 'orders.id', 'order_id')
                 ->where('status', 2)->whereMonth('order_created_at', '>=', $month)
                 ->whereMonth('order_created_at', '<=', $month+2)
                 ->whereYear('order_created_at', $year)
                 ->count();
-            $data['amount']['cancelled'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 3)->whereMonth('order_created_at', '>=', $month)
-                ->whereMonth('order_created_at', '<=', $month+2)
-                ->whereYear('order_created_at', $year)
-                ->count();
 
-            $data['cost']['unapproved'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 0)->whereMonth('order_created_at', '>=', $month)
-                    ->whereMonth('order_created_at', '<=', $month+2)
-                    ->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['shipping'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 1)->whereMonth('order_created_at', '>=', $month)
-                    ->whereMonth('order_created_at', '<=', $month+2)
-                    ->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['delivered'][] = DB::table('orders')
+            $data['cost'][] = DB::table('orders')
                     ->join('order_statuses', 'orders.id', 'order_id')
                     ->where('status', 2)->whereMonth('order_created_at', '>=', $month)
-                    ->whereMonth('order_created_at', '<=', $month+2)
-                    ->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['cancelled'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 3)->whereMonth('order_created_at', '>=', $month)
                     ->whereMonth('order_created_at', '<=', $month+2)
                     ->whereYear('order_created_at', $year)
                     ->sum('total_of_cost') / 1000000;
@@ -133,45 +73,15 @@ class OrderStatisticController extends Controller
         $year = $request->year;
         for($i=$request->month_start; $i<=$request->month_end; $i++) {
             $data['labels'][] = $i;
-            $data['amount']['unapproved'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 0)->whereMonth('order_created_at', $i)
-                ->whereYear('order_created_at', $year)
-                ->count();
-            $data['amount']['shipping'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 1)->whereMonth('order_created_at', $i)
-                ->whereYear('order_created_at', $year)
-                ->count();
-            $data['amount']['delivered'][] = DB::table('orders')
+            $data['amount'][] = DB::table('orders')
                 ->join('order_statuses', 'orders.id', 'order_id')
                 ->where('status', 2)->whereMonth('order_created_at', $i)
                 ->whereYear('order_created_at', $year)
                 ->count();
-            $data['amount']['cancelled'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 3)->whereMonth('order_created_at', $i)
-                ->whereYear('order_created_at', $year)
-                ->count();
 
-            $data['cost']['unapproved'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 0)->whereMonth('order_created_at', $i)
-                    ->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['shipping'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 1)->whereMonth('order_created_at', $i)
-                    ->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['delivered'][] = DB::table('orders')
+            $data['cost'][] = DB::table('orders')
                     ->join('order_statuses', 'orders.id', 'order_id')
                     ->where('status', 2)->whereMonth('order_created_at', $i)
-                    ->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['cancelled'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 3)->whereMonth('order_created_at', $i)
                     ->whereYear('order_created_at', $year)
                     ->sum('total_of_cost') / 1000000;
         }
@@ -185,52 +95,16 @@ class OrderStatisticController extends Controller
         $month = $request->month;
         for($i=$request->date_start; $i<=$request->date_end; $i++) {
             $data['labels'][] = $i;
-            $data['amount']['unapproved'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 0)->whereMonth('order_created_at', $i)
-                ->whereDay('order_created_at', $i)
-                ->whereYear('order_created_at', $year)
-                ->count();
-            $data['amount']['shipping'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 1)->whereMonth('order_created_at', $i)
-                ->whereDay('order_created_at', $i)
-                ->whereYear('order_created_at', $year)
-                ->count();
             $data['amount']['delivered'][] = DB::table('orders')
                 ->join('order_statuses', 'orders.id', 'order_id')
                 ->where('status', 2)->whereMonth('order_created_at', $i)
                 ->whereDay('order_created_at', $i)
                 ->whereYear('order_created_at', $year)
                 ->count();
-            $data['amount']['cancelled'][] = DB::table('orders')
-                ->join('order_statuses', 'orders.id', 'order_id')
-                ->where('status', 3)->whereMonth('order_created_at', $i)
-                ->whereDay('order_created_at', $i)
-                ->whereYear('order_created_at', $year)
-                ->count();
 
-            $data['cost']['unapproved'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 0)->whereMonth('order_created_at', $i)
-                    ->whereDay('order_created_at', $i)
-                    ->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['shipping'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 1)->whereMonth('order_created_at', $i)
-                    ->whereDay('order_created_at', $i)
-                    ->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['delivered'][] = DB::table('orders')
+            $data['cost'][] = DB::table('orders')
                     ->join('order_statuses', 'orders.id', 'order_id')
                     ->where('status', 2)->whereMonth('order_created_at', $i)
-                    ->whereDay('order_created_at', $i)
-                    ->whereYear('order_created_at', $year)
-                    ->sum('total_of_cost') / 1000000;
-            $data['cost']['cancelled'][] = DB::table('orders')
-                    ->join('order_statuses', 'orders.id', 'order_id')
-                    ->where('status', 3)->whereMonth('order_created_at', $i)
                     ->whereDay('order_created_at', $i)
                     ->whereYear('order_created_at', $year)
                     ->sum('total_of_cost') / 1000000;

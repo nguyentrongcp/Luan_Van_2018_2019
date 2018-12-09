@@ -47,7 +47,7 @@
                             $width = 'calc((100% - '.($count - 1).' * 2px) / '.$count.')';
                                 @endphp
                         <img class="{{ $stt }}-comment-image" onclick="openViewer($('.{{ $stt }}-comment-image'), {{ $key }})"
-                             style="width: {{ $width }}; margin: 0 0 2px {{ $margin }}" src="{{ $image->image->link }}">
+                             style="width: {{ $width }}; margin: 0 0 2px {{ $margin }}; height: {{ $width }}" src="{{ $image->image->link }}">
                     @endforeach
                 </div>
                 <div class="row comment-footer-container">

@@ -25,7 +25,7 @@
                     <div class="col s12 m6 l6 payment-col-left">
                         <div class="input-field col s12">
                             <input id="address" type="text" value="221/6">
-                            <label for="address">
+                            <label for="address" class="active">
                                 Số nhà, tên hẻm (nếu có) và tên đường
                                 <span class="red-text">*</span>
                             </label>
