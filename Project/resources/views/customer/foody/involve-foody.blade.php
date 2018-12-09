@@ -4,6 +4,9 @@
             <span class="content-header">Cùng loại</span>
             <div class="divider" style="margin-bottom: 10px"></div>
             @foreach($foody_type->foodies as $key => $foody_involve)
+                @if($foody_involve->is_deleted)
+                    @continue
+                @endif
                 @if($foody->id == $foody_involve->id)
                     @continue
                 @endif
@@ -20,15 +23,19 @@
                             <span class="cost">{{ number_format($foody_involve->currentCost()) }}<sup>đ</sup></span>
                             <span class="describe truncate">{{ $foody_involve->describe }}</span>
                         </div>
-                        <div class="col s1 hide-on-small-only involve-foody-action right-align">
-                            <a class="ui small label cart-update" data-id="{{ $foody_involve->id }}">
-                                <i class="ui plus icon"></i></a>
-                        </div>
+                        @if($foody_involve->getQuantity() != 0)
+                            <div class="col s1 hide-on-small-only involve-foody-action right-align">
+                                <a class="ui small label cart-update" data-id="{{ $foody_involve->id }}">
+                                    <i class="ui plus icon"></i></a>
+                            </div>
+                        @endif
                     </div>
-                    <a class="s12 hide-on-med-and-up ui attached button waves-effect waves-light cart-update"
-                            data-id="{{ $foody_involve->id }}" style="margin-bottom: 5px">
-                        <i class="cart plus icon"></i>Thêm vào giỏ hàng
-                    </a>
+                    @if($foody_involve->getQuantity() != 0)
+                        <a class="s12 hide-on-med-and-up ui attached button waves-effect waves-light cart-update"
+                           data-id="{{ $foody_involve->id }}" style="margin-bottom: 5px">
+                            <i class="cart plus icon"></i>Thêm vào giỏ hàng
+                        </a>
+                    @endif
                 </div>
                 @if($key == 7)
                     @break

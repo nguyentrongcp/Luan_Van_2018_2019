@@ -12,10 +12,6 @@
                 <input type="text" id="sales_offs_name" name="sales-offs-name" value="KM Phụ nữ Việt Nam 20-10" required>
             </div>
             <div class="field">
-                <label for="percent">Phần trăm giảm</label>
-                <input type="number" id="percent" name="percent" value="10" required>
-            </div>
-            <div class="field">
                 <label for="percent">Ngày bắt đầu</label>
                 <input type="date" id="start_date" name="start-date" value="{{date('Y-m-d')}}" required>
             </div>
@@ -67,7 +63,26 @@
     </div>
 @endforeach
 <!--  End Modal -->
+@push('script')
+    <script>
+        function checkDate(form) {
+            let start = $(form).find('[name="start-date"]').val();
+            let end = $(form).find('[name="end-date"]').val();
+            if (start < end)
+                return true;
 
+            $.toast({
+                heading: 'Ngày không hợp lệ',
+                text: 'Ngày kết thúc phải lớn hơn ngày bắt đầu!',
+                icon: 'error',
+                loader: false,
+                position: "top-center"
+            });
+
+            return false;
+        }
+    </script>
+@endpush
 
 
 

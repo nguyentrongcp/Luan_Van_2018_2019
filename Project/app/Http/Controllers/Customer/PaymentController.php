@@ -198,17 +198,25 @@ class PaymentController extends Controller
     public function checkOTP(Request $request) {
         $data = [];
         foreach(Cart::content() as $cart) {
-            if (Foody::find($cart->id)->getSaleCost() != session("$cart->id")) {
+            $foody = Foody::find($cart->id);
+            if ($foody->getSaleCost() != session("$cart->id")) {
                 $data = [
                     'status' => 'error_cost',
                     'error_text' => 'Giá sản phẩm có thay đổi. Hãy cập nhật lại trước khi gửi đơn hàng.'
                 ];
             }
-            if (!Foody::find($cart->id)->checkQuantity($cart->qty)) {
+            if ($foody->checkQuantity($cart->qty)) {
                 $data = [
                     'status' => 'error_cost',
                     'error_text' => 'Rất tiếc, nguyên liệu không đủ. Hãy cập nhật lại trang để
                     xem lại số lượng mới trong giỏ hàng của bạn.'
+                ];
+            }
+            if ($foody->is_deleted) {
+                $data = [
+                    'status' => 'error_cost',
+                    'error_text' => "Ẩm thực \"$foody->name\" đã ngừng bán. Hãy cập nhật lại trang 
+                    và kiểm tra lại giỏ hàng của bạn."
                 ];
             }
         }

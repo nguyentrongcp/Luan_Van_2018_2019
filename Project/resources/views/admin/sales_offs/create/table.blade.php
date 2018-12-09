@@ -7,11 +7,9 @@
                     <input type="checkbox">
                 </div>
             </th>
-            <th class="collapsing">STT</th>
-            <th>Tên khuyến mãi</th>
-            <th class="text-center">Số TĐ</th>
-            <th class="text-center">Ngày bắt đầu</th>
-            <th class="text-center">Ngày kết thúc</th>
+            <th class="collapsing center aligned">STT</th>
+            <th class="center aligned">Giá trị (%)</th>
+            <th class="center aligned">Số ẩm thực</th>
             <th class="collapsing">Xem</th>
             <th class="collapsing">Sửa</th>
         </tr>
@@ -25,14 +23,9 @@
                     </div>
 
                 </td>
-                <td>{{$stt + 1}}</td>
-                <td>
-                    <a class="a-decoration" href="{{route('admin.createSales',[$salesOff->id])}}">
-                        {{$salesOff->name}}</a>
-                </td>
-                <td>{{App\SalesOffDetail::where('sales_off_id',$salesOff->id)->count()}}</td>
-                <td class="text-center">{{$salesOff->start_date}}</td>
-                <td class="text-center">{{$salesOff->end_date}}</td>
+                <td class="center aligned">{{$stt + 1}}</td>
+                <td class="center aligned">{{ $salesOff->percent }}</td>
+                <td class="text-center">{{ $salesOff->salesOffDetails()->count() }}</td>
                 <td class="center aligned">
                     <a href="{{route('sales_offs.show',[$salesOff->id])}}" class="ui tiny blue label">
                         <i class="fa fa-eye"></i>

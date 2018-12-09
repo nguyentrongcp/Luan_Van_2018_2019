@@ -350,6 +350,26 @@ class HomeController extends Controller {
                         </span>
                         <span class=\"rating-spacing\">|</span>";
         }
+        if ($foody->getQuantity() == 0) {
+            $add_cart = "<div class='show-foody-action'>
+                            <span class='ui red label'>Ẩm thực tạm hết</span>
+                        </div>";
+        }
+        else {
+            if ($foody->is_deleted) {
+                $add_cart = "<div class='show-foody-action'>
+                            <span class='ui red label'>Ẩm thực đã ngừng bán</span>
+                        </div>";
+            }
+            else {
+                $add_cart = "<div class=\"show-foody-action\">
+                    <a class=\"waves-effect waves-light btn cart-update\" data-id='$id'>
+                        <i class=\"cart plus icon\"></i>
+                        Thêm vào giỏ
+                    </a>
+                </div>";
+            }
+        }
         $data .= "
                     <span>
                         <i class=\"like red-text icon\" style=\"font-size: 12px\"></i> $liked
@@ -368,12 +388,7 @@ class HomeController extends Controller {
                 <div style='margin-top: 5px'>
                     Đã được đặt: <b>$buy_count</b> lượt
                 </div>
-                <div class=\"show-foody-action\">
-                    <a class=\"waves-effect waves-light btn cart-update\" data-id='$id'>
-                        <i class=\"cart plus icon\"></i>
-                        Thêm vào giỏ
-                    </a>
-                </div>
+                $add_cart
             </div>
             </div>
             ";

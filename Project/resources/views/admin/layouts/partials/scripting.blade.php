@@ -49,6 +49,14 @@
             $('.ui.dropdown.search.material-name').dropdown({
                 allowAdditions: true
             });
+            $('.ui.dropdown.search.sale-percent').dropdown({
+                allowAdditions: true,
+                clearable: true,
+                hideAdditions: false
+            });
+            $('.ui.dropdown.foody-name').dropdown({
+                clearable: true,
+            });
         });
 </script>
 <script>

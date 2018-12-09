@@ -54,7 +54,6 @@ class SalesOffsController extends Controller
             return back()->with('error','Tên khuyến mãi đã tồi tại!');
         }
         $salesOff->name = $name;
-        $salesOff->percent = $request->get('percent');
         $salesOff->start_date = $start;
         $salesOff->end_date = $start;
         $salesOff->save();

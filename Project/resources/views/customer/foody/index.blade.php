@@ -115,13 +115,21 @@
 
             </div>
             <div class="foody-cart">
-                <button id="add-cart-button" data-qty="add" data-id="{{ $foody->id }}"
-                        class="waves-effect waves-light btn col s3" style="width: 170px">
-                    <i class="shopping cart plus icon"></i>
-                    Thêm vào giỏ
-                </button>
-                <input id="add-cart-qty" class="input-field col s2 cart-number number-only" type="number" value="1">
-                <span id="add-cart-cost" class="cost cart-number">{{ number_format($foody->getSaleCost()) }}<sup>đ</sup></span>
+                @if($foody->getQuantity() == 0)
+                    <span style="margin-top: 15px; margin-bottom: 15px" class='ui large red label'>Ẩm thực tạm hết</span>
+                @else
+                    @if($foody->is_deleted)
+                        <span style="margin-top: 15px; margin-bottom: 15px" class='ui large red label'>Ẩm thực đã ngừng bán</span>
+                    @else
+                        <button id="add-cart-button" data-qty="add" data-id="{{ $foody->id }}"
+                                class="waves-effect waves-light btn col s3" style="width: 170px">
+                            <i class="shopping cart plus icon"></i>
+                            Thêm vào giỏ
+                        </button>
+                        <input id="add-cart-qty" class="input-field col s2 cart-number number-only" type="number" value="1">
+                        <span id="add-cart-cost" class="cost cart-number">{{ number_format($foody->getSaleCost()) }}<sup>đ</sup></span>
+                    @endif
+                @endif
             </div>
             <div class="foody-action navbar col s12">
                 <nav class="grey darken-2">

@@ -19,7 +19,7 @@
                         Cart::remove($cart->rowId);
                         Cart::add($cart_old->id,$foody->name,$foody->getQuantity(),0);
                     }
-                    if ($foody->getQuantity() == 0) {
+                    if ($foody->getQuantity() == 0 || $foody->is_deleted) {
                         Cart::remove($cart->rowId);
                     }
             @endphp

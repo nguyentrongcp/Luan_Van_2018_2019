@@ -7,10 +7,9 @@
                     <input type="checkbox">
                 </div>
             </th>
-            <th class="collapsing">STT</th>
-            <th>Tên thực đơn</th>
-            <th>Loại thực đơn</th>
-            <th class="text-center">Ưu đãi (%)</th>
+            <th class="collapsing center aligned">STT</th>
+            <th>Tên ẩm thực</th>
+            <th>Loại ẩm thực</th>
         </tr>
         </thead>
         <tbody>
@@ -22,7 +21,7 @@
                     </div>
 
                 </td>
-                <td>{{$stt + 1}}</td>
+                <td class="center aligned">{{$stt + 1}}</td>
                 <td>
                     <a class="a-decoration" href="{{route('foodies.show',[$salesOffsDetail->foody_id])}}">
                         {{App\Foody::find($salesOffsDetail->foody_id)->name}}</a>
@@ -34,7 +33,6 @@
                     }
                 @endphp
                 <td>{{$nametype}}</td>
-                <td class="text-center">{{App\SalesOff::find($salesOffsDetail->sales_off_id)->percent}}</td>
             </tr>
         @endforeach
         </tbody>
