@@ -19,6 +19,8 @@
 
     }
 
+    .
+
     #google_map {
         width: 100%;
         margin-bottom: 20px;

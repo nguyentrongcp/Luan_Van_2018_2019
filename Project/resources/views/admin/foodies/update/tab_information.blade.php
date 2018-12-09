@@ -37,17 +37,6 @@
                     {{ $errors->first('foody-cost') }}
                 </div>
             @endif
-            <div class="inline field">
-                <label class="label-fixed">Tình trạng:</label>
-                <select name="status" class="ui dropdown">
-                    <option value="1" {{ $foodies->getStatus() > 0 ? 'selected': '' }}>
-                        Đang bán
-                    </option>
-                    <option value="0"{{ $foodies->getStatus() < 1 ? 'selected': '' }}>
-                        Tạm hết
-                    </option>
-                </select>
-            </div>
         </div>
 
         <div class="six wide column">

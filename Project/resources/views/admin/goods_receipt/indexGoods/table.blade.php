@@ -26,7 +26,7 @@
 
             <td>{{ $stt + 1 }}</td>
             <td>{{ $goods->name }}</td>
-            <td class="text-center">{{ $goods->date }}</td>
+            <td class="text-center">{{ date_format(date_create($goods->date), 'd/m/Y') }}</td>
             <td class="text-center">
                 {{ $goods->soMaterial() }}
             </td>

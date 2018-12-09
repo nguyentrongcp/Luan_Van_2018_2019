@@ -27,13 +27,6 @@
                            onclick="$('#cost-update-modal').modal('show')">Cập nhật</a>
                     </div>
                 </div>
-                <div class="inline field">
-                    <label class="label-fixed">Tình trạng</label>
-                    <div class="static-input">
-                        <strong class="ui red label {{$foodies->getStatus() < 1 ? '': 'hidden'}}">Tạm hết</strong>
-                        <strong class="ui green label {{$foodies->getStatus() > 0 ? '': 'hidden'}}">Đang bán</strong>
-                    </div>
-                </div>
                 @if($foodies->isSalesOff())
                     <div class="inline field">
                         <label class="label-fixed">Khuyến mãi</label>

@@ -63,49 +63,37 @@ class FoodyController extends Controller
     {
         $validate = $this->validationStore($request);
         if ($validate->fails()) {
-            return back()->withErrors($validate)
-                ->withInput($request->only('foody-cost', 'foody-name'));
+            return Response(['status' => 'error', 'errors' => $validate->getMessageBag()->toArray()]);
         }
-        $cost_input = str_replace(',', '', $request->get('foody-cost'));
+        $cost_input = str_replace(',', '', $request->get('cost'));
         if ($cost_input < 1000) {
-            return back()->withErrors(['foody-cost' => 'Giá tiền không được nhỏ hơn 1,000đ !'])
-                ->withInput($request->only('foody-cost', 'foody-name'));
+            return Response(['status' => 'error-cost', 'error' => 'Giá ẩm thực phải >= 1000<sup>đ</sup>']);
         }
         if ($cost_input > 10000000) {
-            return back()->withErrors(['foody-cost' => 'Giá tiền không được vượt quá 10,000,000đ !'])
-                ->withInput($request->only('foody-cost', 'foody-name'));
-        }
-        if (!$request->hasFile('foody-avatar')) {
-            return back()->withErrors(['foody-avatar'=>'Bạn chưa upload hình ảnh!'])
-                ->withInput($request->only('foody-cost', 'foody-name'));
+            return Response(['status' => 'error-cost', 'error' => 'Giá ẩm thực phải <= 10,000,000<sup>đ</sup>']);
         }
 
         $foody = new Foody();
-        $foody_name = $request->get('foody-name');
+        $foody_name = $request->get('name');
         $foody->name = $foody_name;
         $foody->slug = str_slug($foody_name);
         if ($foody->matchedName($foody_name)) {
-            return back()->with('error', 'Tên thực đơn đã tồn tại!')
-                ->withInput($request->only('foody-cost', 'foody-name'));
+            return Response(['status' => 'error-name', 'error' => 'Tên ẩm thực đã tồn tại!']);
         }
         $foody->foody_created_at = date('Y-m-d H:i:s');
         $foody->foody_updated_at = date('Y-m-d H:i:s');
-        $foody->is_extra = false;
-        $foody->describe = $request->get('describe');
-        $foody->foody_type_id = $request->get('foody-type-name');
+        $foody->describe = $request->get('description');
+        $foody->foody_type_id = $request->get('type');
 
+        $img = explode(";base64,", $request->get('avatar'));
+        $img_type_aux = explode("image/", $img[0]);
+        $img_type = $img_type_aux[1];
+        $img_base64 = base64_decode($img[1]);
         $time = time();
-        $ext = $request->file('foody-avatar')->extension();
+        file_put_contents("admin/assets/images/avatar/avatar-".$foody->id.'-'.$time.'.'.$img_type, $img_base64);
 
-        $path = $request->file('foody-avatar')
-            ->move('admin\assets\images\avatar', "avatar-$foody->id-$time.$ext");
-        $foody->avatar = str_replace('\\', '/', $path);
+        $foody->avatar = "/admin/assets/images/avatar/avatar-".$foody->id.'-'.$time.'.'.$img_type;
         $foody->save();
-
-        $foodyStatus = new FoodyStatus();
-        $foodyStatus->foody_id = $foody->id;
-        $foodyStatus->status = $request->get('status');
-        $foodyStatus->save();
 
         $cost = new Cost();
         $cost->cost = $cost_input;
@@ -117,7 +105,12 @@ class FoodyController extends Controller
         $vote->foody_id = $foody->id;
         $vote->save();
 
-        return redirect()->route('foodies.show', [$foody->id])->with('success', "Thêm $foody_name thành công!");
+        return Response(['status' => 'success', 'href' => route('foody_success', $foody->id)]);
+    }
+
+    public function success($id) {
+        $foody_name = Foody::find($id)->name;
+        return redirect()->route('foodies.show', [$id])->with('success', "Thêm $foody_name thành công!");
     }
 
     /**
@@ -193,10 +186,6 @@ class FoodyController extends Controller
         $foodys->foody_type_id = $request->get('foody-type-name');
         $foodys->describe = $request->get('describe');
         $foodys->update();
-
-        $foodyStatus = FoodyStatus::findOrFail($id);
-        $foodyStatus->status = $request->get('status');
-        $foodyStatus->update();
 
         $cost = new Cost();
         $cost->cost = $cost_input;
@@ -290,8 +279,8 @@ class FoodyController extends Controller
         $validate = Validator::make(
             $request->all(),
             [
-                'foody-name' => array('required', 'max:100', "regex:/^[A-ỹ][0-ỹ \+\(\)\/]*$/"),
-                'foody-cost' => array('required', 'regex:/^(([1-9]\d*)|([1-9]\d{0,2}(,\d{3})*))$/')
+                'name' => array('required', 'max:100', "regex:/^[A-ỹ][0-ỹ \+\(\)\/&]*$/"),
+                'cost' => array('required', 'regex:/^(([1-9]\d*)|([1-9]\d{0,2}(,\d{3})*))$/')
             ],
             [
                 'required' => ':attribute không được bỏ trống!',
@@ -299,8 +288,8 @@ class FoodyController extends Controller
                 'regex' => ':attribute không hợp lệ!'
             ],
             [
-                'foody-name' => 'Tên thực đơn',
-                'foody-cost' => 'Giá tiền'
+                'name' => 'Tên ẩm thực',
+                'cost' => 'Giá tiền'
             ]
         );
 

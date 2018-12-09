@@ -6,11 +6,11 @@
                 <input type="checkbox" class="hidden">
             </div>
         </th>
-        <th class="collapsing">STT</th>
+        <th class="collapsing center aligned">STT</th>
         <th>Tên nguyên liệu</th>
         <th class="text-center">Số lượng</th>
-        <th class="text-center">Đơn giá</th>
-        <th class="text-center">Tổng tiền</th>
+        <th class="right aligned">Đơn giá</th>
+        <th class="right aligned">Tổng tiền</th>
         <th class="collapsing">Sửa</th>
     </tr>
     </thead>
@@ -23,14 +23,14 @@
                            value="{{ $goodsReceiptDetail->id }}">
                 </div>
             </td>
-            <td>{{ $stt + 1 }}</td>
+            <td class="center aligned">{{ $stt + 1 }}</td>
             <td>{{$goodsReceiptDetail->material}}</td>
             @php
                 $unit = \App\CalculationUnit::find($goodsReceiptDetail->unit_id)->unit;
             @endphp
-            <td>{{$goodsReceiptDetail->quantity . ' '. $unit}}</td>
-            <td class="text-center">{{number_format($goodsReceiptDetail->cost).' đ'}}</td>
-            <td class="text-center">
+            <td class="center aligned">{{$goodsReceiptDetail->quantity . ' '. $unit}}</td>
+            <td class="right aligned">{{number_format($goodsReceiptDetail->cost).' đ'}}</td>
+            <td class="right aligned">
                 {{number_format($goodsReceiptDetail->total_cost).' đ'}}
             </td>
             <td>

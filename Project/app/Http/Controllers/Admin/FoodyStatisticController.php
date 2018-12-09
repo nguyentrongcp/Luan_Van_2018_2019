@@ -12,50 +12,83 @@ class FoodyStatisticController extends Controller
     public function getValue(Request $request)
     {
         $data = [];
-        $date = $request->date;
-        $date_start = $request->date_start;
-        $date_end = $request->date_end;
+        if ($request->type == 'all') {
+            $data = $this->getAll($request);
+        }
         if ($request->type == 'day') {
-            $data = $this->getDate($date);
+            $data = $this->getDate($request);
         }
         if ($request->type == 'days') {
-            $data = $this->getDate($date_start, $date_end);
+            $data = $this->getDate($request);
         }
 
         return Response(['status' => 'success', 'data' => $data]);
     }
 
-    public function getDate($date)
+    public function getAll(Request $request) {
+        $date = $request->date;
+        $qty = $request->qty;
+        $data = DB::table('foodies')->join('order_foodies', 'foodies.id', 'foody_id')
+            ->join('orders', 'order_foodies.order_id', 'orders.id')
+            ->join('order_statuses', 'orders.id', 'order_statuses.order_id')
+            ->selectRaw('foodies.name as foodyname, count(orders.id) as total')
+            ->where('status', 2)
+            ->groupBy('foodies.id')
+            ->orderBy('total','DESC')
+            ->limit($qty);
+
+        return $data->get();
+    }
+
+    public function getDate(Request $request)
     {
+        $date = $request->date;
+        $qty = $request->qty;
         $data = DB::table('foodies')->join('order_foodies', 'foodies.id', 'foody_id')
             ->join('orders', 'order_foodies.order_id', 'orders.id')
             ->join('order_statuses', 'orders.id', 'order_statuses.order_id')
             ->selectRaw('foodies.name as foodyname, count(orders.id) as total')
             ->where('order_created_at', '<=', $date)
-            ->where(function ($query) {
-                $query->where('status', 2)
-                    ->orWhere('status', 3);})
+            ->where('status', 2)
             ->groupBy('foodies.id')
             ->orderBy('total','DESC')
-            ->limit(10);
+            ->limit($qty);
 
         return $data->get();
     }
 
-    public function getDates($start, $end)
+    public function getDates(Request $request)
     {
+        $date_start = $request->date_start;
+        $date_end = $request->date_end;
+        $qty = $request->qty;
         $data = DB::table('foodies')->join('order_foodies', 'foodies.id', 'foody_id')
             ->join('orders', 'order_foodies.order_id', 'orders.id')
             ->join('order_statuses', 'orders.id', 'order_statuses.order_id')
             ->selectRaw('foodies.name as foodyname, count(orders.id) as total')
-            ->where('order_created_at', '>=', $start)
-            ->where('order_created_at', '<=', $end)
-            ->where(function ($query) {
-                $query->where('status', 2)
-                    ->orWhere('status', 3);})
+            ->where('order_created_at', '>=', $date_start)
+            ->where('order_created_at', '<=', $date_end)
+            ->where('status', 3)
             ->groupBy('foodies.id')
             ->orderBy('total','DESC')
-            ->limit(10);
+            ->limit($qty);
+
+        return $data->get();
+    }
+
+    public function getToday(Request $request)
+    {
+        $date = $request->date;
+        $qty = $request->qty;
+        $data = DB::table('foodies')->join('order_foodies', 'foodies.id', 'foody_id')
+            ->join('orders', 'order_foodies.order_id', 'orders.id')
+            ->join('order_statuses', 'orders.id', 'order_statuses.order_id')
+            ->selectRaw('foodies.name as foodyname, count(orders.id) as total')
+            ->where('order_created_at', $date)
+            ->where('status', 2)
+            ->groupBy('foodies.id')
+            ->orderBy('total','DESC')
+            ->limit($qty);
 
         return $data->get();
     }

@@ -84,6 +84,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('foody');
     Route::post('foody_delete', 'admin\restore\FoodyRestoreController@delete')->name('foody_delete')
         ->middleware('foody');
+    Route::get('foodies_success/{id}', 'admin\FoodyController@success')->name('foody_success')
+        ->middleware('foody');
 
     /**      Materials       **/
     Route::resource('material', 'admin\MaterialController')
