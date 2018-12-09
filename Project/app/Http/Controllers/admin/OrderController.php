@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Admin;
+use App\Material;
+use App\MaterialFoody;
 use App\Order;
 use App\OrderFoody;
 use App\OrderStatus;
@@ -146,6 +148,14 @@ class OrderController extends Controller
     public function orderCancelled($id){
         $order = Order::findOrFail($id);
             if ($order->waitingPay() || $order->unapproved()){
+                foreach (OrderFoody::where('order_id',$id)->get() as $orderFoody){
+                    foreach (MaterialFoody::where('foody_id',$orderFoody->foody_id)->get() as $materialFoody){
+                        foreach (Material::where('id',$materialFoody->material_id)->get() as $material){
+                            $material->value += $orderFoody->amount * $materialFoody->value;
+                            $material->update();
+                        }
+                    }
+                }
                 $order->delete();
             }
             if ($order->approved()) {

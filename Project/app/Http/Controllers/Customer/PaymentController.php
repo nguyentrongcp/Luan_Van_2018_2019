@@ -180,7 +180,7 @@ class PaymentController extends Controller
 
         foreach(Cart::content() as $cart) {
             $foody = Foody::find($cart->id);
-//            $foody->minusQuantity($cart->qty);
+            $foody->minusQuantity($cart->qty);
             $cost = $foody->getSaleCost();
             $order_foody = new OrderFoody();
             $order_foody->order_id = $order->id;
