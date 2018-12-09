@@ -71,10 +71,7 @@
                 </div>
                 <div class="col s12 order-row">
                     <span class="col til">Tình trạng:</span><span class="col cont">
-                        @if($order->cancelled())
-                            <i class="delete red-text open fitted icon"></i>
-                            <span class="red-text"><strong> Đã hủy</strong></span>
-                        @elseif($order->unapproved())
+                        @if($order->unapproved())
                             <i class="warning open fitted orange-text icon"></i>
                             <span class="orange-text"><strong> Chưa duyệt</strong></span>
                         @elseif($order->getStatus() == -1)

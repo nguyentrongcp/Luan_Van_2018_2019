@@ -12,7 +12,7 @@
         function buildChartAmount() {
             let types = JSON.parse('{!! \App\Statistic::getOrderByYear() !!}');
 
-            let labels = [], data = {unapproved:[], shipping: [], delivered: [], cancelled: []};
+            let labels = [], data = {delivered: []};
 
             let years = types.years;
             let unapproved = types.unapproved;
@@ -25,10 +25,7 @@
                 let d = getValidValue(delivered[i]);
                 let c = getValidValue(cancelled[i]);
                 labels.push(years[i]);
-                data.unapproved.push(u);
-                data.shipping.push(s);
                 data.delivered.push(d);
-                data.cancelled.push(c);
             }
             let ctx = document.getElementById("order-amount-chart").getContext('2d');
             let myChart = new Chart(ctx, {

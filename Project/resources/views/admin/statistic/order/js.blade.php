@@ -54,32 +54,10 @@
                     datasets: [
                         {
                             type: 'bar',
-                            label: 'Chưa duyệt',
-                            backgroundColor: '#FF9900',
-                            borderColor:  '#FF9900',
-                            data: data.data.amount.unapproved,
-                            borderWidth: 2
-                        }, {
-                            type: 'bar',
-                            label: 'Đang vận chuyển',
-                            backgroundColor: '#66CCFF',
-                            borderColor:  '#66CCFF',
-                            data: data.data.amount.shipping,
-                            borderWidth: 2
-                        }, {
-                            type: 'bar',
-                            label: 'Đã giao hàng',
+                            label: 'Đơn hàng',
                             backgroundColor: '#33CC33',
                             borderColor:  '#33CC33',
-                            data: data.data.amount.delivered,
-                            borderWidth: 2
-                        },
-                        {
-                            type: 'bar',
-                            label: 'Đã hủy',
-                            backgroundColor: '#FF0000',
-                            borderColor:  '#FF0000',
-                            data: data.data.amount.cancelled,
+                            data: data.data.amount,
                             borderWidth: 2
                         }
                     ]
@@ -101,31 +79,17 @@
             $('#table-amount').empty();
             $('#table-amount-total').empty();
             $('#table-amount-title').text($('#type option:selected').text());
-            $total = {
-                'unapproved' : 0,
-                'shipping' : 0,
-                'delivered' : 0,
-                'cancelled' : 0,
-            };
+            $total = 0;
             $.each(data.data.labels, function (key, value) {
-                $total['unapproved'] += parseInt(data.data.amount.unapproved[key]);
-                $total['shipping'] += parseInt(data.data.amount.shipping[key]);
-                $total['delivered'] += parseInt(data.data.amount.delivered[key]);
-                $total['cancelled'] += parseInt(data.data.amount.cancelled[key]);
+                $total += parseInt(data.data.amount[key]);
                 $('#table-amount').append("<tr>" +
                     "<td>" + value + "</td>" +
-                    "<td>" + data.data.amount.unapproved[key] + "</td>" +
-                    "<td>" + data.data.amount.shipping[key] + "</td>" +
-                    "<td>" + data.data.amount.delivered[key] + "</td>" +
-                    "<td>" + data.data.amount.cancelled[key] + "</td>" +
+                    "<td>" + data.data.amount[key] + "</td>" +
                     "</tr>")
             });
             $('#table-amount-total').append("<tr>" +
                 "<th><b>" + 'Tổng' + "</b></th>" +
-                "<th><b>" + $total['unapproved'] + "</b></th>" +
-                "<th><b>" + $total['shipping'] + "</b></th>" +
-                "<th><b>" + $total['delivered'] + "</b></th>" +
-                "<th><b>" + $total['cancelled'] + "</b></th>" +
+                "<th><b>" + $total + "</b></th>" +
                 "</tr>")
         }
 
@@ -140,32 +104,10 @@
                     datasets: [
                         {
                             type: 'bar',
-                            label: 'Chưa duyệt',
-                            backgroundColor: '#FF9900',
-                            borderColor:  '#FF9900',
-                            data: data.data.cost.unapproved,
-                            borderWidth: 2
-                        }, {
-                            type: 'bar',
-                            label: 'Đang vận chuyển',
-                            backgroundColor: '#66CCFF',
-                            borderColor:  '#66CCFF',
-                            data: data.data.cost.shipping,
-                            borderWidth: 2
-                        }, {
-                            type: 'bar',
-                            label: 'Đã giao hàng',
+                            label: 'Số tiền',
                             backgroundColor: '#33CC33',
                             borderColor:  '#33CC33',
-                            data: data.data.cost.delivered,
-                            borderWidth: 2
-                        },
-                        {
-                            type: 'bar',
-                            label: 'Đã hủy',
-                            backgroundColor: '#FF0000',
-                            borderColor:  '#FF0000',
-                            data: data.data.cost.cancelled,
+                            data: data.data.cost,
                             borderWidth: 2
                         }
                     ]
@@ -187,31 +129,17 @@
             $('#table-cost').empty();
             $('#table-cost-total').empty();
             $('#table-cost-title').text($('#type option:selected').text());
-            $total = {
-                'unapproved' : 0,
-                'shipping' : 0,
-                'delivered' : 0,
-                'cancelled' : 0,
-            };
+            $total = 0;
             $.each(data.data.labels, function (key, value) {
-                $total['unapproved'] += parseFloat(data.data.cost.unapproved[key]);
-                $total['shipping'] += parseFloat(data.data.cost.shipping[key]);
-                $total['delivered'] += parseFloat(data.data.cost.delivered[key]);
-                $total['cancelled'] += parseFloat(data.data.cost.cancelled[key]);
+                $total += parseFloat(data.data.cost[key]);
                 $('#table-cost').append("<tr>" +
                     "<td>" + value + "</td>" +
-                    "<td>" + numeral(parseFloat(data.data.cost.unapproved[key])).format('0,0.00') + "</td>" +
-                    "<td>" + numeral(parseFloat(data.data.cost.shipping[key])).format('0,0.00') + "</td>" +
-                    "<td>" + numeral(parseFloat(data.data.cost.delivered[key])).format('0,0.00') + "</td>" +
-                    "<td>" + numeral(parseFloat(data.data.cost.cancelled[key])).format('0,0.00') + "</td>" +
+                    "<td>" + numeral(parseFloat(data.data.cost[key])).format('0,0.00') + "</td>" +
                     "</tr>")
             });
             $('#table-cost-total').append("<tr>" +
                 "<th><b>" + 'Tổng' + "</b></th>" +
-                "<th><b>" + numeral($total['unapproved']).format('0,0.00') + "</b></th>" +
-                "<th><b>" + numeral($total['shipping']).format('0,0.00') + "</b></th>" +
-                "<th><b>" + numeral($total['delivered']).format('0,0.00') + "</b></th>" +
-                "<th><b>" + numeral($total['cancelled']).format('0,0.00') + "</b></th>" +
+                "<th><b>" + numeral($total).format('0,0.00') + "</b></th>" +
                 "</tr>")
         }
     </script>

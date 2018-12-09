@@ -3,10 +3,7 @@
         <thead>
         <tr>
             <th id="duration"></th>
-            <th>Chưa duyệt</th>
-            <th>Đang vận chuyển</th>
-            <th>Đã giao hàng</th>
-            <th>Đã hủy</th>
+            <th>Đơn hàng</th>
         </tr>
         </thead>
         <tbody>
