@@ -321,26 +321,26 @@ class FoodyController extends Controller
         return $validate;
     }
 
-    public function addMaterialFoody(Request $request, $id){
+    public function addMaterialFoody(Request $request){
 
-        $name = $request->get('material-name');
-
-        $material = MaterialFoody::where('foody_id',$id)->get();
-        if ($material->checkName($name)){
-            return back()->with('error','Tên nguyên liệu đã tồn tại!');
-        }
-        if (!$request->has('unit')){
-            return back()->with('error','Bạn chưa chọn đơn vị tính');
-        }
         if ($request->get('value') == ''){
             return back()->with('error','Bạn chưa chọn đơn vị tính');
         }
-        $material->name = $name;
-        $material->value = $request->get('value');
-        $material->calculation_unit_id = $request->get('unit');
+        $materialFoody = new MaterialFoody();
+        $materialFoody->foody_id = $request->get('material-foody-id');
+        $materialFoody->material_id = $request->get('material');
+        $materialFoody->value = $request->get('value');
+        $materialFoody->save();
 
-        $material->update();
         return back()->with('success','Cập nhật nguyên liệu thành công!');
+    }
+
+    public function deleteMaterialFoody($id){
+        $materialFoodys = MaterialFoody::where('material_id',$id)->get();
+        foreach ($materialFoodys as $materialFoody){
+            $materialFoody->delete();
+        }
+            return back()->with('success','Xóa thành công');
     }
 
 }

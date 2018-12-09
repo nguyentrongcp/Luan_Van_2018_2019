@@ -20,6 +20,8 @@ class CreateShopInfosTable extends Migration
             $table->string('address', 100);
             $table->string('phone', 20);
             $table->string('email', 100);
+            $table->time('open');
+            $table->time('close');
             $table->timestamps();
         });
     }

@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Sửa sản phẩm ')
+@section('title', 'Sửa ẩm thực')
 
 @section('content')
 
@@ -16,7 +16,7 @@
             Cập nhật: {{ $nameFoody }}
         </h3>
         <form action="{{ route('foodies.update', [$foodies->id]) }}" method="post" enctype="multipart/form-data"
-              class="ui form static" id="form-thong-tin-san-pham">
+              class="ui form static" id="">
 
             <div class="ui top attached tabular menu">
                 <a class="item active" data-tab="first">Thông tin</a>
@@ -28,6 +28,6 @@
             @include('admin.foodies.update.tab_material')
 
         </form>
-
     </div>
 @endsection
+
