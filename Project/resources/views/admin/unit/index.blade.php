@@ -1,13 +1,13 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Quản lý loại thực đơn')
+@section('title', 'Quản lý đơn vị tính')
 
 @section('content')
     <div class="ui blue raised segment">
-        <h3 class="ui dividing header center aligned">QUẢN LÝ NGUYÊN LIỆU</h3>
+        <h3 class="ui dividing header center aligned">QUẢN LÝ ĐƠN VỊ TÍNH</h3>
         @include('admin.layouts.components.success_msg')
         @include('admin.layouts.components.errors_msg')
-        <form action="{{route('material.destroy',[0])}}" method="post" class="ui form">
+        <form action="{{route('unit.destroy',[0])}}" method="post" class="ui form">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
             <div class="field">
@@ -17,22 +17,21 @@
                     <i class="delete fitted icon"></i>
                     <strong>Xóa </strong>
                 </button>
-                <button type="button" class="ui small blue button" onclick="$('#create-material-modal').modal('show')">
+                <button type="button" class="ui small blue button" onclick="$('#create-unit-modal').modal('show')">
                     <i class="add fitted icon"></i>
                     <strong>Thêm mới </strong>
                 </button>
-                <a href="{{ route('unit.index') }}" class="right floated teal ui small button">Đơn vị tính</a>
             </div>
 
-            @include('admin.material.table')
+            @include('admin.unit.table')
 
         </form>
-        @include('admin.material.modals')
+        @include('admin.unit.modal')
     </div>
 @endsection
 
 @push('script')
     <script>
-        bindSelectAll('material-id[]');
+        bindSelectAll('unit-id[]');
     </script>
 @endpush

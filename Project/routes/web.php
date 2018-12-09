@@ -96,6 +96,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('material_delete', 'admin\restore\MaterialRestoreController@delete')->name('material_delete')
         ->middleware('material');
 
+    /**      Units       **/
+    Route::resource('unit', 'admin\UnitController')
+        ->middleware('material');
 
     /**      Goods receipt notes       **/
     Route::resource('goods_receipt_note', 'admin\GoodsReceiptNotesController')
