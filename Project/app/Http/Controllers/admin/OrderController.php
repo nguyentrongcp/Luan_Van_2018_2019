@@ -145,21 +145,20 @@ class OrderController extends Controller
     }
     public function orderCancelled($id){
         $order = Order::findOrFail($id);
-            if ($order->cancelled()){
+            if ($order->waitingPay() || $order->unapproved()){
+                $order->delete();
+            }
+            if ($order->approved()) {
+                $orderStatuses = OrderStatus::where('order_id', $id)->get();
+                foreach ($orderStatuses as $orderStatus) {
+                    $orderStatus->status = 0;
+                    $orderStatus->update();
+                }
+//
+            }
+            if ($order->getStatus() == 2){
                 $order->is_deleted = true;
                 $order->update();
-            }
-            $orderStatuses = OrderStatus::where('order_id',$id)->get();
-            foreach ($orderStatuses as $orderStatus){
-                $orderStatus->status = 3;
-                $orderStatus->admin_id = Admin::adminId();
-                $orderStatus->approved_date = date('Y-m-d H:i:s');
-                $orderStatus->update();
-            }
-            $orderFoodies = OrderFoody::where('order_id',$id)->get();
-            foreach ($orderFoodies as $orderFoody){
-                $orderFoody->is_deleted = true;
-                $orderFoody->update();
             }
             return back()->with('success','Hủy đơn hàng thành công!');
     }

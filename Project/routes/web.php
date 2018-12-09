@@ -87,6 +87,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('material');
     Route::resource('material_restore', 'admin\restore\MaterialRestoreController', ['only' => ['index', 'store','destroy']])
         ->middleware('material');
+    Route::post('material_delete', 'admin\restore\MaterialRestoreController@delete')->name('material_delete')
+        ->middleware('material');
 
 
     /**      Goods receipt notes       **/
@@ -114,7 +116,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('order');
     Route::get('orders/{id}/print', 'admin\OrderController@printOrder')->name('print_order')
         ->middleware('order');
-
+    Route::resource('order_restore', 'admin\restore\OrderRestoreController', ['only' => ['index', 'store']])
+        ->middleware('order');
+    Route::post('order_delete', 'admin\restore\OrderRestoreController@delete')->name('order_delete')
+        ->middleware('order');
 
     /**      Sales offs       **/
     Route::resource('sales_offs', 'admin\SalesOffsController', ["except" => ["create", "edit"]])

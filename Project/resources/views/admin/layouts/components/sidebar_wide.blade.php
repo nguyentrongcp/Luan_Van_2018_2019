@@ -129,6 +129,11 @@
                        href="{{route('goods_receipt_note_restore.index')}}">
                         <i class="dolly icon icon-left"></i>Nhập hàng</a>
                 @endif
+                @if($employee->checkRoles(6))
+                    <a class="title item {{ Request::is('*order_restore') ? 'active': '' }}"
+                       href="{{route('order_restore.index')}}">
+                        <i class="dolly icon icon-left"></i>Đơn hàng</a>
+                @endif
                 @if($employee->isAdmin())
                     <a class="title item {{ Request::is('*employee_restore') ? 'active': '' }}"
                        href="{{route('employee_restore.index')}}">

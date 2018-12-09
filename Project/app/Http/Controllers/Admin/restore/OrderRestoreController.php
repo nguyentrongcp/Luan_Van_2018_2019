@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\admin\restore;
 
-use App\Material;
+use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class MaterialRestoreController extends Controller
+class OrderRestoreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,13 @@ class MaterialRestoreController extends Controller
      */
     public function index()
     {
-        $materials = Material::where('is_deleted', true)->paginate(10);
+        $orderRestores = Order::join('order_statuses as os','os.order_id','=','orders.id')
+            ->where('is_deleted',true)
+            ->orderBy('os.status','ASC')
+            ->orderBy('orders.order_created_at','DESC')
+            ->paginate(10);
 
-        return view('admin.restore.material.index', compact('materials'));
+        return view('admin.restore.order.index',compact('orderRestores'));
     }
 
     /**
@@ -33,20 +37,20 @@ class MaterialRestoreController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if (!$request->has('material-ids')) {
+        if (!$request->has('order-ids')) {
             return back();
         }
 
-        $ids = $request->get('material-ids');
-        foreach ($ids as $id) {
-            $foody = Material::findOrFail($id);
-            $foody->is_deleted = false;
-            $foody->update();
+        $ids = $request->get('order-ids');
+        foreach($ids as $id) {
+            $order = Order::findOrFail($id);
+            $order->is_deleted = false;
+            $order->update();
         }
 
         return back()->with('success', 'Phục hồi thành công.');
@@ -55,7 +59,7 @@ class MaterialRestoreController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -66,7 +70,7 @@ class MaterialRestoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -77,8 +81,8 @@ class MaterialRestoreController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -89,22 +93,22 @@ class MaterialRestoreController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $material = Material::destroy($id);
-        return back()->with('success', 'Phục hồi thành công.');
+
     }
     public function delete(Request $request){
-        if (!$request->has('material-ids')) {
+        if (!$request->has('order-ids')) {
             return back();
         }
-        $ids = $request->get('material-ids');
+        $ids = $request->get('order-ids');
         foreach($ids as $id) {
-            $material = Material::destroy($id);
+            $order = Order::find($id);
+            $order->delete();
         }
-        return redirect(route('material_restore.index'))->with('success', 'Xóa thành công.');
+        return redirect(route('order_restore.index'))->with('success', 'Xóa thành công.');
     }
 }

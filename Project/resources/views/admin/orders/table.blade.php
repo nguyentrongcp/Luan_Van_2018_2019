@@ -9,8 +9,8 @@
             <th class="text-center">Ngày đặt hàng</th>
             <th class="right aligned">Tổng tiền</th>
             <th class="">Tình trạng</th>
-            <th class="collapsing">Duyệt</th>
-            <th class="collapsing">Hủy</th>
+            <th class="collapsing">Duyệt / Hủy</th>
+            <th class="collapsing">Xóa</th>
         </tr>
         </thead>
         <tbody id="order-table">
@@ -37,13 +37,10 @@
                 <td class="right aligned" id="">{{number_format($order->total_of_cost).' đ'}}
                 </td>
                 <td>
-                    @if($order->cancelled())
-                        <i class="delete red open fitted icon"></i>
-                        <span style="color: red" ><strong> Đã hủy</strong></span>
-                    @elseif($order->unapproved())
+                    @if($order->unapproved())
                         <i class="warning open fitted orange icon"></i>
                         <span style="color: orange" ><strong> Chưa duyệt</strong></span>
-                    @elseif($order->getStatus() == -1)
+                    @elseif($order->waitingPay())
                         @if(date_create(date('Y-m-d H:i:s'))->getTimestamp() -
                                 date_create($order->order_created_at)->getTimestamp() > 600)
                             <i class="wait open fitted red icon"></i>
@@ -66,18 +63,24 @@
                            onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng này?')">
                             <i class="check open fitted icon"></i>
                         </a>
-                    @endif
-                </td>
-                <td>
-                    @if($order->unapproved())
+                        /
                         <a class="ui small orange label a-decoration" href="{{ route('order_cancelled', [$order->id]) }}"
                            onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')">
                             <i class="trash open fitted icon"></i>
                         </a>
-                    @elseif($order->cancelled() || $order->status == -1)
+                    @endif
+                    @if($order->waitingPay() || $order->approved())
+                            <a class="ui small orange label a-decoration" href="{{ route('order_cancelled', [$order->id]) }}"
+                               onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')">
+                                <i class="trash open fitted icon"></i>
+                            </a>
+                    @endif
+                </td>
+                <td>
+                    @if($order->getStatus() == 2)
                         <a class="ui small red label a-decoration" href="{{ route('order_cancelled', [$order->id]) }}"
-                           onclick="return confirm('Bạn chắc chắn muốn xóa đơn hàng này?')">
-                            <i class="remove open fitted icon"></i>
+                           onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng này?')">
+                            <i class="remove fitted icon"></i>
                         </a>
                     @endif
                 </td>

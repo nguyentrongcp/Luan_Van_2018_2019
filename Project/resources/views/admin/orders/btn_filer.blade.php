@@ -21,9 +21,5 @@
             <i class="check icon"></i>
             Đã giao hàng
         </div>
-        <div class="item" style="color: red" data-value="da-huy">
-            <i class="remove icon"></i>
-            Đã hủy
-        </div>
     </div>
 </div>

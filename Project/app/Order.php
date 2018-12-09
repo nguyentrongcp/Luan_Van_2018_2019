@@ -48,14 +48,15 @@ class Order extends Model
         ];
         return $status[$this->orderStatus->status];
     }
+
+    public function waitingPay(){
+        return $this->orderStatus->status == -1;
+    }
     public function unapproved(){
         return $this->orderStatus->status == 0;
     }
     public function approved(){
         return $this->orderStatus->status == 1 || $this->orderStatus->status == 2;
-    }
-    public function cancelled(){
-        return $this->orderStatus->status == 3;
     }
 
     public function getIdAdmin(){
