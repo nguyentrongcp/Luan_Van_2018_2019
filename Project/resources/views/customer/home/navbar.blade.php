@@ -61,7 +61,6 @@
     @endif
 
     @if(\App\Functions::isSalesOff())
-        @php $sales = \App\SalesOff::distinct('percent')->get(); @endphp
         <div class="row">
             <h6><b>Khuyến mãi</b></h6>
             <div class="divider"></div>

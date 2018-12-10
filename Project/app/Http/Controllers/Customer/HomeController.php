@@ -20,6 +20,12 @@ class HomeController extends Controller {
         $foodies = Foody::all();
         $type = '';
         $sort = '';
+        $sales = DB::table('sales_offs as s1')
+            ->join('sales_offs as s2', 's2.sales_off_id', 's1.id')
+            ->where('s1.start_date', '<=', date('Y-m-d'))
+            ->where('s1.end_date', '>=', date('Y-m-d'))
+            ->orderBy('s2.percent', 'desc')->distinct('s2.percent')
+            ->select('s2.percent')->get();
         if ($request->session()->has('foody_type_id')) {
             $type = session('foody_type_id');
             $request->session()->forget('foody_type_id');
@@ -29,7 +35,7 @@ class HomeController extends Controller {
             $request->session()->forget('foody_sort_id');
         }
 
-        return view('customer.home.index', compact(['foody_types', 'foodies', 'type', 'sort']));
+        return view('customer.home.index', compact(['foody_types', 'foodies', 'type', 'sort', 'sales']));
     }
 
     public function getFoody(Request $request) {
