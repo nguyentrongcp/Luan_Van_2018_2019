@@ -8,8 +8,8 @@
                 </div>
             </th>
             <th class="collapsing">STT</th>
-            <th>Tên loại ẩm thực</th>
-            <th class="collapsing">Ẩm thực</th>
+            <th>Tên loại món ăn</th>
+            <th class="collapsing">Món ăn</th>
             <th class="collapsing">Sửa</th>
             <th class="collapsing">Xóa</th>
         </tr>
