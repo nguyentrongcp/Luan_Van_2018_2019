@@ -204,7 +204,7 @@ class Foody extends Model
         if ($this->isMaterial()) {
             foreach($this->materialFoodies as $material_foody) {
                 $material = Material::find($material_foody->material_id);
-                $sorts[] = $material->value / $material_foody->value;
+                $sorts[] = (int)($material->value / $material_foody->value);
             }
             return min($sorts);
         }

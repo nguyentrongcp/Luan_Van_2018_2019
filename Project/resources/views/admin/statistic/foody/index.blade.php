@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Ẩm thực')
+@section('title', 'Thống kê món ăn')
 
 @push('style')
     <style>
@@ -23,16 +23,16 @@
 @section('content')
     <div class="ui blue raised segment">
 
-        <h3 class="ui dividing header">Thống kê ẩm thực</h3>
+        <h3 class="ui dividing header">Thống kê món ăn</h3>
 
         <div class="ui top attached tabular menu">
             <a class="item {{ Request::has('lim') ? '': 'active' }}" data-tab="first">Tổng quan</a>
             {{--<a class="item {{ Request::has('lim') ? 'active' : '' }}" data-tab="second">Khuyến mãi</a>--}}
-            {{--<a class="item" data-tab="third">Hết hàng/Ngừng k.doanh</a>--}}
+            <a class="item" data-tab="third">Hết hàng/Ngừng k.doanh</a>
         </div>
 
         @include('admin.statistic.foody.general')
-{{--        @include('admin.statistic.foody.foody_out_stop')--}}
+        @include('admin.statistic.foody.foody_out_stop')
         @include('admin.statistic.foody.sales_off')
 
     </div>

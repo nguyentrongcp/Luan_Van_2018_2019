@@ -1,7 +1,7 @@
 <h4 class="ui header">
     <label class="label-fixed" for="">Chọn ngày: </label>
     <div class="ui mini input">
-        <input type="date" id="specific-day" name="specific-day">
+        <input type="date" value="{{ date('Y-m-d') }}" id="specific-day" name="specific-day">
     </div>
 </h4>
 

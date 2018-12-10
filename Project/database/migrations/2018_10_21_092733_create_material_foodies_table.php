@@ -20,8 +20,8 @@ class CreateMaterialFoodiesTable extends Migration
             $table->float('value');
             $table->timestamps();
 
-            $table->foreign('material_id')->references('id')->on('materials');
-            $table->foreign('foody_id')->references('id')->on('foodies');
+            $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
+            $table->foreign('foody_id')->references('id')->on('foodies')->onDelete('cascade');
         });
     }
 

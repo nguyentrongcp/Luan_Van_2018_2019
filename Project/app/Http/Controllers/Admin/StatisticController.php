@@ -25,10 +25,12 @@ class StatisticController extends Controller
 
     public function foody()
     {
-        $outFoodies = DB::table('foodies')
-            ->join('foody_statuses', 'foodies.id', '=', 'foody_statuses.foody_id')
-            ->where('foody_statuses.status', '=', false)
-            ->get();
+        $outFoodies = [];
+        foreach(Foody::all() as $foody) {
+            if ($foody->getQuantity() == 0) {
+                $outFoodies[] = $foody;
+            }
+        }
 
         $saleOffFoodies = DB::table('sales_off_details')
             ->join('sales_offs as s2', 's2.id', '=', 'sales_off_details.sales_off_id')

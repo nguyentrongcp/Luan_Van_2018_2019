@@ -9,7 +9,7 @@
                     {{ \App\Dashboard::totalFoody() }}
                 </div>
                 <div class="label">
-                    Ẩm thực
+                    Món ăn
                 </div>
             </div>
 

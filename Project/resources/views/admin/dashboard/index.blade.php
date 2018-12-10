@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Dashboard')
+@section('title', 'Trang chủ')
 
 @section('content')
 

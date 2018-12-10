@@ -3,10 +3,10 @@
     <h5 class="ui header right aligned">
     </h5>
     <div class="column">
-        <h5 class="ui dividing header no-margin-bottom">Ẩm thực đang khuyến mãi</h5>
+        <h5 class="ui dividing header no-margin-bottom">Món ăn đang khuyến mãi</h5>
         <table class="ui table celled striped compact" id="product-out-table">
             <thead>
-            <tr><th class="collapsing center aligned">STT</th><th>Tên ẩm thực</th>
+            <tr><th class="collapsing center aligned">STT</th><th>Tên món ăn</th>
                 <th class="center aligned">Giảm giá</th></tr>
             </thead>
             <tbody>

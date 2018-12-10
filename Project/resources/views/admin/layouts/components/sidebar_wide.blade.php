@@ -31,7 +31,7 @@
 
                     <a href="{{route('foody')}}"
                        class="title item {{ Request::is('*statistic/foody') ? 'active' : '' }}">
-                        <i class="utensils icon icon-left"></i>Ẩm thực</a>
+                        <i class="utensils icon icon-left"></i>Món ăn</a>
                 </div>
             </div>
         </div>
@@ -39,13 +39,13 @@
 
     @if($employee->checkRoles(2))
         <a class="item {{ Request::is('*/foody_type') ? 'active-bar': '' }}" href="/admin/foody_type">
-            <i class="sitemap icon icon-left"></i>Loại ẩm thực</a>
+            <i class="sitemap icon icon-left"></i>Loại món ăn</a>
     @endif
 
     @if($employee->checkRoles(3))
         <a class="item {{ Request::is('*admin/foodies*')||Request::is('*/foody_type/*') ? 'active-bar': '' }}"
            href="/admin/foodies">
-            <i class="utensils icon icon-left"></i>Ẩm thực</a>
+            <i class="utensils icon icon-left"></i>Món ăn</a>
     @endif
     @if($employee->checkRoles(4))
         <a class="item {{Request::is('*/material')|| Request::is('*/materials/*')|| Request::is('*/material') ? 'active-bar': '' }}"

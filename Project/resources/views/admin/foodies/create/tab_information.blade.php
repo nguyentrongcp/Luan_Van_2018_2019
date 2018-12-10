@@ -22,7 +22,7 @@
 
             <div class="inline required field">
                 <label class="label-fixed">Giá</label>
-                <input type="number" name="foody-cost" value="{{old('foody-cost')}}" id="foody-cost"
+                <input type="number" name="foody-cost" value="0" id="foody-cost"
                        placeholder="Giá thành">
             </div>
             <span id="foody-cost-error" class="error-text"></span>

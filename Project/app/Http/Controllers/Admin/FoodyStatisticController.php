@@ -19,7 +19,10 @@ class FoodyStatisticController extends Controller
             $data = $this->getDate($request);
         }
         if ($request->type == 'days') {
-            $data = $this->getDate($request);
+            $data = $this->getDates($request);
+        }
+        if ($request->type == 'today') {
+            $data = $this->getToday($request);
         }
 
         return Response(['status' => 'success', 'data' => $data]);
@@ -68,7 +71,7 @@ class FoodyStatisticController extends Controller
             ->selectRaw('foodies.name as foodyname, count(orders.id) as total')
             ->where('order_created_at', '>=', $date_start)
             ->where('order_created_at', '<=', $date_end)
-            ->where('status', 3)
+            ->where('status', 2)
             ->groupBy('foodies.id')
             ->orderBy('total','DESC')
             ->limit($qty);

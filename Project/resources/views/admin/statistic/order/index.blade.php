@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Đơn hàng')
+@section('title', 'Thống kê đơn hàng')
 
 @section('content')
     <div class="ui blue raised segment">
@@ -12,17 +12,6 @@
         <div class="ui divider"></div>
 
         <h4 class="ui header">Biểu đồ thống kê
-
-            <span class=" force-right pointer"
-                  onclick="showExportMultiple(
-                  '',
-                  'Thong ke theo so luong don hang',
-                  amountCols, amountRows,
-                  'Thong ke theo gia tri don hang (DV: trieu dong)',
-                  revCols, revRows
-              )">
-            <i class="file pdf outline red icon fitted"></i>
-            PDF
         </span>
         </h4>
         <form class="ui tiny form">
