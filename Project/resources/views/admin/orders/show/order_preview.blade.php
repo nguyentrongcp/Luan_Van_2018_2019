@@ -81,10 +81,10 @@
             <thead>
             <tr>
                 <th>STT</th>
-                <th>Tên ẩm thực</th>
+                <th>Tên món ăn</th>
                 <th>Số lượng</th>
                 <th>Đơn giá</th>
-                <th>Khuyến mãi</th>
+                <th>Giảm giá (%)</th>
                 <th>Thành tiền</th>
             </tr>
             </thead>
@@ -101,11 +101,8 @@
             @endforeach
             <tr>
                 <td colspan="6" class="right-aligned">
-                    <p>Thuế GTGT (10%): <strong>{{ number_format($order->total_of_cost * 0.1) }} đ</strong></p>
-                    <p>Tổng tiền hàng (đã có thuế): <strong>{{ number_format($order->total_of_cost) }} đ</strong>
-                    </p>
                     <p>Phí vận chuyển: <strong>{{ number_format($order->transport_fee) }} đ</strong></p>
-                    <p>Tổng cộng: <strong>{{ number_format($order->tong_tien + $order->transport_fee) }}
+                    <p>Tổng cộng: <strong>{{ number_format($order->total_of_cost + $order->transport_fee) }}
                             đ</strong></p>
                 </td>
             </tr>

@@ -33,26 +33,26 @@
                         <input type="text" name="shop-address" value="{{ $shopInfo->address }}">
                     </div>
                 </div>
-                <div class="column">
-                    <div class="field">
-                        <label for="logo">Logo</label>
-                        <img src="{{asset($shopInfo->logo)}}" alt="Logo">
-                    </div>
-                    <div class="required field">
-                        <label>Thay đổi Logo cửa hàng</label>
-                        <label for="logo">
-                            <span class="ui blue compact label">Chọn một ảnh</span>
-                            <span id="logo-name"></span>
-                        </label>
-                        <input type="file" name="logo" id="logo" style="display: none;"
-                               onchange="$('#logo-name').text($('#logo')[0].files[0].name)"
-                               accept=".jpg, .png, .jpeg">
-                    </div>
-                    <div class="field">
-                        <label for="time">Thời gian hoạt động của cửa hàng</label>
+                {{--<div class="column">--}}
+                    {{--<div class="field">--}}
+                        {{--<label for="logo">Logo</label>--}}
+                        {{--<img src="{{asset($shopInfo->logo)}}" alt="Logo">--}}
+                    {{--</div>--}}
+                    {{--<div class="required field">--}}
+                        {{--<label>Thay đổi Logo cửa hàng</label>--}}
+                        {{--<label for="logo">--}}
+                            {{--<span class="ui blue compact label">Chọn một ảnh</span>--}}
+                            {{--<span id="logo-name"></span>--}}
+                        {{--</label>--}}
+                        {{--<input type="file" name="logo" id="logo" style="display: none;"--}}
+                               {{--onchange="$('#logo-name').text($('#logo')[0].files[0].name)"--}}
+                               {{--accept=".jpg, .png, .jpeg">--}}
+                    {{--</div>--}}
+                    {{--<div class="field">--}}
+                        {{--<label for="time">Thời gian hoạt động của cửa hàng</label>--}}
 
-                    </div>
-                </div>
+                    {{--</div>--}}
+                {{--</div>--}}
             </div>
             <div class="field">
                 <button type="submit" class="ui blue button">

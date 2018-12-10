@@ -29,7 +29,7 @@
                 <th class="center aligned">Giá trị</th>
                 {{--<th class="center aligned">Xóa</th>--}}
 
-            </tr>.
+            </tr>
             </thead>
             <tbody>
             @foreach($materialFoodys as $stt => $materialFoody)
