@@ -1,28 +1,26 @@
 <!-- Modal create goods receipt note detail-->
-<div class="ui mini-40 modal" id="create-material-foody-modal">
+<div class="ui mini-40 vertical modal" id="create-material-foody-modal">
     <div class="blue header">Thêm nguyên liệu cho ẩm thực</div>
-    <div class="scrolling content">
+    <div class="content">
         <form action="{{ route('foodies_material')}}" class="ui form" method="post">
             {{ csrf_field() }}
             <input type="hidden" name="material-foody-id" value="{{$id}}">
             <div class="field">
-                <label for="material-name">Tên nguyên liệu</label>
-                <select class="ui dropdown material-name" name="material" id="material">
+                <label>Tên nguyên liệu</label>
+                <select class="ui dropdown" name="material">
                     @foreach(\App\Material::all() as $material)
-                        <option class="item" value="{{$material->id}}">
-                            {{$material->name}}
+                        <option value="{{$material->id}}">
+                            {{$material->name.' ('.$material->calculationUnit->unit.')'}}
                         </option>
                     @endforeach
                 </select>
             </div>
             <div class="field">
-                <label for="amount">Số lượng</label>
-                <div class="ui right labeled input">
-                    <input type="number" step="any" name="value" id="value" placeholder="Số lượng" min="0">
-                </div>
+                <label>Số lượng</label>
+                <input type="number" step="any" name="value" id="value" placeholder="Số lượng" min="0">
             </div>
             <div class="field">
-                <button class="ui blue fluid button"><strong>Lưu</strong></button>
+                <button class="ui fluid blue button"><strong>Lưu</strong></button>
             </div>
         </form>
     </div>

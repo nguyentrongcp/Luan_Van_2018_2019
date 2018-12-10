@@ -12,10 +12,7 @@
             </div>
             <div class="field">
                 <label for="amount">Số lượng</label>
-                <div class="ui right labeled input">
-                    <input type="number" name="value" min="0" placeholder="Số lượng" value="0">
-
-                </div>
+                <input type="number" name="value" min="0" placeholder="Số lượng" value="0">
             </div>
             <div class="field">
                 <label>Đơn vị tính</label>

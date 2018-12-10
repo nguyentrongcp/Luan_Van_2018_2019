@@ -28,11 +28,11 @@
         <div class="ui top attached tabular menu">
             <a class="item {{ Request::has('lim') ? '': 'active' }}" data-tab="first">Tổng quan</a>
             {{--<a class="item {{ Request::has('lim') ? 'active' : '' }}" data-tab="second">Khuyến mãi</a>--}}
-            <a class="item" data-tab="third">Hết hàng/Ngừng k.doanh</a>
+            {{--<a class="item" data-tab="third">Hết hàng/Ngừng k.doanh</a>--}}
         </div>
 
         @include('admin.statistic.foody.general')
-        @include('admin.statistic.foody.foody_out_stop')
+{{--        @include('admin.statistic.foody.foody_out_stop')--}}
         @include('admin.statistic.foody.sales_off')
 
     </div>

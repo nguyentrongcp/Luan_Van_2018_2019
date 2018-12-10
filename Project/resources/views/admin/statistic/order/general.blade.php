@@ -1,7 +1,7 @@
 <div class="ui bottom attached tab segment {{ Request::has('lim') ? '': 'active' }}" data-tab="first">
 
     <div class="ui segment">
-        <div class="ui tiny five statistics">
+        <div class="ui tiny four statistics">
 
             <div class="statistic">
                 <div class="value">
@@ -51,18 +51,18 @@
                 </div>
             </div>
 
-            <div class="statistic">
-                <div class="value">
-                    <i class="icons">
-                        <i class="clipboard icon"></i>
-                        <i class="bottom right corner red remove icon"></i>
-                    </i>
-                    {{\App\Statistic::getTotalOrdercancelled()}}
-                </div>
-                <div class="label">
-                    Đã hủy
-                </div>
-            </div>
+            {{--<div class="statistic">--}}
+                {{--<div class="value">--}}
+                    {{--<i class="icons">--}}
+                        {{--<i class="clipboard icon"></i>--}}
+                        {{--<i class="bottom right corner red remove icon"></i>--}}
+                    {{--</i>--}}
+                    {{--{{\App\Statistic::getTotalOrdercancelled()}}--}}
+                {{--</div>--}}
+                {{--<div class="label">--}}
+                    {{--Đã hủy--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
     </div>
 

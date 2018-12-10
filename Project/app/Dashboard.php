@@ -33,11 +33,11 @@ class Dashboard extends Model
         $status = [
             0 => 'Chưa duyệt',
             1 => 'Đang vận chuyển',
-            2 => 'Đã giao hàng',
-            3 => 'Đã hủy'
+            2 => 'Đã giao hàng'
         ];
         $orders = DB::table('orders')
             ->join('order_statuses','orders.id','=','order_statuses.order_id')
+            ->where('status', '>=', '0')
             ->selectRaw("order_statuses.status as label, count(*) as total")
             ->groupBy('order_statuses.status')->get();
         foreach ($orders as &$order) {

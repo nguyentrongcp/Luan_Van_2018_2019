@@ -60,7 +60,7 @@ class PaymentController extends Controller
         $otp = rand(100000, 999999);
         session(['time' => time(), 'otp' => $otp]);
         $this->store($request);
-//            $this->sendOTP([$request->phone]);
+            $this->sendOTP([$request->phone]);
     }
 
     public function store($request) {
@@ -129,18 +129,18 @@ class PaymentController extends Controller
 
 
         if (!$request->session()->has('time')) {
-            $time = 10;
+            $time = 120;
             $this->create($request);
         }
         else {
             $time = time() - session('time');
-            if ($time < 10) {
+            if ($time < 120) {
                 $this->store($request);
-                $time = 10 - $time;
+                $time = 120 - $time;
             }
 
             else {
-                $time = 10;
+                $time = 120;
                 $this->create($request);
             }
 
@@ -205,7 +205,7 @@ class PaymentController extends Controller
                     'error_text' => 'Giá sản phẩm có thay đổi. Hãy cập nhật lại trước khi gửi đơn hàng.'
                 ];
             }
-            if ($foody->checkQuantity($cart->qty)) {
+            if (!$foody->checkQuantity($cart->qty)) {
                 $data = [
                     'status' => 'error_cost',
                     'error_text' => 'Rất tiếc, nguyên liệu không đủ. Hãy cập nhật lại trang để

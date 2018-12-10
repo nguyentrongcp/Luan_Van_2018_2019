@@ -168,7 +168,7 @@ class OrderController extends Controller
                 $order->is_deleted = true;
                 $order->update();
             }
-            return back()->with('success','Hủy đơn hàng thành công!');
+            return redirect(route('orders.index'))->with('success','Hủy đơn hàng thành công!');
     }
 
     public function printOrder($id){

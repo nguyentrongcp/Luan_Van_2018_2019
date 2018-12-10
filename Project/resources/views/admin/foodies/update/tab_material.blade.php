@@ -20,9 +20,9 @@
                         <input type="checkbox">
                     </div>
                 </th>
-                <th class="collapsing">STT</th>
-                <th class="collapsing">Thành phần</th>
-                <th>Giá trị</th>
+                <th class="collapsing center aligned">STT</th>
+                <th>Thành phần</th>
+                <th class="center aligned">Giá trị</th>
                 <th>Xóa</th>
             </tr>
             </thead>
@@ -39,7 +39,7 @@
                     <td>
                         {{ $materialFoody->material->name }}
                     </td>
-                    <td class="collapsing">
+                    <td class="center aligned">
                         {{ $materialFoody->value .' '.$materialFoody->material->calculationUnit->unit }}
                     </td>
                     <td>
@@ -59,7 +59,6 @@
         </div>
     @endif
 </div>
-@include('admin.foodies.update.modal')
 
 @push('script')
 

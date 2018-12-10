@@ -1,7 +1,7 @@
 <div class="ui bottom attached tab segment {{ Request::has('lim') ? '': 'active' }}" data-tab="first">
 
     <div class="ui segment">
-        <div class="ui tiny four statistics">
+        <div class="ui tiny three statistics">
 
             <div class="statistic">
                 <div class="value">
@@ -13,18 +13,18 @@
                 </div>
             </div>
 
-            <div class="statistic">
-                <div class="value">
-                    <i class="icons">
-                        <i class="box icon"></i>
-                        <i class="bottom right corner red heart icon"></i>
-                    </i>
-                    {{\App\Statistic::getTotalHotSales()}}
-                </div>
-                <div class="label">
-                    Bán chạy nhất
-                </div>
-            </div>
+            {{--<div class="statistic">--}}
+                {{--<div class="value">--}}
+                    {{--<i class="icons">--}}
+                        {{--<i class="box icon"></i>--}}
+                        {{--<i class="bottom right corner red heart icon"></i>--}}
+                    {{--</i>--}}
+                    {{--{{\App\Statistic::getTotalHotSales()}}--}}
+                {{--</div>--}}
+                {{--<div class="label">--}}
+                    {{--Bán chạy nhất--}}
+                {{--</div>--}}
+            {{--</div>--}}
             <div class="statistic">
                 <div class="value">
                     <i class="icons">
@@ -38,13 +38,21 @@
                 </div>
             </div>
 
+            @php
+                $count = 0;
+                foreach(\App\Foody::all() as $foody) {
+                    if ($foody->getQuantity() == 0) {
+                        $count++;
+                    }
+                }
+            @endphp
             <div class="statistic">
                 <div class="value">
                     <i class="icons">
                         <i class="box icon"></i>
                         <i class="bottom right corner red remove icon"></i>
                     </i>
-                    {{\App\Statistic::getOutOffStock()}}
+                    {{ $count }}
                 </div>
                 <div class="label">
                     Hết hàng

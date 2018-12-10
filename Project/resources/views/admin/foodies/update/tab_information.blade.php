@@ -30,7 +30,7 @@
             </div>
             <div class="inline field">
                 <label class="label-fixed">Giá:</label>
-                <input type="text" name="foody-cost" value="{{ number_format($foodies->currentCost()) }}">
+                <input type="text" name="foody-cost" value="{{ $foodies->currentCost() }}">
             </div>
             @if($errors->has('foody-cost'))
                 <div style="color: red; margin-top: 5px; font-size: 13px">

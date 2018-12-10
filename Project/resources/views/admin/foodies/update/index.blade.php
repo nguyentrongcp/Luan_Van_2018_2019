@@ -28,6 +28,7 @@
             @include('admin.foodies.update.tab_material')
 
         </form>
+        @include('admin.foodies.update.modal')
     </div>
 @endsection
 
