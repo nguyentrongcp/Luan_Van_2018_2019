@@ -4,13 +4,13 @@
         <div class="ten wide column">
 
             <div class="inline required field">
-                <label class="label-fixed">Tên ẩm thực</label>
-                <input type="text" name="foody-name" id="foody-name" placeholder="Tên thực đơn"
+                <label class="label-fixed">Tên món ăn</label>
+                <input type="text" name="foody-name" id="foody-name" placeholder="Tên món ăn"
                 value="{{old('foody-name')}}">
             </div>
             <span id="foody-name-error" class="error-text"></span>
             <div class="inline required field">
-                <label class="label-fixed">Loại ẩm thực</label>
+                <label class="label-fixed">Loại món ăn</label>
                 <select name="foody-type-name" id="foody-type" class="ui search dropdown">
                     @foreach($foodyTypes as $foodyType)
                         <option value="{{ $foodyType->id }}">
@@ -76,7 +76,7 @@
                 empty = true;
             }
             if($('#foody-avatar').val() === '') {
-                $('#foody-avatar-error').text('Bạn cần phải thêm ảnh đại diện cho ẩm thực!');
+                $('#foody-avatar-error').text('Bạn cần phải thêm ảnh đại diện cho món ăn!');
                 empty = true;
             }
             if (!empty) {

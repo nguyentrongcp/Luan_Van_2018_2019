@@ -1,6 +1,6 @@
 <!-- Modal create goods receipt note detail-->
 <div class="ui mini-40 modal" id="create-material-foody-modal">
-    <div class="blue header">Thêm nguyên liệu cho ẩm thực</div>
+    <div class="blue header">Thêm nguyên liệu cho món ăn</div>
     <div class="scrolling content">
         <form action="{{ route('foodies_material')}}" class="ui form" method="post">
             {{ csrf_field() }}

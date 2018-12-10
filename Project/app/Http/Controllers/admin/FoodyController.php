@@ -332,15 +332,19 @@ class FoodyController extends Controller
         $materialFoody->value = $request->get('value');
         $materialFoody->save();
 
-        return back()->with('success','Cập nhật nguyên liệu thành công!');
+        return back()->with('success','Thêm nguyên liệu thành công!');
     }
 
-    public function deleteMaterialFoody($id){
-        $materialFoodys = MaterialFoody::where('material_id',$id)->get();
+    public function deleteMaterialFoody(Request $request){
+        if (!$request->get('material-foody-id')){
+            return back()->with('error','Bạn chưa chọn dữ liệu!');
+        }
+        $materialFoodys = MaterialFoody::where('foody_id',$request->get('foody-id'))
+            ->where('material_id',$request->get('material-foody-id'))->get();
         foreach ($materialFoodys as $materialFoody){
             $materialFoody->delete();
         }
-            return back()->with('success','Xóa thành công');
+        return back()->with('success','Xóa thành công');
     }
 
 }
