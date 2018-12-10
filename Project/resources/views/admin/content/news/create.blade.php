@@ -53,12 +53,13 @@
                 <div class="sixteen wide column">
                     <div class="field">
                         <label for="content">Nội dung</label>
-                    </div>
-                    <div id="editor">
+                        <div id="editor">
                     <textarea id='news-content' name="content" placeholder="Nội dung bài viết">
                             {{old('content')}}
                       </textarea>
+                        </div>
                     </div>
+
                     <div class="field">
                         <button id="news-submit" class="ui blue button"><i class="save icon"></i>Lưu bài</button>
                     </div>

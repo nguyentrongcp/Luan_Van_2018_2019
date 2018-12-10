@@ -20,6 +20,10 @@ class Material extends Model
         return $count;
     }
 
+    public function goodsNoteReceiptMaterials() {
+        return $this->hasMany(GoodsReceiptNoteDetail::class, 'material_id', 'id');
+    }
+
     public function checkName($name){
         return (Material::where('name',$name)->count() > 0);
     }

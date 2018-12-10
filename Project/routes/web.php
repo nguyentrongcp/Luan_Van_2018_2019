@@ -149,6 +149,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('salesoff');
     Route::resource('sales_offs_details', 'admin\SalesOffsDetailsController')
         ->middleware('salesoff');
+    Route::get('sales_off_detail/get_foody', 'admin\SalesOffsDetailsController@getFoody')->name('admin.sales.get.foody')
+        ->middleware('salesoff');
 
 
 
@@ -179,6 +181,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::resource('employee_restore', 'admin\restore\EmployeeRestoreController', ['only' => ['index', 'store']])
         ->middleware('employee');
     Route::post('employee_delete', 'admin\restore\EmployeeRestoreController@delete')->name('employee_delete')
+        ->middleware('employee');
+    Route::resource('role', 'admin\RoleController')
         ->middleware('employee');
     /** Comments **/
 

@@ -9,7 +9,7 @@
             </th>
             <th class="collapsing center aligned">STT</th>
             <th class="center aligned">Giá trị (%)</th>
-            <th class="center aligned">Số ẩm thực</th>
+            <th class="center aligned">Số món ăn</th>
             <th class="collapsing">Xem</th>
         </tr>
         </thead>

@@ -36,11 +36,21 @@ class CreateSalesController extends Controller
      */
     public function store(Request $request)
     {
+        $errors = [];
         foreach($request->percent as $percent) {
-            $salesOff = new SalesOff();
-            $salesOff->percent = $percent;
-            $salesOff->sales_off_id = $request->get('id-sales');
-            $salesOff->save();
+            $sales_off = SalesOff::find($request->get('id-sales'));
+            if ($sales_off->salesOffs()->where('percent', $percent)->count() > 0) {
+                $errors[] = $percent;
+            }
+            else {
+                $salesOff = new SalesOff();
+                $salesOff->percent = $percent;
+                $salesOff->sales_off_id = $request->get('id-sales');
+                $salesOff->save();
+            }
+        }
+        if (count($errors) > 0) {
+            return back()->with('error', 'Các giá trị '.implode(', ', $errors).' đã tồn tại!');
         }
 
         return back()->with('success','Thêm mới thành công!');

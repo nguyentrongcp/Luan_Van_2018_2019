@@ -40,12 +40,29 @@ class GoodsReceiptNotesDetailController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->material == '') {
+            return back()->with('error', 'Bạn chưa nhập tên nguyên liệu!');
+        }
+        if ($request->quantity == '') {
+            return back()->with('error', 'Bạn chưa nhập số lượng!');
+        }
+        if ($request->cost == '') {
+            return back()->with('error', 'Bạn chưa nhập đơn giá!');
+        }
+        else {
+            if ($request->cost < 1000) {
+                return back()->with('error', 'Đơn giá không được nhỏ hơn 1,000đ');
+            }
+            if ($request->cost > 10000000) {
+                return back()->with('error', 'Đơn giá không được vượt quá 10,000,000đ');
+            }
+        }
         $idGoods = $request->get('goods-id');
         if (!$request->get('unit')) {
             return back()->with('error', 'Bạn chưa chọn đơn vị tính');
         }
 
-        if (Material::where('id', $request->get('material'))->count() < 0) {
+        if (Material::where('id', $request->get('material'))->count() == 0) {
             $goodsReceiptDetail = new GoodsReceiptNoteDetail();
             $goodsReceiptDetail->material = $request->get('material');
         } else {

@@ -95,12 +95,12 @@
         </div>
     </div>
 </form>
-<h4 class="ui dividing blue header">Ẩm thực</h4>
+<h4 class="ui dividing blue header">Món ăn</h4>
 <table class="ui table striped celled">
     <thead>
     <tr>
         <th class="collapsing center aligned">STT</th>
-        <th>Tên ẩm thực</th>
+        <th>Tên món ăn</th>
         <th class="center aligned">Số lượng</th>
         <th class="right aligned">Đơn giá</th>
         <th class="right aligned">Tổng giá</th>

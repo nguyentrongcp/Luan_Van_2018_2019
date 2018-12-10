@@ -9,11 +9,11 @@
 
             <div class="field">
                 <label for="sales-offs-name">Tên khuyến mãi</label>
-                <input type="text" id="sales_offs_name" name="sales-offs-name" value="KM Phụ nữ Việt Nam 20-10" required>
+                <input type="text" id="sales_offs_name" name="sales-offs-name" value="KM Noel" required>
             </div>
             <div class="field">
                 <label for="percent">Ngày bắt đầu</label>
-                <input type="date" id="start_date" name="start-date" min="{{date('Y-m-d', strtotime('+1 day'))}}" value="{{date('Y-m-d', strtotime('+1 day'))}}" required>
+                <input type="date" id="start_date" name="start-date" min="{{date('Y-m-d')}}" value="{{date('Y-m-d')}}" required>
             </div>
             <div class="field">
                 <label for="percent">Ngày kết thúc</label>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="field">
                     <label for="percent">Ngày bắt đầu</label>
-                    <input type="date" id="start_date" name="start-date" min="{{date('Y-m-d',strtotime('+1 day'))}}" value="{{$salesOff->start_date}}" required>
+                    <input type="date" id="start_date" name="start-date" min="{{date('Y-m-d')}}" value="{{$salesOff->start_date}}" required>
                 </div>
                 <div class="field">
                     <label for="percent">Ngày kết thúc</label>
