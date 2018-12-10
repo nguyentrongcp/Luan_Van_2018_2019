@@ -27,6 +27,9 @@
                     <i class="add fitted icon"></i>
                     <strong>Thêm mới </strong>
                 </a>
+                <a href="#" class="ui small right floated blue button" onclick="$('#update-free-shipping-modal').modal('show')">
+                    <strong>Miễn phí vận chuyển (<span id="free-cost">{{number_format($freeShipping->cost) .' đ'}}</span>)</strong>
+                </a>
             </div>
             @include('admin.transport_fees.table')
         </form>

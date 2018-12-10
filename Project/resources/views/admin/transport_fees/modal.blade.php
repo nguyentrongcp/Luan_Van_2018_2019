@@ -41,6 +41,48 @@
 @endforeach
 {{--<!--  End Modal -->--}}
 
+<div class="ui mini vertical flip modal" id="update-free-shipping-modal">
+    <i class="close icon"></i>
+    <div class="blue header">Cập nhật vận chuyển miễn phí</div>
+    <div class="content">
+        <div class="ui form" >
+            {{ csrf_field() }}
+            {{ method_field('PUT') }}
+            <div class="field">
+                <label for="district-name">Giá</label>
+                <input type="number" id="cost" name="cost" max="1000000" value="{{$freeShipping->cost}}" required>
+            </div>
+            <div class="field">
+                <button type="submit" class="ui cancel blue fluid button" id="btn-update"><strong>Lưu</strong></button>
+            </div>
+        </div>
+    </div>
+</div>
 
+@push('script')
+    <script>
+        $('#btn-update').on('click',function () {
+            $.ajax({
+                type: 'post',
+                url: '{{ route('free_shipping_update') }}',
+                data: {
+                    cost: $('#cost').val()
+                },
+                success: function (data) {
+                    $('.ui.modal').modal('hide');
+                    $.toast({
+                        heading: 'Thông báo',
+                        text: data.text,
+                        icon: 'success',
+                        position: 'bottom-right',
+                        loader: false
+                    });
+                    $('#free-cost').text(numeral(parseInt($('#cost').val())).format('0,0') + ' đ')
+                }
+            })
+        })
+
+    </script>
+    @endpush
 
 

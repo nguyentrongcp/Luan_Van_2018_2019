@@ -8,7 +8,8 @@
         @include('admin.layouts.components.success_msg')
         @include('admin.layouts.components.errors_msg')
         <form action="{{route('foodies.destroy',[0])}}" method="post" class="ui form">
-
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
             <div class="ui padded grid">
                 <div class="eleven wide column">
                     <button class="ui small red delete button need-popup"
@@ -29,7 +30,6 @@
                 </div>
             </div>
             @include('admin.foodies.table')
-
         </form>
     </div>
 @endsection

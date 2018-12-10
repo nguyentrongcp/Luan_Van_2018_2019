@@ -6,7 +6,7 @@
             <div class="inline required field">
                 <label class="label-fixed">Tên món ăn</label>
                 <input type="text" name="foody-name" id="foody-name" placeholder="Tên món ăn"
-                value="{{old('foody-name')}}">
+                value="Bánh trán trộn">
             </div>
             <span id="foody-name-error" class="error-text"></span>
             <div class="inline required field">

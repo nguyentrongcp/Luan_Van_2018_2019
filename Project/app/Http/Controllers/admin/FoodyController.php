@@ -223,7 +223,6 @@ class FoodyController extends Controller
     public function destroy(Request $request)
     {
         $ids = $request->get('foody-id');
-
         if (empty($ids)) {
             return back();
         }
@@ -345,6 +344,15 @@ class FoodyController extends Controller
             $materialFoody->delete();
         }
         return back()->with('success','Xóa thành công');
+    }
+    public function changeCost(Request $request, $id){
+        $foodyCost = new Cost();
+        $foodyCost->foody_id = $id;
+        $foodyCost->cost = $request->get('foody-cost');
+        $foodyCost->cost_updated_at = date('Y-m-d H:i:s');
+        $foodyCost->save();
+
+        return back()->with('success','Thêm mới thành công!');
     }
 
 }

@@ -1,10 +1,10 @@
 
 <div class="ui bottom attached tab segment" data-tab="third">
         <div class="column">
-            <h5 class="ui dividing header no-margin-bottom">Thực đơn tạm hết hàng</h5>
+            <h5 class="ui dividing header no-margin-bottom">Món ăn tạm hết hàng</h5>
             <table class="ui table celled striped compact" id="product-out-table">
                 <thead>
-                <tr><th class="collapsing">STT</th><th>Tên thực đơn</th></tr>
+                <tr><th class="collapsing">STT</th><th>Tên món ăn</th></tr>
                 </thead>
                 <tbody>
                 @foreach($outFoodies as $idx => $outFoodies)
