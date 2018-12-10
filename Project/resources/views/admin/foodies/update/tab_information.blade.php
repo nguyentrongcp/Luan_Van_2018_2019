@@ -1,14 +1,12 @@
 <div class="ui bottom attached tab segment active" data-tab="first">
-    {{ csrf_field() }}
 
-    {{ method_field('PUT') }}
 
     <div class="ui padded stackable grid">
 
         <div class="ten wide column">
 
             <div class="inline field">
-                <label class="label-fixed">Tên ẩm thực:</label>
+                <label class="label-fixed">Tên món ăn:</label>
                 <input type="text" name="foody-name" value="{{ $nameFoody }}" required>
             </div>
             @if($errors->has('foody-name'))
@@ -17,7 +15,7 @@
                 </div>
             @endif
             <div class="inline field">
-                <label class="label-fixed">Loại ẩm thực:</label>
+                <label class="label-fixed">Loại món ăn:</label>
                 <select name="foody-type-name" class="ui search dropdown"
                         onchange="warningMessage('Cảnh báo', 'Tất cả các thông số kỹ thuật sẽ bị thay đổi')">
                     @foreach($foodyTypes as $foodyType)

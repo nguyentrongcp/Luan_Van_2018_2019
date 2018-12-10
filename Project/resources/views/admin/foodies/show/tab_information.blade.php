@@ -3,12 +3,12 @@
         <div class="ui padded grid">
             <div class="ten wide column">
                 <div class="inline field">
-                    <label class="label-fixed">Tên thực đơn</label>
+                    <label class="label-fixed">Tên món ăn</label>
                     <div class="static-input">{{ $foodies->name }}</div>
                 </div>
 
                 <div class="inline field">
-                    <label class="label-fixed">Loại thực đơn</label>
+                    <label class="label-fixed">Loại món ăn</label>
                     <div class="static-input">{{ $typeFoody }}</div>
                 </div>
                 <div class="inline field">

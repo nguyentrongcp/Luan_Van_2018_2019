@@ -89,7 +89,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('foody');
     Route::post('foodies_material', 'admin\FoodyController@addMaterialFoody')->name('foodies_material')
         ->middleware('foody');
-    Route::get('foodies_material_delete/{id}', 'admin\FoodyController@deleteMaterialFoody')->name('foodies_material_delete')
+    Route::get('foodies_material_delete', 'admin\FoodyController@deleteMaterialFoody')->name('foodies_material_delete')
         ->middleware('foody');
 
     /**      Materials       **/

@@ -9,8 +9,8 @@
             </th>
             <th class="collapsing">STT</th>
             <th class="collapsing">Ảnh đại diện</th>
-            <th>Tên ẩm thực</th>
-            <th class="collapsing">Loại ẩm thực</th>
+            <th>Tên món ăn</th>
+            <th class="collapsing">Loại món ăn</th>
             <th class="collapsing">Đơn giá</th>
             {{--<th class="collapsing">Tình trạng</th>--}}
             <th class="collapsing">Cập nhật</th>

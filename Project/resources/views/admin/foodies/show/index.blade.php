@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Chi tiết ẩm thực ')
+@section('title', 'Chi tiết món ăn ')
 
 @section('content')
     <div class="ui blue raised segment">
@@ -15,7 +15,7 @@
 
         <div class="ui top attached tabular menu">
             <a class="item active" data-tab="first">Thông tin</a>
-            <a class="item" data-tab="second">Mô tả ẩm thực</a>
+            <a class="item" data-tab="second">Mô tả món ăn</a>
             <a class="item" data-tab="third">Nguyên liệu</a>
             <a class="item" data-tab="fourth">Bình luận</a>
         </div>
@@ -25,6 +25,7 @@
         @include('admin.foodies.show.tab_describe')
         @include('admin.foodies.show.tab_material')
         @include('admin.foodies.show.tab_comments')
+        @include('admin.foodies.update.modal')
 
     </div>
 @endsection

@@ -1,13 +1,13 @@
 <div class="ui mini vertical flip modal" id="create-foody-type-modal">
     <i class="close icon"></i>
-    <div class="blue header">Thêm mới loại ẩm thực</div>
+    <div class="blue header">Thêm mới loại món ăn</div>
     <div class="content">
         <form action="{{ route('foody_type.store') }}" class="ui form" method="post">
 
             {{ csrf_field() }}
 
             <div class="field">
-                <label for="ten-loai">Tên loại ẩm thực</label>
+                <label for="ten-loai">Tên loại món ăn</label>
                 <input type="text" id="type-name" name="type-name" required>
             </div>
             <div class="field">
@@ -20,7 +20,7 @@
 @foreach($foodyTypes as $foodyType)
     <div class="ui mini vertical flip modal" id="{{ "edit-foody-type-modal-" . $foodyType->id }}">
         <i class="close icon"></i>
-        <div class="blue header">Sửa tên loại ẩm thực</div>
+        <div class="blue header">Sửa tên loại món ăn</div>
         <div class="content">
             <form action="{{ route('foody_type.update', [$foodyType->id]) }}" class="ui form" method="post">
 
@@ -29,7 +29,7 @@
                 {{ method_field('PUT') }}
 
                 <div class="field">
-                    <label for="">Tên loại ẩm thực</label>
+                    <label for="">Tên loại món ăn</label>
                     <input type="text" value="{{ $foodyType->name }}" name="type-name" required>
                 </div>
 
