@@ -1,13 +1,13 @@
 <!-- Modal create goods receipt note detail-->
 <div class="ui mini-40 modal" id="create-goods-receipt-note-detail-modal">
-    <div class="blue header">Thêm mới nguyên liệu</div>
+    <div class="blue header">Thêm nguyên liệu vào phiếu nhập</div>
     <div class="scrolling content">
         <form action="{{ route('goods_receipt_note_detail.store')}}" class="ui form" method="post">
             {{ csrf_field() }}
             <input type="hidden" name="goods-id" value="{{$id}}">
             <div class="field">
                 <label for="material-name">Tên nguyên liệu</label>
-                <select class="ui search dropdown material-name" name="material" id="material">
+                <select class="ui search dropdown material-name" id="dropdown-material" name="material">
                     @foreach(\App\Material::all() as $material)
                         <option class="item" value="{{$material->id}}">
                             {{$material->name}}
@@ -18,13 +18,12 @@
             <div class="field">
                 <label for="amount">Số lượng</label>
                 <div class="ui right labeled input">
-                    <input type="number" name="quantity" id="quantity" placeholder="Số lượng" min="0">
+                    <input type="number" step="any" name="quantity" placeholder="Số lượng" min="0">
                 </div>
             </div>
             <div class="field">
                 <label>Đơn vị tính</label>
-                <select class="ui dropdown material-name" name="unit" id="unit">
-                    <option value="">Chọn đơn vị tính</option>
+                <select class="ui dropdown" readonly="" name="unit" id="dropdown-unit">
                     @foreach(\App\CalculationUnit::all() as $unit)
                         <option class="item" value="{{$unit->id}}">
                             {{$unit->name}}
@@ -43,6 +42,30 @@
     </div>
 </div>
 
+@push('script')
+    <script>
+        $('#dropdown-material').change(function () {
+            let id = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: '{{ route('goods.get.unit') }}',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.status === 'exist') {
+                        $('#dropdown-unit').val(data.value).change();
+                        $($('#dropdown-unit').parent().get(0)).addClass('disabled');
+                    }
+                    else {
+                        $($('#dropdown-unit').parent().get(0)).removeClass('disabled');
+                    }
+                }
+            });
+        });
+    </script>
+@endpush
+
 <!-- Modal edit products type-->
 @foreach($goodsReceiptDetails as $goodsReceiptDetail)
     <div class="ui mini-40 modal" id="update-goods-receipt-note-detail-modal-{{$goodsReceiptDetail->id}}">
@@ -55,7 +78,7 @@
                 <input type="hidden" name="goods-id" value="{{$id}}">
                 <div class="field">
                     <label for="material-name">Tên nguyên liệu</label>
-                    <select class="ui search dropdown material-name" name="material" id="material">
+                    <select class="ui search dropdown material-name" name="material">
                         <option value="{{$goodsReceiptDetail->material}}">{{$goodsReceiptDetail->material}}</option>
                         @foreach(\App\Material::all() as $material)
                             @if($goodsReceiptDetail->material == $material->name)
@@ -69,12 +92,12 @@
                 </div>
                 <div class="field">
                     <label for="amount">Số lượng</label>
-                    <input type="number" name="quantity" id="quantity" placeholder="Số lượng" min="0" autofocus
+                    <input type="number" name="quantity" placeholder="Số lượng" min="0" autofocus
                            value="{{$goodsReceiptDetail->quantity}}">
                 </div>
                 <div class="field">
                     <label>Đơn vị tính</label>
-                    <select class="ui dropdown material-name" name="unit" id="unit">
+                    <select class="ui dropdown material-name" name="unit">
                         <option value="">Chọn đơn vị tính</option>
                         @php
                             $name_unit = \App\CalculationUnit::find($goodsReceiptDetail->unit_id)->name;

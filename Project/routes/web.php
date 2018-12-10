@@ -119,6 +119,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
         ->middleware('goodsreceiptnote');
     Route::post('goods_receipt_note_delete', 'admin\restore\GoodsReceiptNotesRestoreController@delete')->name('goods_receipt_note_delete')
         ->middleware('goodsreceiptnote');
+    Route::get('goods_receipt_note_get_unit', 'admin\GoodsReceiptNotesDetailController@getUnit')->name('goods.get.unit')
+        ->middleware('goodsreceiptnote');
 
     /**      orders       **/
     Route::resource('orders', 'admin\OrderController')

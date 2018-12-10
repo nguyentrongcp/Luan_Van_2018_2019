@@ -7,7 +7,8 @@
 
             <div class="field">
                 <label for="dia-chi">Ngày nhập</label>
-                <input type="date" id="date" name="date" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}" value="{{ date('Y-m-d') }}"
+                <input type="date" id="date" name="date"
+                       min="{{ date('Y-m-d', strtotime('-7 days')) }}" max="{{ date('Y-m-d') }}" value="{{ date('Y-m-d') }}"
                        max="{{ date('Y-m-d') }}" required>
             </div>
             <div class="field">
@@ -28,7 +29,7 @@
 
                 <div class="field">
                     <label for="dia-chi">Ngày nhập</label>
-                    <input type="date" id="date" name="date" min="{{ date('Y-m-d') }}"
+                    <input type="date" id="date" name="date"
                            value="{{ $goodsReceipt->date }}" max="{{ date('Y-m-d') }}" required>
                 </div>
                 <div class="field">

@@ -91,14 +91,14 @@ class MaterialController extends Controller
     {
         $name = $request->get('material-name');
         $material = Material::findOrFail($id);
-        if ($material->checkName($name)){
+        if ($material->checkName($name) && $material->name != $name){
             return back()->with('error','Tên nguyên liệu đã tồn tại!');
         }
         if (!$request->has('unit')){
             return back()->with('error','Bạn chưa chọn đơn vị tính');
         }
         if ($request->get('value') == ''){
-            return back()->with('error','Bạn chưa chọn đơn vị tính');
+            return back()->with('error','Bạn chưa nhập số lượng');
         }
         $material->name = $name;
         $material->value = $request->get('value');

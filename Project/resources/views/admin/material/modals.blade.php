@@ -8,11 +8,11 @@
 
             <div class="field">
                 <label for="ten-loai">Tên nguyên liệu</label>
-                <input type="text" id="type-name" name="material-name" required>
+                <input type="text" id="type-name" name="material-name" value="Salad" required>
             </div>
             <div class="field">
                 <label for="amount">Số lượng</label>
-                <input type="number" name="value" min="0" placeholder="Số lượng" value="0">
+                <input type="number" step="any" name="value" min="0">
             </div>
             <div class="field">
                 <label>Đơn vị tính</label>
@@ -48,21 +48,21 @@
                 </div>
                 <div class="field">
                     <label for="amount">Số lượng</label>
-                    <div class="ui right labeled input">
-                        <input type="number" name="value" id="value" placeholder="Số lượng"
-                               value="{{$material->value}}">
-                        <select class="ui dropdown label" name="unit" id="unit">
-                            <option value="">Chọn đơn vị tính</option>
-                            @php
-                                $name_unit = \App\CalculationUnit::find($material->calculation_unit_id)->name;
-                            @endphp
-                            @foreach(\App\CalculationUnit::all() as $unit)
-                                <option class="item" value="{{$unit->id}}" {{$name_unit==$unit->name ? 'selected':''}}>
-                                    {{$unit->name}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <input type="number" name="value" placeholder="Số lượng"
+                           value="{{$material->value}}">
+                </div>
+                <div class="field">
+                    <label>Đơn vị tính</label>
+                    <select class="ui dropdown" name="unit">
+                        @php
+                            $name_unit = \App\CalculationUnit::find($material->calculation_unit_id)->name;
+                        @endphp
+                        @foreach(\App\CalculationUnit::all() as $unit)
+                            <option class="item" value="{{$unit->id}}" {{$name_unit==$unit->name ? 'selected':''}}>
+                                {{$unit->name}}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="field">
                     <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>

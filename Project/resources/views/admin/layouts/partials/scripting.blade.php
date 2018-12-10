@@ -57,6 +57,7 @@
             $('.ui.dropdown.foody-name').dropdown({
                 clearable: true,
             });
+
         });
 </script>
 <script>

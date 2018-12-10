@@ -11,7 +11,6 @@
         <th class="text-center">Số lượng</th>
         <th class="right aligned">Đơn giá</th>
         <th class="right aligned">Tổng tiền</th>
-        <th class="collapsing">Sửa</th>
     </tr>
     </thead>
     <tbody>
@@ -32,12 +31,6 @@
             <td class="right aligned">{{number_format($goodsReceiptDetail->cost).' đ'}}</td>
             <td class="right aligned">
                 {{number_format($goodsReceiptDetail->total_cost).' đ'}}
-            </td>
-            <td>
-                <a href="#" onclick="$( '{{ '#update-goods-receipt-note-detail-modal-'.$goodsReceiptDetail->id }}' ).modal('show')"
-                   class="ui small green label a-decoration">
-                    <i class="edit fitted icon"></i>
-                </a>
             </td>
         </tr>
     @endforeach

@@ -192,4 +192,11 @@ class GoodsReceiptNotesDetailController extends Controller
 
         return back()->with('success', 'Xóa thành công!');
     }
+
+    public function getUnit(Request $request) {
+        if (Material::find($request->get('id')) != null) {
+            $value = Material::find($request->get('id'));
+            return Response(['status' => 'exist', 'value' => $value->calculationUnit->id]);
+        }
+    }
 }

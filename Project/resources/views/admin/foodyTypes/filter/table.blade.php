@@ -52,7 +52,7 @@
                         <i class="fa fa-eye"></i>
                     </a>
                 </td>
-            </tr>m
+            </tr>
         @endforeach
         </tbody>
     </table>
