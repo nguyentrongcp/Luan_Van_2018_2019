@@ -15,6 +15,7 @@
         </thead>
         <tbody>
         @foreach($roles as $stt => $role)
+            @if($role->id != 1)
             <tr>
                 <td>
                     <div class="ui child checkbox">
@@ -22,7 +23,7 @@
                     </div>
 
                 </td>
-                <td class="center aligned">{{$stt + 1}}</td>
+                <td class="center aligned">{{$stt}}</td>
                 <td>
                     {{ $role->name }}
                 </td>
@@ -44,6 +45,7 @@
                     {{--</a>--}}
                 {{--</td>--}}
             </tr>
+            @endif
         @endforeach
         </tbody>
     </table>

@@ -1,7 +1,7 @@
 <div class="ui fixed inverted borderless menu full-height under-navbar"
      style="width: 220px; display: inline-block;background-color: #2EA8BD;">
     <div class="item" style="width: 200px">
-        <a href="/admin"><img class="ui medium image" src="{{ asset('customer/image/logo.png') }}" alt="Logo"></a>
+        <a href="/admin/dashboard"><img class="ui medium image" src="{{ asset('customer/image/logo.png') }}" alt="Logo"></a>
     </div>
 
     @php
@@ -112,12 +112,12 @@
                 @if($employee->checkRoles(2))
                     <a class="title item {{ Request::is('*foody_type_restore') ? 'active': '' }}"
                        href="{{route('foody_type_restore.index')}}">
-                        <i class="sitemap icon icon-left"></i>Loại ẩm thực</a>
+                        <i class="sitemap icon icon-left"></i>Loại món ăn</a>
                 @endif
                 @if($employee->checkRoles(3))
                     <a class="title item {{ Request::is('*foody_restore') ? 'active': '' }}"
                        href="{{route('foody_restore.index')}}">
-                        <i class="utensils icon icon-left"></i>Ẩm thực</a>
+                        <i class="utensils icon icon-left"></i>Món ăn</a>
                 @endif
                 @if($employee->checkRoles(4))
                     <a class="title item {{ Request::is('*material_restore') ? 'active': '' }}"

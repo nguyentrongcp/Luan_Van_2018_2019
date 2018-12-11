@@ -1,10 +1,10 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Phục hồi - ẩm thực')
+@section('title', 'Phục hồi - món ăn')
 
 @section('content')
     <h2 class="ui dividing header">Phục hồi >>
-        <span class="header-2">Ẩm thực</span>
+        <span class="header-2">Món ăn</span>
     </h2>
 
     <form method="post" id="form-foody-restore">
