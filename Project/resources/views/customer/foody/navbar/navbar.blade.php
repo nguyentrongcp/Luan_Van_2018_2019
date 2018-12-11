@@ -9,9 +9,9 @@
         @endif
         <li><a href="#involve-foody-container">Cùng loại</a></li>
     </ul>
-    <div class="slider-ads-portrait">
-        <img src="/customer/image/slider-ads2.jpg">
-    </div>
+    {{--<div class="slider-ads-portrait">--}}
+        {{--<img src="/customer/image/slider-ads2.jpg">--}}
+    {{--</div>--}}
 </div>
 
 @include('customer.foody.navbar.style')

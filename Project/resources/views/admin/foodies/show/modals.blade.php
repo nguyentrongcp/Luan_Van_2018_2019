@@ -40,15 +40,6 @@
             <div class="field">
                 <input type="text" id="foody_cost" name="foody-cost" placeholder="Nhập giá mới">
             </div>
-            <div class="field">
-                <span class="help-text"><i>Chỉ nhập <strong>số</strong>,
-                        dấu <strong>phẩy</strong>,
-                        dấu <strong>chấm</strong>
-                        hoặc <strong>khoảng trắng</strong></i></span>
-                <div class="ui basic segment right aligned no-margin no-padding">
-                    <button class="ui blue small button">Lưu lại</button>
-                </div>
-            </div>
         </form>
     </div>
 </div>

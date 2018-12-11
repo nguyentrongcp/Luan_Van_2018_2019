@@ -324,7 +324,10 @@ class FoodyController extends Controller
     public function addMaterialFoody(Request $request){
 
         if ($request->get('value') == ''){
-            return back()->with('error','Bạn chưa chọn đơn vị tính');
+            return back()->with('error','Bạn chưa nhập giá trị');
+        }
+        if ($request->get('value') == 0) {
+            return back()->with('error', 'Giá trị phải lớn hơn 0!');
         }
         $materialFoody = new MaterialFoody();
         $materialFoody->foody_id = $request->get('material-foody-id');

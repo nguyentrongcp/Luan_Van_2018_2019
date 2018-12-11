@@ -34,7 +34,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFnRLDNIUKfSH4="
 							},
-							"name": "Thêm ẩm thực",
+							"name": "Thêm món ăn",
 							"ownedViews": [
 								{
 									"_type": "UMLFrameView",
@@ -55,9 +55,9 @@
 											"font": "Arial;13;0",
 											"left": 178.72998046875,
 											"top": 117,
-											"width": 85.55712890625,
+											"width": 81.20263671875,
 											"height": 13,
-											"text": "Thêm ẩm thực"
+											"text": "Thêm món ăn"
 										},
 										{
 											"_type": "LabelView",
@@ -217,7 +217,7 @@
 													"top": 247,
 													"width": 127,
 													"height": 26,
-													"text": "Nhập các thông tin của ẩm thực",
+													"text": "Nhập các thông tin của món ăn",
 													"wordWrap": true
 												},
 												{
@@ -1009,7 +1009,7 @@
 													"top": 359,
 													"width": 124.0712890625,
 													"height": 13,
-													"text": " Thông tin ẩm thực"
+													"text": " Thông tin món ăn"
 												},
 												{
 													"_type": "LabelView",
@@ -2125,7 +2125,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFnRLDNIUKfSH4="
 							},
-							"name": "Nhập các thông tin của ẩm thực"
+							"name": "Nhập các thông tin của món ăn"
 						},
 						{
 							"_type": "UMLAction",
@@ -2370,7 +2370,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFnRLN+t0LDu0Y="
 									},
-									"name": " Thông tin ẩm thực",
+									"name": " Thông tin món ăn",
 									"kind": "acceptSignal"
 								},
 								{
@@ -2416,7 +2416,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFnSLod9flWFfw="
 							},
-							"name": "Sửa ẩm thực",
+							"name": "Sửa món ăn",
 							"ownedViews": [
 								{
 									"_type": "UMLFrameView",
@@ -2437,9 +2437,9 @@
 											"font": "Arial;13;0",
 											"left": 146.72998046875,
 											"top": 37,
-											"width": 76.9306640625,
+											"width": 72.576171875,
 											"height": 13,
-											"text": "Sửa ẩm thực"
+											"text": "Sửa món ăn"
 										},
 										{
 											"_type": "LabelView",
@@ -2600,7 +2600,7 @@
 													"top": 159,
 													"width": 97.50634765625,
 													"height": 13,
-													"text": "Chọn ẩm thực"
+													"text": "Chọn món ăn"
 												},
 												{
 													"_type": "LabelView",
@@ -3039,7 +3039,7 @@
 													"top": 231,
 													"width": 143,
 													"height": 26,
-													"text": "Hiển thị form sửa ẩm thực",
+													"text": "Hiển thị form sửa món ăn",
 													"wordWrap": true
 												},
 												{
@@ -3349,7 +3349,7 @@
 													"top": 159,
 													"width": 130.0380859375,
 													"height": 13,
-													"text": "Danh sách ẩm thực"
+													"text": "Danh sách món ăn"
 												},
 												{
 													"_type": "LabelView",
@@ -5096,7 +5096,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFnSLod9flWFfw="
 							},
-							"name": "Chọn ẩm thực"
+							"name": "Chọn món ăn"
 						},
 						{
 							"_type": "UMLAction",
@@ -5136,7 +5136,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFnSLod9flWFfw="
 							},
-							"name": "Hiển thị form sửa ẩm thực"
+							"name": "Hiển thị form sửa món ăn"
 						},
 						{
 							"_type": "UMLAction",
@@ -5404,7 +5404,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFnSLt/P/mCpC4="
 									},
-									"name": "Danh sách ẩm thực"
+									"name": "Danh sách món ăn"
 								},
 								{
 									"_type": "UMLAction",
@@ -8499,7 +8499,7 @@
 													"top": 159,
 													"width": 103.25732421875,
 													"height": 13,
-													"text": "Chọn thanh toán"
+													"text": "Chọn đặt hàng"
 												},
 												{
 													"_type": "LabelView",
@@ -12345,7 +12345,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFnSOE1rv6FR8k="
 							},
-							"name": "Chọn thanh toán"
+							"name": "Chọn đặt hàng"
 						},
 						{
 							"_type": "UMLAction",

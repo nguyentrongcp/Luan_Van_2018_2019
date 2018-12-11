@@ -9,6 +9,10 @@
                 <label for="material-name">Tên nguyên liệu</label>
                 <select class="ui dropdown material-name" name="material" id="material">
                     @foreach(\App\Material::all() as $material)
+                        @if(\App\MaterialFoody::where('material_id', $material->id)->
+                            where('foody_id', $id)->count() > 0)
+                            @continue
+                        @endif
                         <option class="item" value="{{$material->id}}">
                             {{$material->name}}
                         </option>

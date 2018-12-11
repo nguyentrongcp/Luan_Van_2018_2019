@@ -82,9 +82,9 @@
                        href="/admin/content/shop_infos">
                         <i class="info icon icon-left"></i>
                         Thông tin cửa hàng</a>
-                    <a class="title item {{ Request::is('*sliders') ? 'active': '' }}"
-                       href="/admin/content/sliders">
-                        <i class="certificate icon icon-left"></i>Slide quảng cáo</a>
+                    {{--<a class="title item {{ Request::is('*sliders') ? 'active': '' }}"--}}
+                       {{--href="/admin/content/sliders">--}}
+                        {{--<i class="certificate icon icon-left"></i>Slide quảng cáo</a>--}}
                     <a class="title item {{ Request::is('*news') ? 'active': '' }}"
                        href="/admin/content/news">
                         <i class="newspaper icon icon-left"></i>Tin tức</a>

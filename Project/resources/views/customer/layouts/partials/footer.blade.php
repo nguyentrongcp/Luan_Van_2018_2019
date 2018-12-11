@@ -19,6 +19,7 @@
     {{--</div>--}}
 {{--</footer>--}}
 <footer>
+
     <div id="footer-container" class="row blue-grey lighten-3">
         <div class="container">
             <div class="col s12 m12 l4">
@@ -43,7 +44,7 @@
                 </div>
                 <div style="margin-top: 10px" class="center-align">
                     Tham gia fanpage của chúng tôi:
-                    <a style="color: unset" target="_blank" href="https://www.facebook.com/Fastfoody-%E1%BA%A8m-th%E1%BB%B1c-ngon-nhanh-gi%C3%A1-r%E1%BA%BB-2010538875677074/?modal=admin_todo_tour">
+                    <a style="color: unset" target="_blank" href="https://www.facebook.com/Fastfoodyvn-Th%E1%BB%A9c-%C4%83n-nhanh-giao-h%C3%A0ng-t%E1%BA%ADn-n%C6%A1i-1815873021872788/?modal=admin_todo_tour">
                         <i class="facebook large icon" style="vertical-align: sub"></i></a>
                 </div>
             </div>

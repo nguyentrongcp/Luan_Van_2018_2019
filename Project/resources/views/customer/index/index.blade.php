@@ -70,7 +70,7 @@
                                                 <span>{{ number_format($foody->currentCost()) }}</span><sup>đ</sup>
                                             </span>
                                                 {{ number_format($foody->getSaleCost()) }}<sup>đ</sup>
-                                                <span>-{{ $foody->getSalePercent() }}%</span>
+                                                <span class="ui tiny red label">-{{ $foody->getSalePercent() }}%</span>
                                             </div>
                                         </a>
                                     </div>
@@ -214,7 +214,7 @@
                     <div class="col s12 index-info">
                         <div class="col s12">
                             <i class="material-icons left teal-text">remove</i>
-                            <span class="info-text">{{ count($foodies) }} ẩm thực khác nhau, chất lượng ngon, giá rẻ</span>
+                            <span class="info-text">{{ count($foodies) }} món ăn, nước uống khác nhau, chất lượng ngon, giá rẻ</span>
                         </div>
                         <div class="col s12">
                             <i class="material-icons left teal-text">remove</i>

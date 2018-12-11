@@ -158,9 +158,9 @@
         @include('customer.foody.navbar.navbar')
 
         <div class="col s12 m12 l10 right foody-content-container">
-            <div class="col s12 slider-ads-landscape">
-                <img src="/customer/image/slider-ads.jpg">
-            </div>
+            {{--<div class="col s12 slider-ads-landscape">--}}
+                {{--<img src="/customer/image/slider-ads.jpg">--}}
+            {{--</div>--}}
             <div id="foody-rating-show" class="col s12 m12 l4 right foody-rating-show">
                 @include('customer.foody.rating.rating')
             </div>

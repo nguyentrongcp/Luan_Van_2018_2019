@@ -1,8 +1,8 @@
 <div class="col s12 m9 l9 show-foody" id="show-foody">
 
-    <div class="row slider-ads-landscape">
-        <img src="/customer/image/slider-ads.jpg">
-    </div>
+    {{--<div class="row slider-ads-landscape">--}}
+        {{--<img src="/customer/image/slider-ads.jpg">--}}
+    {{--</div>--}}
 
     <div id="home-foody-container">
         {{--@foreach($foodies as $key => $foody)--}}
