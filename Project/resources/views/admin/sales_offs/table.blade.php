@@ -19,7 +19,7 @@
             <tr>
                 <td>
                     <div class="ui child checkbox">
-                        <input type="checkbox" name="sales-offs-id[]" value="{{$salesOff->id}}">
+                        <input type="checkbox" name="sales-offs-id[]" id="sales-off-id" value="{{$salesOff->id}}">
                     </div>
 
                 </td>

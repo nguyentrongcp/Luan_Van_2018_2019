@@ -37,6 +37,6 @@
 
 @push('script')
     <script>
-        bindSelectAll('sale-offs-id[]');
+        bindSelectAll('sales-offs-id[]');
     </script>
 @endpush

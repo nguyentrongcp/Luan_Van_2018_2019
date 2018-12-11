@@ -58,8 +58,7 @@ class SalesOffsDetailsController extends Controller
         $sales_id = $request->get('sales-offs-id');
         if ($ids == '') {
             foreach(Foody::where('foody_type_id', $request->get('type'))->get() as $foody) {
-                if (SalesOffDetail::where('foody_id', $foody->id)
-                        ->where('sales_off_id', $sales_id)->count() > 0)
+                if (SalesOffDetail::where('foody_id', $foody->id)->count() > 0)
                     continue;
                 $salesOffsDetails = new SalesOffDetail();
                 $salesOffsDetails->sales_off_id = $sales_id;
@@ -119,7 +118,7 @@ class SalesOffsDetailsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request)
     {
         $ids = $request->get('sales-offs-details-id');
         if (!$request->has('sales-offs-details-id')) {
@@ -136,7 +135,7 @@ class SalesOffsDetailsController extends Controller
         $foodies = Foody::where('foody_type_id', $request->type_id)->get();
         $results = [];
         foreach($foodies as $foody) {
-            if (SalesOffDetail::where('foody_id', $foody->id)->where('sales_off_id', $request->sales_id)->count() > 0)
+            if (SalesOffDetail::where('foody_id', $foody->id)->count() > 0)
                 continue;
             $results[] = $foody;
         }

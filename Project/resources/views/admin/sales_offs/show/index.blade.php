@@ -9,7 +9,7 @@
                 <i class="blue small angle double left circular fitted icon"></i></a>
             {{ \App\SalesOff::find($id)->salesOff->name .' >> '.\App\SalesOff::find($id)->percent.'%'}}
         </h3>
-        <form id="sales-foody" action="{{route('sales_offs.destroy',[0])}}" method="post" class="ui form">
+        <form id="sales-foody" action="{{route('sales_offs_details.destroy',[0])}}" method="post" class="ui form">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
             <div class="field">
@@ -58,4 +58,10 @@
             {{--});--}}
         {{--</script>--}}
     {{--@endpush--}}
+
+    @push('script')
+        <script>
+            bindSelectAll('sales-offs-details-id[]');
+        </script>
+    @endpush
 @endsection

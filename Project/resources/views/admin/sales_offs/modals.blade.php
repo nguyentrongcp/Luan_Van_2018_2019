@@ -17,7 +17,7 @@
             </div>
             <div class="field">
                 <label for="percent">Ngày kết thúc</label>
-                <input type="date" id="end_date" name="end-date" min="{{date('Y-m-d',strtotime('+1 day'))}}" value="{{date('Y-m-d',strtotime('+1 day'))}}" required>
+                <input type="date" id="end_date" name="end-date" min="{{date('Y-m-d')}}" value="{{date('Y-m-d',strtotime('+1 day'))}}" required>
             </div>
             <div class="field">
                 <button type="submit" class="ui blue fluid button"><strong>Lưu</strong></button>
