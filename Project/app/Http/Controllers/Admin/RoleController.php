@@ -111,7 +111,7 @@ class RoleController extends Controller
         foreach($roles as $role) {
             $role_detail = new EmployeeRole();
             $role_detail->role_id = $id;
-            $role_detail->fucntion_id = $role;
+            $role_detail->function_id = $role;
             $role_detail->save();
         }
 

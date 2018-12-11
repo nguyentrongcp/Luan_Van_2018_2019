@@ -192,9 +192,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     /** transport fees **/
 
-    Route::resource('transport_fees','admin\TransportFeesController');
-    Route::post('storedistrict','admin\TransportFeesController@storeDistrict')->name('district.store');
-    Route::post('updatedistrict/{$id}','admin\TransportFeesController@updateDistrict')->name('district.update');
+    Route::resource('transport_fees','admin\TransportFeesController')
+        ->middleware('transportfee');
+    Route::post('free_shipping','admin\TransportFeesController@updateFreeShipping')->name('free_shipping_update')
+        ->middleware('transportfee');
+    Route::post('storedistrict','admin\TransportFeesController@storeDistrict')->name('district.store')
+        ->middleware('transportfee');
+    Route::post('updatedistrict/{$id}','admin\TransportFeesController@updateDistrict')->name('district.update')
+        ->middleware('transportfee');
 
 });
 

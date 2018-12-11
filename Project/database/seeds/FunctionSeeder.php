@@ -11,7 +11,7 @@ class FunctionSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['Thống kê', 'Loại ẩm thực', 'Ẩm thực', 'Nguyên liệu','Nhập hàng', 'Đơn hàng', 'Khuyến mãi', 'Nội dung website','Phí vận chuyển'];
+        $types = ['Thống kê', 'Loại món', 'Món ăn', 'Nguyên liệu','Nhập hàng', 'Đơn hàng', 'Khuyến mãi', 'Nội dung website','Phí vận chuyển'];
         $rows = [];
         foreach ($types as $type) {
             $rows[] = [

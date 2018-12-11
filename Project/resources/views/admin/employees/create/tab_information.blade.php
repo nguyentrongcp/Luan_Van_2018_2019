@@ -11,6 +11,17 @@
             </div>
         @endif
         <div class="inline required field">
+            <label class="label-fixed">Email</label>
+            <input type="email" name="employee-email" value="nvana{{rand(1,100)}}@gmail.com" id="employee-email"
+                   placeholder="Email" required>
+        </div>
+        @if($errors->has('employee-email'))
+            <div class="message-error">
+                {{ $errors->first('employee-email') }}
+            </div>
+        @endif
+
+        <div class="inline required field">
             <label class="label-fixed">Mật khẩu</label>
             <input type="password" name="employee-pwd" id="employee_pwd" placeholder="Mật khẩu"
                    value="admin123" required>
@@ -42,16 +53,6 @@
         <div class="ui error message">
         </div>
         <div class="inline required field">
-            <label class="label-fixed">Email</label>
-            <input type="email" name="employee-email" value="nvana{{rand(1,100)}}@gmail.com" id="employee-email"
-                   placeholder="Email" required>
-        </div>
-        @if($errors->has('employee-email'))
-            <div class="message-error">
-                {{ $errors->first('employee-email') }}
-            </div>
-        @endif
-        <div class="inline required field">
             <label class="label-fixed">Số điện thoại</label>
             <input type="text" name="employee-phone" value="0323456789" id="employee-phone"
                    placeholder="Số điện thoại" required>
@@ -75,12 +76,6 @@
                         <option value="{{$role->id}}">{{$role->name}}</option>
                     @endforeach
                 </select>
-                {{--<div class="ui six column field">--}}
-                <a href="#" onclick="$('#add-employee-role-modal').modal('show')"
-                   class="ui blue mini button a-decoration">
-                    <i class="dot fitted icon"></i> ...
-                </a>
-                {{--</div>--}}
             </div>
         </div>
         <div class="inline required field">

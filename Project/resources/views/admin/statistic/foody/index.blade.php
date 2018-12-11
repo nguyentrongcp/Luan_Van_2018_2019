@@ -28,7 +28,7 @@
         <div class="ui top attached tabular menu">
             <a class="item {{ Request::has('lim') ? '': 'active' }}" data-tab="first">Tổng quan</a>
             {{--<a class="item {{ Request::has('lim') ? 'active' : '' }}" data-tab="second">Khuyến mãi</a>--}}
-            <a class="item" data-tab="third">Hết hàng/Ngừng k.doanh</a>
+            <a class="item" data-tab="third">Hết hàng</a>
         </div>
 
         @include('admin.statistic.foody.general')

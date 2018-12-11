@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\District;
+use App\FreeShipping;
 use App\TransportFee;
 use App\Ward;
 use Illuminate\Http\Request;
@@ -18,8 +19,8 @@ class TransportFeesController extends Controller
     public function index()
     {
         $districts = District::paginate(10);
-
-        return view('admin.transport_fees.index', compact('districts'));
+        $freeShipping = FreeShipping::find(1);
+        return view('admin.transport_fees.index', compact('districts','freeShipping'));
     }
 
     /**
@@ -86,7 +87,7 @@ class TransportFeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -122,5 +123,13 @@ class TransportFeesController extends Controller
         $district->district = $dis;
         $district->update();
         return redirect(route('transport_fees.index'))->with('success', 'Thêm thành công!');
+    }
+
+    public function updateFreeShipping(Request $request){
+        $freeShipping = FreeShipping::find(1);
+        $freeShipping->cost = $request->get('cost');
+        $freeShipping->update();
+
+        return Response(['text' => 'Cập nhật thành công!']);
     }
 }
