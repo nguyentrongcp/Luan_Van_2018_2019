@@ -91,7 +91,7 @@
             width: 100%;
         }
         .show-foody-action .btn {
-            width: 100%;
+            width: calc(100% + 20px);
         }
         .show-foody-title {
             padding-top: 5px !important;

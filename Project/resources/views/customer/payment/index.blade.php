@@ -13,7 +13,8 @@
                 Bạn đã sẵn sàng để thanh toán?
             </span>
             <span class="col s12 payment-title">
-                Thông tin giao hàng <a id="detect-location" data-share="off" style="font-size: 13px; cursor: pointer">Chia sẻ vị trí?</a>
+                Thông tin giao hàng
+                {{--<a id="detect-location" data-share="off" style="font-size: 13px; cursor: pointer">Chia sẻ vị trí?</a>--}}
             </span>
             <div class="col s12 divider"></div>
             <div id="maps">

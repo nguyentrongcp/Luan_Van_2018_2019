@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\District;
 use App\Foody;
+use App\FreeShipping;
 use App\Order;
 use App\OrderFoody;
 use App\OrderStatus;
@@ -34,7 +35,7 @@ class PaymentController extends Controller
     public function getTransportFee(Request $request) {
         $transport_fee = TransportFee::find($request->transport_id);
 
-        if (CartFunction::getCost() >= 300000) {
+        if (CartFunction::getCost() >= FreeShipping::find(1)->cost) {
             $fee_text = 'Miễn phí';
             $fee_number = 0;
         }

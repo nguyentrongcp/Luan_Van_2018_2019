@@ -167,6 +167,7 @@
                         },
                         error: function(data) {
                             empty();
+                            closeLoader();
                             var response = JSON.parse(data.responseText);
                             $.each(response.errors, function (key, value) {
                                 $('#error-' + key).html('<span class="red-text">' + value + '</span>');

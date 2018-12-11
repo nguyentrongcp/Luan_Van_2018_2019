@@ -13,11 +13,11 @@ $totalMaterial = \App\Material::getTotalGoodsReceiptMaterial();
                 <span class="ui blue label">{{ $totalOrderUncheck }}</span>đơn hàng chưa duyệt
             </a>
         @endif
-            @if (!empty($totalMaterial))
-                <a class="item" href="{{route('admin.material') }}">
-                    <span class="ui blue label">{{ $totalMaterial }}</span> nguyên liệu cần nhập hàng
-                </a>
-            @endif
+            {{--@if (!empty($totalMaterial))--}}
+                {{--<a class="item" href="{{route('admin.material') }}">--}}
+                    {{--<span class="ui blue label">{{ $totalMaterial }}</span> nguyên liệu cần nhập hàng--}}
+                {{--</a>--}}
+            {{--@endif--}}
     </div>
 
 </div>
