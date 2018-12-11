@@ -268,7 +268,7 @@
 											"top": 165,
 											"width": 170.130859375,
 											"height": 13,
-											"text": "LoaiMonAn"
+											"text": "LoaiAmThuc"
 										},
 										{
 											"_type": "ERDColumnCompartmentView",
@@ -366,7 +366,7 @@
 											"top": 13,
 											"width": 196.16259765625,
 											"height": 13,
-											"text": "GiaMonAn"
+											"text": "GiaAmThuc"
 										},
 										{
 											"_type": "ERDColumnCompartmentView",
@@ -464,7 +464,7 @@
 											"top": 253,
 											"width": 209.16259765625,
 											"height": 13,
-											"text": "MonAn"
+											"text": "AmThuc"
 										},
 										{
 											"_type": "ERDColumnCompartmentView",
@@ -3998,7 +3998,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkHHWApZTIp8s="
 							},
-							"name": "LoaiMonAn",
+							"name": "LoaiAmThuc",
 							"ownedElements": [
 								{
 									"_type": "ERDRelationship",
@@ -4069,7 +4069,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkHHWApZTIp8s="
 							},
-							"name": "GiaMonAn",
+							"name": "GiaAmThuc",
 							"columns": [
 								{
 									"_type": "ERDColumn",
@@ -4107,7 +4107,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkHHWApZTIp8s="
 							},
-							"name": "MonAn",
+							"name": "AmThuc",
 							"ownedElements": [
 								{
 									"_type": "ERDRelationship",
@@ -4272,7 +4272,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFkHHaAu5UcTSo="
 									},
-									"name": "ten_mon_an",
+									"name": "ten_am_thuc",
 									"type": "string",
 									"length": "100"
 								},
