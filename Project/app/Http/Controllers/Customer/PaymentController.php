@@ -51,7 +51,7 @@ class PaymentController extends Controller
     }
 
     public function sendOTP($phone) {
-        $smsAPI = new SpeedSMSAPI("23CwwNwz_M7cbNUAuB1cWoSnSdahEpnO");
+        $smsAPI = new SpeedSMSAPI("");
         $otp = session('otp');
         $content = "Ma OTP cua ban la $otp";
         $smsAPI->sendSMS($phone, $content, 4, '');
@@ -61,7 +61,7 @@ class PaymentController extends Controller
         $otp = rand(100000, 999999);
         session(['time' => time(), 'otp' => $otp]);
         $this->store($request);
-            $this->sendOTP([$request->phone]);
+//            $this->sendOTP([$request->phone]);
     }
 
     public function store($request) {

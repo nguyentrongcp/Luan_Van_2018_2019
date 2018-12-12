@@ -52,8 +52,6 @@
 
 @include('customer.layouts.partials.navbar.cart.cart')
 
-@include('customer.layouts.partials.navbar-mobile')
-
 {{--<div class="container">--}}
     {{--@include('customer.layouts.partials.second-navbar')--}}
 {{--</div>--}}
